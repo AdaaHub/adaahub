@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>ضغط الصور أونلاين مجانًا | AdaaHub</title>
+<meta name="description" content="اضغط صورك أونلاين مجانًا وقلل حجمها بسهولة من خلال متصفحك.">
+
+<style>
+*{
+  box-sizing:border-box;
+}
+
+body{
+  margin:0;
+  font-family:Arial,Tahoma,sans-serif;
+  background:#f5f7fb;
+  color:#20242a;
+}
+
+header{
+  background:#fff;
+  border-bottom:1px solid #e5e7eb;
+  padding:18px;
+}
+
+.header{
+  max-width:900px;
+  margin:auto;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+}
+
+.logo{
+  font-size:27px;
+  font-weight:bold;
+}
+
+.logo span{
+  color:#2563eb;
+}
+
+.home{
+  color:#2563eb;
+  text-decoration:none;
+}
+
+.container{
+  max-width:850px;
+  margin:45px auto;
+  padding:20px;
+}
+
+h1{
+  text-align:center;
+  font-size:32px;
+  margin-bottom:12px;
+}
+
+.subtitle{
+  text-align:center;
+  color:#666;
+  margin-bottom:30px;
+}
+
+.box{
+  background:#fff;
+  border:2px dashed #cbd5e1;
+  border-radius:18px;
+  padding:45px 20px;
+  text-align:center;
+}
+
+input{
+  display:none;
+}
+
+.upload{
+  display:inline-block;
+  background:#2563eb;
+  color:#fff;
+  padding:14px 28px;
+  border-radius:9px;
+  cursor:pointer;
+  font-size:17px;
+}
+
+#result{
+  display:none;
+  margin-top:25px;
+  background:#fff;
+  padding:25px;
+  border-radius:15px;
+  text-align:center;
+  border:1px solid #e5e7eb;
+}
+
+img{
+  max-width:100%;
+  max-height:300px;
+  margin:15px auto;
+  display:block;
+  border-radius:10px;
+}
+
+.download{
+  display:inline-block;
+  background:#16a34a;
+  color:white;
+  text-decoration:none;
+  padding:12px 25px;
+  border-radius:8px;
+  margin-top:15px;
+}
+
+.info{
+  margin-top:15px;
+  line-height:1.8;
+}
+
+footer{
+  text-align:center;
+  color:#777;
+  padding:30px;
+}
+</style>
+</head>
+
+<body>
+
+<header>
+  <div class="header">
+    <div class="logo">Adaa<span>Hub</span></div>
+    <a class="home" href="index.html">الرئيسية</a>
+  </div>
+</header>
+
+<main class="container">
+
+<h1>ضغط الصور أونلاين</h1>
+
+<p class="subtitle">
+قلل حجم صورك بسهولة ومجانًا، بدون رفعها إلى أي خادم.
+</p>
+
+<div class="box">
+
+  <p>اختر صورة من هاتفك أو جهاز الكمبيوتر</p>
+
+  <label class="upload" for="imageInput">
+    اختر صورة
+  </label>
+
+  <input id="imageInput" type="file" accept="image/*">
+
+</div>
+
+<div id="result">
+
+  <h2>تم تجهيز الصورة</h2>
+
+  <img id="preview">
+
+  <div class="info">
+    <div id="oldSize"></div>
+    <div id="newSize"></div>
+  </div>
+
+  <a id="download" class="download" download="adaahub-compressed.jpg">
+    تحميل الصورة المضغوطة
+  </a>
+
+</div>
+
+</main>
+
+<footer>
+© 2026 AdaaHub - جميع الحقوق محفوظة
+</footer>
+
+<script>
+
+const input = document.getElementById("imageInput");
+
+input.addEventListener("change", function(){
+
+  const file = this.files[0];
+
+  if(!file) return;
+
+  const reader = new FileReader();
+
+  reader.onload = function(event){
+
+    const img = new Image();
+
+    img.onload = function(){
+
+      const canvas = document.createElement("canvas");
+      const ctx = canvas.getContext("2d");
+
+      canvas.width = img.width;
+      canvas.height = img.height;
+
+      ctx.drawImage(img,0,0);
+
+      canvas.toBlob(function(blob){
+
+        const url = URL.createObjectURL(blob);
+
+        document.getElementById("preview").src = url;
+
+        document.getElementById("oldSize").innerHTML =
+          "الحجم الأصلي: " + formatSize(file.size);
+
+        document.getElementById("newSize").innerHTML =
+          "الحجم الجديد: " + formatSize(blob.size);
+
+        const download =
+          document.getElementById("download");
+
+        download.href = url;
+
+        document.getElementById("result").style.display = "block";
+
+      },"image/jpeg",0.70);
+
+    };
+
+    img.src = event.target.result;
+
+  };
+
+  reader.readAsDataURL(file);
+
+});
+
+function formatSize(bytes){
+
+  if(bytes < 1024){
+    return bytes + " بايت";
+  }
+
+  if(bytes < 1024 * 1024){
+    return (bytes / 1024).toFixed(1) + " KB";
+  }
+
+  return (bytes / (1024 * 1024)).toFixed(2) + " MB";
+}
+
+</script>
+
+</body>
+</html>
