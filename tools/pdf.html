@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>تحويل الصور إلى PDF أونلاين | AdaaHub</title>
+
+<meta name="description" content="حوّل صورك إلى ملف PDF مجانًا وبسهولة من خلال AdaaHub.">
+
+<style>
+*{
+  box-sizing:border-box;
+  margin:0;
+  padding:0;
+}
+
+body{
+  font-family:Arial,Tahoma,sans-serif;
+  background:#f5f7fb;
+  color:#20242a;
+  line-height:1.7;
+}
+
+header{
+  background:#fff;
+  padding:18px 20px;
+  border-bottom:1px solid #e5e7eb;
+}
+
+.header{
+  max-width:900px;
+  margin:auto;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+}
+
+.logo{
+  font-size:27px;
+  font-weight:bold;
+}
+
+.logo span{
+  color:#2563eb;
+}
+
+.home{
+  color:#2563eb;
+  text-decoration:none;
+}
+
+.container{
+  max-width:850px;
+  margin:45px auto;
+  padding:20px;
+}
+
+h1{
+  text-align:center;
+  font-size:32px;
+  margin-bottom:10px;
+}
+
+.subtitle{
+  text-align:center;
+  color:#666;
+  margin-bottom:30px;
+}
+
+.box{
+  background:#fff;
+  border:2px dashed #cbd5e1;
+  border-radius:18px;
+  padding:45px 20px;
+  text-align:center;
+}
+
+input{
+  display:none;
+}
+
+.upload{
+  display:inline-block;
+  background:#2563eb;
+  color:#fff;
+  padding:14px 28px;
+  border-radius:9px;
+  cursor:pointer;
+  font-size:17px;
+}
+
+#imagesPreview{
+  display:none;
+  margin-top:25px;
+  background:#fff;
+  padding:20px;
+  border-radius:15px;
+  border:1px solid #e5e7eb;
+}
+
+.preview-item{
+  margin-bottom:20px;
+}
+
+.preview-item img{
+  max-width:100%;
+  max-height:250px;
+  border-radius:10px;
+  display:block;
+  margin:10px auto;
+}
+
+.create{
+  display:none;
+  width:100%;
+  margin-top:20px;
+  padding:14px;
+  border:0;
+  border-radius:9px;
+  background:#16a34a;
+  color:white;
+  font-size:17px;
+  cursor:pointer;
+}
+
+.create:hover{
+  background:#15803d;
+}
+
+#status{
+  margin-top:15px;
+  text-align:center;
+  color:#555;
+}
+
+.privacy{
+  margin-top:25px;
+  background:#eff6ff;
+  border:1px solid #bfdbfe;
+  border-radius:12px;
+  padding:18px;
+  text-align:center;
+  color:#1e40af;
+}
+
+footer{
+  margin-top:50px;
+  padding:30px;
+  text-align:center;
+  background:#fff;
+  color:#777;
+}
+
+@media(max-width:700px){
+
+  .header{
+    flex-direction:column;
+    gap:10px;
+  }
+
+  .container{
+    margin-top:25px;
+  }
+
+  h1{
+    font-size:28px;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+
+<div class="header">
+
+<div class="logo">
+Adaa<span>Hub</span>
+</div>
+
+<a class="home" href="../index.html">
+الرئيسية
+</a>
+
+</div>
+
+</header>
+
+<main class="container">
+
+<h1>تحويل الصور إلى PDF</h1>
+
+<p class="subtitle">
+حوّل صورة واحدة أو عدة صور إلى ملف PDF بسهولة ومجانًا.
+</p>
+
+<div class="box">
+
+<p>اختر الصور من هاتفك أو الكمبيوتر</p>
+
+<label class="upload" for="imageInput">
+اختيار الصور
+</label>
+
+<input
+id="imageInput"
+type="file"
+accept="image/*"
+multiple
+>
+
+</div>
+
+<div id="imagesPreview"></div>
+
+<button class="create" id="createPdf">
+إنشاء ملف PDF
+</button>
+
+<div id="status"></div>
+
+<div class="privacy">
+🔒 تتم معالجة الصور داخل متصفحك مباشرة، ولا يتم رفعها إلى خادم AdaaHub.
+</div>
+
+</main>
+
+<footer>
+© 2026 AdaaHub - جميع الحقوق محفوظة
+</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+
+<script>
+
+const imageInput =
+document.getElementById("imageInput");
+
+const imagesPreview =
+document.getElementById("imagesPreview");
+
+const createPdf =
+document.getElementById("createPdf");
+
+const status =
+document.getElementById("status");
+
+let selectedImages = [];
+
+imageInput.addEventListener("change",function(){
+
+selectedImages = Array.from(this.files);
+
+if(selectedImages.length === 0){
+return;
+}
+
+imagesPreview.innerHTML = "";
+imagesPreview.style.display = "block";
+createPdf.style.display = "block";
+
+selectedImages.forEach(function(file,index){
+
+const reader = new FileReader();
+
+reader.onload = function(event){
+
+const item = document.createElement("div");
+
+item.className = "preview-item";
+
+item.innerHTML =
+"<strong>الصورة " + (index + 1) + "</strong>" +
+"<img src='" + event.target.result + "'>";
+
+imagesPreview.appendChild(item);
+
+};
+
+reader.readAsDataURL(file);
+
+});
+
+});
+
+
+createPdf.addEventListener("click",async function(){
+
+if(selectedImages.length === 0){
+
+alert("اختر صورة واحدة على الأقل.");
+
+return;
+
+}
+
+createPdf.disabled = true;
+
+createPdf.textContent = "⏳ جاري إنشاء PDF...";
+
+status.textContent = "";
+
+const { jsPDF } = window.jspdf;
+
+const pdf = new jsPDF({
+orientation:"portrait",
+unit:"mm",
+format:"a4"
+});
+
+for(let i = 0; i < selectedImages.length; i++){
+
+const file = selectedImages[i];
+
+const dataUrl = await readFile(file);
+
+const img = await loadImage(dataUrl);
+
+const pageWidth = 210;
+const pageHeight = 297;
+
+const margin = 10;
+
+const maxWidth =
+pageWidth - (margin * 2);
+
+const maxHeight =
+pageHeight - (margin * 2);
+
+let width = img.width;
+let height = img.height;
+
+const ratio =
+Math.min(maxWidth / width, maxHeight / height);
+
+width *= ratio;
+height *= ratio;
+
+const x =
+(pageWidth - width) / 2;
+
+const y =
+(pageHeight - height) / 2;
+
+if(i > 0){
+pdf.addPage();
+}
+
+pdf.addImage(
+img,
+"JPEG",
+x,
+y,
+width,
+height
+);
+
+}
+
+pdf.save("adaahub-images.pdf");
+
+status.textContent =
+"✅ تم إنشاء ملف PDF بنجاح.";
+
+createPdf.disabled = false;
+
+createPdf.textContent =
+"إنشاء ملف PDF";
+
+});
+
+
+function readFile(file){
+
+return new Promise(function(resolve,reject){
+
+const reader = new FileReader();
+
+reader.onload = function(){
+resolve(reader.result);
+};
+
+reader.onerror = reject;
+
+reader.readAsDataURL(file);
+
+});
+
+}
+
+
+function loadImage(src){
+
+return new Promise(function(resolve,reject){
+
+const img = new Image();
+
+img.onload = function(){
+resolve(img);
+};
+
+img.onerror = reject;
+
+img.src = src;
+
+});
+
+}
+
+</script>
+
+</body>
+</html>
