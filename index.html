@@ -9,6 +9,8 @@
   <meta name="description" content="AdaaHub مركز عربي للأدوات المجانية والسريعة أونلاين.">
   <meta name="robots" content="index, follow">
 
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap" rel="stylesheet">
+
   <style>
     * {
       box-sizing: border-box;
@@ -17,7 +19,7 @@
     }
 
     body {
-      font-family: Arial, sans-serif;
+      font-family: 'Cairo', sans-serif;
       background: #f5f7fb;
       color: #20242a;
     }
@@ -26,6 +28,7 @@
       background: #ffffff;
       padding: 20px;
       border-bottom: 1px solid #e5e7eb;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.05);
     }
 
     .header-content {
@@ -55,6 +58,7 @@
     .hero h1 {
       font-size: 38px;
       margin-bottom: 15px;
+      color: #1f2937;
     }
 
     .hero p {
@@ -77,11 +81,13 @@
       border-radius: 15px;
       text-align: center;
       border: 1px solid #e5e7eb;
-      transition: 0.2s;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+      transition: all 0.3s ease;
     }
 
     .tool:hover {
-      transform: translateY(-4px);
+      transform: translateY(-6px);
+      box-shadow: 0 10px 25px rgba(0,0,0,0.15);
     }
 
     .icon {
@@ -92,6 +98,7 @@
     .tool h2 {
       font-size: 21px;
       margin-bottom: 10px;
+      color: #1f2937;
     }
 
     .tool p {
@@ -107,6 +114,12 @@
       text-decoration: none;
       padding: 11px 22px;
       border-radius: 8px;
+      transition: background-color 0.3s ease;
+      cursor: pointer;
+    }
+
+    .button:hover {
+      background: #1d4ed8;
     }
 
     footer {
@@ -115,6 +128,7 @@
       text-align: center;
       background: #ffffff;
       color: #777;
+      border-top: 1px solid #e5e7eb;
     }
 
     @media (max-width: 700px) {
@@ -124,6 +138,11 @@
 
       .hero h1 {
         font-size: 30px;
+      }
+
+      .header-content {
+        flex-direction: column;
+        gap: 10px;
       }
     }
   </style>
@@ -149,21 +168,21 @@
     <div class="icon">🖼️</div>
     <h2>ضغط الصور</h2>
     <p>قلل حجم صورك بسهولة مع الحفاظ على أفضل جودة ممكنة.</p>
-    <a class="button" href="#">استخدم الأداة</a>
+    <a class="button" href="tools/compress.html">استخدم الأداة</a>
   </div>
 
   <div class="tool">
     <div class="icon">🔄</div>
     <h2>تحويل إلى WebP</h2>
     <p>حوّل صور JPG وPNG إلى WebP بسرعة ومن المتصفح.</p>
-    <a class="button" href="#">استخدم الأداة</a>
+    <a class="button" href="tools/webp.html">استخدم الأداة</a>
   </div>
 
   <div class="tool">
     <div class="icon">📄</div>
     <h2>صور إلى PDF</h2>
     <p>حوّل صورك إلى ملف PDF بطريقة سهلة وسريعة.</p>
-    <a class="button" href="#">استخدم الأداة</a>
+    <a class="button" href="tools/pdf.html">استخدم الأداة</a>
   </div>
 
 </section>
