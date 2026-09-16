@@ -9,10 +9,10 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>AdaaHub | أدوات مجانية أونلاين</title>
+<title>AdaaHub | مركز الأدوات اليومية المجانية</title>
 
 <meta name="description"
-content="AdaaHub مركز الأدوات اليومية المجانية. ضغط الصور، تغيير حجمها، تحويل الصور، أدوات PDF، وعدد الكلمات والحروف بسهولة وسرعة.">
+content="AdaaHub مركز الأدوات اليومية المجانية أونلاين. اضغط الصور، غيّر حجمها، قصها وحوّلها بين الصيغ، أنشئ PDF، واحسب الكلمات والحروف بسهولة من المتصفح.">
 
 <meta name="robots" content="index, follow">
 
@@ -37,8 +37,6 @@ color:#20242a;
 line-height:1.7;
 transition:.3s;
 }
-
-/* HEADER */
 
 header{
 background:#ffffff;
@@ -96,8 +94,6 @@ cursor:pointer;
 font-size:19px;
 }
 
-/* HERO */
-
 .hero{
 max-width:1150px;
 margin:55px auto 35px;
@@ -128,13 +124,11 @@ color:#2563eb;
 }
 
 .hero p{
-max-width:700px;
+max-width:720px;
 margin:auto;
 color:#666;
 font-size:18px;
 }
-
-/* SEARCH */
 
 .search-box{
 max-width:650px;
@@ -158,8 +152,6 @@ border-color:#2563eb;
 box-shadow:0 0 0 3px rgba(37,99,235,.10);
 }
 
-/* SECTION */
-
 .section{
 max-width:1150px;
 margin:35px auto;
@@ -182,8 +174,6 @@ color:#1f2937;
 color:#777;
 font-size:14px;
 }
-
-/* TOOLS */
 
 .tools{
 display:grid;
@@ -241,7 +231,16 @@ font-size:15px;
 background:#1d4ed8;
 }
 
-/* FEATURES */
+.no-result{
+display:none;
+text-align:center;
+padding:30px;
+margin-top:22px;
+background:#fff;
+border-radius:15px;
+border:1px solid #e5e7eb;
+color:#777;
+}
 
 .features{
 display:grid;
@@ -273,19 +272,50 @@ font-size:14px;
 color:#777;
 }
 
-/* EMPTY SEARCH */
-
-.no-result{
-display:none;
-text-align:center;
-padding:30px;
+.info-content{
 background:#fff;
-border-radius:15px;
 border:1px solid #e5e7eb;
-color:#777;
+border-radius:18px;
+padding:28px;
+margin-top:25px;
 }
 
-/* FOOTER */
+.info-content h2{
+font-size:25px;
+margin-bottom:12px;
+color:#1f2937;
+}
+
+.info-content h3{
+font-size:19px;
+margin:22px 0 8px;
+color:#1f2937;
+}
+
+.info-content p{
+color:#666;
+font-size:15px;
+margin-bottom:12px;
+}
+
+.info-content ul{
+padding-right:22px;
+color:#666;
+font-size:15px;
+}
+
+.info-content li{
+margin-bottom:7px;
+}
+
+.info-content a{
+color:#2563eb;
+text-decoration:none;
+}
+
+.info-content a:hover{
+text-decoration:underline;
+}
 
 footer{
 margin-top:60px;
@@ -341,8 +371,6 @@ font-size:13px;
 color:#9ca3af;
 }
 
-/* DARK MODE */
-
 body.dark{
 background:#0f172a;
 color:#e5e7eb;
@@ -352,7 +380,8 @@ body.dark header,
 body.dark .tool,
 body.dark .feature,
 body.dark .search-box input,
-body.dark .no-result{
+body.dark .no-result,
+body.dark .info-content{
 background:#1e293b;
 border-color:#334155;
 }
@@ -360,14 +389,18 @@ border-color:#334155;
 body.dark .logo,
 body.dark .hero h1,
 body.dark .section-title h2,
-body.dark .tool h3{
+body.dark .tool h3,
+body.dark .info-content h2,
+body.dark .info-content h3{
 color:#f8fafc;
 }
 
 body.dark .hero p,
 body.dark .tool p,
 body.dark .section-title p,
-body.dark .feature p{
+body.dark .feature p,
+body.dark .info-content p,
+body.dark .info-content ul{
 color:#94a3b8;
 }
 
@@ -402,7 +435,9 @@ body.dark .badge{
 color:#60a5fa;
 }
 
-/* MOBILE */
+body.dark .info-content a{
+color:#60a5fa;
+}
 
 @media(max-width:800px){
 
@@ -442,9 +477,11 @@ display:block;
 margin-top:5px;
 }
 
+.info-content{
+padding:22px 18px;
 }
 
-/* SMALL MOBILE */
+}
 
 @media(max-width:450px){
 
@@ -474,11 +511,7 @@ padding:24px 18px;
 
 </head>
 
-
 <body>
-
-
-<!-- HEADER -->
 
 <header>
 
@@ -501,7 +534,8 @@ Adaa<span>Hub</span>
 <button
 class="theme-button"
 id="themeButton"
-title="الوضع الليلي">
+title="تبديل الوضع الليلي"
+aria-label="تبديل الوضع الليلي">
 🌙
 </button>
 
@@ -511,8 +545,6 @@ title="الوضع الليلي">
 
 </header>
 
-
-<!-- HERO -->
 
 <section class="hero">
 
@@ -526,8 +558,8 @@ title="الوضع الليلي">
 </h1>
 
 <p>
-AdaaHub يوفر لك مجموعة من الأدوات المجانية التي تساعدك
-على إنجاز مهامك بسرعة وسهولة، مباشرة من المتصفح.
+AdaaHub هو مركز للأدوات اليومية المجانية التي تساعدك
+على إنجاز المهام البسيطة بسرعة وسهولة، مباشرة من المتصفح.
 </p>
 
 <div class="search-box">
@@ -536,123 +568,232 @@ AdaaHub يوفر لك مجموعة من الأدوات المجانية التي
 type="search"
 id="searchInput"
 placeholder="🔎 ابحث عن أداة..."
-autocomplete="off">
+autocomplete="off"
+aria-label="البحث عن أداة">
 
 </div>
 
 </section>
 
 
-<!-- TOOLS -->
+<section class="section" id="tools">
 
-  <div class="tools" id="toolsList">
+<div class="section-title">
 
-  <!-- 1 -->
-  <div class="tool" data-name="ضغط الصور ضغط صورة تصغير حجم الصور">
-    <div class="tool-icon">🖼️</div>
-    <h3>ضغط الصور</h3>
-    <p>قلل حجم صورك بسهولة مع الحفاظ على جودة مناسبة.</p>
-    <a class="tool-button" href="tools/compress.html">استخدم الأداة</a>
-  </div>
+<div>
 
-  <!-- 2 -->
-  <div class="tool" data-name="webp تحويل الصور تحويل صورة jpg png">
-    <div class="tool-icon">🔄</div>
-    <h3>تحويل الصور إلى WebP</h3>
-    <p>حوّل صور JPG وPNG إلى WebP مباشرة من متصفحك.</p>
-    <a class="tool-button" href="tools/webp.html">استخدم الأداة</a>
-  </div>
+<h2>
+أدوات AdaaHub
+</h2>
 
-  <!-- 3 -->
-  <div class="tool" data-name="pdf تحويل الصور pdf صور الى pdf">
-    <div class="tool-icon">📄</div>
-    <h3>صور إلى PDF</h3>
-    <p>حوّل صورة واحدة أو عدة صور إلى ملف PDF بسهولة.</p>
-    <a class="tool-button" href="tools/pdf.html">استخدم الأداة</a>
-  </div>
-
-  <!-- 4 -->
-  <div class="tool" data-name="تغيير حجم الصور تغيير ابعاد الصورة تصغير تكبير الصور">
-    <div class="tool-icon">📐</div>
-    <h3>تغيير حجم الصور</h3>
-    <p>غيّر أبعاد الصور بسهولة مع الحفاظ على تناسبها.</p>
-    <a class="tool-button" href="tools/resize.html">استخدم الأداة</a>
-  </div>
-
-  <!-- 5 -->
-  <div class="tool" data-name="قص الصور قص صورة crop الصور">
-    <div class="tool-icon">✂️</div>
-    <h3>قص الصور</h3>
-    <p>قص الجزء الذي تريده من الصورة بسهولة من المتصفح.</p>
-    <a class="tool-button" href="tools/crop.html">استخدم الأداة</a>
-  </div>
-
-  <!-- 6 -->
-  <div class="tool" data-name="تدوير الصور تدوير صورة rotate">
-    <div class="tool-icon">🔃</div>
-    <h3>تدوير الصور</h3>
-    <p>قم بتدوير الصور يمينًا أو يسارًا بسرعة.</p>
-    <a class="tool-button" href="tools/rotate.html">استخدم الأداة</a>
-  </div>
-
-  <!-- 7 -->
-  <div class="tool" data-name="jpg png تحويل jpg الى png jpg to png">
-    <div class="tool-icon">🖼️</div>
-    <h3>JPG إلى PNG</h3>
-    <p>حوّل صور JPG وJPEG إلى صيغة PNG بسهولة.</p>
-    <a class="tool-button" href="tools/jpg-to-png.html">استخدم الأداة</a>
-  </div>
-
-  <!-- 8 -->
-  <div class="tool" data-name="png jpg تحويل png الى jpg png to jpg">
-    <div class="tool-icon">🔄</div>
-    <h3>PNG إلى JPG</h3>
-    <p>حوّل صور PNG إلى JPG مع إمكانية التحكم في الجودة.</p>
-    <a class="tool-button" href="tools/png-to-jpg.html">استخدم الأداة</a>
-  </div>
-
-  <!-- 9 -->
-  <div class="tool" data-name="webp jpg تحويل webp الى jpg webp to jpg">
-    <div class="tool-icon">🔁</div>
-    <h3>WebP إلى JPG</h3>
-    <p>حوّل صور WebP إلى JPG بسهولة وبجودة مناسبة.</p>
-    <a class="tool-button" href="tools/webp-to-jpg.html">استخدم الأداة</a>
-  </div>
-
-  <!-- 10 -->
-  <div class="tool" data-name="معلومات الصورة ابعاد الصورة حجم الصورة نوع الصورة">
-    <div class="tool-icon">🔍</div>
-    <h3>معلومات الصورة</h3>
-    <p>اعرف أبعاد الصورة وحجمها ونوعها ونسبة أبعادها.</p>
-    <a class="tool-button" href="tools/image-info.html">استخدم الأداة</a>
-  </div>
-
-  <!-- 11 -->
-  <div class="tool" data-name="عداد الكلمات الحروف الكلمات عدد الحروف النص">
-    <div class="tool-icon">📝</div>
-    <h3>عداد الكلمات والحروف</h3>
-    <p>احسب عدد الكلمات والحروف والجمل والأسطر في أي نص.</p>
-    <a class="tool-button" href="tools/word-counter.html">استخدم الأداة</a>
-  </div>
+<p>
+اختر الأداة التي تحتاج إليها وابدأ مباشرة.
+</p>
 
 </div>
+
 </div>
+
+
+<div class="tools" id="toolsList">
+
+
+<div class="tool" data-name="ضغط الصور ضغط صورة تصغير حجم الصور">
+
+<div class="tool-icon">🖼️</div>
+
+<h3>ضغط الصور</h3>
+
+<p>
+قلل حجم صورك بسهولة مع الحفاظ على جودة مناسبة.
+</p>
+
+<a class="tool-button" href="tools/compress.html">
+استخدم الأداة
+</a>
+
+</div>
+
+
+<div class="tool" data-name="webp تحويل الصور تحويل صورة jpg png">
+
+<div class="tool-icon">🔄</div>
+
+<h3>تحويل الصور إلى WebP</h3>
+
+<p>
+حوّل صور JPG وPNG إلى WebP مباشرة من متصفحك.
+</p>
+
+<a class="tool-button" href="tools/webp.html">
+استخدم الأداة
+</a>
+
+</div>
+
+
+<div class="tool" data-name="pdf تحويل الصور pdf صور الى pdf">
+
+<div class="tool-icon">📄</div>
+
+<h3>صور إلى PDF</h3>
+
+<p>
+حوّل صورة واحدة أو عدة صور إلى ملف PDF بسهولة.
+</p>
+
+<a class="tool-button" href="tools/pdf.html">
+استخدم الأداة
+</a>
+
+</div>
+
+
+<div class="tool" data-name="تغيير حجم الصور تغيير ابعاد الصورة تصغير تكبير الصور">
+
+<div class="tool-icon">📐</div>
+
+<h3>تغيير حجم الصور</h3>
+
+<p>
+غيّر أبعاد الصور بسهولة مع الحفاظ على تناسبها.
+</p>
+
+<a class="tool-button" href="tools/resize.html">
+استخدم الأداة
+</a>
+
+</div>
+
+
+<div class="tool" data-name="قص الصور قص صورة crop الصور">
+
+<div class="tool-icon">✂️</div>
+
+<h3>قص الصور</h3>
+
+<p>
+قص الجزء الذي تريده من الصورة بسهولة من المتصفح.
+</p>
+
+<a class="tool-button" href="tools/crop.html">
+استخدم الأداة
+</a>
+
+</div>
+
+
+<div class="tool" data-name="تدوير الصور تدوير صورة rotate">
+
+<div class="tool-icon">🔃</div>
+
+<h3>تدوير الصور</h3>
+
+<p>
+قم بتدوير الصور يمينًا أو يسارًا بسرعة.
+</p>
+
+<a class="tool-button" href="tools/rotate.html">
+استخدم الأداة
+</a>
+
+</div>
+
+
+<div class="tool" data-name="jpg png تحويل jpg الى png jpg to png">
+
+<div class="tool-icon">🖼️</div>
+
+<h3>JPG إلى PNG</h3>
+
+<p>
+حوّل صور JPG وJPEG إلى صيغة PNG بسهولة.
+</p>
+
+<a class="tool-button" href="tools/jpg-to-png.html">
+استخدم الأداة
+</a>
+
+</div>
+
+
+<div class="tool" data-name="png jpg تحويل png الى jpg png to jpg">
+
+<div class="tool-icon">🔄</div>
+
+<h3>PNG إلى JPG</h3>
+
+<p>
+حوّل صور PNG إلى JPG مع إمكانية التحكم في الجودة.
+</p>
+
+<a class="tool-button" href="tools/png-to-jpg.html">
+استخدم الأداة
+</a>
+
+</div>
+
+
+<div class="tool" data-name="webp jpg تحويل webp الى jpg webp to jpg">
+
+<div class="tool-icon">🔁</div>
+
+<h3>WebP إلى JPG</h3>
+
+<p>
+حوّل صور WebP إلى JPG بسهولة وبجودة مناسبة.
+</p>
+
+<a class="tool-button" href="tools/webp-to-jpg.html">
+استخدم الأداة
+</a>
+
+</div>
+
+
+<div class="tool" data-name="معلومات الصورة ابعاد الصورة حجم الصورة نوع الصورة">
+
+<div class="tool-icon">🔍</div>
+
+<h3>معلومات الصورة</h3>
+
+<p>
+اعرف أبعاد الصورة وحجمها ونوعها ونسبة أبعادها.
+</p>
+
+<a class="tool-button" href="tools/image-info.html">
+استخدم الأداة
+</a>
+
+</div>
+
+
+<div class="tool" data-name="عداد الكلمات الحروف الكلمات عدد الحروف النص">
+
+<div class="tool-icon">📝</div>
+
+<h3>عداد الكلمات والحروف</h3>
+
+<p>
+احسب عدد الكلمات والحروف والجمل والأسطر في أي نص.
+</p>
+
+<a class="tool-button" href="tools/word-counter.html">
+استخدم الأداة
+</a>
+
+</div>
+
+
+</div>
+
 
 <div class="no-result" id="noResult">
-  لا توجد أداة مطابقة لبحثك حاليًا.
-</div>
-<div
-class="no-result"
-id="noResult">
-
 لا توجد أداة مطابقة لبحثك حاليًا.
-
 </div>
 
 </section>
 
-
-<!-- ABOUT -->
 
 <section class="section" id="about">
 
@@ -665,7 +806,7 @@ id="noResult">
 </h2>
 
 <p>
-صممنا الموقع ليكون بسيطًا وسريعًا
+أدوات بسيطة لمهام يومية بدون خطوات معقدة.
 </p>
 
 </div>
@@ -687,7 +828,7 @@ id="noResult">
 </h3>
 
 <p>
-أنجز مهمتك بدون خطوات معقدة.
+الوصول إلى الأداة التي تحتاجها واستخدامها مباشرة.
 </p>
 
 </div>
@@ -704,7 +845,7 @@ id="noResult">
 </h3>
 
 <p>
-الأدوات التي تعمل محليًا تعالج الملفات داخل متصفحك.
+الأدوات التي تعمل محليًا تعالج الملفات داخل متصفحك بدلًا من رفعها إلى خادم الموقع.
 </p>
 
 </div>
@@ -717,11 +858,11 @@ id="noResult">
 </div>
 
 <h3>
-يعمل على كل الأجهزة
+متوافق مع الأجهزة
 </h3>
 
 <p>
-تصميم متجاوب للهواتف والكمبيوتر.
+تصميم متجاوب للاستخدام على الهواتف والأجهزة اللوحية وأجهزة الكمبيوتر.
 </p>
 
 </div>
@@ -729,10 +870,45 @@ id="noResult">
 
 </div>
 
+
+<div class="info-content">
+
+<h2>
+مركز الأدوات اليومية
+</h2>
+
+<p>
+يوفر AdaaHub مجموعة من الأدوات المجانية التي تساعدك في إنجاز المهام اليومية المتعلقة بالصور والملفات والنصوص من خلال واجهة بسيطة.
+</p>
+
+<h3>
+أدوات الصور
+</h3>
+
+<p>
+يمكنك ضغط الصور، تغيير أبعادها، قصها وتدويرها، بالإضافة إلى تحويلها بين صيغ JPG وPNG وWebP ومعرفة معلومات الصورة.
+</p>
+
+<h3>
+أدوات الملفات والنصوص
+</h3>
+
+<p>
+يمكنك أيضًا تحويل الصور إلى ملفات PDF وحساب عدد الكلمات والحروف والأسطر في النصوص بسهولة.
+</p>
+
+<h3>
+هل تريد استخدام إحدى الأدوات؟
+</h3>
+
+<p>
+يمكنك العودة إلى <a href="#tools">قسم الأدوات</a> واختيار الأداة المناسبة لك. وإذا كان لديك اقتراح لأداة جديدة، يمكنك التواصل معنا من خلال <a href="pages/contact.html">صفحة اتصل بنا</a>.
+</p>
+
+</div>
+
 </section>
 
-
-<!-- FOOTER -->
 
 <footer>
 
@@ -771,9 +947,7 @@ Adaa<span>Hub</span>
 </div>
 
 <div class="copyright">
-
 © 2026 AdaaHub - جميع الحقوق محفوظة
-
 </div>
 
 </div>
@@ -782,8 +956,6 @@ Adaa<span>Hub</span>
 
 
 <script>
-
-/* SEARCH */
 
 const searchInput =
 document.getElementById("searchInput");
@@ -822,7 +994,7 @@ tool.style.display = "none";
 });
 
 
-if(found === 0){
+if(found === 0 && search !== ""){
 
 noResult.style.display = "block";
 
@@ -834,8 +1006,6 @@ noResult.style.display = "none";
 
 });
 
-
-/* DARK MODE */
 
 const themeButton =
 document.getElementById("themeButton");
@@ -850,6 +1020,11 @@ if(document.body.classList.contains("dark")){
 
 themeButton.textContent = "☀️";
 
+themeButton.setAttribute(
+"aria-label",
+"تفعيل الوضع النهاري"
+);
+
 localStorage.setItem(
 "adaahub-theme",
 "dark"
@@ -858,6 +1033,11 @@ localStorage.setItem(
 }else{
 
 themeButton.textContent = "🌙";
+
+themeButton.setAttribute(
+"aria-label",
+"تفعيل الوضع الليلي"
+);
 
 localStorage.setItem(
 "adaahub-theme",
@@ -869,18 +1049,20 @@ localStorage.setItem(
 });
 
 
-/* LOAD THEME */
-
 if(localStorage.getItem("adaahub-theme") === "dark"){
 
 document.body.classList.add("dark");
 
 themeButton.textContent = "☀️";
 
+themeButton.setAttribute(
+"aria-label",
+"تفعيل الوضع النهاري"
+);
+
 }
 
 </script>
-
 
 </body>
 
