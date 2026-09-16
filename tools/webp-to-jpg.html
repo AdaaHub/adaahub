@@ -201,6 +201,7 @@ button,
     text-align:center;
     color:#1976d2;
     margin-top:15px;
+    font-weight:bold;
 }
 
 .info{
@@ -270,8 +271,15 @@ footer{
 
 <header>
     <div class="header-inner">
-        <a href="../index.html" class="logo">AdaaHub</a>
-        <a href="../index.html" class="home">الرئيسية</a>
+
+        <a href="../index.html" class="logo">
+            AdaaHub
+        </a>
+
+        <a href="../index.html" class="home">
+            الرئيسية
+        </a>
+
     </div>
 </header>
 
@@ -294,7 +302,7 @@ footer{
     </div>
 
     <div class="upload-sub">
-        WebP فقط
+        WebP فقط — بحد أقصى 25MB
     </div>
 
     <input
@@ -307,14 +315,17 @@ footer{
 
 <div class="preview" id="previewBox">
 
-    <img id="previewImage" alt="معاينة صورة WebP">
+    <img
+        id="previewImage"
+        alt="معاينة صورة WebP"
+    >
 
 </div>
 
 <div class="settings" id="settings">
 
     <label for="quality">
-        جودة الصورة
+        جودة صورة JPG
     </label>
 
     <div class="quality-row">
@@ -327,7 +338,9 @@ footer{
             value="85"
         >
 
-        <span id="qualityValue">85%</span>
+        <span id="qualityValue">
+            85%
+        </span>
 
     </div>
 
@@ -341,11 +354,19 @@ footer{
 
 <div class="buttons" id="buttons">
 
-    <button class="convert-btn" id="convertBtn">
+    <button
+        type="button"
+        class="convert-btn"
+        id="convertBtn"
+    >
         🔄 تحويل إلى JPG
     </button>
 
-    <button class="reset-btn" id="resetBtn">
+    <button
+        type="button"
+        class="reset-btn"
+        id="resetBtn"
+    >
         إعادة ضبط
     </button>
 
@@ -360,9 +381,12 @@ footer{
 </div>
 
 <div class="info">
+
     🔒 <strong>خصوصيتك مهمة:</strong>
+
     تتم معالجة الصورة بالكامل داخل متصفحك،
     ولا يتم رفع الصور إلى خوادم AdaaHub.
+
 </div>
 
 </div>
@@ -376,7 +400,7 @@ footer{
 </p>
 
 <p>
-2. اختر جودة الصورة المناسبة لك.
+2. اختر جودة JPG المناسبة لك.
 </p>
 
 <p>
@@ -398,6 +422,22 @@ footer{
 في المناطق الشفافة من صورة WebP أثناء التحويل.
 </p>
 
+<p>
+إذا كنت تريد الاحتفاظ بالشفافية، فمن الأفضل استخدام PNG أو WebP.
+</p>
+
+</section>
+
+<section class="section">
+
+<h2>متى أستخدم JPG بدل WebP؟</h2>
+
+<p>
+JPG مناسب عندما تحتاج إلى صورة متوافقة مع عدد كبير من البرامج
+والمواقع والأجهزة. أما WebP فعادةً يكون مناسبًا للصور المستخدمة
+على الويب عندما تريد حجمًا أقل مع جودة جيدة.
+</p>
+
 </section>
 
 <section class="section">
@@ -409,7 +449,7 @@ footer{
 <h3>هل التحويل مجاني؟</h3>
 
 <p>
-نعم، الأداة مجانية ويمكن استخدامها مباشرة من المتصفح.
+نعم، أداة تحويل WebP إلى JPG مجانية ويمكن استخدامها مباشرة من المتصفح.
 </p>
 
 </div>
@@ -419,7 +459,8 @@ footer{
 <h3>هل يتم رفع الصورة إلى الموقع؟</h3>
 
 <p>
-لا، تتم معالجة الصورة محليًا داخل متصفحك.
+لا، تتم معالجة الصورة محليًا داخل متصفحك، ولا يتم إرسال ملف الصورة
+إلى خوادم AdaaHub.
 </p>
 
 </div>
@@ -429,10 +470,38 @@ footer{
 <h3>هل تعمل الأداة على الهاتف؟</h3>
 
 <p>
-نعم، تعمل على الهواتف وأجهزة الكمبيوتر.
+نعم، يمكن استخدام الأداة على الهواتف والأجهزة اللوحية وأجهزة الكمبيوتر.
 </p>
 
 </div>
+
+<div class="faq">
+
+<h3>هل يمكنني التحكم في جودة JPG؟</h3>
+
+<p>
+نعم، يمكنك اختيار الجودة من 10% إلى 100%. الجودة الأعلى تعني عادةً
+حجم ملف أكبر، بينما الجودة الأقل قد تقلل حجم الملف مع انخفاض جودة الصورة.
+</p>
+
+</div>
+
+</section>
+
+<section class="section">
+
+<h2>أدوات أخرى قد تحتاجها</h2>
+
+<p>
+يمكنك أيضًا استخدام
+<a href="compress.html">أداة ضغط الصور</a>
+أو
+<a href="webp.html">تحويل الصور إلى WebP</a>
+أو
+<a href="png-to-jpg.html">تحويل PNG إلى JPG</a>
+أو
+<a href="jpg-to-png.html">تحويل JPG إلى PNG</a>.
+</p>
 
 </section>
 
@@ -444,24 +513,54 @@ footer{
 
 <script>
 
-const imageInput = document.getElementById("imageInput");
-const previewBox = document.getElementById("previewBox");
-const previewImage = document.getElementById("previewImage");
+const imageInput =
+    document.getElementById("imageInput");
 
-const settings = document.getElementById("settings");
-const quality = document.getElementById("quality");
-const qualityValue = document.getElementById("qualityValue");
+const previewBox =
+    document.getElementById("previewBox");
 
-const details = document.getElementById("details");
-const status = document.getElementById("status");
+const previewImage =
+    document.getElementById("previewImage");
 
-const buttons = document.getElementById("buttons");
-const convertBtn = document.getElementById("convertBtn");
-const resetBtn = document.getElementById("resetBtn");
-const downloadBtn = document.getElementById("downloadBtn");
+const settings =
+    document.getElementById("settings");
+
+const quality =
+    document.getElementById("quality");
+
+const qualityValue =
+    document.getElementById("qualityValue");
+
+const details =
+    document.getElementById("details");
+
+const status =
+    document.getElementById("status");
+
+const buttons =
+    document.getElementById("buttons");
+
+const convertBtn =
+    document.getElementById("convertBtn");
+
+const resetBtn =
+    document.getElementById("resetBtn");
+
+const downloadBtn =
+    document.getElementById("downloadBtn");
+
+const MAX_FILE_SIZE = 25 * 1024 * 1024;
 
 let selectedFile = null;
+
 let image = new Image();
+
+let previewUrl = null;
+
+let downloadUrl = null;
+
+
+/* تغيير الجودة */
 
 quality.addEventListener("input", function(){
 
@@ -470,79 +569,194 @@ quality.addEventListener("input", function(){
 
 });
 
+
+/* اختيار الصورة */
+
 imageInput.addEventListener("change", function(){
 
     const file = this.files[0];
 
-    if(!file) return;
+    if(!file){
+
+        return;
+
+    }
+
 
     if(file.type !== "image/webp"){
 
         alert("من فضلك اختر صورة WebP فقط.");
 
-        this.value = "";
+        resetTool();
 
         return;
+
     }
+
+
+    if(file.size > MAX_FILE_SIZE){
+
+        alert("حجم الصورة أكبر من 25MB.");
+
+        resetTool();
+
+        return;
+
+    }
+
 
     selectedFile = file;
 
-    const url = URL.createObjectURL(file);
+
+    if(previewUrl){
+
+        URL.revokeObjectURL(previewUrl);
+
+    }
+
+
+    previewUrl =
+        URL.createObjectURL(file);
+
 
     image.onload = function(){
 
-        previewImage.src = url;
+        previewImage.src =
+            previewUrl;
 
-        previewBox.style.display = "block";
 
-        settings.style.display = "block";
+        previewBox.style.display =
+            "block";
 
-        buttons.style.display = "flex";
 
-        details.style.display = "block";
+        settings.style.display =
+            "block";
+
+
+        buttons.style.display =
+            "flex";
+
+
+        details.style.display =
+            "block";
+
 
         details.innerHTML =
+
             "أبعاد الصورة: <strong>" +
+
             image.naturalWidth +
+
             " × " +
+
             image.naturalHeight +
+
             "</strong><br>" +
+
             "حجم WebP الأصلي: <strong>" +
+
             formatSize(file.size) +
+
             "</strong>";
 
-        downloadBtn.style.display = "none";
 
-        status.style.display = "none";
+        downloadBtn.style.display =
+            "none";
+
+
+        status.style.display =
+            "none";
 
     };
 
-    image.src = url;
+
+    image.onerror = function(){
+
+        alert("تعذر قراءة صورة WebP.");
+
+        resetTool();
+
+    };
+
+
+    image.src =
+        previewUrl;
 
 });
 
+
+/* تحويل WebP إلى JPG */
+
 convertBtn.addEventListener("click", function(){
 
-    if(!selectedFile) return;
+    if(!selectedFile){
 
-    status.style.display = "block";
+        return;
+
+    }
+
+
+    if(!image.complete ||
+       !image.naturalWidth){
+
+        status.style.display =
+            "block";
+
+        status.textContent =
+            "تعذر تحميل الصورة.";
+
+        return;
+
+    }
+
+
+    status.style.display =
+        "block";
 
     status.textContent =
         "جاري تحويل الصورة إلى JPG...";
 
-    const canvas = document.createElement("canvas");
 
-    canvas.width = image.naturalWidth;
-    canvas.height = image.naturalHeight;
+    convertBtn.disabled =
+        true;
 
-    const ctx = canvas.getContext("2d");
+
+    const canvas =
+        document.createElement("canvas");
+
+
+    canvas.width =
+        image.naturalWidth;
+
+    canvas.height =
+        image.naturalHeight;
+
+
+    const ctx =
+        canvas.getContext("2d");
+
+
+    if(!ctx){
+
+        status.textContent =
+            "المتصفح لا يدعم معالجة الصورة.";
+
+        convertBtn.disabled =
+            false;
+
+        return;
+
+    }
+
 
     /*
-      JPG لا يدعم الشفافية،
-      لذلك نضع خلفية بيضاء.
+       JPG لا يدعم الشفافية،
+       لذلك نضع خلفية بيضاء أولًا.
     */
 
-    ctx.fillStyle = "#ffffff";
+    ctx.fillStyle =
+        "#ffffff";
+
 
     ctx.fillRect(
         0,
@@ -551,122 +765,244 @@ convertBtn.addEventListener("click", function(){
         canvas.height
     );
 
+
     ctx.drawImage(
         image,
         0,
-        0
+        0,
+        canvas.width,
+        canvas.height
     );
+
 
     const imageQuality =
         Number(quality.value) / 100;
 
+
     canvas.toBlob(function(blob){
+
+        convertBtn.disabled =
+            false;
+
 
         if(!blob){
 
             status.textContent =
-                "حدث خطأ أثناء التحويل.";
+                "حدث خطأ أثناء تحويل الصورة.";
 
             return;
+
         }
 
-        if(window.downloadUrl){
+
+        if(downloadUrl){
 
             URL.revokeObjectURL(
-                window.downloadUrl
+                downloadUrl
             );
 
         }
 
-        window.downloadUrl =
+
+        downloadUrl =
             URL.createObjectURL(blob);
+
 
         const originalName =
             selectedFile.name
-            .replace(/\.[^/.]+$/,"");
+            .replace(/\.[^/.]+$/, "");
+
 
         downloadBtn.href =
-            window.downloadUrl;
+            downloadUrl;
+
 
         downloadBtn.download =
-            originalName + "-adaahub.jpg";
+            originalName +
+            "-adaahub.jpg";
+
 
         downloadBtn.style.display =
             "inline-block";
 
+
         status.textContent =
             "تم تحويل الصورة بنجاح.";
 
+
         details.innerHTML =
+
             "أبعاد الصورة: <strong>" +
+
             image.naturalWidth +
+
             " × " +
+
             image.naturalHeight +
+
             "</strong><br>" +
-            "حجم WebP: <strong>" +
+
+            "حجم WebP الأصلي: <strong>" +
+
             formatSize(selectedFile.size) +
+
             "</strong><br>" +
+
             "حجم JPG: <strong>" +
+
             formatSize(blob.size) +
-            "</strong>";
+
+            "</strong><br>" +
+
+            "الجودة: <strong>" +
+
+            quality.value +
+
+            "%</strong>";
+
 
     }, "image/jpeg", imageQuality);
 
 });
 
+
+/* إعادة الضبط */
+
 resetBtn.addEventListener("click", function(){
 
-    imageInput.value = "";
+    resetTool();
 
-    selectedFile = null;
+});
 
-    previewBox.style.display = "none";
 
-    settings.style.display = "none";
+function resetTool(){
 
-    details.style.display = "none";
+    imageInput.value =
+        "";
 
-    buttons.style.display = "none";
+    selectedFile =
+        null;
 
-    downloadBtn.style.display = "none";
 
-    status.style.display = "none";
+    previewBox.style.display =
+        "none";
 
-    previewImage.removeAttribute("src");
 
-    quality.value = 85;
+    settings.style.display =
+        "none";
 
-    qualityValue.textContent = "85%";
 
-    if(window.downloadUrl){
+    details.style.display =
+        "none";
+
+
+    buttons.style.display =
+        "none";
+
+
+    downloadBtn.style.display =
+        "none";
+
+
+    status.style.display =
+        "none";
+
+
+    previewImage.removeAttribute(
+        "src"
+    );
+
+
+    quality.value =
+        85;
+
+
+    qualityValue.textContent =
+        "85%";
+
+
+    if(previewUrl){
 
         URL.revokeObjectURL(
-            window.downloadUrl
+            previewUrl
         );
 
-        window.downloadUrl = null;
+        previewUrl =
+            null;
 
     }
 
-});
+
+    if(downloadUrl){
+
+        URL.revokeObjectURL(
+            downloadUrl
+        );
+
+        downloadUrl =
+            null;
+
+    }
+
+}
+
+
+/* تنسيق حجم الملف */
 
 function formatSize(bytes){
 
     if(bytes < 1024){
 
-        return bytes + " بايت";
+        return bytes +
+            " بايت";
 
     }
+
 
     if(bytes < 1024 * 1024){
 
-        return (bytes / 1024).toFixed(1) + " KB";
+        return (
+            bytes / 1024
+        ).toFixed(1) +
+        " KB";
 
     }
 
-    return (bytes / (1024 * 1024)).toFixed(2) + " MB";
+
+    return (
+        bytes /
+        (1024 * 1024)
+    ).toFixed(2) +
+    " MB";
 
 }
+
+
+/* تنظيف الروابط عند مغادرة الصفحة */
+
+window.addEventListener(
+    "beforeunload",
+    function(){
+
+        if(previewUrl){
+
+            URL.revokeObjectURL(
+                previewUrl
+            );
+
+        }
+
+
+        if(downloadUrl){
+
+            URL.revokeObjectURL(
+                downloadUrl
+            );
+
+        }
+
+    }
+);
 
 </script>
 
