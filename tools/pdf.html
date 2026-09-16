@@ -11,7 +11,7 @@
 
 <meta
 name="description"
-content="حوّل صور JPG وPNG إلى ملف PDF مجانًا أونلاين. اجمع عدة صور في ملف PDF واحد من الهاتف أو الكمبيوتر بدون رفع الصور إلى خادم AdaaHub."
+content="حوّل صور JPG وPNG وWebP إلى ملف PDF مجانًا من الهاتف أو الكمبيوتر. اجمع عدة صور في ملف PDF واحد مباشرة من المتصفح."
 >
 
 <meta name="robots" content="index, follow">
@@ -85,7 +85,7 @@ h1{
   text-align:center;
   color:#666;
   margin:0 auto 28px;
-  max-width:650px;
+  max-width:680px;
 }
 
 .tool-box{
@@ -246,10 +246,16 @@ input[type="file"]{
   background:#d1d5db;
 }
 
+.reset-button:disabled{
+  opacity:.6;
+  cursor:not-allowed;
+}
+
 .status{
   margin-top:15px;
   text-align:center;
   font-weight:bold;
+  min-height:28px;
 }
 
 .privacy-note{
@@ -284,6 +290,16 @@ input[type="file"]{
   padding-right:22px;
 }
 
+.content a{
+  color:#2563eb;
+  font-weight:bold;
+  text-decoration:none;
+}
+
+.content a:hover{
+  text-decoration:underline;
+}
+
 .faq{
   margin-top:30px;
 }
@@ -306,6 +322,16 @@ footer{
   color:#777;
   padding:30px 20px;
   margin-top:30px;
+}
+
+footer a{
+  color:#2563eb;
+  text-decoration:none;
+  margin:0 5px;
+}
+
+footer a:hover{
+  text-decoration:underline;
 }
 
 @media(max-width:600px){
@@ -388,7 +414,7 @@ footer{
       </h2>
 
       <p>
-        يمكنك اختيار صورة واحدة أو عدة صور JPG وPNG وغيرها.
+        يدعم JPG وJPEG وPNG وWebP
       </p>
 
       <label
@@ -401,7 +427,7 @@ footer{
       <input
         id="imageInput"
         type="file"
-        accept="image/jpeg,image/png,image/gif,image/webp"
+        accept="image/jpeg,image/png,image/webp"
         multiple
       >
 
@@ -411,8 +437,7 @@ footer{
     <div
       class="selected-info"
       id="selectedInfo"
-    >
-    </div>
+    ></div>
 
 
     <div
@@ -427,8 +452,7 @@ footer{
       <div
         class="preview-grid"
         id="previewGrid"
-      >
-      </div>
+      ></div>
 
     </div>
 
@@ -436,6 +460,7 @@ footer{
     <button
       class="create-button"
       id="createPdf"
+      type="button"
     >
       📄 إنشاء ملف PDF
     </button>
@@ -444,6 +469,7 @@ footer{
     <button
       class="reset-button"
       id="resetButton"
+      type="button"
     >
       بدء من جديد
     </button>
@@ -452,8 +478,8 @@ footer{
     <div
       class="status"
       id="status"
-    >
-    </div>
+      aria-live="polite"
+    ></div>
 
 
     <div class="privacy-note">
@@ -475,9 +501,8 @@ footer{
 
     <p>
       تساعدك أداة AdaaHub على جمع صورك في ملف PDF واحد
-      بسهولة، سواء كنت تستخدم هاتفًا أو جهاز كمبيوتر.
-      لا تحتاج إلى تثبيت برنامج إضافي، ويمكنك اختيار
-      صورة واحدة أو عدة صور لإنشاء ملف PDF.
+      بسهولة من الهاتف أو الكمبيوتر. يمكنك اختيار صورة واحدة
+      أو عدة صور، ثم ترتيبها ومراجعتها قبل إنشاء الملف.
     </p>
 
 
@@ -496,7 +521,7 @@ footer{
       </li>
 
       <li>
-        راجع الصور المختارة قبل إنشاء الملف.
+        راجع الصور المختارة واحذف أي صورة لا تريدها.
       </li>
 
       <li>
@@ -504,7 +529,7 @@ footer{
       </li>
 
       <li>
-        سيتم تنزيل ملف PDF على جهازك.
+        بعد انتهاء المعالجة سيتم حفظ ملف PDF على جهازك.
       </li>
 
     </ol>
@@ -517,7 +542,7 @@ footer{
     <p>
       لا تعتمد الأداة على رفع الصور إلى خادم AdaaHub.
       تتم معالجة الصور داخل المتصفح باستخدام JavaScript،
-      ثم يتم إنشاء ملف PDF على جهازك.
+      ثم يتم إنشاء ملف PDF من الصور الموجودة على جهازك.
     </p>
 
 
@@ -526,9 +551,55 @@ footer{
     </h3>
 
     <p>
-      نعم، يمكنك اختيار عدة صور في نفس الوقت، وسيتم وضع
-      كل صورة في صفحة منفصلة داخل ملف PDF واحد.
+      نعم، يمكنك اختيار عدة صور في نفس العملية،
+      وسيتم وضع كل صورة في صفحة منفصلة داخل ملف PDF.
+      ويتم ضبط حجم الصورة لتناسب صفحة A4 مع الحفاظ على تناسب أبعادها.
     </p>
+
+
+    <h3>
+      أدوات أخرى قد تهمك
+    </h3>
+
+    <ul>
+
+      <li>
+        <a href="compress.html">
+          ضغط الصور وتقليل حجمها
+        </a>
+      </li>
+
+      <li>
+        <a href="webp.html">
+          تحويل الصور إلى WebP
+        </a>
+      </li>
+
+      <li>
+        <a href="resize.html">
+          تغيير حجم وأبعاد الصور
+        </a>
+      </li>
+
+      <li>
+        <a href="crop.html">
+          قص الصور أونلاين
+        </a>
+      </li>
+
+      <li>
+        <a href="rotate.html">
+          تدوير الصور
+        </a>
+      </li>
+
+      <li>
+        <a href="image-info.html">
+          معرفة معلومات الصورة
+        </a>
+      </li>
+
+    </ul>
 
 
     <div class="faq">
@@ -559,8 +630,8 @@ footer{
         </summary>
 
         <p>
-          نعم، تم تصميم الأداة للعمل على الهواتف
-          والأجهزة اللوحية وأجهزة الكمبيوتر الحديثة.
+          نعم، يمكن استخدام الأداة من الهواتف والأجهزة اللوحية
+          وأجهزة الكمبيوتر الحديثة.
         </p>
 
       </details>
@@ -569,13 +640,12 @@ footer{
       <details>
 
         <summary>
-          كم صورة يمكنني تحويلها؟
+          هل يمكن تحويل عدة صور إلى PDF واحد؟
         </summary>
 
         <p>
-          يمكنك اختيار عدة صور في نفس العملية، لكن عدد الصور
-          الذي يمكنك معالجته عمليًا يعتمد على إمكانيات جهازك
-          وحجم الصور.
+          نعم، يمكنك تحديد عدة صور وسيتم جمعها في ملف PDF واحد،
+          بحيث توضع كل صورة في صفحة مستقلة.
         </p>
 
       </details>
@@ -584,12 +654,12 @@ footer{
       <details>
 
         <summary>
-          هل كل صورة تصبح صفحة داخل PDF؟
+          هل يمكن حذف صورة قبل إنشاء PDF؟
         </summary>
 
         <p>
-          نعم، يتم وضع كل صورة في صفحة منفصلة داخل ملف PDF
-          مع الحفاظ على تناسب أبعاد الصورة مع صفحة A4.
+          نعم، يمكنك الضغط على «حذف الصورة» الموجودة أسفل
+          أي صورة لإزالتها من العملية.
         </p>
 
       </details>
@@ -602,7 +672,22 @@ footer{
         </summary>
 
         <p>
-          لا، الأداة تعمل مباشرة من المتصفح.
+          لا، الأداة تعمل مباشرة من متصفح الويب.
+        </p>
+
+      </details>
+
+
+      <details>
+
+        <summary>
+          ما حجم الصور المناسب؟
+        </summary>
+
+        <p>
+          يمكن للأداة التعامل مع الصور المختلفة، لكن الصور
+          الضخمة جدًا قد تحتاج إلى وقت وذاكرة أكبر أثناء المعالجة،
+          خصوصًا على الهواتف ذات الإمكانيات المحدودة.
         </p>
 
       </details>
@@ -618,9 +703,17 @@ footer{
 
   © 2026 AdaaHub - جميع الحقوق محفوظة
 
+  <br><br>
+
+  <a href="../pages/about.html">من نحن</a> |
+  <a href="../pages/privacy.html">الخصوصية</a> |
+  <a href="../pages/terms.html">الشروط والأحكام</a> |
+  <a href="../pages/contact.html">اتصل بنا</a>
+
 </footer>
 
 
+<!-- مكتبة إنشاء ملفات PDF -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 
 
@@ -650,6 +743,19 @@ const status =
 
 let selectedImages = [];
 
+const MAX_FILE_SIZE =
+  15 * 1024 * 1024;
+
+const MAX_IMAGES =
+  20;
+
+
+const allowedTypes = [
+  "image/jpeg",
+  "image/png",
+  "image/webp"
+];
+
 
 imageInput.addEventListener(
   "change",
@@ -658,23 +764,65 @@ imageInput.addEventListener(
     const files =
       Array.from(this.files);
 
+
     if(files.length === 0){
       return;
+    }
+
+
+    if(files.length > MAX_IMAGES){
+
+      alert(
+        "يمكنك اختيار 20 صورة كحد أقصى في العملية الواحدة."
+      );
+
+      imageInput.value = "";
+
+      return;
+
     }
 
 
     const validFiles =
       files.filter(function(file){
 
-        return file.type.startsWith("image/");
+        return allowedTypes.includes(
+          file.type
+        );
 
       });
 
 
-    if(validFiles.length === 0){
+    if(validFiles.length !== files.length){
 
       alert(
-        "يرجى اختيار ملفات صور صالحة."
+        "تم تجاهل بعض الملفات لأن الأداة تدعم JPG وJPEG وPNG وWebP فقط."
+      );
+
+    }
+
+
+    const sizeValidFiles =
+      validFiles.filter(function(file){
+
+        return file.size <= MAX_FILE_SIZE;
+
+      });
+
+
+    if(sizeValidFiles.length !== validFiles.length){
+
+      alert(
+        "تم تجاهل الصور التي يزيد حجمها عن 15 MB."
+      );
+
+    }
+
+
+    if(sizeValidFiles.length === 0){
+
+      alert(
+        "لم يتم اختيار صورة صالحة. اختر صورًا بحجم لا يتجاوز 15 MB."
       );
 
       imageInput.value = "";
@@ -685,7 +833,7 @@ imageInput.addEventListener(
 
 
     selectedImages =
-      validFiles;
+      sizeValidFiles;
 
 
     renderPreviews();
@@ -778,6 +926,7 @@ function renderPreviews(){
                 1
               );
 
+
               if(
                 selectedImages.length === 0
               ){
@@ -794,20 +943,28 @@ function renderPreviews(){
           );
 
 
-          item.appendChild(number);
+          item.appendChild(
+            number
+          );
 
-          item.appendChild(img);
+          item.appendChild(
+            img
+          );
 
           item.appendChild(
             removeButton
           );
 
-          previewGrid.appendChild(item);
+          previewGrid.appendChild(
+            item
+          );
 
         };
 
 
-      reader.readAsDataURL(file);
+      reader.readAsDataURL(
+        file
+      );
 
     }
   );
@@ -830,6 +987,20 @@ createPdf.addEventListener(
     }
 
 
+    if(
+      !window.jspdf ||
+      !window.jspdf.jsPDF
+    ){
+
+      alert(
+        "تعذر تحميل مكوّن إنشاء PDF. تحقق من اتصال الإنترنت ثم حاول مرة أخرى."
+      );
+
+      return;
+
+    }
+
+
     createPdf.disabled =
       true;
 
@@ -839,9 +1010,8 @@ createPdf.addEventListener(
     createPdf.textContent =
       "⏳ جاري إنشاء ملف PDF...";
 
-
     status.textContent =
-      "يرجى الانتظار حتى انتهاء المعالجة.";
+      "جاري تجهيز الصور...";
 
 
     try{
@@ -887,17 +1057,20 @@ createPdf.addEventListener(
 
 
         const dataUrl =
-          await readFile(file);
+          await readFile(
+            file
+          );
 
 
         const img =
-          await loadImage(dataUrl);
+          await loadImage(
+            dataUrl
+          );
 
 
         const maxWidth =
           pageWidth -
           (margin * 2);
-
 
         const maxHeight =
           pageHeight -
@@ -918,9 +1091,11 @@ createPdf.addEventListener(
           );
 
 
-        width *= ratio;
+        width =
+          width * ratio;
 
-        height *= ratio;
+        height =
+          height * ratio;
 
 
         const x =
@@ -943,7 +1118,9 @@ createPdf.addEventListener(
           x,
           y,
           width,
-          height
+          height,
+          undefined,
+          "MEDIUM"
         );
 
       }
@@ -957,12 +1134,13 @@ createPdf.addEventListener(
       status.textContent =
         "✅ تم إنشاء ملف PDF بنجاح.";
 
+
     }catch(error){
 
       console.error(error);
 
       status.textContent =
-        "❌ حدث خطأ أثناء إنشاء ملف PDF. حاول استخدام صور أخرى.";
+        "❌ حدث خطأ أثناء إنشاء ملف PDF. حاول استخدام صور أصغر.";
 
     }
 
@@ -1007,10 +1185,20 @@ function resetTool(){
   createPdf.style.display =
     "none";
 
+  createPdf.disabled =
+    false;
+
+  createPdf.textContent =
+    "📄 إنشاء ملف PDF";
+
   resetButton.style.display =
     "none";
 
-  status.textContent = "";
+  resetButton.disabled =
+    false;
+
+  status.textContent =
+    "";
 
 }
 
@@ -1039,14 +1227,16 @@ function readFile(file){
 
           reject(
             new Error(
-              "تعذر قراءة الملف"
+              "تعذر قراءة الملف."
             )
           );
 
         };
 
 
-      reader.readAsDataURL(file);
+      reader.readAsDataURL(
+        file
+      );
 
     }
   );
@@ -1066,7 +1256,9 @@ function loadImage(src){
       img.onload =
         function(){
 
-          resolve(img);
+          resolve(
+            img
+          );
 
         };
 
@@ -1076,7 +1268,7 @@ function loadImage(src){
 
           reject(
             new Error(
-              "تعذر تحميل الصورة"
+              "تعذر تحميل الصورة."
             )
           );
 
