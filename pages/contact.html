@@ -1,282 +1,289 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
-
 <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<meta charset="UTF-8">
+  <title>اتصل بنا | AdaaHub</title>
 
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="تواصل مع فريق AdaaHub لإرسال الاستفسارات والملاحظات والاقتراحات.">
+  <meta name="robots" content="index, follow">
 
-<title>اتصل بنا | AdaaHub</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
 
-<meta name="description"
-content="تواصل مع فريق AdaaHub لإرسال الاقتراحات والملاحظات والإبلاغ عن مشاكل الأدوات.">
+    body {
+      font-family: Arial, Tahoma, sans-serif;
+      background: #f5f7fb;
+      color: #1f2937;
+      line-height: 1.8;
+    }
 
-<style>
+    .header {
+      background: #fff;
+      border-bottom: 1px solid #e5e7eb;
+      padding: 16px 20px;
+    }
 
-*{
-box-sizing:border-box;
-margin:0;
-padding:0;
-}
+    .header-inner {
+      max-width: 1100px;
+      margin: auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+    }
 
-body{
-font-family:Arial,Tahoma,sans-serif;
-background:#f5f7fb;
-color:#20242a;
-line-height:1.8;
-}
+    .logo {
+      text-decoration: none;
+      color: #111827;
+      font-size: 24px;
+      font-weight: bold;
+    }
 
-header{
-background:#fff;
-border-bottom:1px solid #e5e7eb;
-padding:17px 20px;
-}
+    .logo span {
+      color: #2563eb;
+    }
 
-.header{
-max-width:1000px;
-margin:auto;
-display:flex;
-align-items:center;
-justify-content:space-between;
-}
+    .nav {
+      display: flex;
+      gap: 18px;
+      flex-wrap: wrap;
+    }
 
-.logo{
-font-size:27px;
-font-weight:bold;
-}
+    .nav a {
+      text-decoration: none;
+      color: #374151;
+      font-size: 15px;
+    }
 
-.logo span{
-color:#2563eb;
-}
+    .nav a:hover {
+      color: #2563eb;
+    }
 
-.home{
-color:#2563eb;
-text-decoration:none;
-}
+    .container {
+      width: 92%;
+      max-width: 850px;
+      margin: 50px auto;
+    }
 
-.container{
-max-width:850px;
-margin:45px auto;
-padding:20px;
-}
+    .contact-box {
+      background: #fff;
+      border-radius: 18px;
+      padding: 35px;
+      box-shadow: 0 8px 30px rgba(0,0,0,.06);
+      border: 1px solid #e5e7eb;
+    }
 
-.card{
-background:#fff;
-border:1px solid #e5e7eb;
-border-radius:18px;
-padding:35px;
-}
+    .contact-title {
+      text-align: center;
+      margin-bottom: 10px;
+      font-size: 30px;
+      color: #111827;
+    }
 
-h1{
-font-size:32px;
-margin-bottom:12px;
-color:#111827;
-}
+    .contact-intro {
+      text-align: center;
+      color: #6b7280;
+      margin-bottom: 30px;
+    }
 
-.intro{
-color:#666;
-margin-bottom:25px;
-}
+    .form-group {
+      margin-bottom: 20px;
+    }
 
-.form-group{
-margin-bottom:18px;
-}
+    label {
+      display: block;
+      margin-bottom: 8px;
+      font-weight: bold;
+      color: #374151;
+    }
 
-label{
-display:block;
-font-weight:bold;
-margin-bottom:7px;
-}
+    input,
+    textarea {
+      width: 100%;
+      padding: 14px 15px;
+      border: 1px solid #d1d5db;
+      border-radius: 10px;
+      font-family: inherit;
+      font-size: 15px;
+      outline: none;
+      background: #fff;
+      color: #111827;
+    }
 
-input,
-textarea{
-width:100%;
-padding:13px 15px;
-border:1px solid #d1d5db;
-border-radius:9px;
-font-family:inherit;
-font-size:15px;
-outline:none;
-}
+    input:focus,
+    textarea:focus {
+      border-color: #2563eb;
+      box-shadow: 0 0 0 3px rgba(37,99,235,.10);
+    }
 
-input:focus,
-textarea:focus{
-border-color:#2563eb;
-box-shadow:0 0 0 3px rgba(37,99,235,.1);
-}
+    textarea {
+      min-height: 160px;
+      resize: vertical;
+    }
 
-textarea{
-min-height:150px;
-resize:vertical;
-}
+    .submit-btn {
+      width: 100%;
+      border: none;
+      border-radius: 10px;
+      padding: 14px;
+      background: #2563eb;
+      color: #fff;
+      font-size: 16px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: .2s;
+    }
 
-button{
-width:100%;
-padding:14px;
-border:0;
-border-radius:9px;
-background:#2563eb;
-color:#fff;
-font-family:inherit;
-font-size:16px;
-font-weight:bold;
-cursor:pointer;
-}
+    .submit-btn:hover {
+      background: #1d4ed8;
+    }
 
-button:hover{
-background:#1d4ed8;
-}
+    .note {
+      text-align: center;
+      color: #6b7280;
+      font-size: 13px;
+      margin-top: 18px;
+    }
 
-.note{
-margin-top:20px;
-padding:15px;
-background:#eff6ff;
-border:1px solid #bfdbfe;
-border-radius:10px;
-color:#1e40af;
-font-size:14px;
-}
+    .footer {
+      text-align: center;
+      padding: 30px 20px;
+      color: #6b7280;
+      font-size: 14px;
+    }
 
-footer{
-margin-top:60px;
-background:#111827;
-color:#cbd5e1;
-padding:30px 20px;
-text-align:center;
-}
+    @media (max-width: 600px) {
+      .header-inner {
+        flex-direction: column;
+      }
 
-@media(max-width:600px){
+      .nav {
+        justify-content: center;
+      }
 
-.container{
-margin-top:25px;
-padding:15px;
-}
+      .container {
+        width: 94%;
+        margin: 30px auto;
+      }
 
-.card{
-padding:25px 18px;
-}
+      .contact-box {
+        padding: 24px 18px;
+      }
 
-h1{
-font-size:27px;
-}
-
-}
-
-</style>
-
+      .contact-title {
+        font-size: 25px;
+      }
+    }
+  </style>
 </head>
 
 <body>
 
-<header>
+<header class="header">
+  <div class="header-inner">
 
-<div class="header">
+    <a class="logo" href="../index.html">
+      Adaa<span>Hub</span>
+    </a>
 
-<div class="logo">
-Adaa<span>Hub</span>
-</div>
+    <nav class="nav">
+      <a href="../index.html">الرئيسية</a>
+      <a href="../index.html#tools">الأدوات</a>
+      <a href="about.html">من نحن</a>
+      <a href="privacy.html">الخصوصية</a>
+    </nav>
 
-<a class="home" href="../index.html">
-الرئيسية
-</a>
-
-</div>
-
+  </div>
 </header>
-
 
 <main class="container">
 
-<div class="card">
+  <section class="contact-box">
 
-<h1>اتصل بنا</h1>
+    <h1 class="contact-title">اتصل بنا</h1>
 
-<p class="intro">
-يسعدنا استقبال اقتراحاتك وملاحظاتك. إذا وجدت مشكلة في إحدى
-الأدوات أو لديك فكرة لأداة جديدة، يمكنك التواصل معنا.
-</p>
+    <p class="contact-intro">
+      لديك سؤال أو اقتراح أو واجهت مشكلة في إحدى أدوات AdaaHub؟
+      أرسل لنا رسالتك وسنحاول مساعدتك.
+    </p>
 
-<form
-action="mailto:ضع-بريدك-هنا@example.com"
-method="post"
-enctype="text/plain">
+    <form
+      action="https://formspree.io/f/xaenwgbw"
+      method="POST"
+    >
 
-<div class="form-group">
+      <div class="form-group">
+        <label for="name">الاسم</label>
 
-<label for="name">
-الاسم
-</label>
+        <input
+          type="text"
+          id="name"
+          name="name"
+          placeholder="اكتب اسمك"
+          autocomplete="name"
+          required
+        >
+      </div>
 
-<input
-type="text"
-id="name"
-name="name"
-placeholder="اكتب اسمك"
-required>
+      <div class="form-group">
+        <label for="email">البريد الإلكتروني</label>
 
-</div>
+        <input
+          type="email"
+          id="email"
+          name="email"
+          placeholder="example@email.com"
+          autocomplete="email"
+          required
+        >
+      </div>
 
+      <div class="form-group">
+        <label for="subject">الموضوع</label>
 
-<div class="form-group">
+        <input
+          type="text"
+          id="subject"
+          name="subject"
+          placeholder="موضوع الرسالة"
+          required
+        >
+      </div>
 
-<label for="email">
-البريد الإلكتروني
-</label>
+      <div class="form-group">
+        <label for="message">رسالتك</label>
 
-<input
-type="email"
-id="email"
-name="email"
-placeholder="example@email.com"
-required>
+        <textarea
+          id="message"
+          name="message"
+          placeholder="اكتب رسالتك هنا..."
+          required
+        ></textarea>
+      </div>
 
-</div>
+      <button class="submit-btn" type="submit">
+        إرسال الرسالة
+      </button>
 
+    </form>
 
-<div class="form-group">
+    <p class="note">
+      نستخدم بيانات الرسالة فقط للتعامل مع طلبك والتواصل معك عند الحاجة.
+    </p>
 
-<label for="message">
-رسالتك
-</label>
-
-<textarea
-id="message"
-name="message"
-placeholder="اكتب رسالتك هنا..."
-required></textarea>
-
-</div>
-
-
-<button type="submit">
-إرسال الرسالة
-</button>
-
-</form>
-
-
-<div class="note">
-
-💡 <strong>ملاحظة:</strong>
-استبدل البريد الموجود في الكود بعنوان البريد الإلكتروني
-الذي تريد استقبال رسائل AdaaHub عليه.
-
-</div>
-
-</div>
+  </section>
 
 </main>
 
-
-<footer>
-
-<p>
-© 2026 AdaaHub - جميع الحقوق محفوظة
-</p>
-
+<footer class="footer">
+  © 2026 AdaaHub — جميع الحقوق محفوظة
 </footer>
 
 </body>
-
 </html>
