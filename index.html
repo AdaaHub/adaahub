@@ -3,7 +3,7 @@
 
 <head>
 
-<meta name="google-site-verification" content="JY8NYzH5CBIWuXxr8YPPcmuw71KB9XYxxQQzFcg-Hi4" />
+<meta name="google-site-verification" content="JY8NYzH5CBIWuXxr8YPPcmuw71KB9XYxxQQzFcg-Hi4">
 
 <meta charset="UTF-8">
 
@@ -11,8 +11,7 @@
 
 <title>AdaaHub | مركز الأدوات اليومية المجانية</title>
 
-<meta name="description"
-content="AdaaHub مركز الأدوات اليومية المجانية أونلاين. اضغط الصور، غيّر حجمها، قصها وحوّلها بين الصيغ، أنشئ PDF، واحسب الكلمات والحروف بسهولة من المتصفح.">
+<meta name="description" content="AdaaHub مركز الأدوات اليومية المجانية أونلاين. اضغط الصور، غيّر حجمها، قصها وحوّلها بين الصيغ، أنشئ PDF، واحسب الكلمات والحروف بسهولة من المتصفح.">
 
 <meta name="robots" content="index, follow">
 
@@ -60,6 +59,7 @@ gap:20px;
 font-size:28px;
 font-weight:bold;
 color:#20242a;
+text-decoration:none;
 }
 
 .logo span{
@@ -517,9 +517,9 @@ padding:24px 18px;
 
 <div class="header">
 
-<div class="logo">
+<a class="logo" href="./">
 Adaa<span>Hub</span>
-</div>
+</a>
 
 <nav class="nav">
 
@@ -532,6 +532,7 @@ Adaa<span>Hub</span>
 </a>
 
 <button
+type="button"
 class="theme-button"
 id="themeButton"
 title="تبديل الوضع الليلي"
@@ -545,6 +546,8 @@ aria-label="تبديل الوضع الليلي">
 
 </header>
 
+
+<main>
 
 <section class="hero">
 
@@ -563,6 +566,10 @@ AdaaHub هو مركز للأدوات اليومية المجانية التي ت
 </p>
 
 <div class="search-box">
+
+<label for="searchInput" style="position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0;">
+ابحث عن أداة
+</label>
 
 <input
 type="search"
@@ -788,7 +795,11 @@ aria-label="البحث عن أداة">
 </div>
 
 
-<div class="no-result" id="noResult">
+<div
+class="no-result"
+id="noResult"
+role="status"
+aria-live="polite">
 لا توجد أداة مطابقة لبحثك حاليًا.
 </div>
 
@@ -909,6 +920,8 @@ aria-label="البحث عن أداة">
 
 </section>
 
+</main>
+
 
 <footer>
 
@@ -957,110 +970,134 @@ Adaa<span>Hub</span>
 
 <script>
 
-const searchInput =
-document.getElementById("searchInput");
-
-const toolCards =
-document.querySelectorAll(".tool");
-
-const noResult =
-document.getElementById("noResult");
+const searchInput = document.getElementById("searchInput");
+const toolCards = document.querySelectorAll(".tool");
+const noResult = document.getElementById("noResult");
+const themeButton = document.getElementById("themeButton");
 
 
-searchInput.addEventListener("input",function(){
+/*
+  البحث عن الأدوات
+*/
+function searchTools(){
 
-const search =
-this.value.toLowerCase().trim();
+  const search = searchInput.value
+    .toLowerCase()
+    .trim();
 
-let found = 0;
+  let found = 0;
 
-toolCards.forEach(function(tool){
+  toolCards.forEach(function(tool){
 
-const name =
-tool.dataset.name.toLowerCase();
+    const name = tool.dataset.name.toLowerCase();
 
-if(name.includes(search)){
+    const isMatch =
+      search === "" ||
+      name.includes(search);
 
-tool.style.display = "";
+    tool.style.display =
+      isMatch ? "" : "none";
 
-found++;
+    if(isMatch){
+      found++;
+    }
 
-}else{
+  });
 
-tool.style.display = "none";
+  /*
+    لا تظهر رسالة عدم وجود نتائج
+    إلا عندما يكتب المستخدم شيئًا
+    ولا توجد أداة مطابقة.
+  */
+  if(search !== "" && found === 0){
 
-}
+    noResult.style.display = "block";
 
-});
+  }else{
 
+    noResult.style.display = "none";
 
-if(found === 0 && search !== ""){
-
-noResult.style.display = "block";
-
-}else{
-
-noResult.style.display = "none";
-
-}
-
-});
-
-
-const themeButton =
-document.getElementById("themeButton");
-
-
-themeButton.addEventListener("click",function(){
-
-document.body.classList.toggle("dark");
-
-
-if(document.body.classList.contains("dark")){
-
-themeButton.textContent = "☀️";
-
-themeButton.setAttribute(
-"aria-label",
-"تفعيل الوضع النهاري"
-);
-
-localStorage.setItem(
-"adaahub-theme",
-"dark"
-);
-
-}else{
-
-themeButton.textContent = "🌙";
-
-themeButton.setAttribute(
-"aria-label",
-"تفعيل الوضع الليلي"
-);
-
-localStorage.setItem(
-"adaahub-theme",
-"light"
-);
+  }
 
 }
 
-});
 
-
-if(localStorage.getItem("adaahub-theme") === "dark"){
-
-document.body.classList.add("dark");
-
-themeButton.textContent = "☀️";
-
-themeButton.setAttribute(
-"aria-label",
-"تفعيل الوضع النهاري"
+searchInput.addEventListener(
+  "input",
+  searchTools
 );
 
+
+/*
+  الوضع الليلي
+*/
+function updateThemeButton(){
+
+  if(document.body.classList.contains("dark")){
+
+    themeButton.textContent = "☀️";
+
+    themeButton.setAttribute(
+      "aria-label",
+      "تفعيل الوضع النهاري"
+    );
+
+    themeButton.setAttribute(
+      "title",
+      "تفعيل الوضع النهاري"
+    );
+
+  }else{
+
+    themeButton.textContent = "🌙";
+
+    themeButton.setAttribute(
+      "aria-label",
+      "تفعيل الوضع الليلي"
+    );
+
+    themeButton.setAttribute(
+      "title",
+      "تفعيل الوضع الليلي"
+    );
+
+  }
+
 }
+
+
+themeButton.addEventListener(
+  "click",
+  function(){
+
+    document.body.classList.toggle("dark");
+
+    localStorage.setItem(
+      "adaahub-theme",
+      document.body.classList.contains("dark")
+        ? "dark"
+        : "light"
+    );
+
+    updateThemeButton();
+
+  }
+);
+
+
+/*
+  استعادة الوضع المحفوظ
+*/
+if(
+  localStorage.getItem("adaahub-theme") === "dark"
+){
+
+  document.body.classList.add("dark");
+
+}
+
+
+updateThemeButton();
 
 </script>
 
