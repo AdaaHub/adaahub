@@ -4,9 +4,9 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>تدوير الصور أونلاين مجانًا | AdaaHub</title>
+<title>تدوير الصور أونلاين مجانًا | تدوير الصورة يمين ويسار | AdaaHub</title>
 
-<meta name="description" content="دوّر الصور أونلاين مجانًا إلى اليمين أو اليسار واحفظ الصورة الجديدة مباشرة من المتصفح بدون رفعها إلى أي خادم.">
+<meta name="description" content="دوّر الصور أونلاين مجانًا إلى اليمين أو اليسار بزاوية 90 أو 180 درجة، ثم حمّل الصورة مباشرة من المتصفح بدون رفعها إلى خوادم AdaaHub.">
 
 <meta name="robots" content="index, follow">
 
@@ -84,6 +84,7 @@ h1{
     text-align:center;
     background:#fafcff;
     cursor:pointer;
+    transition:.2s;
 }
 
 .upload-box:hover{
@@ -109,6 +110,18 @@ h1{
     color:#777;
     font-size:14px;
     margin-top:8px;
+}
+
+.file-selected{
+    display:none;
+    margin-top:15px;
+    padding:10px 12px;
+    background:#f8fafc;
+    border-radius:8px;
+    text-align:center;
+    color:#555;
+    font-size:14px;
+    word-break:break-word;
 }
 
 .editor{
@@ -146,6 +159,12 @@ button,
     padding:12px 20px;
     font-size:15px;
     cursor:pointer;
+    transition:.2s;
+}
+
+button:hover,
+.download-btn:hover{
+    opacity:.9;
 }
 
 .rotate-btn{
@@ -163,6 +182,14 @@ button,
     background:#16a34a;
     color:#fff;
     text-decoration:none;
+}
+
+.status{
+    display:none;
+    text-align:center;
+    margin-top:15px;
+    color:#555;
+    font-size:14px;
 }
 
 .info{
@@ -198,11 +225,37 @@ button,
     margin-bottom:6px;
 }
 
+.tools-links{
+    display:flex;
+    flex-wrap:wrap;
+    gap:10px;
+}
+
+.tools-links a{
+    text-decoration:none;
+    background:#f1f5f9;
+    color:#1976d2;
+    padding:9px 12px;
+    border-radius:8px;
+    font-size:14px;
+}
+
+.tools-links a:hover{
+    background:#e0efff;
+}
+
 footer{
     text-align:center;
     padding:25px 15px;
     color:#777;
     font-size:14px;
+    line-height:1.8;
+}
+
+footer a{
+    color:#666;
+    text-decoration:none;
+    margin:0 5px;
 }
 
 @media(max-width:600px){
@@ -224,6 +277,10 @@ footer{
         width:100%;
         text-align:center;
     }
+
+    .section{
+        padding:20px;
+    }
 }
 </style>
 </head>
@@ -244,8 +301,8 @@ footer{
 <h1>تدوير الصور أونلاين مجانًا</h1>
 
 <p class="intro">
-    قم بتدوير صورك 90 درجة إلى اليمين أو اليسار،
-    ثم حمّل الصورة الجديدة مباشرة من جهازك.
+    قم بتدوير صورتك إلى اليمين أو اليسار بسهولة،
+    ثم حمّل النسخة الجديدة مباشرة من جهازك.
 </p>
 
 <label class="upload-box" for="imageInput">
@@ -257,14 +314,18 @@ footer{
     </div>
 
     <div class="upload-sub">
-        JPG أو PNG أو WebP
+        JPG أو PNG أو WebP — حتى 25 ميجابايت
     </div>
 
-    <input type="file"
-           id="imageInput"
-           accept="image/jpeg,image/png,image/webp">
+    <input
+        type="file"
+        id="imageInput"
+        accept="image/jpeg,image/png,image/webp"
+    >
 
 </label>
+
+<div class="file-selected" id="fileSelected"></div>
 
 <div class="editor" id="editor">
 
@@ -274,24 +335,45 @@ footer{
 
     <div class="controls">
 
-        <button class="rotate-btn" id="leftBtn">
-            ↩️ تدوير لليسار
+        <button
+            type="button"
+            class="rotate-btn"
+            id="leftBtn">
+            ↩️ تدوير لليسار 90°
         </button>
 
-        <button class="rotate-btn" id="rightBtn">
-            ↪️ تدوير لليمين
+        <button
+            type="button"
+            class="rotate-btn"
+            id="rightBtn">
+            ↪️ تدوير لليمين 90°
         </button>
 
-        <button class="reset-btn" id="resetBtn">
+        <button
+            type="button"
+            class="rotate-btn"
+            id="rotate180Btn">
+            🔄 تدوير 180°
+        </button>
+
+        <button
+            type="button"
+            class="reset-btn"
+            id="resetBtn">
             إعادة ضبط
         </button>
 
-        <a class="download-btn"
-           id="downloadBtn"
-           download>
+        <a
+            class="download-btn"
+            id="downloadBtn"
+            download>
             ⬇️ تحميل الصورة
         </a>
 
+    </div>
+
+    <div class="status" id="status">
+        تم تجهيز الصورة للتحميل.
     </div>
 
 </div>
@@ -309,19 +391,41 @@ footer{
 <h2>طريقة تدوير الصورة</h2>
 
 <p>
-1. اختر الصورة التي تريد تدويرها.
+1. اختر الصورة التي تريد تدويرها من جهازك.
 </p>
 
 <p>
-2. اضغط على تدوير لليمين أو تدوير لليسار.
+2. استخدم زر تدوير لليمين أو اليسار بزاوية 90 درجة.
 </p>
 
 <p>
-3. يمكنك تدوير الصورة أكثر من مرة إذا أردت.
+3. يمكنك استخدام زر 180 درجة لتدوير الصورة رأسًا على عقب.
 </p>
 
 <p>
-4. اضغط على تحميل الصورة لحفظ النتيجة.
+4. بعد الوصول إلى النتيجة المطلوبة اضغط على تحميل الصورة.
+</p>
+
+<p>
+يمكنك تدوير الصورة أكثر من مرة قبل تحميلها.
+</p>
+
+</section>
+
+<section class="section">
+
+<h2>مميزات أداة تدوير الصور</h2>
+
+<p>
+تعمل الأداة مباشرة من المتصفح دون الحاجة إلى تثبيت برنامج على الكمبيوتر أو الهاتف.
+</p>
+
+<p>
+تدعم الصور بصيغ JPG وPNG وWebP، كما يمكنك تدوير الصورة عدة مرات قبل حفظ النتيجة.
+</p>
+
+<p>
+تتم معالجة الصورة محليًا داخل المتصفح، لذلك لا تحتاج إلى إرسال ملفك إلى خادم خارجي.
 </p>
 
 </section>
@@ -332,20 +436,30 @@ footer{
 
 <div class="faq">
 
-<h3>هل تحتاج الأداة إلى رفع الصورة؟</h3>
+<h3>هل يتم رفع الصورة إلى الموقع؟</h3>
 
 <p>
-لا، تتم معالجة الصورة داخل المتصفح مباشرة.
+لا. تتم معالجة الصورة داخل متصفحك مباشرة، ولا يتم رفع ملف الصورة إلى خوادم AdaaHub.
 </p>
 
 </div>
 
 <div class="faq">
 
-<h3>هل تعمل الأداة على الهاتف؟</h3>
+<h3>هل يمكن تدوير الصورة أكثر من مرة؟</h3>
 
 <p>
-نعم، الأداة متوافقة مع الهواتف وأجهزة الكمبيوتر.
+نعم، يمكنك الضغط على أزرار التدوير عدة مرات حتى تصل إلى الاتجاه المناسب.
+</p>
+
+</div>
+
+<div class="faq">
+
+<h3>هل يمكن تدوير الصورة 180 درجة؟</h3>
+
+<p>
+نعم، يوجد زر مخصص لتدوير الصورة 180 درجة.
 </p>
 
 </div>
@@ -355,8 +469,44 @@ footer{
 <h3>ما صيغ الصور المدعومة؟</h3>
 
 <p>
-تدعم الأداة JPG وPNG وWebP.
+تدعم الأداة JPG وJPEG وPNG وWebP.
 </p>
+
+</div>
+
+<div class="faq">
+
+<h3>هل تعمل الأداة على الهاتف؟</h3>
+
+<p>
+نعم، يمكنك استخدامها من الهواتف والأجهزة اللوحية وأجهزة الكمبيوتر.
+</p>
+
+</div>
+
+</section>
+
+<section class="section">
+
+<h2>أدوات أخرى قد تحتاجها</h2>
+
+<div class="tools-links">
+
+<a href="compress.html">ضغط الصور</a>
+
+<a href="webp.html">تحويل إلى WebP</a>
+
+<a href="resize.html">تغيير حجم الصور</a>
+
+<a href="crop.html">قص الصور</a>
+
+<a href="jpg-to-png.html">JPG إلى PNG</a>
+
+<a href="png-to-jpg.html">PNG إلى JPG</a>
+
+<a href="webp-to-jpg.html">WebP إلى JPG</a>
+
+<a href="image-info.html">معلومات الصورة</a>
 
 </div>
 
@@ -365,7 +515,17 @@ footer{
 </main>
 
 <footer>
+
 © 2026 AdaaHub - مركز الأدوات اليومية
+
+<br>
+
+<a href="../index.html">الرئيسية</a> |
+<a href="../pages/about.html">من نحن</a> |
+<a href="../pages/privacy.html">سياسة الخصوصية</a> |
+<a href="../pages/terms.html">الشروط والأحكام</a> |
+<a href="../pages/contact.html">اتصل بنا</a>
+
 </footer>
 
 <script>
@@ -377,17 +537,49 @@ const ctx = canvas.getContext("2d");
 
 const leftBtn = document.getElementById("leftBtn");
 const rightBtn = document.getElementById("rightBtn");
+const rotate180Btn = document.getElementById("rotate180Btn");
 const resetBtn = document.getElementById("resetBtn");
 const downloadBtn = document.getElementById("downloadBtn");
 
+const fileSelected = document.getElementById("fileSelected");
+const status = document.getElementById("status");
+
+const MAX_FILE_SIZE = 25 * 1024 * 1024;
+
 let image = new Image();
 let angle = 0;
+let currentDownloadUrl = null;
 
 imageInput.addEventListener("change", function(){
 
     const file = this.files[0];
 
     if(!file) return;
+
+    clearDownload();
+
+    if(!file.type.match(/^image\/(jpeg|png|webp)$/i)){
+
+        alert("من فضلك اختر صورة بصيغة JPG أو PNG أو WebP.");
+
+        this.value = "";
+
+        return;
+    }
+
+    if(file.size > MAX_FILE_SIZE){
+
+        alert("حجم الصورة أكبر من 25 ميجابايت.");
+
+        this.value = "";
+
+        return;
+    }
+
+    fileSelected.textContent =
+        "الصورة المختارة: " + file.name;
+
+    fileSelected.style.display = "block";
 
     const reader = new FileReader();
 
@@ -399,9 +591,17 @@ imageInput.addEventListener("change", function(){
 
             editor.style.display = "block";
 
+            status.style.display = "none";
+
             drawImage();
 
-            downloadBtn.style.display = "none";
+        };
+
+        image.onerror = function(){
+
+            alert("تعذر قراءة الصورة. جرّب صورة أخرى.");
+
+            resetTool();
 
         };
 
@@ -415,21 +615,25 @@ imageInput.addEventListener("change", function(){
 
 function drawImage(){
 
-    const radians = angle * Math.PI / 180;
+    if(!image.naturalWidth || !image.naturalHeight) return;
 
-    const sin = Math.abs(Math.sin(radians));
-    const cos = Math.abs(Math.cos(radians));
+    const normalizedAngle =
+        ((angle % 360) + 360) % 360;
 
-    const width = image.naturalWidth;
-    const height = image.naturalHeight;
+    let width = image.naturalWidth;
+    let height = image.naturalHeight;
 
-    canvas.width = Math.round(
-        width * cos + height * sin
-    );
+    if(normalizedAngle === 90 || normalizedAngle === 270){
 
-    canvas.height = Math.round(
-        width * sin + height * cos
-    );
+        canvas.width = height;
+        canvas.height = width;
+
+    }else{
+
+        canvas.width = width;
+        canvas.height = height;
+
+    }
 
     ctx.clearRect(
         0,
@@ -445,42 +649,47 @@ function drawImage(){
         canvas.height / 2
     );
 
-    ctx.rotate(radians);
+    ctx.rotate(angle * Math.PI / 180);
 
     ctx.drawImage(
         image,
         -width / 2,
-        -height / 2
+        -height / 2,
+        width,
+        height
     );
 
     ctx.restore();
-
 }
 
 function updateDownload(){
 
     canvas.toBlob(function(blob){
 
-        if(!blob) return;
+        if(!blob){
 
-        if(window.currentDownloadUrl){
-            URL.revokeObjectURL(
-                window.currentDownloadUrl
-            );
+            status.textContent =
+                "تعذر تجهيز الصورة للتحميل.";
+
+            status.style.display = "block";
+
+            return;
         }
 
-        const url = URL.createObjectURL(blob);
+        clearDownload();
 
-        window.currentDownloadUrl = url;
+        currentDownloadUrl =
+            URL.createObjectURL(blob);
 
-        downloadBtn.href = url;
+        downloadBtn.href =
+            currentDownloadUrl;
 
         let name = "image";
 
         if(imageInput.files[0]){
 
             name = imageInput.files[0].name
-                .replace(/\.[^/.]+$/,"");
+                .replace(/\.[^/.]+$/, "");
 
         }
 
@@ -490,49 +699,93 @@ function updateDownload(){
         downloadBtn.style.display =
             "inline-block";
 
-    }, "image/png");
+        status.textContent =
+            "تم تدوير الصورة. يمكنك الآن تحميل النتيجة.";
 
+        status.style.display =
+            "block";
+
+    }, "image/png");
 }
 
-leftBtn.addEventListener("click",function(){
+function rotate(degrees){
 
-    angle -= 90;
-
-    drawImage();
-
-    updateDownload();
-
-});
-
-rightBtn.addEventListener("click",function(){
-
-    angle += 90;
+    angle += degrees;
 
     drawImage();
 
     updateDownload();
+}
+
+leftBtn.addEventListener("click", function(){
+
+    rotate(-90);
 
 });
 
-resetBtn.addEventListener("click",function(){
+rightBtn.addEventListener("click", function(){
+
+    rotate(90);
+
+});
+
+rotate180Btn.addEventListener("click", function(){
+
+    rotate(180);
+
+});
+
+resetBtn.addEventListener("click", function(){
+
+    resetTool();
+
+});
+
+function clearDownload(){
+
+    if(currentDownloadUrl){
+
+        URL.revokeObjectURL(
+            currentDownloadUrl
+        );
+
+        currentDownloadUrl = null;
+    }
+
+    downloadBtn.removeAttribute("href");
+
+    downloadBtn.style.display =
+        "none";
+}
+
+function resetTool(){
+
+    clearDownload();
 
     imageInput.value = "";
 
     editor.style.display = "none";
 
+    fileSelected.style.display =
+        "none";
+
+    fileSelected.textContent = "";
+
+    status.style.display = "none";
+
     angle = 0;
 
-    downloadBtn.style.display = "none";
+    ctx.clearRect(
+        0,
+        0,
+        canvas.width,
+        canvas.height
+    );
+}
 
-    if(window.currentDownloadUrl){
+window.addEventListener("beforeunload", function(){
 
-        URL.revokeObjectURL(
-            window.currentDownloadUrl
-        );
-
-        window.currentDownloadUrl = null;
-
-    }
+    clearDownload();
 
 });
 
