@@ -1,0 +1,522 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>عداد الكلمات والحروف أونلاين مجانًا | AdaaHub</title>
+
+  <meta name="description" content="عداد الكلمات والحروف العربي أونلاين مجانًا. احسب عدد الكلمات والحروف والجمل والأسطر والمسافات في النص بسهولة من الهاتف أو الكمبيوتر.">
+
+  <meta name="robots" content="index, follow">
+
+  <link rel="canonical" href="https://adaahub.github.io/adaahub/tools/word-counter.html">
+
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: Arial, Tahoma, sans-serif;
+      background: #f5f7fa;
+      color: #222;
+      line-height: 1.8;
+    }
+
+    header {
+      background: #fff;
+      border-bottom: 1px solid #e5e7eb;
+      padding: 16px 20px;
+    }
+
+    .header-inner {
+      max-width: 1000px;
+      margin: auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .logo {
+      color: #1976d2;
+      font-size: 24px;
+      font-weight: bold;
+      text-decoration: none;
+    }
+
+    .home-link {
+      color: #333;
+      text-decoration: none;
+      font-size: 15px;
+    }
+
+    .container {
+      width: 95%;
+      max-width: 900px;
+      margin: 35px auto;
+    }
+
+    .tool-card,
+    .content {
+      background: #fff;
+      border-radius: 16px;
+      padding: 25px;
+      box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+    }
+
+    h1 {
+      text-align: center;
+      color: #1976d2;
+      margin-top: 0;
+      font-size: 28px;
+    }
+
+    .intro {
+      text-align: center;
+      color: #666;
+      margin-bottom: 25px;
+    }
+
+    textarea {
+      width: 100%;
+      min-height: 280px;
+      resize: vertical;
+      padding: 16px;
+      border: 1px solid #d9dee5;
+      border-radius: 12px;
+      font-family: Arial, Tahoma, sans-serif;
+      font-size: 17px;
+      line-height: 1.9;
+      outline: none;
+    }
+
+    textarea:focus {
+      border-color: #1976d2;
+    }
+
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+      margin-top: 20px;
+    }
+
+    .stat {
+      background: #f5f7fa;
+      border-radius: 12px;
+      padding: 15px;
+      text-align: center;
+    }
+
+    .stat strong {
+      display: block;
+      color: #1976d2;
+      font-size: 25px;
+      margin-bottom: 3px;
+    }
+
+    .stat span {
+      color: #666;
+      font-size: 14px;
+    }
+
+    .buttons {
+      display: flex;
+      gap: 10px;
+      margin-top: 18px;
+    }
+
+    button {
+      flex: 1;
+      padding: 13px;
+      border-radius: 10px;
+      cursor: pointer;
+      font-size: 16px;
+    }
+
+    .clear-btn {
+      border: 1px solid #ddd;
+      background: #fff;
+    }
+
+    .copy-btn {
+      border: 0;
+      background: #198754;
+      color: #fff;
+    }
+
+    .status {
+      text-align: center;
+      margin-top: 12px;
+      color: #198754;
+      font-weight: bold;
+      min-height: 25px;
+    }
+
+    .content {
+      margin-top: 25px;
+      box-shadow: none;
+    }
+
+    .content h2 {
+      color: #1976d2;
+      font-size: 21px;
+    }
+
+    .privacy {
+      background: #eef8f1;
+      border-right: 4px solid #198754;
+      padding: 12px;
+      border-radius: 8px;
+      margin-top: 15px;
+    }
+
+    footer {
+      text-align: center;
+      color: #777;
+      padding: 25px;
+      font-size: 14px;
+    }
+
+    @media (max-width: 600px) {
+      .tool-card,
+      .content {
+        padding: 18px;
+      }
+
+      h1 {
+        font-size: 23px;
+      }
+
+      .stats {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .buttons {
+        flex-direction: column;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+<header>
+  <div class="header-inner">
+    <a class="logo" href="../index.html">AdaaHub</a>
+    <a class="home-link" href="../index.html">الرئيسية</a>
+  </div>
+</header>
+
+<main class="container">
+
+  <div class="tool-card">
+
+    <h1>عداد الكلمات والحروف</h1>
+
+    <p class="intro">
+      احسب عدد الكلمات والحروف والجمل والأسطر في أي نص بسهولة.
+    </p>
+
+    <textarea
+      id="textInput"
+      placeholder="اكتب أو الصق النص هنا..."
+      spellcheck="false"
+    ></textarea>
+
+    <div class="stats">
+
+      <div class="stat">
+        <strong id="words">0</strong>
+        <span>الكلمات</span>
+      </div>
+
+      <div class="stat">
+        <strong id="characters">0</strong>
+        <span>الحروف</span>
+      </div>
+
+      <div class="stat">
+        <strong id="charactersNoSpaces">0</strong>
+        <span>بدون مسافات</span>
+      </div>
+
+      <div class="stat">
+        <strong id="sentences">0</strong>
+        <span>الجمل</span>
+      </div>
+
+      <div class="stat">
+        <strong id="lines">0</strong>
+        <span>الأسطر</span>
+      </div>
+
+      <div class="stat">
+        <strong id="spaces">0</strong>
+        <span>المسافات</span>
+      </div>
+
+    </div>
+
+    <div class="buttons">
+
+      <button
+        class="copy-btn"
+        id="copyBtn"
+      >
+        نسخ النص
+      </button>
+
+      <button
+        class="clear-btn"
+        id="clearBtn"
+      >
+        مسح النص
+      </button>
+
+    </div>
+
+    <div class="status" id="status"></div>
+
+  </div>
+
+
+  <section class="content">
+
+    <h2>ما هي أداة عداد الكلمات والحروف؟</h2>
+
+    <p>
+      أداة عداد الكلمات والحروف من AdaaHub تساعدك على معرفة عدد الكلمات
+      والحروف داخل النص بسرعة، سواء كان النص باللغة العربية أو الإنجليزية.
+    </p>
+
+    <h2>ماذا تحسب الأداة؟</h2>
+
+    <ul>
+      <li>عدد الكلمات.</li>
+      <li>عدد الحروف والرموز.</li>
+      <li>عدد الحروف بدون المسافات.</li>
+      <li>عدد الجمل.</li>
+      <li>عدد الأسطر.</li>
+      <li>عدد المسافات.</li>
+    </ul>
+
+    <h2>طريقة الاستخدام</h2>
+
+    <ol>
+      <li>اكتب النص أو الصقه داخل مربع الكتابة.</li>
+      <li>ستظهر الإحصائيات تلقائيًا.</li>
+      <li>يمكنك نسخ النص أو مسحه والبدء من جديد.</li>
+    </ol>
+
+    <h2>هل يتم حفظ النص؟</h2>
+
+    <div class="privacy">
+      لا. تتم عملية حساب النص داخل المتصفح مباشرة، ولا يتم إرسال النص
+      إلى خادم AdaaHub.
+    </div>
+
+    <h2>الأسئلة الشائعة</h2>
+
+    <h3>هل الأداة مجانية؟</h3>
+
+    <p>
+      نعم، الأداة مجانية ويمكن استخدامها من الهاتف والكمبيوتر.
+    </p>
+
+    <h3>هل تدعم اللغة العربية؟</h3>
+
+    <p>
+      نعم، يمكن استخدامها مع النصوص العربية والإنجليزية وغيرها من اللغات.
+    </p>
+
+    <h3>هل أحتاج إلى تثبيت برنامج؟</h3>
+
+    <p>
+      لا، تعمل الأداة مباشرة من متصفح الإنترنت.
+    </p>
+
+  </section>
+
+</main>
+
+<footer>
+  © 2026 AdaaHub - مركز الأدوات اليومية
+</footer>
+
+
+<script>
+
+const textInput = document.getElementById("textInput");
+
+const words = document.getElementById("words");
+const characters = document.getElementById("characters");
+const charactersNoSpaces =
+  document.getElementById("charactersNoSpaces");
+
+const sentences = document.getElementById("sentences");
+const lines = document.getElementById("lines");
+const spaces = document.getElementById("spaces");
+
+const copyBtn = document.getElementById("copyBtn");
+const clearBtn = document.getElementById("clearBtn");
+const status = document.getElementById("status");
+
+
+function updateStats() {
+
+  const text = textInput.value;
+
+  /*
+    عدد الحروف والرموز بالكامل
+  */
+
+  characters.textContent = text.length;
+
+
+  /*
+    عدد الحروف بدون المسافات
+  */
+
+  charactersNoSpaces.textContent =
+    text.replace(/\s/g, "").length;
+
+
+  /*
+    حساب الكلمات
+  */
+
+  const trimmed = text.trim();
+
+  if (trimmed === "") {
+
+    words.textContent = "0";
+
+  } else {
+
+    words.textContent =
+      trimmed.split(/\s+/).length;
+
+  }
+
+
+  /*
+    حساب الجمل
+  */
+
+  const sentenceMatches =
+    text.match(/[.!؟?]+/g);
+
+  sentences.textContent =
+    sentenceMatches ? sentenceMatches.length : "0";
+
+
+  /*
+    حساب الأسطر
+  */
+
+  if (text === "") {
+
+    lines.textContent = "0";
+
+  } else {
+
+    lines.textContent =
+      text.split(/\r\n|\r|\n/).length;
+
+  }
+
+
+  /*
+    حساب المسافات
+  */
+
+  const spaceMatches =
+    text.match(/ /g);
+
+  spaces.textContent =
+    spaceMatches ? spaceMatches.length : "0";
+
+}
+
+
+textInput.addEventListener(
+  "input",
+  updateStats
+);
+
+
+/*
+  نسخ النص
+*/
+
+copyBtn.addEventListener("click", async () => {
+
+  if (!textInput.value) {
+
+    status.textContent =
+      "لا يوجد نص لنسخه.";
+
+    return;
+
+  }
+
+  try {
+
+    await navigator.clipboard.writeText(
+      textInput.value
+    );
+
+    status.textContent =
+      "تم نسخ النص بنجاح.";
+
+  } catch (error) {
+
+    textInput.select();
+
+    document.execCommand("copy");
+
+    status.textContent =
+      "تم نسخ النص.";
+
+  }
+
+  setTimeout(() => {
+    status.textContent = "";
+  }, 2000);
+
+});
+
+
+/*
+  مسح النص
+*/
+
+clearBtn.addEventListener("click", () => {
+
+  textInput.value = "";
+
+  updateStats();
+
+  status.textContent =
+    "تم مسح النص.";
+
+  setTimeout(() => {
+    status.textContent = "";
+  }, 1500);
+
+});
+
+
+/*
+  تشغيل العداد عند فتح الصفحة
+*/
+
+updateStats();
+
+</script>
+
+</body>
+</html>
