@@ -1,0 +1,542 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>تدوير الصور أونلاين مجانًا | AdaaHub</title>
+
+<meta name="description" content="دوّر الصور أونلاين مجانًا إلى اليمين أو اليسار واحفظ الصورة الجديدة مباشرة من المتصفح بدون رفعها إلى أي خادم.">
+
+<meta name="robots" content="index, follow">
+
+<link rel="canonical" href="https://adaahub.github.io/adaahub/tools/rotate.html">
+
+<style>
+*{
+    box-sizing:border-box;
+}
+
+body{
+    margin:0;
+    font-family:Arial,Tahoma,sans-serif;
+    background:#f5f7fb;
+    color:#222;
+}
+
+header{
+    background:#fff;
+    border-bottom:1px solid #e5e7eb;
+    padding:16px 20px;
+}
+
+.header-inner{
+    max-width:1000px;
+    margin:auto;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+}
+
+.logo{
+    font-size:24px;
+    font-weight:bold;
+    color:#1976d2;
+    text-decoration:none;
+}
+
+.home{
+    color:#333;
+    text-decoration:none;
+}
+
+.container{
+    max-width:900px;
+    margin:30px auto;
+    padding:0 15px;
+}
+
+.card{
+    background:#fff;
+    border-radius:14px;
+    padding:25px;
+    box-shadow:0 5px 20px rgba(0,0,0,.06);
+}
+
+h1{
+    text-align:center;
+    color:#1976d2;
+    font-size:28px;
+}
+
+.intro{
+    text-align:center;
+    color:#666;
+    line-height:1.8;
+    margin-bottom:25px;
+}
+
+.upload-box{
+    display:block;
+    border:2px dashed #b8c2d1;
+    border-radius:12px;
+    padding:30px 15px;
+    text-align:center;
+    background:#fafcff;
+    cursor:pointer;
+}
+
+.upload-box:hover{
+    border-color:#1976d2;
+    background:#f4f9ff;
+}
+
+.upload-box input{
+    display:none;
+}
+
+.upload-icon{
+    font-size:42px;
+    margin-bottom:10px;
+}
+
+.upload-text{
+    font-size:17px;
+    font-weight:bold;
+}
+
+.upload-sub{
+    color:#777;
+    font-size:14px;
+    margin-top:8px;
+}
+
+.editor{
+    display:none;
+    margin-top:25px;
+}
+
+.preview{
+    background:#111;
+    border-radius:10px;
+    padding:15px;
+    text-align:center;
+    overflow:auto;
+}
+
+#canvas{
+    max-width:100%;
+    height:auto;
+    display:block;
+    margin:auto;
+}
+
+.controls{
+    display:flex;
+    justify-content:center;
+    gap:10px;
+    flex-wrap:wrap;
+    margin-top:20px;
+}
+
+button,
+.download-btn{
+    border:0;
+    border-radius:8px;
+    padding:12px 20px;
+    font-size:15px;
+    cursor:pointer;
+}
+
+.rotate-btn{
+    background:#1976d2;
+    color:#fff;
+}
+
+.reset-btn{
+    background:#e5e7eb;
+    color:#222;
+}
+
+.download-btn{
+    display:none;
+    background:#16a34a;
+    color:#fff;
+    text-decoration:none;
+}
+
+.info{
+    margin-top:25px;
+    background:#f0f7ff;
+    border-right:4px solid #1976d2;
+    padding:15px;
+    border-radius:8px;
+    line-height:1.8;
+    font-size:14px;
+}
+
+.section{
+    background:#fff;
+    margin-top:20px;
+    padding:25px;
+    border-radius:14px;
+}
+
+.section h2{
+    color:#1976d2;
+    margin-top:0;
+    font-size:21px;
+}
+
+.section p{
+    color:#555;
+    line-height:1.9;
+}
+
+.faq h3{
+    font-size:17px;
+    margin-bottom:6px;
+}
+
+footer{
+    text-align:center;
+    padding:25px 15px;
+    color:#777;
+    font-size:14px;
+}
+
+@media(max-width:600px){
+
+    .container{
+        margin:20px auto;
+    }
+
+    .card{
+        padding:18px;
+    }
+
+    h1{
+        font-size:23px;
+    }
+
+    .controls button,
+    .download-btn{
+        width:100%;
+        text-align:center;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+    <div class="header-inner">
+        <a href="../index.html" class="logo">AdaaHub</a>
+        <a href="../index.html" class="home">الرئيسية</a>
+    </div>
+</header>
+
+<main class="container">
+
+<div class="card">
+
+<h1>تدوير الصور أونلاين مجانًا</h1>
+
+<p class="intro">
+    قم بتدوير صورك 90 درجة إلى اليمين أو اليسار،
+    ثم حمّل الصورة الجديدة مباشرة من جهازك.
+</p>
+
+<label class="upload-box" for="imageInput">
+
+    <div class="upload-icon">🔄</div>
+
+    <div class="upload-text">
+        اختر صورة للبدء
+    </div>
+
+    <div class="upload-sub">
+        JPG أو PNG أو WebP
+    </div>
+
+    <input type="file"
+           id="imageInput"
+           accept="image/jpeg,image/png,image/webp">
+
+</label>
+
+<div class="editor" id="editor">
+
+    <div class="preview">
+        <canvas id="canvas"></canvas>
+    </div>
+
+    <div class="controls">
+
+        <button class="rotate-btn" id="leftBtn">
+            ↩️ تدوير لليسار
+        </button>
+
+        <button class="rotate-btn" id="rightBtn">
+            ↪️ تدوير لليمين
+        </button>
+
+        <button class="reset-btn" id="resetBtn">
+            إعادة ضبط
+        </button>
+
+        <a class="download-btn"
+           id="downloadBtn"
+           download>
+            ⬇️ تحميل الصورة
+        </a>
+
+    </div>
+
+</div>
+
+<div class="info">
+    🔒 <strong>خصوصيتك مهمة:</strong>
+    تتم معالجة الصورة بالكامل داخل متصفحك،
+    ولا يتم رفع الصور إلى خوادم AdaaHub.
+</div>
+
+</div>
+
+<section class="section">
+
+<h2>طريقة تدوير الصورة</h2>
+
+<p>
+1. اختر الصورة التي تريد تدويرها.
+</p>
+
+<p>
+2. اضغط على تدوير لليمين أو تدوير لليسار.
+</p>
+
+<p>
+3. يمكنك تدوير الصورة أكثر من مرة إذا أردت.
+</p>
+
+<p>
+4. اضغط على تحميل الصورة لحفظ النتيجة.
+</p>
+
+</section>
+
+<section class="section">
+
+<h2>الأسئلة الشائعة</h2>
+
+<div class="faq">
+
+<h3>هل تحتاج الأداة إلى رفع الصورة؟</h3>
+
+<p>
+لا، تتم معالجة الصورة داخل المتصفح مباشرة.
+</p>
+
+</div>
+
+<div class="faq">
+
+<h3>هل تعمل الأداة على الهاتف؟</h3>
+
+<p>
+نعم، الأداة متوافقة مع الهواتف وأجهزة الكمبيوتر.
+</p>
+
+</div>
+
+<div class="faq">
+
+<h3>ما صيغ الصور المدعومة؟</h3>
+
+<p>
+تدعم الأداة JPG وPNG وWebP.
+</p>
+
+</div>
+
+</section>
+
+</main>
+
+<footer>
+© 2026 AdaaHub - مركز الأدوات اليومية
+</footer>
+
+<script>
+
+const imageInput = document.getElementById("imageInput");
+const editor = document.getElementById("editor");
+const canvas = document.getElementById("canvas");
+const ctx = canvas.getContext("2d");
+
+const leftBtn = document.getElementById("leftBtn");
+const rightBtn = document.getElementById("rightBtn");
+const resetBtn = document.getElementById("resetBtn");
+const downloadBtn = document.getElementById("downloadBtn");
+
+let image = new Image();
+let angle = 0;
+
+imageInput.addEventListener("change", function(){
+
+    const file = this.files[0];
+
+    if(!file) return;
+
+    const reader = new FileReader();
+
+    reader.onload = function(e){
+
+        image.onload = function(){
+
+            angle = 0;
+
+            editor.style.display = "block";
+
+            drawImage();
+
+            downloadBtn.style.display = "none";
+
+        };
+
+        image.src = e.target.result;
+
+    };
+
+    reader.readAsDataURL(file);
+
+});
+
+function drawImage(){
+
+    const radians = angle * Math.PI / 180;
+
+    const sin = Math.abs(Math.sin(radians));
+    const cos = Math.abs(Math.cos(radians));
+
+    const width = image.naturalWidth;
+    const height = image.naturalHeight;
+
+    canvas.width = Math.round(
+        width * cos + height * sin
+    );
+
+    canvas.height = Math.round(
+        width * sin + height * cos
+    );
+
+    ctx.clearRect(
+        0,
+        0,
+        canvas.width,
+        canvas.height
+    );
+
+    ctx.save();
+
+    ctx.translate(
+        canvas.width / 2,
+        canvas.height / 2
+    );
+
+    ctx.rotate(radians);
+
+    ctx.drawImage(
+        image,
+        -width / 2,
+        -height / 2
+    );
+
+    ctx.restore();
+
+}
+
+function updateDownload(){
+
+    canvas.toBlob(function(blob){
+
+        if(!blob) return;
+
+        if(window.currentDownloadUrl){
+            URL.revokeObjectURL(
+                window.currentDownloadUrl
+            );
+        }
+
+        const url = URL.createObjectURL(blob);
+
+        window.currentDownloadUrl = url;
+
+        downloadBtn.href = url;
+
+        let name = "image";
+
+        if(imageInput.files[0]){
+
+            name = imageInput.files[0].name
+                .replace(/\.[^/.]+$/,"");
+
+        }
+
+        downloadBtn.download =
+            name + "-adaahub-rotate.png";
+
+        downloadBtn.style.display =
+            "inline-block";
+
+    }, "image/png");
+
+}
+
+leftBtn.addEventListener("click",function(){
+
+    angle -= 90;
+
+    drawImage();
+
+    updateDownload();
+
+});
+
+rightBtn.addEventListener("click",function(){
+
+    angle += 90;
+
+    drawImage();
+
+    updateDownload();
+
+});
+
+resetBtn.addEventListener("click",function(){
+
+    imageInput.value = "";
+
+    editor.style.display = "none";
+
+    angle = 0;
+
+    downloadBtn.style.display = "none";
+
+    if(window.currentDownloadUrl){
+
+        URL.revokeObjectURL(
+            window.currentDownloadUrl
+        );
+
+        window.currentDownloadUrl = null;
+
+    }
+
+});
+
+</script>
+
+</body>
+</html>
