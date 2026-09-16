@@ -5,7 +5,10 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <title>ضغط الصور أونلاين مجانًا | AdaaHub</title>
-<meta name="description" content="اضغط صورك أونلاين مجانًا وقلل حجمها بسهولة من خلال متصفحك.">
+<meta name="description" content="اضغط الصور أونلاين مجانًا من هاتفك أو الكمبيوتر. قلل حجم الصور بسرعة داخل المتصفح بدون رفع ملفاتك إلى خادم.">
+
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://adaahub.github.io/adaahub/tools/compress.html">
 
 <style>
 *{
@@ -17,12 +20,13 @@ body{
   font-family:Arial,Tahoma,sans-serif;
   background:#f5f7fb;
   color:#20242a;
+  line-height:1.7;
 }
 
 header{
   background:#fff;
   border-bottom:1px solid #e5e7eb;
-  padding:18px;
+  padding:16px 18px;
 }
 
 .header{
@@ -31,6 +35,7 @@ header{
   display:flex;
   justify-content:space-between;
   align-items:center;
+  gap:20px;
 }
 
 .logo{
@@ -45,24 +50,30 @@ header{
 .home{
   color:#2563eb;
   text-decoration:none;
+  font-weight:bold;
+}
+
+.home:hover{
+  text-decoration:underline;
 }
 
 .container{
   max-width:850px;
-  margin:45px auto;
+  margin:35px auto;
   padding:20px;
 }
 
 h1{
   text-align:center;
   font-size:32px;
-  margin-bottom:12px;
+  margin:0 0 10px;
 }
 
 .subtitle{
   text-align:center;
   color:#666;
-  margin-bottom:30px;
+  margin:0 auto 28px;
+  max-width:650px;
 }
 
 .box{
@@ -71,6 +82,11 @@ h1{
   border-radius:18px;
   padding:45px 20px;
   text-align:center;
+  box-shadow:0 5px 20px rgba(0,0,0,.04);
+}
+
+.box p{
+  margin-top:0;
 }
 
 input{
@@ -85,6 +101,17 @@ input{
   border-radius:9px;
   cursor:pointer;
   font-size:17px;
+  font-weight:bold;
+}
+
+.upload:hover{
+  background:#1d4ed8;
+}
+
+#status{
+  display:none;
+  margin-top:15px;
+  color:#555;
 }
 
 #result{
@@ -95,14 +122,26 @@ input{
   border-radius:15px;
   text-align:center;
   border:1px solid #e5e7eb;
+  box-shadow:0 5px 20px rgba(0,0,0,.04);
 }
 
-img{
+#preview{
   max-width:100%;
-  max-height:300px;
+  max-height:320px;
   margin:15px auto;
   display:block;
   border-radius:10px;
+}
+
+.info{
+  margin-top:15px;
+  line-height:2;
+}
+
+#saved{
+  font-weight:bold;
+  color:#16a34a;
+  margin-top:5px;
 }
 
 .download{
@@ -113,17 +152,88 @@ img{
   padding:12px 25px;
   border-radius:8px;
   margin-top:15px;
+  font-weight:bold;
 }
 
-.info{
+.download:hover{
+  background:#15803d;
+}
+
+.reset{
+  display:inline-block;
+  background:#e5e7eb;
+  color:#20242a;
+  border:0;
+  padding:11px 22px;
+  border-radius:8px;
   margin-top:15px;
-  line-height:1.8;
+  cursor:pointer;
+  font-weight:bold;
+}
+
+.content{
+  background:#fff;
+  margin-top:30px;
+  padding:25px;
+  border-radius:15px;
+  border:1px solid #e5e7eb;
+}
+
+.content h2{
+  font-size:23px;
+  margin-top:0;
+}
+
+.content h3{
+  font-size:19px;
+}
+
+.content ul{
+  padding-right:22px;
+}
+
+.faq{
+  margin-top:30px;
+}
+
+.faq details{
+  background:#f8fafc;
+  border:1px solid #e5e7eb;
+  border-radius:10px;
+  padding:14px 16px;
+  margin-bottom:10px;
+}
+
+.faq summary{
+  cursor:pointer;
+  font-weight:bold;
 }
 
 footer{
   text-align:center;
   color:#777;
-  padding:30px;
+  padding:30px 20px;
+}
+
+@media(max-width:600px){
+
+  .header{
+    flex-direction:column;
+  }
+
+  h1{
+    font-size:27px;
+  }
+
+  .container{
+    margin:20px auto;
+    padding:15px;
+  }
+
+  .box{
+    padding:35px 15px;
+  }
+
 }
 </style>
 </head>
@@ -132,63 +242,174 @@ footer{
 
 <header>
   <div class="header">
-    <div class="logo">Adaa<span>Hub</span></div>
-    <a class="home" href="../index.html">الرئيسية</a>
+
+    <div class="logo">
+      Adaa<span>Hub</span>
+    </div>
+
+    <a class="home" href="../index.html">
+      الرئيسية
+    </a>
+
   </div>
 </header>
 
 <main class="container">
 
-<h1>ضغط الصور أونلاين</h1>
+  <h1>ضغط الصور أونلاين مجانًا</h1>
 
-<p class="subtitle">
-قلل حجم صورك بسهولة ومجانًا، بدون رفعها إلى أي خادم.
-</p>
+  <p class="subtitle">
+    قلل حجم صورك بسرعة من هاتفك أو الكمبيوتر، بدون رفع الصور إلى خادم.
+  </p>
 
-<div class="box">
+  <div class="box">
 
-  <p>اختر صورة من هاتفك أو جهاز الكمبيوتر</p>
+    <p>
+      اختر صورة من جهازك لبدء عملية الضغط.
+    </p>
 
-  <label class="upload" for="imageInput">
-    اختر صورة
-  </label>
+    <label class="upload" for="imageInput">
+      اختر صورة
+    </label>
 
-  <input id="imageInput" type="file" accept="image/*">
+    <input
+      id="imageInput"
+      type="file"
+      accept="image/jpeg,image/png,image/webp"
+    >
 
-</div>
+    <div id="status">
+      جارٍ معالجة الصورة...
+    </div>
 
-<div id="result">
-
-  <h2>تم تجهيز الصورة</h2>
-
-  <img id="preview">
-
-  <div class="info">
-    <div id="oldSize"></div>
-    <div id="newSize"></div>
   </div>
 
-  <a id="download" class="download" download="adaahub-compressed.jpg">
-    تحميل الصورة المضغوطة
-  </a>
+  <div id="result">
 
-</div>
+    <h2>تم ضغط الصورة</h2>
+
+    <img id="preview" alt="معاينة الصورة المضغوطة">
+
+    <div class="info">
+
+      <div id="oldSize"></div>
+
+      <div id="newSize"></div>
+
+      <div id="saved"></div>
+
+    </div>
+
+    <a
+      id="download"
+      class="download"
+      download="adaahub-compressed.jpg"
+    >
+      تحميل الصورة المضغوطة
+    </a>
+
+    <br>
+
+    <button class="reset" id="reset">
+      ضغط صورة أخرى
+    </button>
+
+  </div>
+
+  <section class="content">
+
+    <h2>ضغط الصور بدون رفعها إلى الإنترنت</h2>
+
+    <p>
+      تساعدك أداة AdaaHub على تقليل حجم الصور مباشرة من المتصفح.
+      اختر الصورة من جهازك وستتم معالجتها محليًا باستخدام المتصفح،
+      ثم يمكنك تحميل النسخة المضغوطة.
+    </p>
+
+    <h3>كيفية استخدام أداة ضغط الصور؟</h3>
+
+    <ol>
+      <li>اضغط على زر «اختر صورة».</li>
+      <li>حدد الصورة التي تريد ضغطها.</li>
+      <li>انتظر حتى تتم معالجة الصورة.</li>
+      <li>راجع الحجم الأصلي والحجم الجديد.</li>
+      <li>اضغط على «تحميل الصورة المضغوطة».</li>
+    </ol>
+
+    <h3>هل يتم رفع الصور إلى خادم؟</h3>
+
+    <p>
+      لا تعتمد الأداة على رفع الصورة إلى خادم خارجي لمعالجتها؛
+      تتم عملية الضغط داخل متصفحك باستخدام تقنيات JavaScript.
+    </p>
+
+    <div class="faq">
+
+      <h2>الأسئلة الشائعة</h2>
+
+      <details>
+        <summary>هل أداة ضغط الصور مجانية؟</summary>
+        <p>
+          نعم، يمكنك استخدام الأداة مجانًا من المتصفح.
+        </p>
+      </details>
+
+      <details>
+        <summary>هل تعمل الأداة على الهاتف؟</summary>
+        <p>
+          نعم، الصفحة مصممة للعمل على الهواتف والأجهزة اللوحية وأجهزة الكمبيوتر.
+        </p>
+      </details>
+
+      <details>
+        <summary>هل أحتاج إلى تثبيت برنامج؟</summary>
+        <p>
+          لا، يمكنك استخدام الأداة مباشرة من المتصفح بدون تثبيت برنامج إضافي.
+        </p>
+      </details>
+
+      <details>
+        <summary>هل يمكنني ضغط أكثر من صورة؟</summary>
+        <p>
+          حاليًا يتم اختيار صورة واحدة في كل مرة. يمكنك ضغط صورة أخرى
+          باستخدام زر «ضغط صورة أخرى».
+        </p>
+      </details>
+
+    </div>
+
+  </section>
 
 </main>
 
 <footer>
-© 2026 AdaaHub - جميع الحقوق محفوظة
+  © 2026 AdaaHub - جميع الحقوق محفوظة
 </footer>
 
 <script>
 
 const input = document.getElementById("imageInput");
+const result = document.getElementById("result");
+const status = document.getElementById("status");
+const preview = document.getElementById("preview");
+const download = document.getElementById("download");
+const reset = document.getElementById("reset");
 
 input.addEventListener("change", function(){
 
   const file = this.files[0];
 
-  if(!file) return;
+  if(!file){
+    return;
+  }
+
+  if(!file.type.startsWith("image/")){
+    alert("يرجى اختيار ملف صورة صالح.");
+    return;
+  }
+
+  status.style.display = "block";
+  result.style.display = "none";
 
   const reader = new FileReader();
 
@@ -208,24 +429,42 @@ input.addEventListener("change", function(){
 
       canvas.toBlob(function(blob){
 
+        if(!blob){
+          status.textContent = "تعذر معالجة الصورة.";
+          return;
+        }
+
         const url = URL.createObjectURL(blob);
 
-        document.getElementById("preview").src = url;
+        preview.src = url;
 
-        document.getElementById("oldSize").innerHTML =
+        document.getElementById("oldSize").textContent =
           "الحجم الأصلي: " + formatSize(file.size);
 
-        document.getElementById("newSize").innerHTML =
+        document.getElementById("newSize").textContent =
           "الحجم الجديد: " + formatSize(blob.size);
 
-        const download =
-          document.getElementById("download");
+        const saved =
+          ((1 - (blob.size / file.size)) * 100);
+
+        document.getElementById("saved").textContent =
+          saved > 0
+          ? "تم تقليل الحجم بنسبة " + saved.toFixed(1) + "%"
+          : "لم ينخفض حجم الصورة.";
 
         download.href = url;
 
-        document.getElementById("result").style.display = "block";
+        status.style.display = "none";
+        result.style.display = "block";
 
       },"image/jpeg",0.70);
+
+    };
+
+    img.onerror = function(){
+
+      status.textContent =
+        "تعذر قراءة الصورة. حاول اختيار صورة أخرى.";
 
     };
 
@@ -233,7 +472,24 @@ input.addEventListener("change", function(){
 
   };
 
+  reader.onerror = function(){
+
+    status.textContent =
+      "حدث خطأ أثناء قراءة الملف.";
+
+  };
+
   reader.readAsDataURL(file);
+
+});
+
+reset.addEventListener("click", function(){
+
+  input.value = "";
+  result.style.display = "none";
+  status.style.display = "none";
+  preview.removeAttribute("src");
+  download.removeAttribute("href");
 
 });
 
@@ -248,6 +504,7 @@ function formatSize(bytes){
   }
 
   return (bytes / (1024 * 1024)).toFixed(2) + " MB";
+
 }
 
 </script>
