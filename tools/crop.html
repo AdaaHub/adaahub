@@ -1,0 +1,750 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>قص الصور أونلاين مجانًا | AdaaHub</title>
+
+<meta name="description" content="قص الصور أونلاين مجانًا بسهولة. حدد الجزء الذي تريد الاحتفاظ به ثم حمّل الصورة مباشرة من المتصفح بدون رفعها إلى أي خادم.">
+
+<meta name="robots" content="index, follow">
+
+<link rel="canonical" href="https://adaahub.github.io/adaahub/tools/crop.html">
+
+<style>
+*{
+    box-sizing:border-box;
+}
+
+body{
+    margin:0;
+    font-family:Arial,Tahoma,sans-serif;
+    background:#f5f7fb;
+    color:#222;
+}
+
+header{
+    background:#ffffff;
+    border-bottom:1px solid #e5e7eb;
+    padding:16px 20px;
+}
+
+.header-inner{
+    max-width:1000px;
+    margin:auto;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:15px;
+}
+
+.logo{
+    font-size:24px;
+    font-weight:bold;
+    color:#1976d2;
+    text-decoration:none;
+}
+
+.home{
+    color:#333;
+    text-decoration:none;
+    font-size:15px;
+}
+
+.container{
+    max-width:900px;
+    margin:30px auto;
+    padding:0 15px;
+}
+
+.card{
+    background:#fff;
+    border-radius:14px;
+    padding:25px;
+    box-shadow:0 5px 20px rgba(0,0,0,.06);
+}
+
+h1{
+    margin-top:0;
+    text-align:center;
+    color:#1976d2;
+    font-size:28px;
+}
+
+.intro{
+    text-align:center;
+    color:#666;
+    line-height:1.8;
+    margin-bottom:25px;
+}
+
+.upload-box{
+    border:2px dashed #b8c2d1;
+    border-radius:12px;
+    padding:30px 15px;
+    text-align:center;
+    background:#fafcff;
+    cursor:pointer;
+    transition:.2s;
+}
+
+.upload-box:hover{
+    border-color:#1976d2;
+    background:#f4f9ff;
+}
+
+.upload-box input{
+    display:none;
+}
+
+.upload-icon{
+    font-size:42px;
+    margin-bottom:10px;
+}
+
+.upload-text{
+    font-size:17px;
+    font-weight:bold;
+}
+
+.upload-sub{
+    color:#777;
+    font-size:14px;
+    margin-top:8px;
+}
+
+.editor{
+    display:none;
+    margin-top:25px;
+}
+
+.canvas-wrapper{
+    width:100%;
+    overflow:auto;
+    background:#111;
+    border-radius:10px;
+    padding:10px;
+    text-align:center;
+}
+
+#canvas{
+    max-width:100%;
+    height:auto;
+    display:block;
+    margin:auto;
+    cursor:crosshair;
+    touch-action:none;
+}
+
+.selection-info{
+    text-align:center;
+    color:#666;
+    font-size:14px;
+    margin:15px 0;
+}
+
+.buttons{
+    display:flex;
+    gap:10px;
+    justify-content:center;
+    flex-wrap:wrap;
+}
+
+button,
+.download-btn{
+    border:0;
+    border-radius:8px;
+    padding:12px 22px;
+    font-size:15px;
+    cursor:pointer;
+    text-decoration:none;
+}
+
+.crop-btn{
+    background:#16a34a;
+    color:white;
+}
+
+.reset-btn{
+    background:#e5e7eb;
+    color:#222;
+}
+
+.download-btn{
+    display:none;
+    background:#1976d2;
+    color:white;
+}
+
+button:disabled{
+    opacity:.5;
+    cursor:not-allowed;
+}
+
+.info{
+    margin-top:25px;
+    background:#f0f7ff;
+    border-right:4px solid #1976d2;
+    padding:15px;
+    border-radius:8px;
+    line-height:1.8;
+    font-size:14px;
+}
+
+.section{
+    background:#fff;
+    margin-top:20px;
+    padding:25px;
+    border-radius:14px;
+    box-shadow:0 5px 20px rgba(0,0,0,.04);
+}
+
+.section h2{
+    color:#1976d2;
+    margin-top:0;
+    font-size:21px;
+}
+
+.section p{
+    line-height:1.9;
+    color:#555;
+}
+
+.faq{
+    margin-top:15px;
+}
+
+.faq h3{
+    font-size:17px;
+    margin-bottom:7px;
+}
+
+.faq p{
+    margin-top:0;
+}
+
+footer{
+    text-align:center;
+    padding:25px 15px;
+    color:#777;
+    font-size:14px;
+}
+
+@media(max-width:600px){
+
+    .container{
+        margin:20px auto;
+    }
+
+    .card{
+        padding:18px;
+    }
+
+    h1{
+        font-size:23px;
+    }
+
+    .header-inner{
+        padding:0;
+    }
+
+    .logo{
+        font-size:21px;
+    }
+
+    .canvas-wrapper{
+        padding:5px;
+    }
+
+    button,
+    .download-btn{
+        width:100%;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+    <div class="header-inner">
+        <a href="../index.html" class="logo">AdaaHub</a>
+        <a href="../index.html" class="home">الرئيسية</a>
+    </div>
+</header>
+
+<main class="container">
+
+    <div class="card">
+
+        <h1>قص الصور أونلاين مجانًا</h1>
+
+        <p class="intro">
+            قص أي صورة بسهولة وحدد الجزء الذي تريد الاحتفاظ به،
+            ثم حمّل الصورة الجديدة مباشرة من المتصفح.
+        </p>
+
+        <label class="upload-box" for="imageInput">
+
+            <div class="upload-icon">✂️</div>
+
+            <div class="upload-text">
+                اختر صورة للبدء
+            </div>
+
+            <div class="upload-sub">
+                JPG أو PNG أو WebP
+            </div>
+
+            <input type="file" id="imageInput" accept="image/jpeg,image/png,image/webp">
+
+        </label>
+
+        <div class="editor" id="editor">
+
+            <div class="canvas-wrapper">
+                <canvas id="canvas"></canvas>
+            </div>
+
+            <div class="selection-info" id="selectionInfo">
+                اسحب على الصورة لتحديد الجزء الذي تريد قصه
+            </div>
+
+            <div class="buttons">
+
+                <button class="crop-btn" id="cropBtn" disabled>
+                    ✂️ قص الصورة
+                </button>
+
+                <button class="reset-btn" id="resetBtn">
+                    إعادة ضبط
+                </button>
+
+                <a class="download-btn" id="downloadBtn" download>
+                    ⬇️ تحميل الصورة
+                </a>
+
+            </div>
+
+        </div>
+
+        <div class="info">
+            🔒 <strong>خصوصيتك مهمة:</strong>
+            تتم معالجة الصورة بالكامل داخل متصفحك.
+            لا يتم رفع الصور إلى خوادم AdaaHub.
+        </div>
+
+    </div>
+
+    <section class="section">
+
+        <h2>طريقة قص الصورة</h2>
+
+        <p>
+            1. اختر الصورة التي تريد قصها.
+        </p>
+
+        <p>
+            2. اسحب بالماوس أو بإصبعك على الصورة لتحديد المنطقة المطلوبة.
+        </p>
+
+        <p>
+            3. اضغط على زر <strong>قص الصورة</strong>.
+        </p>
+
+        <p>
+            4. اضغط على <strong>تحميل الصورة</strong> لحفظ النتيجة على جهازك.
+        </p>
+
+    </section>
+
+    <section class="section">
+
+        <h2>الأسئلة الشائعة</h2>
+
+        <div class="faq">
+
+            <h3>هل يتم رفع الصورة إلى الموقع؟</h3>
+
+            <p>
+                لا. تتم معالجة الصورة محليًا داخل المتصفح ولا يتم إرسالها إلى خادم.
+            </p>
+
+        </div>
+
+        <div class="faq">
+
+            <h3>هل تعمل الأداة على الهاتف؟</h3>
+
+            <p>
+                نعم، يمكنك استخدام الأداة من الهاتف أو الكمبيوتر.
+            </p>
+
+        </div>
+
+        <div class="faq">
+
+            <h3>ما صيغ الصور المدعومة؟</h3>
+
+            <p>
+                الأداة تدعم صور JPG وPNG وWebP.
+            </p>
+
+        </div>
+
+    </section>
+
+</main>
+
+<footer>
+    © 2026 AdaaHub - مركز الأدوات اليومية
+</footer>
+
+<script>
+
+const imageInput = document.getElementById("imageInput");
+const canvas = document.getElementById("canvas");
+const ctx = canvas.getContext("2d");
+
+const editor = document.getElementById("editor");
+const cropBtn = document.getElementById("cropBtn");
+const resetBtn = document.getElementById("resetBtn");
+const downloadBtn = document.getElementById("downloadBtn");
+const selectionInfo = document.getElementById("selectionInfo");
+
+let image = new Image();
+
+let startX = 0;
+let startY = 0;
+let currentX = 0;
+let currentY = 0;
+
+let selecting = false;
+let hasSelection = false;
+
+let displayScale = 1;
+
+imageInput.addEventListener("change", function(){
+
+    const file = this.files[0];
+
+    if(!file) return;
+
+    const reader = new FileReader();
+
+    reader.onload = function(e){
+
+        image.onload = function(){
+
+            displayScale = Math.min(
+                1,
+                800 / image.naturalWidth
+            );
+
+            canvas.width = Math.round(
+                image.naturalWidth * displayScale
+            );
+
+            canvas.height = Math.round(
+                image.naturalHeight * displayScale
+            );
+
+            drawImage();
+
+            editor.style.display = "block";
+
+            cropBtn.disabled = true;
+
+            downloadBtn.style.display = "none";
+
+            selectionInfo.textContent =
+                "اسحب على الصورة لتحديد الجزء الذي تريد قصه";
+
+        };
+
+        image.src = e.target.result;
+
+    };
+
+    reader.readAsDataURL(file);
+
+});
+
+function drawImage(){
+
+    ctx.clearRect(
+        0,
+        0,
+        canvas.width,
+        canvas.height
+    );
+
+    ctx.drawImage(
+        image,
+        0,
+        0,
+        canvas.width,
+        canvas.height
+    );
+
+}
+
+function getPosition(e){
+
+    const rect = canvas.getBoundingClientRect();
+
+    let clientX;
+    let clientY;
+
+    if(e.touches){
+
+        clientX = e.touches[0].clientX;
+        clientY = e.touches[0].clientY;
+
+    }else{
+
+        clientX = e.clientX;
+        clientY = e.clientY;
+
+    }
+
+    return {
+
+        x: Math.max(
+            0,
+            Math.min(
+                canvas.width,
+                clientX - rect.left
+            )
+        ),
+
+        y: Math.max(
+            0,
+            Math.min(
+                canvas.height,
+                clientY - rect.top
+            )
+        )
+
+    };
+
+}
+
+function startSelection(e){
+
+    e.preventDefault();
+
+    const pos = getPosition(e);
+
+    startX = pos.x;
+    startY = pos.y;
+
+    currentX = startX;
+    currentY = startY;
+
+    selecting = true;
+
+    hasSelection = false;
+
+}
+
+function moveSelection(e){
+
+    if(!selecting) return;
+
+    e.preventDefault();
+
+    const pos = getPosition(e);
+
+    currentX = pos.x;
+    currentY = pos.y;
+
+    drawSelection();
+
+}
+
+function endSelection(e){
+
+    if(!selecting) return;
+
+    selecting = false;
+
+    const width = Math.abs(currentX - startX);
+    const height = Math.abs(currentY - startY);
+
+    if(width > 5 && height > 5){
+
+        hasSelection = true;
+
+        cropBtn.disabled = false;
+
+        selectionInfo.textContent =
+            "تم تحديد المنطقة. اضغط «قص الصورة»";
+
+    }
+
+}
+
+function drawSelection(){
+
+    drawImage();
+
+    const x = Math.min(startX,currentX);
+    const y = Math.min(startY,currentY);
+
+    const width = Math.abs(currentX-startX);
+    const height = Math.abs(currentY-startY);
+
+    ctx.fillStyle = "rgba(0,0,0,.45)";
+
+    ctx.fillRect(
+        0,
+        0,
+        canvas.width,
+        canvas.height
+    );
+
+    ctx.clearRect(
+        x,
+        y,
+        width,
+        height
+    );
+
+    ctx.drawImage(
+        image,
+        x / displayScale,
+        y / displayScale,
+        width / displayScale,
+        height / displayScale,
+        x,
+        y,
+        width,
+        height
+    );
+
+    ctx.strokeStyle = "#ffffff";
+    ctx.lineWidth = 2;
+
+    ctx.strokeRect(
+        x,
+        y,
+        width,
+        height
+    );
+
+}
+
+canvas.addEventListener(
+    "mousedown",
+    startSelection
+);
+
+canvas.addEventListener(
+    "mousemove",
+    moveSelection
+);
+
+window.addEventListener(
+    "mouseup",
+    endSelection
+);
+
+canvas.addEventListener(
+    "touchstart",
+    startSelection,
+    {passive:false}
+);
+
+canvas.addEventListener(
+    "touchmove",
+    moveSelection,
+    {passive:false}
+);
+
+canvas.addEventListener(
+    "touchend",
+    endSelection,
+    {passive:false}
+);
+
+cropBtn.addEventListener("click", function(){
+
+    if(!hasSelection) return;
+
+    const x = Math.min(startX,currentX);
+    const y = Math.min(startY,currentY);
+
+    const width = Math.abs(currentX-startX);
+    const height = Math.abs(currentY-startY);
+
+    const output = document.createElement("canvas");
+
+    output.width = Math.round(
+        width / displayScale
+    );
+
+    output.height = Math.round(
+        height / displayScale
+    );
+
+    const outputCtx = output.getContext("2d");
+
+    outputCtx.drawImage(
+        image,
+        x / displayScale,
+        y / displayScale,
+        width / displayScale,
+        height / displayScale,
+        0,
+        0,
+        output.width,
+        output.height
+    );
+
+    output.toBlob(function(blob){
+
+        if(!blob) return;
+
+        const url = URL.createObjectURL(blob);
+
+        downloadBtn.href = url;
+
+        const originalName =
+            imageInput.files[0].name
+            .replace(/\.[^/.]+$/,"");
+
+        downloadBtn.download =
+            originalName + "-adaahub-crop.png";
+
+        downloadBtn.style.display = "inline-block";
+
+        selectionInfo.textContent =
+            "تم قص الصورة بنجاح، يمكنك تحميلها الآن.";
+
+    },"image/png");
+
+});
+
+resetBtn.addEventListener("click",function(){
+
+    imageInput.value = "";
+
+    editor.style.display = "none";
+
+    cropBtn.disabled = true;
+
+    downloadBtn.style.display = "none";
+
+    hasSelection = false;
+
+    selecting = false;
+
+});
+
+</script>
+
+</body>
+</html>
