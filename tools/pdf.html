@@ -1,21 +1,34 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
+
 <head>
+
 <meta charset="UTF-8">
+
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>تحويل الصور إلى PDF أونلاين | AdaaHub</title>
+<title>تحويل الصور إلى PDF أونلاين مجانًا | AdaaHub</title>
 
-<meta name="description" content="حوّل صورك إلى ملف PDF مجانًا وبسهولة من خلال AdaaHub.">
+<meta
+name="description"
+content="حوّل صور JPG وPNG إلى ملف PDF مجانًا أونلاين. اجمع عدة صور في ملف PDF واحد من الهاتف أو الكمبيوتر بدون رفع الصور إلى خادم AdaaHub."
+>
+
+<meta name="robots" content="index, follow">
+
+<link
+rel="canonical"
+href="https://adaahub.github.io/adaahub/tools/pdf.html"
+>
 
 <style>
+
 *{
   box-sizing:border-box;
-  margin:0;
-  padding:0;
 }
 
 body{
+  margin:0;
   font-family:Arial,Tahoma,sans-serif;
   background:#f5f7fb;
   color:#20242a;
@@ -24,8 +37,8 @@ body{
 
 header{
   background:#fff;
-  padding:18px 20px;
   border-bottom:1px solid #e5e7eb;
+  padding:16px 18px;
 }
 
 .header{
@@ -34,6 +47,7 @@ header{
   display:flex;
   justify-content:space-between;
   align-items:center;
+  gap:20px;
 }
 
 .logo{
@@ -48,368 +62,1037 @@ header{
 .home{
   color:#2563eb;
   text-decoration:none;
+  font-weight:bold;
+}
+
+.home:hover{
+  text-decoration:underline;
 }
 
 .container{
   max-width:850px;
-  margin:45px auto;
+  margin:35px auto;
   padding:20px;
 }
 
 h1{
   text-align:center;
   font-size:32px;
-  margin-bottom:10px;
+  margin:0 0 10px;
 }
 
 .subtitle{
   text-align:center;
   color:#666;
-  margin-bottom:30px;
+  margin:0 auto 28px;
+  max-width:650px;
 }
 
-.box{
+.tool-box{
   background:#fff;
-  border:2px dashed #cbd5e1;
   border-radius:18px;
-  padding:45px 20px;
-  text-align:center;
+  padding:30px 20px;
+  border:1px solid #e5e7eb;
+  box-shadow:0 5px 20px rgba(0,0,0,.04);
 }
 
-input{
+.upload-area{
+  border:2px dashed #cbd5e1;
+  border-radius:15px;
+  padding:40px 20px;
+  text-align:center;
+  background:#fafcff;
+}
+
+.upload-icon{
+  font-size:50px;
+  margin-bottom:10px;
+}
+
+.upload-area h2{
+  font-size:21px;
+  margin:0 0 8px;
+}
+
+.upload-area p{
+  color:#777;
+  margin:0 0 20px;
+}
+
+input[type="file"]{
   display:none;
 }
 
-.upload{
+.choose-button{
   display:inline-block;
   background:#2563eb;
   color:#fff;
-  padding:14px 28px;
+  padding:13px 27px;
+  border-radius:9px;
+  cursor:pointer;
+  font-size:16px;
+  font-weight:bold;
+}
+
+.choose-button:hover{
+  background:#1d4ed8;
+}
+
+.selected-info{
+  display:none;
+  margin-top:20px;
+  padding:14px;
+  background:#eff6ff;
+  border:1px solid #bfdbfe;
+  border-radius:10px;
+  color:#1e40af;
+  text-align:center;
+  font-weight:bold;
+}
+
+.images-preview{
+  display:none;
+  margin-top:20px;
+}
+
+.images-preview h2{
+  font-size:21px;
+  margin:0 0 15px;
+}
+
+.preview-grid{
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:15px;
+}
+
+.preview-item{
+  position:relative;
+  background:#f8fafc;
+  border:1px solid #e5e7eb;
+  border-radius:12px;
+  padding:12px;
+  text-align:center;
+}
+
+.preview-number{
+  font-weight:bold;
+  margin-bottom:8px;
+  color:#475569;
+}
+
+.preview-item img{
+  width:100%;
+  height:180px;
+  object-fit:contain;
+  background:#fff;
+  border-radius:8px;
+  display:block;
+}
+
+.remove-image{
+  margin-top:10px;
+  border:0;
+  background:#fee2e2;
+  color:#b91c1c;
+  padding:8px 14px;
+  border-radius:7px;
+  cursor:pointer;
+  font-weight:bold;
+}
+
+.remove-image:hover{
+  background:#fecaca;
+}
+
+.create-button{
+  width:100%;
+  border:0;
+  margin-top:20px;
+  background:#16a34a;
+  color:#fff;
+  padding:14px;
   border-radius:9px;
   cursor:pointer;
   font-size:17px;
+  font-weight:bold;
+  display:none;
 }
 
-#imagesPreview{
+.create-button:hover{
+  background:#15803d;
+}
+
+.create-button:disabled{
+  background:#94a3b8;
+  cursor:not-allowed;
+}
+
+.reset-button{
+  width:100%;
+  border:0;
+  margin-top:10px;
+  background:#e5e7eb;
+  color:#333;
+  padding:12px;
+  border-radius:9px;
+  cursor:pointer;
+  font-size:16px;
+  font-weight:bold;
   display:none;
-  margin-top:25px;
+}
+
+.reset-button:hover{
+  background:#d1d5db;
+}
+
+.status{
+  margin-top:15px;
+  text-align:center;
+  font-weight:bold;
+}
+
+.privacy-note{
+  margin-top:20px;
+  background:#eff6ff;
+  border:1px solid #bfdbfe;
+  border-radius:12px;
+  padding:16px;
+  color:#1e40af;
+  text-align:center;
+}
+
+.content{
   background:#fff;
-  padding:20px;
+  margin-top:30px;
+  padding:25px;
   border-radius:15px;
   border:1px solid #e5e7eb;
 }
 
-.preview-item{
-  margin-bottom:20px;
+.content h2{
+  margin-top:0;
+  font-size:23px;
 }
 
-.preview-item img{
-  max-width:100%;
-  max-height:250px;
+.content h3{
+  font-size:19px;
+}
+
+.content ol,
+.content ul{
+  padding-right:22px;
+}
+
+.faq{
+  margin-top:30px;
+}
+
+.faq details{
+  background:#f8fafc;
+  border:1px solid #e5e7eb;
   border-radius:10px;
-  display:block;
-  margin:10px auto;
+  padding:14px 16px;
+  margin-bottom:10px;
 }
 
-.create{
-  display:none;
-  width:100%;
-  margin-top:20px;
-  padding:14px;
-  border:0;
-  border-radius:9px;
-  background:#16a34a;
-  color:white;
-  font-size:17px;
+.faq summary{
   cursor:pointer;
-}
-
-.create:hover{
-  background:#15803d;
-}
-
-#status{
-  margin-top:15px;
-  text-align:center;
-  color:#555;
-}
-
-.privacy{
-  margin-top:25px;
-  background:#eff6ff;
-  border:1px solid #bfdbfe;
-  border-radius:12px;
-  padding:18px;
-  text-align:center;
-  color:#1e40af;
+  font-weight:bold;
 }
 
 footer{
-  margin-top:50px;
-  padding:30px;
   text-align:center;
-  background:#fff;
   color:#777;
+  padding:30px 20px;
+  margin-top:30px;
 }
 
-@media(max-width:700px){
+@media(max-width:600px){
 
   .header{
     flex-direction:column;
-    gap:10px;
-  }
-
-  .container{
-    margin-top:25px;
   }
 
   h1{
-    font-size:28px;
+    font-size:27px;
   }
+
+  .container{
+    margin:20px auto;
+    padding:15px;
+  }
+
+  .tool-box{
+    padding:20px 15px;
+  }
+
+  .preview-grid{
+    grid-template-columns:1fr;
+  }
+
+  .preview-item img{
+    height:220px;
+  }
+
 }
+
 </style>
+
 </head>
 
 <body>
 
 <header>
 
-<div class="header">
+  <div class="header">
 
-<div class="logo">
-Adaa<span>Hub</span>
-</div>
+    <div class="logo">
+      Adaa<span>Hub</span>
+    </div>
 
-<a class="home" href="../index.html">
-الرئيسية
-</a>
+    <a
+      class="home"
+      href="../index.html"
+    >
+      الرئيسية
+    </a>
 
-</div>
+  </div>
 
 </header>
 
+
 <main class="container">
 
-<h1>تحويل الصور إلى PDF</h1>
+  <h1>
+    تحويل الصور إلى PDF أونلاين
+  </h1>
 
-<p class="subtitle">
-حوّل صورة واحدة أو عدة صور إلى ملف PDF بسهولة ومجانًا.
-</p>
+  <p class="subtitle">
+    اجمع صورة واحدة أو عدة صور في ملف PDF واحد مجانًا
+    من الهاتف أو الكمبيوتر.
+  </p>
 
-<div class="box">
 
-<p>اختر الصور من هاتفك أو الكمبيوتر</p>
+  <section class="tool-box">
 
-<label class="upload" for="imageInput">
-اختيار الصور
-</label>
+    <div class="upload-area">
 
-<input
-id="imageInput"
-type="file"
-accept="image/*"
-multiple
->
+      <div class="upload-icon">
+        📄
+      </div>
 
-</div>
+      <h2>
+        اختر الصور التي تريد تحويلها
+      </h2>
 
-<div id="imagesPreview"></div>
+      <p>
+        يمكنك اختيار صورة واحدة أو عدة صور JPG وPNG وغيرها.
+      </p>
 
-<button class="create" id="createPdf">
-إنشاء ملف PDF
-</button>
+      <label
+        class="choose-button"
+        for="imageInput"
+      >
+        اختيار الصور
+      </label>
 
-<div id="status"></div>
+      <input
+        id="imageInput"
+        type="file"
+        accept="image/jpeg,image/png,image/gif,image/webp"
+        multiple
+      >
 
-<div class="privacy">
-🔒 تتم معالجة الصور داخل متصفحك مباشرة، ولا يتم رفعها إلى خادم AdaaHub.
-</div>
+    </div>
+
+
+    <div
+      class="selected-info"
+      id="selectedInfo"
+    >
+    </div>
+
+
+    <div
+      class="images-preview"
+      id="imagesPreview"
+    >
+
+      <h2>
+        الصور المختارة
+      </h2>
+
+      <div
+        class="preview-grid"
+        id="previewGrid"
+      >
+      </div>
+
+    </div>
+
+
+    <button
+      class="create-button"
+      id="createPdf"
+    >
+      📄 إنشاء ملف PDF
+    </button>
+
+
+    <button
+      class="reset-button"
+      id="resetButton"
+    >
+      بدء من جديد
+    </button>
+
+
+    <div
+      class="status"
+      id="status"
+    >
+    </div>
+
+
+    <div class="privacy-note">
+
+      🔒 <strong>الخصوصية:</strong>
+      تتم معالجة الصور داخل متصفحك مباشرة،
+      ولا يتم رفعها إلى خادم AdaaHub.
+
+    </div>
+
+  </section>
+
+
+  <section class="content">
+
+    <h2>
+      تحويل الصور إلى ملف PDF
+    </h2>
+
+    <p>
+      تساعدك أداة AdaaHub على جمع صورك في ملف PDF واحد
+      بسهولة، سواء كنت تستخدم هاتفًا أو جهاز كمبيوتر.
+      لا تحتاج إلى تثبيت برنامج إضافي، ويمكنك اختيار
+      صورة واحدة أو عدة صور لإنشاء ملف PDF.
+    </p>
+
+
+    <h3>
+      كيفية تحويل الصور إلى PDF؟
+    </h3>
+
+    <ol>
+
+      <li>
+        اضغط على «اختيار الصور».
+      </li>
+
+      <li>
+        حدد صورة واحدة أو عدة صور من جهازك.
+      </li>
+
+      <li>
+        راجع الصور المختارة قبل إنشاء الملف.
+      </li>
+
+      <li>
+        اضغط على «إنشاء ملف PDF».
+      </li>
+
+      <li>
+        سيتم تنزيل ملف PDF على جهازك.
+      </li>
+
+    </ol>
+
+
+    <h3>
+      هل يتم رفع الصور إلى الإنترنت؟
+    </h3>
+
+    <p>
+      لا تعتمد الأداة على رفع الصور إلى خادم AdaaHub.
+      تتم معالجة الصور داخل المتصفح باستخدام JavaScript،
+      ثم يتم إنشاء ملف PDF على جهازك.
+    </p>
+
+
+    <h3>
+      هل يمكن تحويل أكثر من صورة؟
+    </h3>
+
+    <p>
+      نعم، يمكنك اختيار عدة صور في نفس الوقت، وسيتم وضع
+      كل صورة في صفحة منفصلة داخل ملف PDF واحد.
+    </p>
+
+
+    <div class="faq">
+
+      <h2>
+        الأسئلة الشائعة
+      </h2>
+
+
+      <details>
+
+        <summary>
+          هل تحويل الصور إلى PDF مجاني؟
+        </summary>
+
+        <p>
+          نعم، يمكنك استخدام الأداة مجانًا من المتصفح
+          بدون الحاجة إلى تثبيت برنامج.
+        </p>
+
+      </details>
+
+
+      <details>
+
+        <summary>
+          هل تعمل الأداة على الهاتف؟
+        </summary>
+
+        <p>
+          نعم، تم تصميم الأداة للعمل على الهواتف
+          والأجهزة اللوحية وأجهزة الكمبيوتر الحديثة.
+        </p>
+
+      </details>
+
+
+      <details>
+
+        <summary>
+          كم صورة يمكنني تحويلها؟
+        </summary>
+
+        <p>
+          يمكنك اختيار عدة صور في نفس العملية، لكن عدد الصور
+          الذي يمكنك معالجته عمليًا يعتمد على إمكانيات جهازك
+          وحجم الصور.
+        </p>
+
+      </details>
+
+
+      <details>
+
+        <summary>
+          هل كل صورة تصبح صفحة داخل PDF؟
+        </summary>
+
+        <p>
+          نعم، يتم وضع كل صورة في صفحة منفصلة داخل ملف PDF
+          مع الحفاظ على تناسب أبعاد الصورة مع صفحة A4.
+        </p>
+
+      </details>
+
+
+      <details>
+
+        <summary>
+          هل أحتاج إلى تثبيت برنامج؟
+        </summary>
+
+        <p>
+          لا، الأداة تعمل مباشرة من المتصفح.
+        </p>
+
+      </details>
+
+    </div>
+
+  </section>
 
 </main>
 
+
 <footer>
-© 2026 AdaaHub - جميع الحقوق محفوظة
+
+  © 2026 AdaaHub - جميع الحقوق محفوظة
+
 </footer>
 
+
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+
 
 <script>
 
 const imageInput =
-document.getElementById("imageInput");
+  document.getElementById("imageInput");
+
+const selectedInfo =
+  document.getElementById("selectedInfo");
 
 const imagesPreview =
-document.getElementById("imagesPreview");
+  document.getElementById("imagesPreview");
+
+const previewGrid =
+  document.getElementById("previewGrid");
 
 const createPdf =
-document.getElementById("createPdf");
+  document.getElementById("createPdf");
+
+const resetButton =
+  document.getElementById("resetButton");
 
 const status =
-document.getElementById("status");
+  document.getElementById("status");
+
 
 let selectedImages = [];
 
-imageInput.addEventListener("change",function(){
 
-selectedImages = Array.from(this.files);
+imageInput.addEventListener(
+  "change",
+  function(){
 
-if(selectedImages.length === 0){
-return;
-}
+    const files =
+      Array.from(this.files);
 
-imagesPreview.innerHTML = "";
-imagesPreview.style.display = "block";
-createPdf.style.display = "block";
-
-selectedImages.forEach(function(file,index){
-
-const reader = new FileReader();
-
-reader.onload = function(event){
-
-const item = document.createElement("div");
-
-item.className = "preview-item";
-
-item.innerHTML =
-"<strong>الصورة " + (index + 1) + "</strong>" +
-"<img src='" + event.target.result + "'>";
-
-imagesPreview.appendChild(item);
-
-};
-
-reader.readAsDataURL(file);
-
-});
-
-});
+    if(files.length === 0){
+      return;
+    }
 
 
-createPdf.addEventListener("click",async function(){
+    const validFiles =
+      files.filter(function(file){
 
-if(selectedImages.length === 0){
+        return file.type.startsWith("image/");
 
-alert("اختر صورة واحدة على الأقل.");
+      });
 
-return;
 
-}
+    if(validFiles.length === 0){
 
-createPdf.disabled = true;
+      alert(
+        "يرجى اختيار ملفات صور صالحة."
+      );
 
-createPdf.textContent = "⏳ جاري إنشاء PDF...";
+      imageInput.value = "";
 
-status.textContent = "";
+      return;
 
-const { jsPDF } = window.jspdf;
+    }
 
-const pdf = new jsPDF({
-orientation:"portrait",
-unit:"mm",
-format:"a4"
-});
 
-for(let i = 0; i < selectedImages.length; i++){
+    selectedImages =
+      validFiles;
 
-const file = selectedImages[i];
 
-const dataUrl = await readFile(file);
+    renderPreviews();
 
-const img = await loadImage(dataUrl);
-
-const pageWidth = 210;
-const pageHeight = 297;
-
-const margin = 10;
-
-const maxWidth =
-pageWidth - (margin * 2);
-
-const maxHeight =
-pageHeight - (margin * 2);
-
-let width = img.width;
-let height = img.height;
-
-const ratio =
-Math.min(maxWidth / width, maxHeight / height);
-
-width *= ratio;
-height *= ratio;
-
-const x =
-(pageWidth - width) / 2;
-
-const y =
-(pageHeight - height) / 2;
-
-if(i > 0){
-pdf.addPage();
-}
-
-pdf.addImage(
-img,
-"JPEG",
-x,
-y,
-width,
-height
+  }
 );
 
+
+function renderPreviews(){
+
+  previewGrid.innerHTML = "";
+
+  selectedInfo.style.display =
+    "block";
+
+  imagesPreview.style.display =
+    "block";
+
+  createPdf.style.display =
+    "block";
+
+  resetButton.style.display =
+    "block";
+
+
+  selectedInfo.textContent =
+    "تم اختيار " +
+    selectedImages.length +
+    " صورة";
+
+
+  selectedImages.forEach(
+    function(file,index){
+
+      const reader =
+        new FileReader();
+
+
+      reader.onload =
+        function(event){
+
+          const item =
+            document.createElement("div");
+
+          item.className =
+            "preview-item";
+
+
+          const number =
+            document.createElement("div");
+
+          number.className =
+            "preview-number";
+
+          number.textContent =
+            "الصورة " +
+            (index + 1);
+
+
+          const img =
+            document.createElement("img");
+
+          img.src =
+            event.target.result;
+
+          img.alt =
+            "معاينة الصورة " +
+            (index + 1);
+
+
+          const removeButton =
+            document.createElement("button");
+
+          removeButton.className =
+            "remove-image";
+
+          removeButton.type =
+            "button";
+
+          removeButton.textContent =
+            "حذف الصورة";
+
+
+          removeButton.addEventListener(
+            "click",
+            function(){
+
+              selectedImages.splice(
+                index,
+                1
+              );
+
+              if(
+                selectedImages.length === 0
+              ){
+
+                resetTool();
+
+              }else{
+
+                renderPreviews();
+
+              }
+
+            }
+          );
+
+
+          item.appendChild(number);
+
+          item.appendChild(img);
+
+          item.appendChild(
+            removeButton
+          );
+
+          previewGrid.appendChild(item);
+
+        };
+
+
+      reader.readAsDataURL(file);
+
+    }
+  );
+
 }
 
-pdf.save("adaahub-images.pdf");
 
-status.textContent =
-"✅ تم إنشاء ملف PDF بنجاح.";
+createPdf.addEventListener(
+  "click",
+  async function(){
 
-createPdf.disabled = false;
+    if(selectedImages.length === 0){
 
-createPdf.textContent =
-"إنشاء ملف PDF";
+      alert(
+        "اختر صورة واحدة على الأقل."
+      );
 
-});
+      return;
+
+    }
+
+
+    createPdf.disabled =
+      true;
+
+    resetButton.disabled =
+      true;
+
+    createPdf.textContent =
+      "⏳ جاري إنشاء ملف PDF...";
+
+
+    status.textContent =
+      "يرجى الانتظار حتى انتهاء المعالجة.";
+
+
+    try{
+
+      const {
+        jsPDF
+      } = window.jspdf;
+
+
+      const pdf =
+        new jsPDF({
+          orientation:"portrait",
+          unit:"mm",
+          format:"a4"
+        });
+
+
+      const pageWidth =
+        210;
+
+      const pageHeight =
+        297;
+
+      const margin =
+        10;
+
+
+      for(
+        let i = 0;
+        i < selectedImages.length;
+        i++
+      ){
+
+        status.textContent =
+          "جاري معالجة الصورة " +
+          (i + 1) +
+          " من " +
+          selectedImages.length;
+
+
+        const file =
+          selectedImages[i];
+
+
+        const dataUrl =
+          await readFile(file);
+
+
+        const img =
+          await loadImage(dataUrl);
+
+
+        const maxWidth =
+          pageWidth -
+          (margin * 2);
+
+
+        const maxHeight =
+          pageHeight -
+          (margin * 2);
+
+
+        let width =
+          img.naturalWidth;
+
+        let height =
+          img.naturalHeight;
+
+
+        const ratio =
+          Math.min(
+            maxWidth / width,
+            maxHeight / height
+          );
+
+
+        width *= ratio;
+
+        height *= ratio;
+
+
+        const x =
+          (pageWidth - width) / 2;
+
+        const y =
+          (pageHeight - height) / 2;
+
+
+        if(i > 0){
+
+          pdf.addPage();
+
+        }
+
+
+        pdf.addImage(
+          img,
+          "JPEG",
+          x,
+          y,
+          width,
+          height
+        );
+
+      }
+
+
+      pdf.save(
+        "adaahub-images.pdf"
+      );
+
+
+      status.textContent =
+        "✅ تم إنشاء ملف PDF بنجاح.";
+
+    }catch(error){
+
+      console.error(error);
+
+      status.textContent =
+        "❌ حدث خطأ أثناء إنشاء ملف PDF. حاول استخدام صور أخرى.";
+
+    }
+
+
+    createPdf.disabled =
+      false;
+
+    resetButton.disabled =
+      false;
+
+    createPdf.textContent =
+      "📄 إنشاء ملف PDF";
+
+  }
+);
+
+
+resetButton.addEventListener(
+  "click",
+  function(){
+
+    resetTool();
+
+  }
+);
+
+
+function resetTool(){
+
+  selectedImages = [];
+
+  imageInput.value = "";
+
+  previewGrid.innerHTML = "";
+
+  selectedInfo.style.display =
+    "none";
+
+  imagesPreview.style.display =
+    "none";
+
+  createPdf.style.display =
+    "none";
+
+  resetButton.style.display =
+    "none";
+
+  status.textContent = "";
+
+}
 
 
 function readFile(file){
 
-return new Promise(function(resolve,reject){
+  return new Promise(
+    function(resolve,reject){
 
-const reader = new FileReader();
+      const reader =
+        new FileReader();
 
-reader.onload = function(){
-resolve(reader.result);
-};
 
-reader.onerror = reject;
+      reader.onload =
+        function(){
 
-reader.readAsDataURL(file);
+          resolve(
+            reader.result
+          );
 
-});
+        };
+
+
+      reader.onerror =
+        function(){
+
+          reject(
+            new Error(
+              "تعذر قراءة الملف"
+            )
+          );
+
+        };
+
+
+      reader.readAsDataURL(file);
+
+    }
+  );
 
 }
 
 
 function loadImage(src){
 
-return new Promise(function(resolve,reject){
+  return new Promise(
+    function(resolve,reject){
 
-const img = new Image();
+      const img =
+        new Image();
 
-img.onload = function(){
-resolve(img);
-};
 
-img.onerror = reject;
+      img.onload =
+        function(){
 
-img.src = src;
+          resolve(img);
 
-});
+        };
+
+
+      img.onerror =
+        function(){
+
+          reject(
+            new Error(
+              "تعذر تحميل الصورة"
+            )
+          );
+
+        };
+
+
+      img.src =
+        src;
+
+    }
+  );
 
 }
 
 </script>
 
 </body>
+
 </html>
