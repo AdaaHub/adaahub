@@ -1,513 +1,977 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
+
 <head>
+
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>ضغط الصور أونلاين مجانًا | AdaaHub</title>
-<meta name="description" content="اضغط الصور أونلاين مجانًا من هاتفك أو الكمبيوتر. قلل حجم الصور بسرعة داخل المتصفح بدون رفع ملفاتك إلى خادم.">
+<title>ضغط الصور أونلاين مجانًا | تقليل حجم الصور | AdaaHub</title>
+
+<meta name="description"
+content="اضغط صور JPG وPNG وWebP مجانًا من الهاتف أو الكمبيوتر. قلل حجم الصور مباشرة داخل المتصفح دون رفع ملفاتك إلى خادم خارجي.">
 
 <meta name="robots" content="index, follow">
-<link rel="canonical" href="https://adaahub.github.io/adaahub/tools/compress.html">
+
+<link rel="canonical"
+href="https://adaahub.github.io/adaahub/tools/compress.html">
 
 <style>
+
 *{
-  box-sizing:border-box;
+box-sizing:border-box;
+}
+
+html{
+scroll-behavior:smooth;
 }
 
 body{
-  margin:0;
-  font-family:Arial,Tahoma,sans-serif;
-  background:#f5f7fb;
-  color:#20242a;
-  line-height:1.7;
+margin:0;
+font-family:Arial,Tahoma,sans-serif;
+background:#f5f7fb;
+color:#20242a;
+line-height:1.7;
 }
 
 header{
-  background:#fff;
-  border-bottom:1px solid #e5e7eb;
-  padding:16px 18px;
+background:#fff;
+border-bottom:1px solid #e5e7eb;
+padding:16px 18px;
 }
 
 .header{
-  max-width:900px;
-  margin:auto;
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  gap:20px;
+max-width:950px;
+margin:auto;
+display:flex;
+justify-content:space-between;
+align-items:center;
+gap:20px;
 }
 
 .logo{
-  font-size:27px;
-  font-weight:bold;
+font-size:27px;
+font-weight:bold;
 }
 
 .logo span{
-  color:#2563eb;
+color:#2563eb;
 }
 
-.home{
-  color:#2563eb;
-  text-decoration:none;
-  font-weight:bold;
+.nav{
+display:flex;
+align-items:center;
+gap:15px;
 }
 
-.home:hover{
-  text-decoration:underline;
+.nav a{
+color:#2563eb;
+text-decoration:none;
+font-weight:bold;
+}
+
+.nav a:hover{
+text-decoration:underline;
 }
 
 .container{
-  max-width:850px;
-  margin:35px auto;
-  padding:20px;
+max-width:900px;
+margin:35px auto;
+padding:20px;
 }
 
 h1{
-  text-align:center;
-  font-size:32px;
-  margin:0 0 10px;
+text-align:center;
+font-size:34px;
+margin:0 0 10px;
 }
 
 .subtitle{
-  text-align:center;
-  color:#666;
-  margin:0 auto 28px;
-  max-width:650px;
+text-align:center;
+color:#666;
+margin:0 auto 28px;
+max-width:700px;
+font-size:17px;
 }
 
 .box{
-  background:#fff;
-  border:2px dashed #cbd5e1;
-  border-radius:18px;
-  padding:45px 20px;
-  text-align:center;
-  box-shadow:0 5px 20px rgba(0,0,0,.04);
+background:#fff;
+border:2px dashed #cbd5e1;
+border-radius:18px;
+padding:45px 20px;
+text-align:center;
+box-shadow:0 5px 20px rgba(0,0,0,.04);
 }
 
 .box p{
-  margin-top:0;
+margin-top:0;
+color:#555;
 }
 
 input{
-  display:none;
+display:none;
 }
 
 .upload{
-  display:inline-block;
-  background:#2563eb;
-  color:#fff;
-  padding:14px 28px;
-  border-radius:9px;
-  cursor:pointer;
-  font-size:17px;
-  font-weight:bold;
+display:inline-block;
+background:#2563eb;
+color:#fff;
+padding:14px 28px;
+border-radius:9px;
+cursor:pointer;
+font-size:17px;
+font-weight:bold;
+transition:.2s;
 }
 
 .upload:hover{
-  background:#1d4ed8;
+background:#1d4ed8;
+}
+
+.upload:focus{
+outline:3px solid rgba(37,99,235,.25);
 }
 
 #status{
-  display:none;
-  margin-top:15px;
-  color:#555;
+display:none;
+margin-top:18px;
+color:#555;
 }
 
 #result{
-  display:none;
-  margin-top:25px;
-  background:#fff;
-  padding:25px;
-  border-radius:15px;
-  text-align:center;
-  border:1px solid #e5e7eb;
-  box-shadow:0 5px 20px rgba(0,0,0,.04);
+display:none;
+margin-top:25px;
+background:#fff;
+padding:25px;
+border-radius:15px;
+text-align:center;
+border:1px solid #e5e7eb;
+box-shadow:0 5px 20px rgba(0,0,0,.04);
 }
 
 #preview{
-  max-width:100%;
-  max-height:320px;
-  margin:15px auto;
-  display:block;
-  border-radius:10px;
+max-width:100%;
+max-height:360px;
+margin:15px auto;
+display:block;
+border-radius:10px;
+object-fit:contain;
 }
 
 .info{
-  margin-top:15px;
-  line-height:2;
+margin-top:15px;
+line-height:2;
 }
 
 #saved{
-  font-weight:bold;
-  color:#16a34a;
-  margin-top:5px;
+font-weight:bold;
+color:#16a34a;
+margin-top:5px;
 }
 
 .download{
-  display:inline-block;
-  background:#16a34a;
-  color:white;
-  text-decoration:none;
-  padding:12px 25px;
-  border-radius:8px;
-  margin-top:15px;
-  font-weight:bold;
+display:inline-block;
+background:#16a34a;
+color:#fff;
+text-decoration:none;
+padding:12px 25px;
+border-radius:8px;
+margin-top:15px;
+font-weight:bold;
 }
 
 .download:hover{
-  background:#15803d;
+background:#15803d;
 }
 
 .reset{
-  display:inline-block;
-  background:#e5e7eb;
-  color:#20242a;
-  border:0;
-  padding:11px 22px;
-  border-radius:8px;
-  margin-top:15px;
-  cursor:pointer;
-  font-weight:bold;
+display:inline-block;
+background:#e5e7eb;
+color:#20242a;
+border:0;
+padding:11px 22px;
+border-radius:8px;
+margin-top:15px;
+cursor:pointer;
+font-weight:bold;
+font-family:inherit;
+}
+
+.reset:hover{
+background:#d1d5db;
 }
 
 .content{
-  background:#fff;
-  margin-top:30px;
-  padding:25px;
-  border-radius:15px;
-  border:1px solid #e5e7eb;
+background:#fff;
+margin-top:30px;
+padding:28px;
+border-radius:15px;
+border:1px solid #e5e7eb;
 }
 
 .content h2{
-  font-size:23px;
-  margin-top:0;
+font-size:24px;
+margin-top:0;
+color:#1f2937;
 }
 
 .content h3{
-  font-size:19px;
+font-size:19px;
+margin-top:25px;
+color:#1f2937;
 }
 
-.content ul{
-  padding-right:22px;
+.content p{
+color:#555;
+}
+
+.content ul,
+.content ol{
+padding-right:22px;
+color:#555;
+}
+
+.content li{
+margin-bottom:7px;
+}
+
+.internal-links{
+display:flex;
+flex-wrap:wrap;
+gap:10px;
+margin-top:15px;
+}
+
+.internal-links a{
+display:inline-block;
+background:#eff6ff;
+color:#2563eb;
+padding:9px 13px;
+border-radius:8px;
+text-decoration:none;
+font-size:14px;
+}
+
+.internal-links a:hover{
+background:#dbeafe;
 }
 
 .faq{
-  margin-top:30px;
+margin-top:30px;
+}
+
+.faq h2{
+margin-bottom:15px;
 }
 
 .faq details{
-  background:#f8fafc;
-  border:1px solid #e5e7eb;
-  border-radius:10px;
-  padding:14px 16px;
-  margin-bottom:10px;
+background:#f8fafc;
+border:1px solid #e5e7eb;
+border-radius:10px;
+padding:14px 16px;
+margin-bottom:10px;
 }
 
 .faq summary{
-  cursor:pointer;
-  font-weight:bold;
+cursor:pointer;
+font-weight:bold;
+}
+
+.faq p{
+margin-bottom:0;
 }
 
 footer{
-  text-align:center;
-  color:#777;
-  padding:30px 20px;
+text-align:center;
+color:#777;
+padding:30px 20px;
+}
+
+.footer-links{
+display:flex;
+justify-content:center;
+flex-wrap:wrap;
+gap:15px;
+margin-top:10px;
+}
+
+.footer-links a{
+color:#666;
+text-decoration:none;
+font-size:14px;
+}
+
+.footer-links a:hover{
+color:#2563eb;
 }
 
 @media(max-width:600px){
 
-  .header{
-    flex-direction:column;
-  }
+.header{
+flex-direction:column;
+}
 
-  h1{
-    font-size:27px;
-  }
+h1{
+font-size:28px;
+}
 
-  .container{
-    margin:20px auto;
-    padding:15px;
-  }
+.container{
+margin:20px auto;
+padding:15px;
+}
 
-  .box{
-    padding:35px 15px;
-  }
+.box{
+padding:35px 15px;
+}
+
+.content{
+padding:22px 18px;
+}
 
 }
+
 </style>
+
 </head>
 
 <body>
 
 <header>
-  <div class="header">
 
-    <div class="logo">
-      Adaa<span>Hub</span>
-    </div>
+<div class="header">
 
-    <a class="home" href="../index.html">
-      الرئيسية
-    </a>
+<div class="logo">
+Adaa<span>Hub</span>
+</div>
 
-  </div>
+<nav class="nav">
+
+<a href="../index.html">
+الرئيسية
+</a>
+
+<a href="../index.html#tools">
+كل الأدوات
+</a>
+
+</nav>
+
+</div>
+
 </header>
+
 
 <main class="container">
 
-  <h1>ضغط الصور أونلاين مجانًا</h1>
+<h1>
+ضغط الصور أونلاين مجانًا
+</h1>
 
-  <p class="subtitle">
-    قلل حجم صورك بسرعة من هاتفك أو الكمبيوتر، بدون رفع الصور إلى خادم.
-  </p>
+<p class="subtitle">
+قلل حجم صور JPG وPNG وWebP مباشرة من هاتفك أو الكمبيوتر،
+بدون الحاجة إلى تثبيت برنامج أو رفع الصورة إلى خادم لمعالجتها.
+</p>
 
-  <div class="box">
 
-    <p>
-      اختر صورة من جهازك لبدء عملية الضغط.
-    </p>
+<div class="box">
 
-    <label class="upload" for="imageInput">
-      اختر صورة
-    </label>
+<p>
+اختر صورة من جهازك لبدء عملية الضغط.
+</p>
 
-    <input
-      id="imageInput"
-      type="file"
-      accept="image/jpeg,image/png,image/webp"
-    >
+<label class="upload" for="imageInput">
+اختر صورة
+</label>
 
-    <div id="status">
-      جارٍ معالجة الصورة...
-    </div>
+<input
+id="imageInput"
+type="file"
+accept="image/jpeg,image/png,image/webp"
+aria-label="اختيار صورة لضغطها"
+>
 
-  </div>
+<div id="status" aria-live="polite">
+جارٍ معالجة الصورة...
+</div>
 
-  <div id="result">
+</div>
 
-    <h2>تم ضغط الصورة</h2>
 
-    <img id="preview" alt="معاينة الصورة المضغوطة">
+<div id="result">
 
-    <div class="info">
+<h2>
+تمت معالجة الصورة
+</h2>
 
-      <div id="oldSize"></div>
+<img
+id="preview"
+alt="معاينة الصورة المضغوطة"
+>
 
-      <div id="newSize"></div>
+<div class="info">
 
-      <div id="saved"></div>
+<div id="oldSize"></div>
 
-    </div>
+<div id="newSize"></div>
 
-    <a
-      id="download"
-      class="download"
-      download="adaahub-compressed.jpg"
-    >
-      تحميل الصورة المضغوطة
-    </a>
+<div id="saved"></div>
 
-    <br>
+</div>
 
-    <button class="reset" id="reset">
-      ضغط صورة أخرى
-    </button>
+<a
+id="download"
+class="download"
+download="adaahub-compressed.jpg"
+>
+تحميل الصورة المضغوطة
+</a>
 
-  </div>
+<br>
 
-  <section class="content">
+<button
+class="reset"
+id="reset"
+type="button">
+ضغط صورة أخرى
+</button>
 
-    <h2>ضغط الصور بدون رفعها إلى الإنترنت</h2>
+</div>
 
-    <p>
-      تساعدك أداة AdaaHub على تقليل حجم الصور مباشرة من المتصفح.
-      اختر الصورة من جهازك وستتم معالجتها محليًا باستخدام المتصفح،
-      ثم يمكنك تحميل النسخة المضغوطة.
-    </p>
 
-    <h3>كيفية استخدام أداة ضغط الصور؟</h3>
+<section class="content">
 
-    <ol>
-      <li>اضغط على زر «اختر صورة».</li>
-      <li>حدد الصورة التي تريد ضغطها.</li>
-      <li>انتظر حتى تتم معالجة الصورة.</li>
-      <li>راجع الحجم الأصلي والحجم الجديد.</li>
-      <li>اضغط على «تحميل الصورة المضغوطة».</li>
-    </ol>
+<h2>
+ضغط الصور بدون رفعها إلى الإنترنت
+</h2>
 
-    <h3>هل يتم رفع الصور إلى خادم؟</h3>
+<p>
+تتيح لك أداة ضغط الصور من AdaaHub تقليل حجم الصور مباشرة داخل متصفحك.
+يتم تحميل الصورة إلى ذاكرة المتصفح ومعالجتها باستخدام JavaScript،
+ثم يمكنك تحميل النتيجة إلى جهازك.
+</p>
 
-    <p>
-      لا تعتمد الأداة على رفع الصورة إلى خادم خارجي لمعالجتها؛
-      تتم عملية الضغط داخل متصفحك باستخدام تقنيات JavaScript.
-    </p>
+<h3>
+كيفية ضغط صورة؟
+</h3>
 
-    <div class="faq">
+<ol>
 
-      <h2>الأسئلة الشائعة</h2>
+<li>
+اضغط على «اختر صورة».
+</li>
 
-      <details>
-        <summary>هل أداة ضغط الصور مجانية؟</summary>
-        <p>
-          نعم، يمكنك استخدام الأداة مجانًا من المتصفح.
-        </p>
-      </details>
+<li>
+حدد صورة JPG أو PNG أو WebP من جهازك.
+</li>
 
-      <details>
-        <summary>هل تعمل الأداة على الهاتف؟</summary>
-        <p>
-          نعم، الصفحة مصممة للعمل على الهواتف والأجهزة اللوحية وأجهزة الكمبيوتر.
-        </p>
-      </details>
+<li>
+انتظر لحظات حتى تتم معالجة الصورة.
+</li>
 
-      <details>
-        <summary>هل أحتاج إلى تثبيت برنامج؟</summary>
-        <p>
-          لا، يمكنك استخدام الأداة مباشرة من المتصفح بدون تثبيت برنامج إضافي.
-        </p>
-      </details>
+<li>
+راجع الحجم الأصلي والحجم الجديد ونسبة التوفير.
+</li>
 
-      <details>
-        <summary>هل يمكنني ضغط أكثر من صورة؟</summary>
-        <p>
-          حاليًا يتم اختيار صورة واحدة في كل مرة. يمكنك ضغط صورة أخرى
-          باستخدام زر «ضغط صورة أخرى».
-        </p>
-      </details>
+<li>
+اضغط على «تحميل الصورة المضغوطة» لحفظ النتيجة.
+</li>
 
-    </div>
+</ol>
 
-  </section>
+
+<h3>
+ما أنواع الصور التي تدعمها الأداة؟
+</h3>
+
+<p>
+الأداة تدعم حاليًا صور JPG وJPEG وPNG وWebP.
+الناتج يتم حفظه بصيغة JPG لتقليل الحجم بشكل مناسب للاستخدامات الشائعة على الويب.
+</p>
+
+
+<h3>
+هل يتم رفع الصور إلى خادم؟
+</h3>
+
+<p>
+لا تعتمد عملية الضغط نفسها على رفع الصورة إلى خادم خارجي.
+تتم معالجة الصورة داخل متصفحك باستخدام JavaScript،
+ثم يتم إنشاء ملف النتيجة داخل المتصفح.
+</p>
+
+
+<h3>
+هل تريد أدوات أخرى للصور؟
+</h3>
+
+<p>
+يمكنك استخدام أدوات AdaaHub الأخرى لمعالجة الصور:
+</p>
+
+<div class="internal-links">
+
+<a href="webp.html">
+تحويل الصور إلى WebP
+</a>
+
+<a href="resize.html">
+تغيير حجم الصور
+</a>
+
+<a href="crop.html">
+قص الصور
+</a>
+
+<a href="rotate.html">
+تدوير الصور
+</a>
+
+<a href="jpg-to-png.html">
+JPG إلى PNG
+</a>
+
+<a href="png-to-jpg.html">
+PNG إلى JPG
+</a>
+
+<a href="webp-to-jpg.html">
+WebP إلى JPG
+</a>
+
+<a href="image-info.html">
+معلومات الصورة
+</a>
+
+</div>
+
+
+<div class="faq">
+
+<h2>
+الأسئلة الشائعة
+</h2>
+
+
+<details>
+
+<summary>
+هل أداة ضغط الصور مجانية؟
+</summary>
+
+<p>
+نعم، يمكنك استخدام أداة ضغط الصور مجانًا من خلال المتصفح.
+</p>
+
+</details>
+
+
+<details>
+
+<summary>
+هل تعمل الأداة على الهاتف؟
+</summary>
+
+<p>
+نعم، يمكن استخدام الأداة على الهواتف والأجهزة اللوحية وأجهزة الكمبيوتر الحديثة.
+</p>
+
+</details>
+
+
+<details>
+
+<summary>
+هل أحتاج إلى تثبيت برنامج؟
+</summary>
+
+<p>
+لا، الأداة تعمل مباشرة من المتصفح ولا تحتاج إلى تثبيت برنامج إضافي.
+</p>
+
+</details>
+
+
+<details>
+
+<summary>
+هل يمكن ضغط أكثر من صورة في نفس الوقت؟
+</summary>
+
+<p>
+حاليًا تتم معالجة صورة واحدة في كل مرة. بعد الانتهاء يمكنك الضغط على «ضغط صورة أخرى» لمعالجة صورة جديدة.
+</p>
+
+</details>
+
+
+<details>
+
+<summary>
+هل ستظل جودة الصورة كما هي؟
+</summary>
+
+<p>
+يتم ضغط الصورة باستخدام جودة مناسبة لتقليل حجم الملف. قد يحدث انخفاض بسيط في الجودة مقارنة بالملف الأصلي، ويختلف ذلك حسب الصورة وحجمها وصيغتها.
+</p>
+
+</details>
+
+
+</div>
+
+</section>
 
 </main>
 
+
 <footer>
-  © 2026 AdaaHub - جميع الحقوق محفوظة
+
+© 2026 AdaaHub - جميع الحقوق محفوظة
+
+<div class="footer-links">
+
+<a href="../pages/about.html">
+من نحن
+</a>
+
+<a href="../pages/privacy.html">
+سياسة الخصوصية
+</a>
+
+<a href="../pages/terms.html">
+شروط الاستخدام
+</a>
+
+<a href="../pages/contact.html">
+اتصل بنا
+</a>
+
+</div>
+
 </footer>
+
 
 <script>
 
-const input = document.getElementById("imageInput");
-const result = document.getElementById("result");
-const status = document.getElementById("status");
-const preview = document.getElementById("preview");
-const download = document.getElementById("download");
-const reset = document.getElementById("reset");
+const input =
+document.getElementById("imageInput");
+
+const result =
+document.getElementById("result");
+
+const status =
+document.getElementById("status");
+
+const preview =
+document.getElementById("preview");
+
+const download =
+document.getElementById("download");
+
+const reset =
+document.getElementById("reset");
+
+const oldSize =
+document.getElementById("oldSize");
+
+const newSize =
+document.getElementById("newSize");
+
+const saved =
+document.getElementById("saved");
+
+let currentUrl = null;
+
 
 input.addEventListener("change", function(){
 
-  const file = this.files[0];
+const file = this.files[0];
 
-  if(!file){
-    return;
-  }
+if(!file){
+return;
+}
 
-  if(!file.type.startsWith("image/")){
-    alert("يرجى اختيار ملف صورة صالح.");
-    return;
-  }
 
-  status.style.display = "block";
-  result.style.display = "none";
+const allowedTypes = [
+"image/jpeg",
+"image/png",
+"image/webp"
+];
 
-  const reader = new FileReader();
 
-  reader.onload = function(event){
+if(!allowedTypes.includes(file.type)){
 
-    const img = new Image();
+alert("يرجى اختيار صورة JPG أو PNG أو WebP.");
 
-    img.onload = function(){
+input.value = "";
 
-      const canvas = document.createElement("canvas");
-      const ctx = canvas.getContext("2d");
+return;
 
-      canvas.width = img.width;
-      canvas.height = img.height;
+}
 
-      ctx.drawImage(img,0,0);
 
-      canvas.toBlob(function(blob){
+const maxSize = 25 * 1024 * 1024;
 
-        if(!blob){
-          status.textContent = "تعذر معالجة الصورة.";
-          return;
-        }
+if(file.size > maxSize){
 
-        const url = URL.createObjectURL(blob);
+alert("حجم الصورة كبير جدًا. الحد الأقصى المسموح به هو 25 ميجابايت.");
 
-        preview.src = url;
+input.value = "";
 
-        document.getElementById("oldSize").textContent =
-          "الحجم الأصلي: " + formatSize(file.size);
+return;
 
-        document.getElementById("newSize").textContent =
-          "الحجم الجديد: " + formatSize(blob.size);
+}
 
-        const saved =
-          ((1 - (blob.size / file.size)) * 100);
 
-        document.getElementById("saved").textContent =
-          saved > 0
-          ? "تم تقليل الحجم بنسبة " + saved.toFixed(1) + "%"
-          : "لم ينخفض حجم الصورة.";
+status.textContent =
+"جارٍ معالجة الصورة...";
 
-        download.href = url;
+status.style.display = "block";
 
-        status.style.display = "none";
-        result.style.display = "block";
+result.style.display = "none";
 
-      },"image/jpeg",0.70);
 
-    };
+if(currentUrl){
 
-    img.onerror = function(){
+URL.revokeObjectURL(currentUrl);
 
-      status.textContent =
-        "تعذر قراءة الصورة. حاول اختيار صورة أخرى.";
+currentUrl = null;
 
-    };
+}
 
-    img.src = event.target.result;
 
-  };
+const reader =
+new FileReader();
 
-  reader.onerror = function(){
 
-    status.textContent =
-      "حدث خطأ أثناء قراءة الملف.";
+reader.onload = function(event){
 
-  };
+const img =
+new Image();
 
-  reader.readAsDataURL(file);
+
+img.onload = function(){
+
+const canvas =
+document.createElement("canvas");
+
+const ctx =
+canvas.getContext("2d");
+
+
+if(!ctx){
+
+status.textContent =
+"المتصفح لا يدعم معالجة الصور المطلوبة.";
+
+return;
+
+}
+
+
+canvas.width =
+img.naturalWidth;
+
+canvas.height =
+img.naturalHeight;
+
+
+/*
+  خلفية بيضاء حتى لا تظهر المناطق
+  الشفافة باللون الأسود عند تحويل
+  PNG أو WebP إلى JPG.
+*/
+
+ctx.fillStyle = "#ffffff";
+
+ctx.fillRect(
+0,
+0,
+canvas.width,
+canvas.height
+);
+
+
+ctx.drawImage(
+img,
+0,
+0
+);
+
+
+canvas.toBlob(
+
+function(blob){
+
+if(!blob){
+
+status.textContent =
+"تعذر إنشاء الصورة المضغوطة. حاول استخدام صورة أخرى.";
+
+return;
+
+}
+
+
+currentUrl =
+URL.createObjectURL(blob);
+
+
+preview.src =
+currentUrl;
+
+
+oldSize.textContent =
+"الحجم الأصلي: " +
+formatSize(file.size);
+
+
+newSize.textContent =
+"الحجم الجديد: " +
+formatSize(blob.size);
+
+
+const savedPercent =
+((1 - (blob.size / file.size)) * 100);
+
+
+if(savedPercent > 0){
+
+saved.textContent =
+"تم تقليل الحجم بنسبة " +
+savedPercent.toFixed(1) +
+"%";
+
+saved.style.color =
+"#16a34a";
+
+}else{
+
+saved.textContent =
+"لم ينخفض حجم الصورة بعد الضغط.";
+
+saved.style.color =
+"#dc2626";
+
+}
+
+
+download.href =
+currentUrl;
+
+
+status.style.display =
+"none";
+
+result.style.display =
+"block";
+
+
+},
+
+"image/jpeg",
+0.70
+
+);
+
+};
+
+
+img.onerror = function(){
+
+status.textContent =
+"تعذر قراءة الصورة. حاول اختيار صورة أخرى.";
+
+};
+
+
+img.src =
+event.target.result;
+
+};
+
+
+reader.onerror = function(){
+
+status.textContent =
+"حدث خطأ أثناء قراءة الملف.";
+
+};
+
+
+reader.readAsDataURL(file);
 
 });
+
 
 reset.addEventListener("click", function(){
 
-  input.value = "";
-  result.style.display = "none";
-  status.style.display = "none";
-  preview.removeAttribute("src");
-  download.removeAttribute("href");
+input.value = "";
+
+result.style.display = "none";
+
+status.style.display = "none";
+
+preview.removeAttribute("src");
+
+download.removeAttribute("href");
+
+oldSize.textContent = "";
+
+newSize.textContent = "";
+
+saved.textContent = "";
+
+if(currentUrl){
+
+URL.revokeObjectURL(currentUrl);
+
+currentUrl = null;
+
+}
 
 });
 
+
 function formatSize(bytes){
 
-  if(bytes < 1024){
-    return bytes + " بايت";
-  }
+if(bytes < 1024){
 
-  if(bytes < 1024 * 1024){
-    return (bytes / 1024).toFixed(1) + " KB";
-  }
-
-  return (bytes / (1024 * 1024)).toFixed(2) + " MB";
+return bytes + " بايت";
 
 }
+
+
+if(bytes < 1024 * 1024){
+
+return (
+bytes / 1024
+).toFixed(1) + " KB";
+
+}
+
+
+return (
+bytes / (1024 * 1024)
+).toFixed(2) + " MB";
+
+}
+
+
+window.addEventListener(
+"beforeunload",
+function(){
+
+if(currentUrl){
+
+URL.revokeObjectURL(currentUrl);
+
+}
+
+});
 
 </script>
 
 </body>
+
 </html>
