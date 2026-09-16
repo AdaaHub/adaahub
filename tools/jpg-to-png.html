@@ -1,0 +1,591 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>تحويل JPG إلى PNG أونلاين مجانًا | AdaaHub</title>
+
+<meta name="description" content="حوّل صور JPG وJPEG إلى PNG أونلاين مجانًا. معالجة سريعة داخل المتصفح مع إمكانية تحميل الصورة مباشرة بدون رفعها إلى الخادم.">
+
+<meta name="robots" content="index, follow">
+
+<link rel="canonical" href="https://adaahub.github.io/adaahub/tools/jpg-to-png.html">
+
+<style>
+*{
+    box-sizing:border-box;
+}
+
+body{
+    margin:0;
+    font-family:Arial,Tahoma,sans-serif;
+    background:#f5f7fb;
+    color:#222;
+}
+
+header{
+    background:#fff;
+    border-bottom:1px solid #e5e7eb;
+    padding:16px 20px;
+}
+
+.header-inner{
+    max-width:1000px;
+    margin:auto;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+}
+
+.logo{
+    font-size:24px;
+    font-weight:bold;
+    color:#1976d2;
+    text-decoration:none;
+}
+
+.home{
+    color:#333;
+    text-decoration:none;
+}
+
+.container{
+    max-width:900px;
+    margin:30px auto;
+    padding:0 15px;
+}
+
+.card{
+    background:#fff;
+    border-radius:14px;
+    padding:25px;
+    box-shadow:0 5px 20px rgba(0,0,0,.06);
+}
+
+h1{
+    text-align:center;
+    color:#1976d2;
+    font-size:28px;
+}
+
+.intro{
+    text-align:center;
+    color:#666;
+    line-height:1.8;
+    margin-bottom:25px;
+}
+
+.upload-box{
+    display:block;
+    border:2px dashed #b8c2d1;
+    border-radius:12px;
+    padding:30px 15px;
+    text-align:center;
+    background:#fafcff;
+    cursor:pointer;
+}
+
+.upload-box:hover{
+    border-color:#1976d2;
+    background:#f4f9ff;
+}
+
+.upload-box input{
+    display:none;
+}
+
+.upload-icon{
+    font-size:42px;
+    margin-bottom:10px;
+}
+
+.upload-text{
+    font-size:17px;
+    font-weight:bold;
+}
+
+.upload-sub{
+    color:#777;
+    font-size:14px;
+    margin-top:8px;
+}
+
+.preview{
+    display:none;
+    margin-top:25px;
+    background:#111;
+    border-radius:10px;
+    padding:15px;
+    text-align:center;
+}
+
+.preview img{
+    max-width:100%;
+    max-height:500px;
+    height:auto;
+    display:block;
+    margin:auto;
+}
+
+.details{
+    display:none;
+    margin-top:15px;
+    text-align:center;
+    color:#666;
+    line-height:1.8;
+}
+
+.buttons{
+    display:none;
+    justify-content:center;
+    gap:10px;
+    flex-wrap:wrap;
+    margin-top:20px;
+}
+
+button,
+.download-btn{
+    border:0;
+    border-radius:8px;
+    padding:12px 22px;
+    font-size:15px;
+    cursor:pointer;
+    text-decoration:none;
+}
+
+.convert-btn{
+    background:#16a34a;
+    color:#fff;
+}
+
+.reset-btn{
+    background:#e5e7eb;
+    color:#222;
+}
+
+.download-btn{
+    background:#1976d2;
+    color:#fff;
+    display:none;
+}
+
+.status{
+    text-align:center;
+    color:#1976d2;
+    margin-top:15px;
+    display:none;
+}
+
+.info{
+    margin-top:25px;
+    background:#f0f7ff;
+    border-right:4px solid #1976d2;
+    padding:15px;
+    border-radius:8px;
+    line-height:1.8;
+    font-size:14px;
+}
+
+.section{
+    background:#fff;
+    margin-top:20px;
+    padding:25px;
+    border-radius:14px;
+}
+
+.section h2{
+    color:#1976d2;
+    margin-top:0;
+    font-size:21px;
+}
+
+.section p{
+    color:#555;
+    line-height:1.9;
+}
+
+.faq h3{
+    font-size:17px;
+    margin-bottom:6px;
+}
+
+footer{
+    text-align:center;
+    padding:25px 15px;
+    color:#777;
+    font-size:14px;
+}
+
+@media(max-width:600px){
+
+    .container{
+        margin:20px auto;
+    }
+
+    .card{
+        padding:18px;
+    }
+
+    h1{
+        font-size:23px;
+    }
+
+    .buttons button,
+    .buttons .download-btn{
+        width:100%;
+        text-align:center;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+    <div class="header-inner">
+        <a href="../index.html" class="logo">AdaaHub</a>
+        <a href="../index.html" class="home">الرئيسية</a>
+    </div>
+</header>
+
+<main class="container">
+
+<div class="card">
+
+<h1>تحويل JPG إلى PNG أونلاين مجانًا</h1>
+
+<p class="intro">
+    حوّل صور JPG وJPEG إلى PNG بسهولة،
+    ثم حمّل الصورة الجديدة مباشرة من المتصفح.
+</p>
+
+<label class="upload-box" for="imageInput">
+
+    <div class="upload-icon">🖼️</div>
+
+    <div class="upload-text">
+        اختر صورة JPG
+    </div>
+
+    <div class="upload-sub">
+        JPG أو JPEG فقط
+    </div>
+
+    <input
+        type="file"
+        id="imageInput"
+        accept="image/jpeg,.jpg,.jpeg"
+    >
+
+</label>
+
+<div class="preview" id="previewBox">
+
+    <img id="previewImage" alt="معاينة الصورة">
+
+</div>
+
+<div class="details" id="details"></div>
+
+<div class="status" id="status">
+    جاري تحويل الصورة...
+</div>
+
+<div class="buttons" id="buttons">
+
+    <button class="convert-btn" id="convertBtn">
+        🔄 تحويل إلى PNG
+    </button>
+
+    <button class="reset-btn" id="resetBtn">
+        إعادة ضبط
+    </button>
+
+    <a
+        class="download-btn"
+        id="downloadBtn"
+        download
+    >
+        ⬇️ تحميل PNG
+    </a>
+
+</div>
+
+<div class="info">
+    🔒 <strong>خصوصيتك مهمة:</strong>
+    تتم معالجة الصورة بالكامل داخل متصفحك،
+    ولا يتم رفع الصور إلى خوادم AdaaHub.
+</div>
+
+</div>
+
+<section class="section">
+
+<h2>طريقة تحويل JPG إلى PNG</h2>
+
+<p>
+1. اختر صورة بصيغة JPG أو JPEG من جهازك.
+</p>
+
+<p>
+2. اضغط على زر «تحويل إلى PNG».
+</p>
+
+<p>
+3. انتظر لحظات حتى تكتمل عملية التحويل.
+</p>
+
+<p>
+4. اضغط على «تحميل PNG» لحفظ الصورة الجديدة.
+</p>
+
+</section>
+
+<section class="section">
+
+<h2>ما الفرق بين JPG وPNG؟</h2>
+
+<p>
+صيغة JPG مناسبة للصور الفوتوغرافية لأنها توفر حجمًا صغيرًا نسبيًا،
+بينما PNG مناسبة أكثر للصور التي تحتاج إلى جودة بدون فقدان أو خلفيات شفافة.
+</p>
+
+</section>
+
+<section class="section">
+
+<h2>الأسئلة الشائعة</h2>
+
+<div class="faq">
+
+<h3>هل التحويل مجاني؟</h3>
+
+<p>
+نعم، يمكنك استخدام الأداة مجانًا.
+</p>
+
+</div>
+
+<div class="faq">
+
+<h3>هل يتم رفع الصور إلى الموقع؟</h3>
+
+<p>
+لا. تتم عملية التحويل داخل المتصفح على جهازك.
+</p>
+
+</div>
+
+<div class="faq">
+
+<h3>هل تعمل الأداة على الهاتف؟</h3>
+
+<p>
+نعم، تعمل على الهواتف وأجهزة الكمبيوتر.
+</p>
+
+</div>
+
+</section>
+
+</main>
+
+<footer>
+© 2026 AdaaHub - مركز الأدوات اليومية
+</footer>
+
+<script>
+
+const imageInput = document.getElementById("imageInput");
+const previewBox = document.getElementById("previewBox");
+const previewImage = document.getElementById("previewImage");
+const details = document.getElementById("details");
+
+const buttons = document.getElementById("buttons");
+const convertBtn = document.getElementById("convertBtn");
+const resetBtn = document.getElementById("resetBtn");
+
+const downloadBtn = document.getElementById("downloadBtn");
+const status = document.getElementById("status");
+
+let selectedFile = null;
+let image = new Image();
+
+imageInput.addEventListener("change", function(){
+
+    const file = this.files[0];
+
+    if(!file) return;
+
+    if(!file.type.match(/^image\/jpeg$/i)){
+
+        alert("من فضلك اختر صورة JPG أو JPEG فقط.");
+
+        this.value = "";
+
+        return;
+    }
+
+    selectedFile = file;
+
+    const url = URL.createObjectURL(file);
+
+    image.onload = function(){
+
+        previewImage.src = url;
+
+        previewBox.style.display = "block";
+
+        buttons.style.display = "flex";
+
+        details.style.display = "block";
+
+        details.innerHTML =
+            "أبعاد الصورة: <strong>" +
+            image.naturalWidth +
+            " × " +
+            image.naturalHeight +
+            "</strong><br>" +
+            "حجم الملف الأصلي: <strong>" +
+            formatSize(file.size) +
+            "</strong>";
+
+        downloadBtn.style.display = "none";
+
+        status.style.display = "none";
+
+    };
+
+    image.src = url;
+
+});
+
+convertBtn.addEventListener("click", function(){
+
+    if(!selectedFile) return;
+
+    status.style.display = "block";
+
+    status.textContent =
+        "جاري تحويل الصورة إلى PNG...";
+
+    const canvas = document.createElement("canvas");
+
+    canvas.width = image.naturalWidth;
+    canvas.height = image.naturalHeight;
+
+    const ctx = canvas.getContext("2d");
+
+    ctx.drawImage(
+        image,
+        0,
+        0
+    );
+
+    canvas.toBlob(function(blob){
+
+        if(!blob){
+
+            status.textContent =
+                "حدث خطأ أثناء التحويل.";
+
+            return;
+        }
+
+        if(window.downloadUrl){
+
+            URL.revokeObjectURL(
+                window.downloadUrl
+            );
+
+        }
+
+        window.downloadUrl =
+            URL.createObjectURL(blob);
+
+        const originalName =
+            selectedFile.name
+            .replace(/\.[^/.]+$/,"");
+
+        downloadBtn.href =
+            window.downloadUrl;
+
+        downloadBtn.download =
+            originalName + "-adaahub.png";
+
+        downloadBtn.style.display =
+            "inline-block";
+
+        status.textContent =
+            "تم تحويل الصورة بنجاح.";
+
+        details.innerHTML =
+            "أبعاد الصورة: <strong>" +
+            image.naturalWidth +
+            " × " +
+            image.naturalHeight +
+            "</strong><br>" +
+            "حجم JPG: <strong>" +
+            formatSize(selectedFile.size) +
+            "</strong><br>" +
+            "حجم PNG: <strong>" +
+            formatSize(blob.size) +
+            "</strong>";
+
+    }, "image/png");
+
+});
+
+resetBtn.addEventListener("click", function(){
+
+    imageInput.value = "";
+
+    selectedFile = null;
+
+    previewBox.style.display = "none";
+
+    details.style.display = "none";
+
+    buttons.style.display = "none";
+
+    downloadBtn.style.display = "none";
+
+    status.style.display = "none";
+
+    previewImage.removeAttribute("src");
+
+    if(window.downloadUrl){
+
+        URL.revokeObjectURL(
+            window.downloadUrl
+        );
+
+        window.downloadUrl = null;
+
+    }
+
+});
+
+function formatSize(bytes){
+
+    if(bytes < 1024){
+
+        return bytes + " بايت";
+
+    }
+
+    if(bytes < 1024 * 1024){
+
+        return (bytes / 1024).toFixed(1) + " KB";
+
+    }
+
+    return (bytes / (1024 * 1024)).toFixed(2) + " MB";
+
+}
+
+</script>
+
+</body>
+</html>
