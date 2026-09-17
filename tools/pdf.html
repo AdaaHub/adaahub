@@ -502,7 +502,7 @@ footer a:hover{
     <p>
       تساعدك أداة AdaaHub على جمع صورك في ملف PDF واحد
       بسهولة من الهاتف أو الكمبيوتر. يمكنك اختيار صورة واحدة
-      أو عدة صور، ثم ترتيبها ومراجعتها قبل إنشاء الملف.
+      أو عدة صور، ثم مراجعتها قبل إنشاء الملف.
     </p>
 
 
@@ -547,13 +547,27 @@ footer a:hover{
 
 
     <h3>
+      ماذا يحدث للصور أثناء إنشاء PDF؟
+    </h3>
+
+    <p>
+      يتم تجهيز كل صورة داخل المتصفح لتناسب صفحة A4،
+      ثم يتم إدراجها داخل ملف PDF. إذا كانت الصورة تحتوي
+      على خلفية شفافة، يتم استخدام خلفية بيضاء عند تجهيزها
+      لملف PDF لأن صفحات PDF الناتجة من هذه الأداة تعتمد
+      على صور JPEG.
+    </p>
+
+
+    <h3>
       هل يمكن تحويل أكثر من صورة؟
     </h3>
 
     <p>
       نعم، يمكنك اختيار عدة صور في نفس العملية،
       وسيتم وضع كل صورة في صفحة منفصلة داخل ملف PDF.
-      ويتم ضبط حجم الصورة لتناسب صفحة A4 مع الحفاظ على تناسب أبعادها.
+      ويتم ضبط حجم الصورة لتناسب صفحة A4 مع الحفاظ على
+      تناسب أبعادها.
     </p>
 
 
@@ -600,6 +614,13 @@ footer a:hover{
       </li>
 
     </ul>
+
+
+    <p>
+      <a href="../index.html">
+        ← عرض جميع أدوات AdaaHub
+      </a>
+    </p>
 
 
     <div class="faq">
@@ -685,9 +706,10 @@ footer a:hover{
         </summary>
 
         <p>
-          يمكن للأداة التعامل مع الصور المختلفة، لكن الصور
-          الضخمة جدًا قد تحتاج إلى وقت وذاكرة أكبر أثناء المعالجة،
-          خصوصًا على الهواتف ذات الإمكانيات المحدودة.
+          الحد الأقصى لحجم الصورة الواحدة هو 15 MB،
+          ويمكن اختيار حتى 20 صورة في العملية الواحدة.
+          الصور الكبيرة قد تحتاج إلى وقت وذاكرة أكبر أثناء
+          المعالجة، خصوصًا على الهواتف ذات الإمكانيات المحدودة.
         </p>
 
       </details>
@@ -705,6 +727,7 @@ footer a:hover{
 
   <br><br>
 
+  <a href="../index.html">الرئيسية</a> |
   <a href="../pages/about.html">من نحن</a> |
   <a href="../pages/privacy.html">الخصوصية</a> |
   <a href="../pages/terms.html">الشروط والأحكام</a> |
@@ -834,7 +857,6 @@ imageInput.addEventListener(
 
     selectedImages =
       sizeValidFiles;
-
 
     renderPreviews();
 
@@ -1084,6 +1106,18 @@ createPdf.addEventListener(
           img.naturalHeight;
 
 
+        if(
+          !width ||
+          !height
+        ){
+
+          throw new Error(
+            "أبعاد الصورة غير صالحة."
+          );
+
+        }
+
+
         const ratio =
           Math.min(
             maxWidth / width,
@@ -1112,8 +1146,20 @@ createPdf.addEventListener(
         }
 
 
+        /*
+          تجهيز الصورة داخل Canvas أولًا.
+          يتم استخدام خلفية بيضاء حتى لا تظهر
+          المناطق الشفافة بشكل غير صحيح داخل JPEG.
+        */
+
+        const jpegDataUrl =
+          convertImageToJpeg(
+            img
+          );
+
+
         pdf.addImage(
-          img,
+          jpegDataUrl,
           "JPEG",
           x,
           y,
@@ -1279,6 +1325,56 @@ function loadImage(src){
         src;
 
     }
+  );
+
+}
+
+
+/*
+  تحويل الصورة إلى JPEG داخل المتصفح.
+  هذا يجعل JPG وPNG وWebP تعمل بالطريقة نفسها
+  مع jsPDF، مع خلفية بيضاء للصور الشفافة.
+*/
+
+function convertImageToJpeg(img){
+
+  const canvas =
+    document.createElement("canvas");
+
+  const ctx =
+    canvas.getContext("2d");
+
+
+  canvas.width =
+    img.naturalWidth;
+
+  canvas.height =
+    img.naturalHeight;
+
+
+  ctx.fillStyle =
+    "#ffffff";
+
+  ctx.fillRect(
+    0,
+    0,
+    canvas.width,
+    canvas.height
+  );
+
+
+  ctx.drawImage(
+    img,
+    0,
+    0,
+    canvas.width,
+    canvas.height
+  );
+
+
+  return canvas.toDataURL(
+    "image/jpeg",
+    0.92
   );
 
 }
