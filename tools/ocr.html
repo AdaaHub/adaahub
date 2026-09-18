@@ -1,0 +1,853 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>تحويل الصور إلى نص عربي مجانًا | OCR | AdaaHub</title>
+
+<meta name="description"
+content="حوّل الصور إلى نص عربي مجانًا باستخدام OCR. استخرج النص من الصور ولقطات الشاشة بسهولة من الهاتف أو الكمبيوتر.">
+
+<link rel="canonical"
+href="https://adaahub.github.io/adaahub/tools/ocr.html">
+
+<meta name="robots" content="index, follow">
+
+<style>
+
+*{
+box-sizing:border-box;
+}
+
+body{
+margin:0;
+font-family:Cairo,Arial,sans-serif;
+background:#f8fafc;
+color:#1e293b;
+line-height:1.8;
+}
+
+header{
+background:#2563eb;
+color:white;
+padding:16px 20px;
+position:sticky;
+top:0;
+z-index:100;
+box-shadow:0 2px 10px rgba(0,0,0,.08);
+}
+
+.header-inner{
+max-width:1100px;
+margin:auto;
+display:flex;
+align-items:center;
+justify-content:space-between;
+gap:15px;
+}
+
+.logo{
+font-size:24px;
+font-weight:bold;
+text-decoration:none;
+color:white;
+}
+
+.home{
+color:white;
+text-decoration:none;
+font-size:14px;
+}
+
+.container{
+max-width:1000px;
+margin:40px auto;
+padding:0 18px;
+}
+
+.hero{
+text-align:center;
+margin-bottom:30px;
+}
+
+.hero h1{
+font-size:32px;
+margin-bottom:10px;
+color:#0f172a;
+}
+
+.hero p{
+color:#64748b;
+font-size:16px;
+margin:0 auto;
+max-width:700px;
+}
+
+.tool-box{
+background:white;
+border-radius:18px;
+padding:25px;
+box-shadow:0 5px 25px rgba(15,23,42,.08);
+}
+
+.upload-area{
+border:2px dashed #93c5fd;
+border-radius:16px;
+padding:45px 20px;
+text-align:center;
+background:#eff6ff;
+cursor:pointer;
+transition:.2s;
+}
+
+.upload-area:hover{
+background:#dbeafe;
+}
+
+.upload-icon{
+font-size:48px;
+margin-bottom:10px;
+}
+
+.upload-title{
+font-size:20px;
+font-weight:bold;
+margin-bottom:5px;
+}
+
+.upload-desc{
+color:#64748b;
+font-size:14px;
+}
+
+input[type="file"]{
+display:none;
+}
+
+.options{
+display:flex;
+gap:12px;
+flex-wrap:wrap;
+margin-top:20px;
+}
+
+.option{
+flex:1;
+min-width:180px;
+}
+
+.option label{
+display:block;
+font-weight:bold;
+margin-bottom:7px;
+}
+
+select{
+width:100%;
+padding:12px;
+border:1px solid #cbd5e1;
+border-radius:10px;
+background:white;
+font-family:inherit;
+font-size:15px;
+}
+
+.preview{
+display:none;
+margin-top:20px;
+text-align:center;
+}
+
+.preview img{
+max-width:100%;
+max-height:300px;
+border-radius:12px;
+border:1px solid #e2e8f0;
+}
+
+.action{
+margin-top:20px;
+}
+
+button{
+border:0;
+border-radius:10px;
+padding:13px 22px;
+font-family:inherit;
+font-size:16px;
+font-weight:bold;
+cursor:pointer;
+}
+
+.primary{
+background:#2563eb;
+color:white;
+width:100%;
+}
+
+.primary:hover{
+background:#1d4ed8;
+}
+
+.primary:disabled{
+background:#94a3b8;
+cursor:not-allowed;
+}
+
+.progress{
+display:none;
+margin-top:20px;
+}
+
+.progress-bar{
+height:10px;
+background:#e2e8f0;
+border-radius:20px;
+overflow:hidden;
+}
+
+.progress-inner{
+height:100%;
+width:0%;
+background:#2563eb;
+transition:.2s;
+}
+
+.status{
+text-align:center;
+font-size:14px;
+color:#64748b;
+margin-top:8px;
+}
+
+.result{
+display:none;
+margin-top:25px;
+}
+
+.result textarea{
+width:100%;
+min-height:280px;
+padding:15px;
+border:1px solid #cbd5e1;
+border-radius:12px;
+resize:vertical;
+font-family:Arial,sans-serif;
+font-size:16px;
+line-height:1.8;
+direction:rtl;
+}
+
+.result-actions{
+display:flex;
+gap:10px;
+flex-wrap:wrap;
+margin-top:12px;
+}
+
+.result-actions button{
+flex:1;
+min-width:130px;
+}
+
+.copy{
+background:#16a34a;
+color:white;
+}
+
+.download{
+background:#0f172a;
+color:white;
+}
+
+.clear{
+background:#e2e8f0;
+color:#1e293b;
+}
+
+.info{
+margin-top:30px;
+background:#f1f5f9;
+padding:20px;
+border-radius:14px;
+}
+
+.info h2{
+margin-top:0;
+font-size:21px;
+}
+
+.info ul{
+padding-right:20px;
+}
+
+.related{
+margin-top:35px;
+}
+
+.related h2{
+font-size:22px;
+}
+
+.tools{
+display:grid;
+grid-template-columns:repeat(3,1fr);
+gap:15px;
+}
+
+.tool{
+background:white;
+padding:18px;
+border-radius:12px;
+text-decoration:none;
+color:#1e293b;
+box-shadow:0 3px 12px rgba(0,0,0,.05);
+font-weight:bold;
+}
+
+footer{
+margin-top:50px;
+padding:25px;
+background:#0f172a;
+color:#cbd5e1;
+text-align:center;
+}
+
+footer a{
+color:#93c5fd;
+text-decoration:none;
+margin:0 7px;
+}
+
+@media(max-width:700px){
+
+.hero h1{
+font-size:25px;
+}
+
+.tool-box{
+padding:16px;
+}
+
+.tools{
+grid-template-columns:1fr;
+}
+
+.header-inner{
+flex-direction:column;
+}
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<header>
+
+<div class="header-inner">
+
+<a class="logo" href="../index.html">
+AdaaHub
+</a>
+
+<a class="home" href="../index.html">
+الرئيسية
+</a>
+
+</div>
+
+</header>
+
+
+<main class="container">
+
+<section class="hero">
+
+<h1>تحويل الصور إلى نص عربي</h1>
+
+<p>
+استخرج النص من الصور ولقطات الشاشة بسهولة باستخدام تقنية OCR، مجانًا من الهاتف أو الكمبيوتر.
+</p>
+
+</section>
+
+
+<section class="tool-box">
+
+<label for="imageInput" class="upload-area" id="uploadArea">
+
+<div class="upload-icon">📷</div>
+
+<div class="upload-title">
+اختر صورة
+</div>
+
+<div class="upload-desc">
+اضغط هنا لرفع صورة تحتوي على نص
+</div>
+
+</label>
+
+<input
+type="file"
+id="imageInput"
+accept="image/*"
+>
+
+
+<div class="preview" id="preview">
+
+<img id="previewImage" alt="معاينة الصورة">
+
+</div>
+
+
+<div class="options">
+
+<div class="option">
+
+<label for="language">
+لغة النص
+</label>
+
+<select id="language">
+
+<option value="ara">العربية</option>
+
+<option value="eng">الإنجليزية</option>
+
+<option value="ara+eng">العربية + الإنجليزية</option>
+
+</select>
+
+</div>
+
+</div>
+
+
+<div class="action">
+
+<button
+class="primary"
+id="extractBtn"
+disabled
+>
+استخراج النص
+</button>
+
+</div>
+
+
+<div class="progress" id="progress">
+
+<div class="progress-bar">
+
+<div
+class="progress-inner"
+id="progressInner">
+</div>
+
+</div>
+
+<div
+class="status"
+id="status">
+جاري تجهيز الأداة...
+</div>
+
+</div>
+
+
+<div class="result" id="result">
+
+<h2>النص المستخرج</h2>
+
+<textarea
+id="output"
+placeholder="سيظهر النص المستخرج هنا..."
+></textarea>
+
+<div class="result-actions">
+
+<button
+class="copy"
+id="copyBtn">
+📋 نسخ النص
+</button>
+
+<button
+class="download"
+id="downloadBtn">
+⬇️ تحميل TXT
+</button>
+
+<button
+class="clear"
+id="clearBtn">
+🗑️ مسح
+</button>
+
+</div>
+
+</div>
+
+</section>
+
+
+<section class="info">
+
+<h2>كيف تستخدم أداة تحويل الصورة إلى نص؟</h2>
+
+<ul>
+
+<li>اضغط على منطقة رفع الصورة.</li>
+
+<li>اختر الصورة التي تحتوي على النص.</li>
+
+<li>حدد لغة النص.</li>
+
+<li>اضغط على زر «استخراج النص».</li>
+
+<li>انتظر حتى انتهاء عملية التعرف على النص.</li>
+
+<li>انسخ النص أو حمّله كملف TXT.</li>
+
+</ul>
+
+<p>
+تتم معالجة الصورة مباشرة داخل المتصفح في هذه النسخة، ولا تحتاج إلى إنشاء حساب لاستخدام الأداة.
+</p>
+
+</section>
+
+
+<section class="related">
+
+<h2>أدوات AdaaHub الأخرى</h2>
+
+<div class="tools">
+
+<a class="tool" href="compress.html">
+🗜️ ضغط الصور
+</a>
+
+<a class="tool" href="webp.html">
+🖼️ تحويل الصور إلى WebP
+</a>
+
+<a class="tool" href="pdf.html">
+📄 تحويل الصور إلى PDF
+</a>
+
+<a class="tool" href="resize.html">
+📐 تغيير حجم الصور
+</a>
+
+<a class="tool" href="crop.html">
+✂️ قص الصور
+</a>
+
+<a class="tool" href="jpg-to-png.html">
+🔄 JPG إلى PNG
+</a>
+
+</div>
+
+</section>
+
+</main>
+
+
+<footer>
+
+<div>
+© 2026 AdaaHub
+</div>
+
+<div style="margin-top:10px">
+
+<a href="../pages/about.html">من نحن</a>
+
+<a href="../pages/privacy.html">الخصوصية</a>
+
+<a href="../pages/terms.html">الشروط</a>
+
+<a href="../pages/contact.html">اتصل بنا</a>
+
+</div>
+
+</footer>
+
+
+<!-- OCR Library -->
+
+<script src="https://cdn.jsdelivr.net/npm/tesseract.js@5/dist/tesseract.min.js"></script>
+
+
+<script>
+
+const imageInput =
+document.getElementById("imageInput");
+
+const uploadArea =
+document.getElementById("uploadArea");
+
+const preview =
+document.getElementById("preview");
+
+const previewImage =
+document.getElementById("previewImage");
+
+const extractBtn =
+document.getElementById("extractBtn");
+
+const progress =
+document.getElementById("progress");
+
+const progressInner =
+document.getElementById("progressInner");
+
+const status =
+document.getElementById("status");
+
+const result =
+document.getElementById("result");
+
+const output =
+document.getElementById("output");
+
+const copyBtn =
+document.getElementById("copyBtn");
+
+const downloadBtn =
+document.getElementById("downloadBtn");
+
+const clearBtn =
+document.getElementById("clearBtn");
+
+let selectedFile = null;
+
+
+uploadArea.addEventListener("click", () => {
+
+imageInput.click();
+
+});
+
+
+imageInput.addEventListener("change", function(){
+
+const file = this.files[0];
+
+if(!file){
+return;
+}
+
+selectedFile = file;
+
+const reader = new FileReader();
+
+reader.onload = function(e){
+
+previewImage.src = e.target.result;
+
+preview.style.display = "block";
+
+extractBtn.disabled = false;
+
+};
+
+reader.readAsDataURL(file);
+
+});
+
+
+extractBtn.addEventListener("click", async function(){
+
+if(!selectedFile){
+return;
+}
+
+extractBtn.disabled = true;
+
+progress.style.display = "block";
+
+result.style.display = "none";
+
+progressInner.style.width = "0%";
+
+status.textContent =
+"جاري تشغيل محرك التعرف على النص...";
+
+
+try{
+
+const language =
+document.getElementById("language").value;
+
+const worker =
+await Tesseract.createWorker(
+language,
+1,
+{
+logger: function(info){
+
+if(info.status){
+
+status.textContent =
+info.status;
+
+}
+
+if(typeof info.progress === "number"){
+
+progressInner.style.width =
+Math.round(info.progress * 100) + "%";
+
+}
+
+}
+}
+);
+
+
+const { data: { text } } =
+await worker.recognize(selectedFile);
+
+
+await worker.terminate();
+
+
+output.value = text.trim();
+
+result.style.display = "block";
+
+status.textContent =
+"تم استخراج النص بنجاح.";
+
+progressInner.style.width = "100%";
+
+}
+
+catch(error){
+
+console.error(error);
+
+status.textContent =
+"حدث خطأ أثناء استخراج النص. حاول بصورة أوضح.";
+
+}
+
+finally{
+
+extractBtn.disabled = false;
+
+}
+
+});
+
+
+copyBtn.addEventListener("click", async function(){
+
+if(!output.value){
+return;
+}
+
+try{
+
+await navigator.clipboard.writeText(
+output.value
+);
+
+copyBtn.textContent =
+"✓ تم النسخ";
+
+setTimeout(() => {
+
+copyBtn.textContent =
+"📋 نسخ النص";
+
+},1500);
+
+}
+
+catch(error){
+
+output.select();
+
+document.execCommand("copy");
+
+}
+
+});
+
+
+downloadBtn.addEventListener("click", function(){
+
+const text =
+output.value;
+
+if(!text){
+return;
+}
+
+const blob =
+new Blob(
+[text],
+{
+type:"text/plain;charset=utf-8"
+}
+);
+
+const url =
+URL.createObjectURL(blob);
+
+const link =
+document.createElement("a");
+
+link.href = url;
+
+link.download =
+"adaahub-ocr.txt";
+
+link.click();
+
+URL.revokeObjectURL(url);
+
+});
+
+
+clearBtn.addEventListener("click", function(){
+
+selectedFile = null;
+
+imageInput.value = "";
+
+preview.style.display = "none";
+
+result.style.display = "none";
+
+output.value = "";
+
+extractBtn.disabled = true;
+
+progress.style.display = "none";
+
+progressInner.style.width = "0%";
+
+status.textContent =
+"جاري تجهيز الأداة...";
+
+});
+
+</script>
+
+</body>
+
+</html>
