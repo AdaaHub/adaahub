@@ -10,16 +10,26 @@
 <title>قص الصور أونلاين مجانًا | قص وتحديد جزء من الصورة | AdaaHub</title>
 
 <meta
-name="description"
-content="قص الصور أونلاين مجانًا بسهولة. حدد الجزء الذي تريد الاحتفاظ به باستخدام الماوس أو اللمس، ثم حمّل الصورة المقصوصة مباشرة من المتصفح."
+  name="description"
+  content="قص الصور أونلاين مجانًا بسهولة. حدد الجزء الذي تريد الاحتفاظ به باستخدام الماوس أو اللمس، ثم حمّل الصورة المقصوصة مباشرة من المتصفح."
 >
 
 <meta name="robots" content="index, follow">
 
 <link
-rel="canonical"
-href="https://adaahub.github.io/adaahub/tools/crop.html"
+  rel="canonical"
+  href="https://adaahub.github.io/adaahub/tools/crop.html"
 >
+
+<script>
+(function(){
+  const savedTheme = localStorage.getItem("adaahub-theme");
+
+  if(savedTheme === "dark"){
+    document.documentElement.classList.add("dark");
+  }
+})();
+</script>
 
 <style>
 
@@ -27,103 +37,239 @@ href="https://adaahub.github.io/adaahub/tools/crop.html"
   box-sizing:border-box;
 }
 
+:root{
+  --primary:#2563eb;
+  --primary-dark:#1d4ed8;
+  --primary-soft:#eff6ff;
+  --bg:#f6f8fc;
+  --surface:#ffffff;
+  --text:#111827;
+  --muted:#64748b;
+  --border:#e5e7eb;
+  --success:#16a34a;
+  --danger:#dc2626;
+  --shadow:0 12px 35px rgba(15,23,42,.07);
+}
+
+html.dark{
+  --primary:#60a5fa;
+  --primary-dark:#93c5fd;
+  --primary-soft:#172554;
+  --bg:#0b1120;
+  --surface:#111827;
+  --text:#f1f5f9;
+  --muted:#94a3b8;
+  --border:#243044;
+  --success:#4ade80;
+  --danger:#f87171;
+  --shadow:0 12px 35px rgba(0,0,0,.25);
+}
+
+html{
+  scroll-behavior:smooth;
+}
+
 body{
   margin:0;
   font-family:Arial,Tahoma,sans-serif;
-  background:#f5f7fb;
-  color:#20242a;
+  background:
+    radial-gradient(
+      circle at top,
+      rgba(37,99,235,.08),
+      transparent 420px
+    ),
+    var(--bg);
+  color:var(--text);
   line-height:1.7;
+  transition:
+    background .25s ease,
+    color .25s ease;
+}
+
+button,
+input,
+select{
+  font-family:inherit;
 }
 
 header{
-  background:#fff;
-  border-bottom:1px solid #e5e7eb;
-  padding:16px 18px;
+  position:sticky;
+  top:0;
+  z-index:100;
+  background:rgba(255,255,255,.88);
+  border-bottom:1px solid var(--border);
+  backdrop-filter:blur(12px);
+}
+
+html.dark header{
+  background:rgba(17,24,39,.88);
 }
 
 .header{
-  max-width:900px;
+  max-width:1050px;
   margin:auto;
+  padding:14px 20px;
   display:flex;
   justify-content:space-between;
   align-items:center;
-  gap:20px;
+  gap:18px;
 }
 
 .logo{
-  font-size:27px;
-  font-weight:bold;
+  display:flex;
+  align-items:center;
+  gap:9px;
+  color:var(--text);
+  text-decoration:none;
+  font-size:25px;
+  font-weight:800;
+  white-space:nowrap;
+}
+
+.logo-mark{
+  width:38px;
+  height:38px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  border-radius:11px;
+  color:#fff;
+  font-size:21px;
+  font-weight:900;
+  background:linear-gradient(
+    135deg,
+    #2563eb,
+    #60a5fa
+  );
+  box-shadow:0 7px 18px rgba(37,99,235,.25);
 }
 
 .logo span{
-  color:#2563eb;
+  color:var(--primary);
+}
+
+.nav{
+  display:flex;
+  align-items:center;
+  gap:9px;
 }
 
 .home{
-  color:#2563eb;
+  color:var(--primary);
   text-decoration:none;
-  font-weight:bold;
+  font-weight:700;
+  padding:8px 11px;
+  border-radius:9px;
 }
 
 .home:hover{
-  text-decoration:underline;
+  background:var(--primary-soft);
 }
 
-.container{
-  max-width:850px;
-  margin:35px auto;
-  padding:20px;
-}
-
-h1{
-  text-align:center;
-  font-size:32px;
-  margin:0 0 10px;
-}
-
-.subtitle{
-  text-align:center;
-  color:#666;
-  margin:0 auto 28px;
-  max-width:680px;
-}
-
-.tool-box{
-  background:#fff;
-  border-radius:18px;
-  padding:30px 20px;
-  border:1px solid #e5e7eb;
-  box-shadow:0 5px 20px rgba(0,0,0,.04);
-}
-
-.upload-area{
-  border:2px dashed #cbd5e1;
-  border-radius:15px;
-  padding:40px 20px;
-  text-align:center;
-  background:#fafcff;
+.theme-toggle{
+  border:1px solid var(--border);
+  background:var(--surface);
+  color:var(--text);
+  width:42px;
+  height:42px;
+  border-radius:10px;
   cursor:pointer;
+  font-size:18px;
   transition:.2s;
 }
 
-.upload-area:hover{
-  border-color:#2563eb;
-  background:#f4f8ff;
+.theme-toggle:hover{
+  border-color:var(--primary);
+  transform:translateY(-1px);
+}
+
+.container{
+  max-width:950px;
+  margin:0 auto;
+  padding:42px 20px 20px;
+}
+
+.hero{
+  text-align:center;
+  margin-bottom:28px;
+}
+
+.badge{
+  display:inline-flex;
+  align-items:center;
+  gap:6px;
+  padding:7px 12px;
+  border-radius:999px;
+  background:var(--primary-soft);
+  color:var(--primary);
+  font-size:13px;
+  font-weight:700;
+  margin-bottom:12px;
+}
+
+h1{
+  margin:0 0 10px;
+  font-size:34px;
+  line-height:1.35;
+  letter-spacing:-.5px;
+}
+
+.subtitle{
+  max-width:720px;
+  margin:0 auto;
+  color:var(--muted);
+  font-size:16px;
+}
+
+.tool-card{
+  background:var(--surface);
+  border:1px solid var(--border);
+  border-radius:20px;
+  padding:25px;
+  box-shadow:var(--shadow);
+}
+
+.upload-box{
+  border:2px dashed var(--border);
+  border-radius:16px;
+  padding:38px 20px;
+  text-align:center;
+  background:
+    linear-gradient(
+      180deg,
+      var(--surface),
+      var(--bg)
+    );
+  transition:.2s;
+  cursor:pointer;
+}
+
+.upload-box:hover{
+  border-color:var(--primary);
+  background:var(--primary-soft);
 }
 
 .upload-icon{
-  font-size:50px;
-  margin-bottom:10px;
+  width:64px;
+  height:64px;
+  margin:0 auto 13px;
+  border-radius:17px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:32px;
+  background:var(--primary-soft);
 }
 
-.upload-area h2{
+.upload-box h2{
+  margin:0 0 7px;
   font-size:21px;
-  margin:0 0 8px;
 }
 
-.upload-area p{
-  color:#777;
-  margin:0 0 20px;
+.upload-box p{
+  color:var(--muted);
+  margin:0 0 18px;
+  font-size:14px;
 }
 
 input[type="file"]{
@@ -131,41 +277,73 @@ input[type="file"]{
 }
 
 .choose-button{
-  display:inline-block;
-  background:#2563eb;
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  background:var(--primary);
   color:#fff;
-  padding:13px 27px;
-  border-radius:9px;
+  padding:12px 24px;
+  border-radius:10px;
+  font-size:15px;
+  font-weight:700;
   cursor:pointer;
-  font-size:16px;
-  font-weight:bold;
+  transition:.2s;
 }
 
 .choose-button:hover{
-  background:#1d4ed8;
+  background:var(--primary-dark);
+  transform:translateY(-1px);
 }
 
 .file-selected{
   display:none;
-  margin-top:15px;
-  background:#eff6ff;
+  max-width:100%;
+  margin:16px auto 0;
+  padding:10px 13px;
   border:1px solid #bfdbfe;
-  color:#1e40af;
-  border-radius:9px;
-  padding:10px;
+  background:var(--primary-soft);
+  color:var(--primary);
+  border-radius:10px;
   font-size:14px;
+  overflow-wrap:anywhere;
+}
+
+.status{
+  display:none;
+  margin-top:15px;
+  padding:11px 14px;
+  border-radius:10px;
+  text-align:center;
+  font-size:14px;
+  border:1px solid var(--border);
+}
+
+.status.show{
+  display:block;
+}
+
+.status.success{
+  color:var(--success);
+  background:rgba(22,163,74,.08);
+  border-color:rgba(22,163,74,.25);
+}
+
+.status.error{
+  color:var(--danger);
+  background:rgba(220,38,38,.08);
+  border-color:rgba(220,38,38,.25);
 }
 
 .editor{
   display:none;
-  margin-top:25px;
+  margin-top:22px;
 }
 
 .canvas-wrapper{
   width:100%;
   overflow:auto;
-  background:#111;
-  border-radius:10px;
+  background:#111827;
+  border-radius:14px;
   padding:10px;
   text-align:center;
   -webkit-overflow-scrolling:touch;
@@ -184,7 +362,7 @@ input[type="file"]{
 
 .selection-info{
   text-align:center;
-  color:#666;
+  color:var(--muted);
   font-size:14px;
   margin:15px 0;
 }
@@ -199,40 +377,42 @@ input[type="file"]{
 button,
 .download-btn{
   border:0;
-  border-radius:9px;
+  border-radius:10px;
   padding:12px 22px;
   font-size:15px;
   cursor:pointer;
   text-decoration:none;
   font-family:inherit;
+  transition:.2s;
 }
 
 .crop-btn{
-  background:#16a34a;
+  background:var(--success);
   color:#fff;
 }
 
-.crop-btn:hover{
-  background:#15803d;
+.crop-btn:hover:not(:disabled){
+  filter:brightness(.93);
+  transform:translateY(-1px);
 }
 
 .reset-btn{
-  background:#e5e7eb;
-  color:#222;
+  background:var(--border);
+  color:var(--text);
 }
 
 .reset-btn:hover{
-  background:#d1d5db;
+  filter:brightness(.95);
 }
 
 .download-btn{
   display:none;
-  background:#2563eb;
+  background:var(--primary);
   color:#fff;
 }
 
 .download-btn:hover{
-  background:#1d4ed8;
+  background:var(--primary-dark);
 }
 
 button:disabled{
@@ -240,31 +420,38 @@ button:disabled{
   cursor:not-allowed;
 }
 
-.info{
-  margin-top:20px;
-  background:#eff6ff;
-  border:1px solid #bfdbfe;
+.privacy-note{
+  margin-top:18px;
+  padding:14px 16px;
   border-radius:12px;
-  padding:16px;
-  color:#1e40af;
+  background:var(--primary-soft);
+  border:1px solid rgba(37,99,235,.18);
+  color:var(--primary);
   text-align:center;
+  font-size:14px;
 }
 
 .content{
-  background:#fff;
   margin-top:30px;
-  padding:25px;
-  border-radius:15px;
-  border:1px solid #e5e7eb;
+  background:var(--surface);
+  border:1px solid var(--border);
+  border-radius:18px;
+  padding:28px;
+  box-shadow:var(--shadow);
 }
 
 .content h2{
   margin-top:0;
-  font-size:23px;
+  font-size:24px;
 }
 
 .content h3{
   font-size:19px;
+  margin-top:25px;
+}
+
+.content p{
+  color:var(--muted);
 }
 
 .content ol,
@@ -272,10 +459,14 @@ button:disabled{
   padding-right:22px;
 }
 
+.content li{
+  margin-bottom:7px;
+}
+
 .content a{
-  color:#2563eb;
+  color:var(--primary);
   text-decoration:none;
-  font-weight:bold;
+  font-weight:700;
 }
 
 .content a:hover{
@@ -283,26 +474,34 @@ button:disabled{
 }
 
 .faq{
-  margin-top:30px;
+  margin-top:32px;
+}
+
+.faq h2{
+  margin-bottom:15px;
 }
 
 .faq details{
-  background:#f8fafc;
-  border:1px solid #e5e7eb;
-  border-radius:10px;
+  background:var(--bg);
+  border:1px solid var(--border);
+  border-radius:11px;
   padding:14px 16px;
   margin-bottom:10px;
 }
 
 .faq summary{
   cursor:pointer;
-  font-weight:bold;
+  font-weight:700;
+}
+
+.faq p{
+  margin-bottom:0;
 }
 
 .tools-links{
   margin-top:30px;
-  padding-top:20px;
-  border-top:1px solid #e5e7eb;
+  padding-top:22px;
+  border-top:1px solid var(--border);
 }
 
 .tools-links h3{
@@ -311,13 +510,14 @@ button:disabled{
 
 footer{
   text-align:center;
-  color:#777;
-  padding:30px 20px;
-  margin-top:30px;
+  color:var(--muted);
+  padding:32px 20px;
+  margin-top:10px;
+  font-size:14px;
 }
 
 footer a{
-  color:#2563eb;
+  color:var(--primary);
   text-decoration:none;
   margin:0 5px;
 }
@@ -326,32 +526,94 @@ footer a:hover{
   text-decoration:underline;
 }
 
-@media(max-width:600px){
+.spinner{
+  display:inline-block;
+  width:15px;
+  height:15px;
+  border:2px solid rgba(255,255,255,.45);
+  border-top-color:#fff;
+  border-radius:50%;
+  animation:spin .7s linear infinite;
+  vertical-align:-2px;
+  margin-left:5px;
+}
+
+@keyframes spin{
+  to{
+    transform:rotate(360deg);
+  }
+}
+
+@media(max-width:700px){
 
   .header{
-    flex-direction:column;
-  }
-
-  h1{
-    font-size:27px;
+    padding:12px 15px;
   }
 
   .container{
-    margin:20px auto;
-    padding:15px;
+    padding:30px 15px 15px;
   }
 
-  .tool-box{
-    padding:20px 15px;
+  h1{
+    font-size:28px;
   }
 
-  .canvas-wrapper{
-    padding:5px;
+  .tool-card{
+    padding:18px;
+  }
+
+  .content{
+    padding:22px 18px;
+  }
+
+}
+
+@media(max-width:430px){
+
+  .header{
+    flex-wrap:wrap;
+  }
+
+  .logo{
+    font-size:22px;
+  }
+
+  .logo-mark{
+    width:35px;
+    height:35px;
+  }
+
+  .nav{
+    width:100%;
+    justify-content:flex-end;
+  }
+
+  .upload-box{
+    padding:30px 14px;
+  }
+
+  .buttons{
+    flex-direction:column;
   }
 
   button,
   .download-btn{
     width:100%;
+  }
+
+}
+
+@media(prefers-reduced-motion:reduce){
+
+  html{
+    scroll-behavior:auto;
+  }
+
+  *,
+  *::before,
+  *::after{
+    animation-duration:.01ms !important;
+    transition-duration:.01ms !important;
   }
 
 }
@@ -366,16 +628,40 @@ footer a:hover{
 
   <div class="header">
 
-    <div class="logo">
-      Adaa<span>Hub</span>
-    </div>
-
     <a
-      class="home"
+      class="logo"
       href="../index.html"
+      aria-label="AdaaHub الرئيسية"
     >
-      الرئيسية
+
+      <span class="logo-mark">A</span>
+
+      <span>
+        Adaa<span>Hub</span>
+      </span>
+
     </a>
+
+    <nav class="nav">
+
+      <a
+        class="home"
+        href="../index.html"
+      >
+        الرئيسية
+      </a>
+
+      <button
+        class="theme-toggle"
+        id="themeToggle"
+        type="button"
+        aria-label="تفعيل الوضع الليلي"
+        title="الوضع الليلي"
+      >
+        🌙
+      </button>
+
+    </nav>
 
   </div>
 
@@ -384,20 +670,28 @@ footer a:hover{
 
 <main class="container">
 
-  <h1>
-    قص الصور أونلاين مجانًا
-  </h1>
+  <section class="hero">
 
-  <p class="subtitle">
-    حدد الجزء الذي تريد الاحتفاظ به من الصورة باستخدام الماوس
-    أو إصبعك، ثم حمّل الصورة المقصوصة مباشرة من المتصفح.
-  </p>
+    <div class="badge">
+      ⚡ أداة مجانية وسريعة
+    </div>
+
+    <h1>
+      قص الصور أونلاين مجانًا
+    </h1>
+
+    <p class="subtitle">
+      حدد الجزء الذي تريد الاحتفاظ به من الصورة باستخدام الماوس
+      أو إصبعك، ثم حمّل الصورة المقصوصة مباشرة من المتصفح.
+    </p>
+
+  </section>
 
 
-  <section class="tool-box">
+  <section class="tool-card">
 
     <label
-      class="upload-area"
+      class="upload-box"
       for="imageInput"
     >
 
@@ -432,13 +726,24 @@ footer a:hover{
 
 
     <div
+      class="status"
+      id="status"
+      role="status"
+      aria-live="polite"
+    ></div>
+
+
+    <div
       class="editor"
       id="editor"
     >
 
       <div class="canvas-wrapper">
 
-        <canvas id="canvas"></canvas>
+        <canvas
+          id="canvas"
+          aria-label="منطقة تحديد الجزء المطلوب من الصورة"
+        ></canvas>
 
       </div>
 
@@ -446,6 +751,7 @@ footer a:hover{
       <div
         class="selection-info"
         id="selectionInfo"
+        aria-live="polite"
       >
         اسحب على الصورة لتحديد الجزء الذي تريد قصه
       </div>
@@ -456,6 +762,7 @@ footer a:hover{
         <button
           class="crop-btn"
           id="cropBtn"
+          type="button"
           disabled
         >
           ✂️ قص الصورة
@@ -465,6 +772,7 @@ footer a:hover{
         <button
           class="reset-btn"
           id="resetBtn"
+          type="button"
         >
           إعادة ضبط
         </button>
@@ -483,7 +791,7 @@ footer a:hover{
     </div>
 
 
-    <div class="info">
+    <div class="privacy-note">
 
       🔒 <strong>الخصوصية:</strong>
       تتم معالجة الصورة داخل متصفحك مباشرة،
@@ -752,6 +1060,64 @@ footer a:hover{
 
 <script>
 
+/* =========================
+   الوضع الليلي
+========================= */
+
+const themeToggle =
+  document.getElementById("themeToggle");
+
+
+function updateThemeButton(){
+
+  const dark =
+    document.documentElement.classList.contains("dark");
+
+  themeToggle.textContent =
+    dark ? "☀️" : "🌙";
+
+  themeToggle.setAttribute(
+    "aria-label",
+    dark
+      ? "تفعيل الوضع الفاتح"
+      : "تفعيل الوضع الليلي"
+  );
+
+  themeToggle.setAttribute(
+    "title",
+    dark
+      ? "الوضع الفاتح"
+      : "الوضع الليلي"
+  );
+
+}
+
+
+updateThemeButton();
+
+
+themeToggle.addEventListener(
+  "click",
+  function(){
+
+    const dark =
+      document.documentElement.classList.toggle("dark");
+
+    localStorage.setItem(
+      "adaahub-theme",
+      dark ? "dark" : "light"
+    );
+
+    updateThemeButton();
+
+  }
+);
+
+
+/* =========================
+   عناصر الأداة
+========================= */
+
 const imageInput =
   document.getElementById("imageInput");
 
@@ -778,6 +1144,9 @@ const selectionInfo =
 
 const fileSelected =
   document.getElementById("fileSelected");
+
+const status =
+  document.getElementById("status");
 
 
 let image =
@@ -806,7 +1175,36 @@ const MAX_CANVAS_DIMENSION =
   10000;
 
 
-/* اختيار الصورة */
+/* =========================
+   رسائل الحالة
+========================= */
+
+function showStatus(message,type){
+
+  status.textContent =
+    message;
+
+  status.className =
+    "status show " +
+    type;
+
+}
+
+
+function clearStatus(){
+
+  status.textContent =
+    "";
+
+  status.className =
+    "status";
+
+}
+
+
+/* =========================
+   اختيار الصورة
+========================= */
 
 imageInput.addEventListener(
   "change",
@@ -820,6 +1218,9 @@ imageInput.addEventListener(
     }
 
 
+    clearStatus();
+
+
     const allowedTypes = [
       "image/jpeg",
       "image/png",
@@ -829,11 +1230,13 @@ imageInput.addEventListener(
 
     if(!allowedTypes.includes(file.type)){
 
-      alert(
-        "يرجى اختيار صورة بصيغة JPG أو PNG أو WebP."
+      showStatus(
+        "يرجى اختيار صورة بصيغة JPG أو PNG أو WebP.",
+        "error"
       );
 
-      imageInput.value = "";
+      imageInput.value =
+        "";
 
       return;
 
@@ -842,11 +1245,13 @@ imageInput.addEventListener(
 
     if(file.size > MAX_FILE_SIZE){
 
-      alert(
-        "حجم الصورة أكبر من 25MB. يرجى اختيار صورة أصغر."
+      showStatus(
+        "حجم الصورة أكبر من 25MB. يرجى اختيار صورة أصغر.",
+        "error"
       );
 
-      imageInput.value = "";
+      imageInput.value =
+        "";
 
       return;
 
@@ -859,6 +1264,7 @@ imageInput.addEventListener(
 
     fileSelected.style.display =
       "block";
+
 
     fileSelected.innerHTML =
       "📄 <strong>" +
@@ -884,11 +1290,12 @@ imageInput.addEventListener(
               MAX_CANVAS_DIMENSION
             ){
 
-              alert(
-                "أبعاد الصورة كبيرة جدًا. يرجى استخدام صورة بأبعاد أصغر من 10000 بكسل."
+              showStatus(
+                "أبعاد الصورة كبيرة جدًا. يرجى استخدام صورة بأبعاد أصغر من 10000 بكسل.",
+                "error"
               );
 
-              resetTool();
+              resetTool(false);
 
               return;
 
@@ -959,11 +1366,12 @@ imageInput.addEventListener(
         image.onerror =
           function(){
 
-            alert(
-              "تعذر قراءة الصورة. يرجى تجربة صورة أخرى."
+            showStatus(
+              "تعذر قراءة الصورة. يرجى تجربة صورة أخرى.",
+              "error"
             );
 
-            resetTool();
+            resetTool(false);
 
           };
 
@@ -977,8 +1385,9 @@ imageInput.addEventListener(
     reader.onerror =
       function(){
 
-        alert(
-          "حدث خطأ أثناء قراءة الصورة."
+        showStatus(
+          "حدث خطأ أثناء قراءة الصورة.",
+          "error"
         );
 
       };
@@ -990,7 +1399,9 @@ imageInput.addEventListener(
 );
 
 
-/* رسم الصورة */
+/* =========================
+   رسم الصورة
+========================= */
 
 function drawImage(){
 
@@ -1013,7 +1424,9 @@ function drawImage(){
 }
 
 
-/* الحصول على موضع المؤشر */
+/* =========================
+   الحصول على موضع المؤشر
+========================= */
 
 function getPosition(event){
 
@@ -1044,14 +1457,10 @@ function getPosition(event){
   }
 
 
-  /*
-    تصحيح الموضع إذا تم تصغير
-    canvas بصريًا بواسطة CSS.
-  */
-
   const scaleX =
     canvas.width /
     rect.width;
+
 
   const scaleY =
     canvas.height /
@@ -1083,7 +1492,9 @@ function getPosition(event){
 }
 
 
-/* بداية التحديد */
+/* =========================
+   بداية التحديد
+========================= */
 
 function startSelection(event){
 
@@ -1113,16 +1524,21 @@ function startSelection(event){
   hasSelection =
     false;
 
+
   cropBtn.disabled =
     true;
 
 
   clearDownload();
 
+  clearStatus();
+
 }
 
 
-/* تحريك التحديد */
+/* =========================
+   تحريك التحديد
+========================= */
 
 function moveSelection(event){
 
@@ -1150,7 +1566,9 @@ function moveSelection(event){
 }
 
 
-/* إنهاء التحديد */
+/* =========================
+   إنهاء التحديد
+========================= */
 
 function endSelection(){
 
@@ -1185,6 +1603,7 @@ function endSelection(){
     hasSelection =
       true;
 
+
     cropBtn.disabled =
       false;
 
@@ -1196,6 +1615,7 @@ function endSelection(){
 
     hasSelection =
       false;
+
 
     cropBtn.disabled =
       true;
@@ -1212,7 +1632,9 @@ function endSelection(){
 }
 
 
-/* رسم التحديد */
+/* =========================
+   رسم التحديد
+========================= */
 
 function drawSelection(){
 
@@ -1247,11 +1669,8 @@ function drawSelection(){
     );
 
 
-  /*
-    طبقة التعتيم
-  */
-
   ctx.save();
+
 
   ctx.fillStyle =
     "rgba(0,0,0,.45)";
@@ -1264,10 +1683,6 @@ function drawSelection(){
     canvas.height
   );
 
-
-  /*
-    إعادة رسم الجزء المحدد
-  */
 
   ctx.clearRect(
     x,
@@ -1290,12 +1705,9 @@ function drawSelection(){
   );
 
 
-  /*
-    إطار التحديد
-  */
-
   ctx.strokeStyle =
     "#ffffff";
+
 
   ctx.lineWidth =
     2;
@@ -1314,17 +1726,21 @@ function drawSelection(){
 }
 
 
-/* أحداث الماوس */
+/* =========================
+   أحداث الماوس
+========================= */
 
 canvas.addEventListener(
   "mousedown",
   startSelection
 );
 
+
 canvas.addEventListener(
   "mousemove",
   moveSelection
 );
+
 
 window.addEventListener(
   "mouseup",
@@ -1332,7 +1748,9 @@ window.addEventListener(
 );
 
 
-/* أحداث اللمس */
+/* =========================
+   أحداث اللمس
+========================= */
 
 canvas.addEventListener(
   "touchstart",
@@ -1342,6 +1760,7 @@ canvas.addEventListener(
   }
 );
 
+
 canvas.addEventListener(
   "touchmove",
   moveSelection,
@@ -1349,6 +1768,7 @@ canvas.addEventListener(
     passive:false
   }
 );
+
 
 canvas.addEventListener(
   "touchend",
@@ -1365,7 +1785,9 @@ canvas.addEventListener(
 );
 
 
-/* قص الصورة */
+/* =========================
+   قص الصورة
+========================= */
 
 cropBtn.addEventListener(
   "click",
@@ -1426,8 +1848,9 @@ cropBtn.addEventListener(
       outputHeight < 1
     ){
 
-      alert(
-        "المنطقة المحددة صغيرة جدًا."
+      showStatus(
+        "المنطقة المحددة صغيرة جدًا.",
+        "error"
       );
 
       return;
@@ -1442,8 +1865,9 @@ cropBtn.addEventListener(
       MAX_CANVAS_DIMENSION
     ){
 
-      alert(
-        "الأبعاد الناتجة كبيرة جدًا."
+      showStatus(
+        "الأبعاد الناتجة كبيرة جدًا.",
+        "error"
       );
 
       return;
@@ -1454,8 +1878,9 @@ cropBtn.addEventListener(
     cropBtn.disabled =
       true;
 
-    cropBtn.textContent =
-      "⏳ جارٍ قص الصورة...";
+
+    cropBtn.innerHTML =
+      '<span class="spinner"></span> جارٍ قص الصورة...';
 
 
     const output =
@@ -1466,6 +1891,7 @@ cropBtn.addEventListener(
 
     output.width =
       outputWidth;
+
 
     output.height =
       outputHeight;
@@ -1479,15 +1905,19 @@ cropBtn.addEventListener(
 
     if(!outputCtx){
 
-      alert(
-        "تعذر تجهيز الصورة."
+      showStatus(
+        "تعذر تجهيز الصورة.",
+        "error"
       );
+
 
       cropBtn.disabled =
         false;
 
+
       cropBtn.textContent =
         "✂️ قص الصورة";
+
 
       return;
 
@@ -1512,15 +1942,19 @@ cropBtn.addEventListener(
 
         if(!blob){
 
-          alert(
-            "تعذر إنشاء الصورة المقصوصة."
+          showStatus(
+            "تعذر إنشاء الصورة المقصوصة.",
+            "error"
           );
+
 
           cropBtn.disabled =
             false;
 
+
           cropBtn.textContent =
             "✂️ قص الصورة";
+
 
           return;
 
@@ -1553,10 +1987,10 @@ cropBtn.addEventListener(
 
 
         downloadBtn.style.display =
-          "inline-block";
+          "inline-flex";
 
 
-        selectionInfo.innerHTML =
+        selectionInfo.textContent =
           "✅ تم قص الصورة بنجاح — " +
           outputWidth +
           " × " +
@@ -1567,8 +2001,15 @@ cropBtn.addEventListener(
         cropBtn.disabled =
           false;
 
+
         cropBtn.textContent =
           "✂️ قص الصورة";
+
+
+        showStatus(
+          "تم إنشاء الصورة المقصوصة بنجاح. يمكنك تحميلها الآن.",
+          "success"
+        );
 
 
         downloadBtn.scrollIntoView({
@@ -1584,19 +2025,21 @@ cropBtn.addEventListener(
 );
 
 
-/* إعادة ضبط */
+/* =========================
+   إعادة ضبط
+========================= */
 
 resetBtn.addEventListener(
   "click",
   function(){
 
-    resetTool();
+    resetTool(true);
 
   }
 );
 
 
-function resetTool(){
+function resetTool(clearMessage){
 
   clearDownload();
 
@@ -1661,10 +2104,19 @@ function resetTool(){
     canvas.height
   );
 
+
+  if(clearMessage){
+
+    clearStatus();
+
+  }
+
 }
 
 
-/* تنظيف رابط التحميل */
+/* =========================
+   تنظيف رابط التحميل
+========================= */
 
 function clearDownload(){
 
@@ -1696,7 +2148,9 @@ function clearDownload(){
 }
 
 
-/* حجم الملف */
+/* =========================
+   حجم الملف
+========================= */
 
 function formatSize(bytes){
 
@@ -1732,7 +2186,9 @@ function formatSize(bytes){
 }
 
 
-/* حماية اسم الملف */
+/* =========================
+   حماية اسم الملف
+========================= */
 
 function escapeHtml(text){
 
@@ -1761,7 +2217,9 @@ function escapeHtml(text){
 }
 
 
-/* تنظيف الرابط عند مغادرة الصفحة */
+/* =========================
+   تنظيف الرابط عند مغادرة الصفحة
+========================= */
 
 window.addEventListener(
   "beforeunload",
