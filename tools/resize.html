@@ -27,95 +27,225 @@ href="https://adaahub.github.io/adaahub/tools/resize.html"
   box-sizing:border-box;
 }
 
+:root{
+  --primary:#2563eb;
+  --primary-dark:#1d4ed8;
+  --primary-soft:#eff6ff;
+  --bg:#f6f8fc;
+  --surface:#ffffff;
+  --text:#111827;
+  --muted:#64748b;
+  --border:#e5e7eb;
+  --success:#16a34a;
+  --danger:#dc2626;
+  --shadow:0 12px 35px rgba(15,23,42,.07);
+}
+
+html.dark{
+  --primary:#60a5fa;
+  --primary-dark:#93c5fd;
+  --primary-soft:#172554;
+  --bg:#0b1120;
+  --surface:#111827;
+  --text:#f1f5f9;
+  --muted:#94a3b8;
+  --border:#243044;
+  --success:#4ade80;
+  --danger:#f87171;
+  --shadow:0 12px 35px rgba(0,0,0,.25);
+}
+
+html{
+  scroll-behavior:smooth;
+}
+
 body{
   margin:0;
   font-family:Arial,Tahoma,sans-serif;
-  background:#f5f7fb;
-  color:#20242a;
-  line-height:1.7;
+  background:
+    radial-gradient(
+      circle at top,
+      rgba(37,99,235,.08),
+      transparent 35%
+    ),
+    var(--bg);
+  color:var(--text);
+  line-height:1.8;
+  transition:
+    background .25s ease,
+    color .25s ease;
+}
+
+button,
+input,
+select{
+  font:inherit;
 }
 
 header{
-  background:#fff;
-  border-bottom:1px solid #e5e7eb;
-  padding:16px 18px;
+  position:sticky;
+  top:0;
+  z-index:1000;
+  background:rgba(255,255,255,.88);
+  backdrop-filter:blur(12px);
+  -webkit-backdrop-filter:blur(12px);
+  border-bottom:1px solid var(--border);
+}
+
+html.dark header{
+  background:rgba(11,17,32,.88);
 }
 
 .header{
-  max-width:900px;
+  max-width:1100px;
   margin:auto;
+  padding:14px 20px;
   display:flex;
-  justify-content:space-between;
   align-items:center;
+  justify-content:space-between;
   gap:20px;
 }
 
 .logo{
-  font-size:27px;
-  font-weight:bold;
+  display:flex;
+  align-items:center;
+  gap:9px;
+  color:var(--text);
+  text-decoration:none;
+  font-size:25px;
+  font-weight:800;
+}
+
+.logo-mark{
+  width:38px;
+  height:38px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  border-radius:12px;
+  color:#fff;
+  background:
+    linear-gradient(
+      135deg,
+      #2563eb,
+      #60a5fa
+    );
+  box-shadow:
+    0 8px 20px rgba(37,99,235,.22);
 }
 
 .logo span{
-  color:#2563eb;
+  color:var(--primary);
+}
+
+.nav{
+  display:flex;
+  align-items:center;
+  gap:10px;
 }
 
 .home{
-  color:#2563eb;
+  color:var(--primary);
   text-decoration:none;
   font-weight:bold;
+  padding:9px 12px;
+  border-radius:9px;
 }
 
 .home:hover{
-  text-decoration:underline;
+  background:var(--primary-soft);
+}
+
+.theme-toggle{
+  border:1px solid var(--border);
+  background:var(--surface);
+  color:var(--text);
+  width:42px;
+  height:42px;
+  border-radius:10px;
+  cursor:pointer;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  transition:.2s;
+}
+
+.theme-toggle:hover{
+  border-color:var(--primary);
+  transform:translateY(-1px);
 }
 
 .container{
-  max-width:850px;
-  margin:35px auto;
-  padding:20px;
+  max-width:1050px;
+  margin:0 auto;
+  padding:45px 20px;
+}
+
+.hero{
+  text-align:center;
+  max-width:800px;
+  margin:0 auto 30px;
+}
+
+.badge{
+  display:inline-flex;
+  align-items:center;
+  gap:7px;
+  padding:7px 13px;
+  border-radius:999px;
+  background:var(--primary-soft);
+  color:var(--primary);
+  font-size:14px;
+  font-weight:bold;
+  margin-bottom:14px;
 }
 
 h1{
-  text-align:center;
-  font-size:32px;
-  margin:0 0 10px;
+  margin:0 0 12px;
+  font-size:38px;
+  line-height:1.35;
 }
 
 .subtitle{
-  text-align:center;
-  color:#666;
-  margin:0 auto 28px;
-  max-width:680px;
+  margin:0 auto;
+  max-width:760px;
+  color:var(--muted);
+  font-size:17px;
 }
 
 .tool-box{
-  background:#fff;
-  border-radius:18px;
-  padding:30px 20px;
-  border:1px solid #e5e7eb;
-  box-shadow:0 5px 20px rgba(0,0,0,.04);
+  background:var(--surface);
+  border:1px solid var(--border);
+  border-radius:20px;
+  padding:25px;
+  box-shadow:var(--shadow);
 }
 
 .upload-area{
-  border:2px dashed #cbd5e1;
-  border-radius:15px;
-  padding:40px 20px;
+  border:2px dashed var(--border);
+  border-radius:16px;
+  padding:42px 20px;
   text-align:center;
-  background:#fafcff;
+  background:
+    linear-gradient(
+      180deg,
+      var(--primary-soft),
+      var(--surface)
+    );
 }
 
 .upload-icon{
-  font-size:50px;
-  margin-bottom:10px;
+  font-size:48px;
+  margin-bottom:8px;
 }
 
 .upload-area h2{
-  font-size:21px;
-  margin:0 0 8px;
+  margin:0 0 7px;
+  font-size:22px;
 }
 
 .upload-area p{
-  color:#777;
+  color:var(--muted);
   margin:0 0 20px;
 }
 
@@ -125,40 +255,43 @@ input[type="file"]{
 
 .choose-button{
   display:inline-block;
-  background:#2563eb;
+  background:var(--primary);
   color:#fff;
-  padding:13px 27px;
-  border-radius:9px;
+  padding:13px 25px;
+  border-radius:10px;
   cursor:pointer;
-  font-size:16px;
   font-weight:bold;
+  transition:.2s;
 }
 
 .choose-button:hover{
-  background:#1d4ed8;
+  background:var(--primary-dark);
+  transform:translateY(-1px);
 }
 
 .file-selected{
   display:none;
-  margin-top:15px;
-  background:#eff6ff;
-  border:1px solid #bfdbfe;
-  color:#1e40af;
-  border-radius:9px;
-  padding:10px;
+  margin:16px auto 0;
+  max-width:600px;
+  background:var(--primary-soft);
+  border:1px solid var(--border);
+  color:var(--primary);
+  border-radius:10px;
+  padding:10px 12px;
   font-size:14px;
 }
 
 .settings{
   display:none;
   margin-top:20px;
-  padding:20px;
-  background:#f8fafc;
-  border-radius:12px;
+  padding:22px;
+  background:var(--bg);
+  border:1px solid var(--border);
+  border-radius:15px;
 }
 
 .settings h2{
-  font-size:20px;
+  font-size:21px;
   margin:0 0 18px;
 }
 
@@ -178,16 +311,19 @@ input[type="file"]{
 .field select{
   width:100%;
   padding:12px;
-  border:1px solid #cbd5e1;
-  border-radius:8px;
-  background:#fff;
+  border:1px solid var(--border);
+  border-radius:9px;
+  background:var(--surface);
+  color:var(--text);
   font-size:16px;
   outline:none;
+  transition:.2s;
 }
 
 .field input:focus,
 .field select:focus{
-  border-color:#2563eb;
+  border-color:var(--primary);
+  box-shadow:0 0 0 3px rgba(37,99,235,.10);
 }
 
 .lock-row{
@@ -200,6 +336,7 @@ input[type="file"]{
 .lock-row input{
   width:18px;
   height:18px;
+  accent-color:var(--primary);
 }
 
 .lock-row label{
@@ -211,7 +348,8 @@ input[type="file"]{
   margin-top:20px;
 }
 
-.format-section label{
+.format-section label,
+.quality-section label{
   display:block;
   font-weight:bold;
   margin-bottom:8px;
@@ -220,20 +358,20 @@ input[type="file"]{
 .format-section select{
   width:100%;
   padding:12px;
-  border:1px solid #cbd5e1;
-  border-radius:8px;
-  background:#fff;
+  border:1px solid var(--border);
+  border-radius:9px;
+  background:var(--surface);
+  color:var(--text);
   font-size:16px;
+  outline:none;
+}
+
+.format-section select:focus{
+  border-color:var(--primary);
 }
 
 .quality-section{
   margin-top:20px;
-}
-
-.quality-section label{
-  display:block;
-  font-weight:bold;
-  margin-bottom:8px;
 }
 
 .quality-row{
@@ -244,65 +382,72 @@ input[type="file"]{
 
 input[type="range"]{
   flex:1;
+  accent-color:var(--primary);
   cursor:pointer;
 }
 
 #qualityValue{
   min-width:50px;
   font-weight:bold;
+  color:var(--primary);
 }
 
 .resize-button{
   width:100%;
   border:0;
   margin-top:20px;
-  background:#16a34a;
+  background:var(--success);
   color:#fff;
   padding:14px;
-  border-radius:9px;
+  border-radius:10px;
   cursor:pointer;
   font-size:17px;
   font-weight:bold;
+  transition:.2s;
 }
 
 .resize-button:hover{
   background:#15803d;
+  transform:translateY(-1px);
 }
 
 .resize-button:disabled{
   background:#94a3b8;
   cursor:not-allowed;
+  transform:none;
 }
 
 .result{
   display:none;
-  margin-top:25px;
-  background:#fff;
-  border:1px solid #e5e7eb;
-  border-radius:15px;
+  margin-top:22px;
+  background:var(--surface);
+  border:1px solid var(--border);
+  border-radius:16px;
   padding:25px;
   text-align:center;
+  box-shadow:var(--shadow);
 }
 
 .result h2{
   margin-top:0;
-  color:#16a34a;
+  color:var(--success);
 }
 
 .preview{
   max-width:100%;
-  max-height:350px;
+  max-height:400px;
   display:block;
   margin:15px auto;
-  border-radius:10px;
-  background:#f8fafc;
-  border:1px solid #e5e7eb;
+  border-radius:12px;
+  background:var(--bg);
+  border:1px solid var(--border);
 }
 
 .file-info{
-  background:#f8fafc;
+  background:var(--bg);
+  border:1px solid var(--border);
   padding:15px;
-  border-radius:10px;
+  border-radius:11px;
   margin-top:15px;
   line-height:2;
 }
@@ -311,58 +456,62 @@ input[type="range"]{
   display:inline-block;
   margin-top:18px;
   padding:12px 25px;
-  background:#2563eb;
+  background:var(--primary);
   color:#fff;
   text-decoration:none;
-  border-radius:9px;
+  border-radius:10px;
   font-weight:bold;
+  transition:.2s;
 }
 
 .download-button:hover{
-  background:#1d4ed8;
+  background:var(--primary-dark);
+  transform:translateY(-1px);
 }
 
 .reset-button{
   display:inline-block;
   margin-top:12px;
   padding:10px 20px;
-  background:#e5e7eb;
-  color:#333;
+  background:var(--border);
+  color:var(--text);
   border:0;
-  border-radius:8px;
+  border-radius:9px;
   cursor:pointer;
   font-weight:bold;
 }
 
 .reset-button:hover{
-  background:#d1d5db;
+  opacity:.85;
 }
 
 .privacy-note{
   margin-top:20px;
-  background:#eff6ff;
-  border:1px solid #bfdbfe;
+  background:var(--primary-soft);
+  border:1px solid var(--border);
   border-radius:12px;
   padding:16px;
-  color:#1e40af;
+  color:var(--primary);
   text-align:center;
 }
 
 .content{
-  background:#fff;
+  background:var(--surface);
   margin-top:30px;
-  padding:25px;
-  border-radius:15px;
-  border:1px solid #e5e7eb;
+  padding:28px;
+  border-radius:16px;
+  border:1px solid var(--border);
+  box-shadow:var(--shadow);
 }
 
 .content h2{
   margin-top:0;
-  font-size:23px;
+  font-size:25px;
 }
 
 .content h3{
-  font-size:19px;
+  font-size:20px;
+  margin-top:25px;
 }
 
 .content ol,
@@ -370,8 +519,12 @@ input[type="range"]{
   padding-right:22px;
 }
 
+.content li{
+  margin-bottom:7px;
+}
+
 .content a{
-  color:#2563eb;
+  color:var(--primary);
   text-decoration:none;
   font-weight:bold;
 }
@@ -385,9 +538,9 @@ input[type="range"]{
 }
 
 .faq details{
-  background:#f8fafc;
-  border:1px solid #e5e7eb;
-  border-radius:10px;
+  background:var(--bg);
+  border:1px solid var(--border);
+  border-radius:11px;
   padding:14px 16px;
   margin-bottom:10px;
 }
@@ -397,29 +550,29 @@ input[type="range"]{
   font-weight:bold;
 }
 
+.faq p{
+  color:var(--muted);
+}
+
 .tools-links{
   margin-top:30px;
   padding-top:20px;
-  border-top:1px solid #e5e7eb;
+  border-top:1px solid var(--border);
 }
 
 .tools-links h3{
   margin-top:0;
 }
 
-.tools-links ul{
-  margin:0;
-}
-
 footer{
   text-align:center;
-  color:#777;
+  color:var(--muted);
   padding:30px 20px;
-  margin-top:30px;
+  margin-top:10px;
 }
 
 footer a{
-  color:#2563eb;
+  color:var(--primary);
   text-decoration:none;
   margin:0 5px;
 }
@@ -428,23 +581,90 @@ footer a:hover{
   text-decoration:underline;
 }
 
-@media(max-width:600px){
+.status{
+  min-height:24px;
+  margin-top:14px;
+  text-align:center;
+  color:var(--muted);
+  font-size:14px;
+}
+
+.spinner{
+  display:inline-block;
+  width:16px;
+  height:16px;
+  border:2px solid var(--border);
+  border-top-color:var(--primary);
+  border-radius:50%;
+  animation:spin .7s linear infinite;
+  vertical-align:-3px;
+  margin-left:6px;
+}
+
+@keyframes spin{
+  to{
+    transform:rotate(360deg);
+  }
+}
+
+@media(max-width:700px){
 
   .header{
-    flex-direction:column;
+    padding:12px 15px;
   }
 
-  h1{
-    font-size:27px;
+  .logo{
+    font-size:23px;
+  }
+
+  .logo-mark{
+    width:35px;
+    height:35px;
   }
 
   .container{
-    margin:20px auto;
-    padding:15px;
+    padding:30px 15px;
+  }
+
+  h1{
+    font-size:30px;
   }
 
   .tool-box{
-    padding:20px 15px;
+    padding:18px;
+  }
+
+  .content{
+    padding:22px 18px;
+  }
+
+}
+
+@media(max-width:430px){
+
+  .header{
+    gap:10px;
+  }
+
+  .home{
+    padding:7px 8px;
+  }
+
+  .theme-toggle{
+    width:38px;
+    height:38px;
+  }
+
+  h1{
+    font-size:26px;
+  }
+
+  .subtitle{
+    font-size:15px;
+  }
+
+  .upload-area{
+    padding:32px 15px;
   }
 
   .dimensions{
@@ -462,6 +682,18 @@ footer a:hover{
 
 }
 
+@media(prefers-reduced-motion:reduce){
+
+  *,
+  *::before,
+  *::after{
+    scroll-behavior:auto !important;
+    transition:none !important;
+    animation:none !important;
+  }
+
+}
+
 </style>
 
 </head>
@@ -472,16 +704,42 @@ footer a:hover{
 
   <div class="header">
 
-    <div class="logo">
-      Adaa<span>Hub</span>
-    </div>
-
     <a
-      class="home"
+      class="logo"
       href="../index.html"
+      aria-label="AdaaHub الرئيسية"
     >
-      الرئيسية
+
+      <span class="logo-mark">
+        A
+      </span>
+
+      Adaa<span>Hub</span>
+
     </a>
+
+
+    <div class="nav">
+
+      <a
+        class="home"
+        href="../index.html"
+      >
+        الرئيسية
+      </a>
+
+
+      <button
+        class="theme-toggle"
+        id="themeToggle"
+        type="button"
+        aria-label="تفعيل الوضع الداكن"
+        title="تفعيل الوضع الداكن"
+      >
+        🌙
+      </button>
+
+    </div>
 
   </div>
 
@@ -490,14 +748,22 @@ footer a:hover{
 
 <main class="container">
 
-  <h1>
-    تغيير حجم الصور أونلاين
-  </h1>
+  <section class="hero">
 
-  <p class="subtitle">
-    صغّر أو كبّر صورك بسهولة، وحدد العرض والارتفاع والجودة والصيغة المناسبة،
-    ثم حمّل الصورة الجديدة مباشرة من المتصفح.
-  </p>
+    <div class="badge">
+      ⚡ أداة مجانية وسريعة
+    </div>
+
+    <h1>
+      تغيير حجم الصور أونلاين مجانًا
+    </h1>
+
+    <p class="subtitle">
+      صغّر أو كبّر صورك بسهولة، وحدد العرض والارتفاع والجودة والصيغة المناسبة،
+      ثم حمّل الصورة الجديدة مباشرة من المتصفح دون رفعها إلى خادم AdaaHub.
+    </p>
+
+  </section>
 
 
   <section class="tool-box">
@@ -532,6 +798,12 @@ footer a:hover{
       <div
         class="file-selected"
         id="fileSelected"
+      ></div>
+
+      <div
+        class="status"
+        id="status"
+        aria-live="polite"
       ></div>
 
     </div>
@@ -656,6 +928,7 @@ footer a:hover{
       <button
         class="resize-button"
         id="resizeButton"
+        type="button"
       >
         📐 تغيير حجم الصورة
       </button>
@@ -706,6 +979,7 @@ footer a:hover{
       <button
         class="reset-button"
         id="resetButton"
+        type="button"
       >
         تغيير صورة أخرى
       </button>
@@ -1005,6 +1279,81 @@ footer a:hover{
 
 <script>
 
+/* منع ظهور الوضع الفاتح قبل تحميل الصفحة */
+
+(function(){
+
+  const savedTheme =
+    localStorage.getItem("adaahub-theme");
+
+  if(savedTheme === "dark"){
+
+    document.documentElement.classList.add("dark");
+
+  }
+
+})();
+
+
+/* الوضع الليلي */
+
+const themeToggle =
+  document.getElementById("themeToggle");
+
+
+function updateThemeButton(){
+
+  const isDark =
+    document.documentElement.classList.contains("dark");
+
+
+  themeToggle.textContent =
+    isDark ? "☀️" : "🌙";
+
+
+  themeToggle.setAttribute(
+    "aria-label",
+    isDark
+      ? "تفعيل الوضع الفاتح"
+      : "تفعيل الوضع الداكن"
+  );
+
+
+  themeToggle.setAttribute(
+    "title",
+    isDark
+      ? "تفعيل الوضع الفاتح"
+      : "تفعيل الوضع الداكن"
+  );
+
+}
+
+
+themeToggle.addEventListener(
+  "click",
+  function(){
+
+    const isDark =
+      document.documentElement.classList.toggle("dark");
+
+
+    localStorage.setItem(
+      "adaahub-theme",
+      isDark ? "dark" : "light"
+    );
+
+
+    updateThemeButton();
+
+  }
+);
+
+
+updateThemeButton();
+
+
+/* عناصر الأداة */
+
 const imageInput =
   document.getElementById("imageInput");
 
@@ -1059,6 +1408,9 @@ const resetButton =
 const fileSelected =
   document.getElementById("fileSelected");
 
+const status =
+  document.getElementById("status");
+
 
 let selectedFile = null;
 
@@ -1076,6 +1428,26 @@ const MAX_DIMENSION =
   10000;
 
 
+/* رسائل الحالة */
+
+function setStatus(
+  message,
+  type = ""
+){
+
+  status.textContent =
+    message;
+
+  status.style.color =
+    type === "error"
+      ? "var(--danger)"
+      : type === "success"
+        ? "var(--success)"
+        : "var(--muted)";
+
+}
+
+
 /* اختيار الصورة */
 
 imageInput.addEventListener(
@@ -1084,6 +1456,7 @@ imageInput.addEventListener(
 
     const file =
       this.files[0];
+
 
     if(!file){
       return;
@@ -1099,8 +1472,9 @@ imageInput.addEventListener(
 
     if(!allowedTypes.includes(file.type)){
 
-      alert(
-        "يرجى اختيار صورة بصيغة JPG أو PNG أو WebP."
+      setStatus(
+        "يرجى اختيار صورة بصيغة JPG أو PNG أو WebP.",
+        "error"
       );
 
       imageInput.value = "";
@@ -1112,8 +1486,9 @@ imageInput.addEventListener(
 
     if(file.size > MAX_FILE_SIZE){
 
-      alert(
-        "حجم الصورة أكبر من 25MB. يرجى اختيار صورة أصغر."
+      setStatus(
+        "حجم الصورة أكبر من 25MB. يرجى اختيار صورة أصغر.",
+        "error"
       );
 
       imageInput.value = "";
@@ -1125,6 +1500,9 @@ imageInput.addEventListener(
 
     selectedFile =
       file;
+
+
+    setStatus("");
 
 
     fileSelected.style.display =
@@ -1180,8 +1558,9 @@ imageInput.addEventListener(
         img.onerror =
           function(){
 
-            alert(
-              "تعذر قراءة الصورة. يرجى تجربة صورة أخرى."
+            setStatus(
+              "تعذر قراءة الصورة. يرجى تجربة صورة أخرى.",
+              "error"
             );
 
             resetTool();
@@ -1198,8 +1577,9 @@ imageInput.addEventListener(
     reader.onerror =
       function(){
 
-        alert(
-          "حدث خطأ أثناء قراءة الصورة."
+        setStatus(
+          "حدث خطأ أثناء قراءة الصورة.",
+          "error"
         );
 
       };
@@ -1357,8 +1737,9 @@ resizeButton.addEventListener(
 
     if(!selectedFile){
 
-      alert(
-        "اختر صورة أولًا."
+      setStatus(
+        "اختر صورة أولًا.",
+        "error"
       );
 
       return;
@@ -1387,8 +1768,9 @@ resizeButton.addEventListener(
       newHeight < 1
     ){
 
-      alert(
-        "أدخل عرضًا وارتفاعًا صحيحين."
+      setStatus(
+        "أدخل عرضًا وارتفاعًا صحيحين.",
+        "error"
       );
 
       return;
@@ -1401,8 +1783,9 @@ resizeButton.addEventListener(
       newHeight > MAX_DIMENSION
     ){
 
-      alert(
-        "الحد الأقصى للعرض أو الارتفاع هو 10000 بكسل."
+      setStatus(
+        "الحد الأقصى للعرض أو الارتفاع هو 10000 بكسل.",
+        "error"
       );
 
       return;
@@ -1416,8 +1799,9 @@ resizeButton.addEventListener(
 
     if(totalPixels > 50000000){
 
-      alert(
-        "الأبعاد المطلوبة كبيرة جدًا وقد تستهلك ذاكرة الجهاز. استخدم أبعادًا أصغر."
+      setStatus(
+        "الأبعاد المطلوبة كبيرة جدًا وقد تستهلك ذاكرة الجهاز. استخدم أبعادًا أصغر.",
+        "error"
       );
 
       return;
@@ -1428,8 +1812,13 @@ resizeButton.addEventListener(
     resizeButton.disabled =
       true;
 
-    resizeButton.textContent =
-      "⏳ جارٍ تغيير الحجم...";
+    resizeButton.innerHTML =
+      '<span class="spinner"></span> جارٍ تغيير الحجم...';
+
+
+    setStatus(
+      "جارٍ تجهيز الصورة..."
+    );
 
 
     const reader =
@@ -1521,9 +1910,18 @@ resizeButton.addEventListener(
 
                   if(!blob){
 
-                    throw new Error(
-                      "تعذر إنشاء الملف"
+                    setStatus(
+                      "تعذر إنشاء الملف. جرّب أبعادًا أصغر.",
+                      "error"
                     );
+
+                    resizeButton.disabled =
+                      false;
+
+                    resizeButton.textContent =
+                      "📐 تغيير حجم الصورة";
+
+                    return;
 
                   }
 
@@ -1598,6 +1996,12 @@ resizeButton.addEventListener(
                     "📐 تغيير حجم الصورة";
 
 
+                  setStatus(
+                    "تم تغيير حجم الصورة بنجاح.",
+                    "success"
+                  );
+
+
                   result.scrollIntoView({
                     behavior:"smooth",
                     block:"start"
@@ -1612,8 +2016,9 @@ resizeButton.addEventListener(
 
               console.error(error);
 
-              alert(
-                "تعذر إنشاء الصورة الجديدة. جرّب أبعادًا أصغر."
+              setStatus(
+                "تعذر إنشاء الصورة الجديدة. جرّب أبعادًا أصغر.",
+                "error"
               );
 
               resizeButton.disabled =
@@ -1630,8 +2035,9 @@ resizeButton.addEventListener(
         img.onerror =
           function(){
 
-            alert(
-              "تعذر قراءة الصورة."
+            setStatus(
+              "تعذر قراءة الصورة.",
+              "error"
             );
 
             resizeButton.disabled =
@@ -1652,8 +2058,9 @@ resizeButton.addEventListener(
     reader.onerror =
       function(){
 
-        alert(
-          "حدث خطأ أثناء قراءة الصورة."
+        setStatus(
+          "حدث خطأ أثناء قراءة الصورة.",
+          "error"
         );
 
         resizeButton.disabled =
@@ -1766,6 +2173,8 @@ function resetTool(){
   resizeButton.textContent =
     "📐 تغيير حجم الصورة";
 
+
+  setStatus("");
 
   updateQualityVisibility();
 
