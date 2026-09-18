@@ -1,8 +1,10 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
+
 <head>
 
 <meta charset="UTF-8">
+
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <title>تحويل الصور إلى WebP أونلاين مجانًا | AdaaHub</title>
@@ -16,6 +18,7 @@
 <script>
 (function(){
   const theme = localStorage.getItem("adaahub-theme");
+
   if(theme === "dark"){
     document.documentElement.classList.add("dark");
   }
@@ -24,460 +27,930 @@
 
 <style>
 
+/* =========================
+   Base
+========================= */
+
 *{
   box-sizing:border-box;
-}
-
-:root{
-  --primary:#2563eb;
-  --primary-dark:#1d4ed8;
-  --primary-soft:#eff6ff;
-  --bg:#f6f8fc;
-  --surface:#ffffff;
-  --text:#111827;
-  --muted:#64748b;
-  --border:#e5e7eb;
-  --success:#16a34a;
-  --danger:#dc2626;
-  --shadow:0 12px 35px rgba(15,23,42,.07);
-}
-
-html.dark{
-  --primary:#60a5fa;
-  --primary-dark:#93c5fd;
-  --primary-soft:#172554;
-  --bg:#0b1120;
-  --surface:#111827;
-  --text:#f1f5f9;
-  --muted:#94a3b8;
-  --border:#243044;
-  --success:#4ade80;
-  --danger:#f87171;
-  --shadow:0 12px 35px rgba(0,0,0,.25);
 }
 
 html{
   scroll-behavior:smooth;
 }
 
+:root{
+
+  --primary:#2563eb;
+  --primary-dark:#1d4ed8;
+  --primary-soft:#eff6ff;
+
+  --bg:#f6f8fc;
+  --surface:#ffffff;
+
+  --text:#111827;
+  --muted:#64748b;
+
+  --border:#e5e7eb;
+
+  --success:#16a34a;
+  --success-dark:#15803d;
+
+  --danger:#dc2626;
+
+  --shadow:0 12px 35px rgba(15,23,42,.07);
+
+}
+
+html.dark{
+
+  --primary:#60a5fa;
+  --primary-dark:#93c5fd;
+  --primary-soft:#172554;
+
+  --bg:#0b1120;
+  --surface:#111827;
+
+  --text:#f1f5f9;
+  --muted:#94a3b8;
+
+  --border:#243044;
+
+  --success:#4ade80;
+  --success-dark:#22c55e;
+
+  --danger:#f87171;
+
+  --shadow:0 12px 35px rgba(0,0,0,.25);
+
+}
+
 body{
+
   margin:0;
-  font-family:Arial,Tahoma,sans-serif;
+
+  font-family:
+    Arial,
+    Tahoma,
+    sans-serif;
+
   background:var(--bg);
+
   color:var(--text);
+
   line-height:1.7;
+
   transition:
     background .25s ease,
     color .25s ease;
+
 }
 
+/* =========================
+   Header
+========================= */
+
 header{
+
   background:var(--surface);
+
   border-bottom:1px solid var(--border);
+
   padding:15px 18px;
+
   position:sticky;
+
   top:0;
+
   z-index:100;
-  transition:
-    background .25s ease,
-    border-color .25s ease;
+
 }
 
 .header{
+
   max-width:900px;
+
   margin:auto;
+
   display:flex;
+
   justify-content:space-between;
+
   align-items:center;
+
   gap:20px;
+
 }
 
 .logo{
+
   font-size:27px;
+
   font-weight:bold;
+
   letter-spacing:-.5px;
+
 }
 
 .logo span{
+
   color:var(--primary);
+
 }
 
 .header-actions{
+
   display:flex;
+
   align-items:center;
+
   gap:10px;
+
 }
 
 .home{
+
   color:var(--primary);
+
   text-decoration:none;
+
   font-weight:bold;
+
 }
 
 .home:hover{
+
   text-decoration:underline;
+
 }
 
 .theme-toggle{
+
   width:42px;
+
   height:42px;
+
   border:1px solid var(--border);
+
   border-radius:12px;
+
   background:var(--surface);
+
   color:var(--text);
+
   cursor:pointer;
+
   font-size:19px;
+
   display:flex;
+
   align-items:center;
+
   justify-content:center;
+
   transition:
     background .2s ease,
     border-color .2s ease,
     transform .2s ease;
+
 }
 
 .theme-toggle:hover{
+
   transform:translateY(-2px);
+
   border-color:var(--primary);
+
 }
 
+/* =========================
+   Main
+========================= */
+
 .container{
+
   max-width:850px;
+
   margin:35px auto;
+
   padding:20px;
+
 }
 
 h1{
+
   text-align:center;
+
   font-size:32px;
+
   margin:0 0 10px;
+
 }
 
 .subtitle{
+
   text-align:center;
+
   color:var(--muted);
+
   margin:0 auto 28px;
+
   max-width:680px;
+
 }
+
+/* =========================
+   Tool Box
+========================= */
 
 .tool-box{
+
   background:var(--surface);
+
   border-radius:18px;
+
   padding:30px 20px;
+
   border:1px solid var(--border);
+
   box-shadow:var(--shadow);
+
 }
+
+/* =========================
+   Upload
+========================= */
 
 .upload-area{
+
   border:2px dashed var(--border);
+
   border-radius:15px;
+
   padding:40px 20px;
+
   text-align:center;
+
   background:var(--bg);
+
   transition:
-    background .25s ease,
-    border-color .25s ease;
+    border-color .2s ease,
+    background .2s ease;
+
 }
 
-.upload-area:hover{
+.upload-area:focus-within{
+
   border-color:var(--primary);
+
 }
 
 .upload-icon{
+
   font-size:50px;
+
   margin-bottom:10px;
+
 }
 
 .upload-area h2{
+
   font-size:21px;
+
   margin:0 0 8px;
+
 }
 
 .upload-area p{
+
   color:var(--muted);
+
   margin:0 0 20px;
+
 }
 
 input[type="file"]{
+
   display:none;
+
 }
 
 .choose-button{
+
   display:inline-block;
+
   background:var(--primary);
+
   color:#fff;
+
   padding:13px 27px;
+
   border-radius:9px;
+
   cursor:pointer;
+
   font-size:16px;
+
   font-weight:bold;
+
   transition:
     background .2s ease,
     transform .2s ease;
+
 }
 
 .choose-button:hover{
+
   background:var(--primary-dark);
+
   transform:translateY(-1px);
+
+}
+
+.choose-button:focus-visible{
+
+  outline:3px solid rgba(37,99,235,.35);
+
+  outline-offset:3px;
+
 }
 
 .file-name{
+
   margin-top:15px;
+
   font-size:14px;
+
   color:var(--muted);
+
   word-break:break-word;
+
 }
 
+/* =========================
+   Settings
+========================= */
+
 .settings{
+
   display:none;
+
   margin-top:20px;
+
   padding:20px;
+
   background:var(--bg);
+
   border-radius:12px;
+
   border:1px solid var(--border);
+
 }
 
 .settings label{
+
   display:block;
+
   font-weight:bold;
+
   margin-bottom:10px;
+
 }
 
 .quality-row{
+
   display:flex;
+
   align-items:center;
+
   gap:15px;
+
 }
 
 input[type="range"]{
+
   flex:1;
+
   cursor:pointer;
+
   accent-color:var(--primary);
+
+}
+
+input[type="range"]:focus-visible{
+
+  outline:3px solid rgba(37,99,235,.3);
+
+  outline-offset:4px;
+
 }
 
 #qualityValue{
+
   min-width:45px;
+
   font-weight:bold;
+
   color:var(--primary);
+
 }
 
+/* =========================
+   Buttons
+========================= */
+
 .convert-button{
+
   width:100%;
+
   border:0;
+
   margin-top:20px;
+
   background:var(--success);
+
   color:#fff;
+
   padding:14px;
+
   border-radius:9px;
+
   cursor:pointer;
+
   font-size:17px;
+
   font-weight:bold;
+
   display:none;
+
   transition:
     background .2s ease,
     transform .2s ease;
+
 }
 
 .convert-button:hover{
-  background:#15803d;
+
+  background:var(--success-dark);
+
   transform:translateY(-1px);
+
 }
 
 .convert-button:disabled{
+
   background:#94a3b8;
+
   cursor:not-allowed;
+
   transform:none;
+
 }
 
+.convert-button:focus-visible,
+.reset-button:focus-visible,
+.download-button:focus-visible,
+.theme-toggle:focus-visible{
+
+  outline:3px solid rgba(37,99,235,.35);
+
+  outline-offset:3px;
+
+}
+
+/* =========================
+   Result
+========================= */
+
 .result{
+
   display:none;
+
   margin-top:25px;
+
   background:var(--surface);
+
   border:1px solid var(--border);
+
   border-radius:15px;
+
   padding:25px;
+
   text-align:center;
+
 }
 
 .result h2{
+
   margin-top:0;
+
   color:var(--success);
+
 }
 
 .preview{
+
   max-width:100%;
+
   max-height:320px;
+
   display:block;
+
   margin:15px auto;
+
   border-radius:10px;
+
   border:1px solid var(--border);
+
 }
 
 .file-info{
+
   background:var(--bg);
+
   padding:15px;
+
   border-radius:10px;
+
   margin-top:15px;
+
   line-height:2;
+
 }
 
+/* =========================
+   Download
+========================= */
+
 .download-button{
+
   display:inline-block;
+
   margin-top:18px;
+
   padding:12px 25px;
+
   background:var(--primary);
+
   color:#fff;
+
   text-decoration:none;
+
   border-radius:9px;
+
   font-weight:bold;
+
   transition:
     background .2s ease,
     transform .2s ease;
+
 }
 
 .download-button:hover{
+
   background:var(--primary-dark);
+
   transform:translateY(-1px);
+
 }
 
+/* =========================
+   Reset
+========================= */
+
 .reset-button{
+
   display:inline-block;
+
   margin-top:12px;
+
   padding:10px 20px;
+
   background:var(--border);
+
   color:var(--text);
+
   border:0;
+
   border-radius:8px;
+
   cursor:pointer;
+
   font-weight:bold;
+
   transition:
     background .2s ease,
     transform .2s ease;
+
 }
 
 .reset-button:hover{
+
   background:#cbd5e1;
+
   transform:translateY(-1px);
+
 }
 
-.privacy-note{
-  margin-top:20px;
-  background:var(--primary-soft);
-  border:1px solid rgba(37,99,235,.25);
-  border-radius:12px;
-  padding:16px;
-  color:var(--primary-dark);
+/* =========================
+   Error / Status
+========================= */
+
+.status-message{
+
+  display:none;
+
+  margin-top:18px;
+
+  padding:14px 16px;
+
+  border-radius:10px;
+
+  font-weight:bold;
+
   text-align:center;
+
+}
+
+.status-message.error{
+
+  background:rgba(220,38,38,.08);
+
+  border:1px solid rgba(220,38,38,.25);
+
+  color:var(--danger);
+
+}
+
+.status-message.success{
+
+  background:rgba(22,163,74,.08);
+
+  border:1px solid rgba(22,163,74,.25);
+
+  color:var(--success);
+
+}
+
+/* =========================
+   Privacy
+========================= */
+
+.privacy-note{
+
+  margin-top:20px;
+
+  background:var(--primary-soft);
+
+  border:1px solid rgba(37,99,235,.25);
+
+  border-radius:12px;
+
+  padding:16px;
+
+  color:var(--primary-dark);
+
+  text-align:center;
+
 }
 
 html.dark .privacy-note{
+
   color:#bfdbfe;
+
 }
 
+/* =========================
+   Content
+========================= */
+
 .content{
+
   background:var(--surface);
+
   margin-top:30px;
+
   padding:25px;
+
   border-radius:15px;
+
   border:1px solid var(--border);
+
   box-shadow:var(--shadow);
+
 }
 
 .content h2{
+
   margin-top:0;
+
   font-size:23px;
+
 }
 
 .content h3{
+
   font-size:19px;
+
 }
 
 .content ol,
 .content ul{
+
   padding-right:22px;
+
 }
 
 .content a{
+
   color:var(--primary);
+
   font-weight:bold;
+
   text-decoration:none;
+
 }
 
 .content a:hover{
+
   text-decoration:underline;
+
 }
 
+/* =========================
+   FAQ
+========================= */
+
 .faq{
+
   margin-top:30px;
+
 }
 
 .faq details{
+
   background:var(--bg);
+
   border:1px solid var(--border);
+
   border-radius:10px;
+
   padding:14px 16px;
+
   margin-bottom:10px;
-  transition:
-    background .25s ease,
-    border-color .25s ease;
+
 }
 
 .faq summary{
+
   cursor:pointer;
+
   font-weight:bold;
+
 }
 
+.faq summary:focus-visible{
+
+  outline:3px solid rgba(37,99,235,.3);
+
+  outline-offset:4px;
+
+  border-radius:5px;
+
+}
+
+/* =========================
+   Footer
+========================= */
+
 footer{
+
   text-align:center;
+
   color:var(--muted);
+
   padding:30px 20px;
+
   margin-top:30px;
+
 }
 
 footer a{
+
   color:var(--primary);
+
   text-decoration:none;
+
   margin:0 5px;
+
 }
 
 footer a:hover{
+
   text-decoration:underline;
+
 }
+
+/* =========================
+   Accessibility
+========================= */
+
+.visually-hidden{
+
+  position:absolute;
+
+  width:1px;
+
+  height:1px;
+
+  padding:0;
+
+  margin:-1px;
+
+  overflow:hidden;
+
+  clip:rect(0,0,0,0);
+
+  white-space:nowrap;
+
+  border:0;
+
+}
+
+@media(prefers-reduced-motion:reduce){
+
+  html{
+
+    scroll-behavior:auto;
+
+  }
+
+  *{
+
+    transition:none !important;
+
+    animation:none !important;
+
+  }
+
+}
+
+/* =========================
+   Mobile
+========================= */
 
 @media(max-width:600px){
 
   .header{
+
     flex-direction:row;
+
   }
 
   .header-actions{
+
     gap:6px;
+
   }
 
   .home{
+
     font-size:14px;
+
   }
 
   h1{
+
     font-size:27px;
+
   }
 
   .container{
+
     margin:20px auto;
+
     padding:15px;
+
   }
 
   .tool-box{
+
     padding:20px 15px;
+
   }
 
   .quality-row{
+
     flex-direction:column;
+
     align-items:stretch;
+
   }
 
   #qualityValue{
+
     text-align:center;
+
   }
 
 }
@@ -498,7 +971,9 @@ footer a:hover{
 
     <div class="header-actions">
 
-      <a class="home" href="../index.html">
+      <a
+        class="home"
+        href="../index.html">
         الرئيسية
       </a>
 
@@ -520,7 +995,9 @@ footer a:hover{
 
 <main class="container">
 
-  <h1>تحويل الصور إلى WebP أونلاين</h1>
+  <h1>
+    تحويل الصور إلى WebP أونلاين
+  </h1>
 
   <p class="subtitle">
     حوّل صور JPG وJPEG وPNG إلى WebP مجانًا،
@@ -528,11 +1005,22 @@ footer a:hover{
   </p>
 
 
-  <section class="tool-box">
+  <section
+    class="tool-box"
+    aria-labelledby="toolTitle">
+
+    <h2
+      id="toolTitle"
+      class="visually-hidden">
+      أداة تحويل الصور إلى WebP
+    </h2>
+
 
     <div class="upload-area">
 
-      <div class="upload-icon">
+      <div
+        class="upload-icon"
+        aria-hidden="true">
         🖼️
       </div>
 
@@ -541,10 +1029,12 @@ footer a:hover{
       </h2>
 
       <p>
-        يدعم JPG وJPEG وPNG
+        يدعم JPG وJPEG وPNG — الحد الأقصى 25 MB
       </p>
 
-      <label class="choose-button" for="imageInput">
+      <label
+        class="choose-button"
+        for="imageInput">
         اختيار صورة
       </label>
 
@@ -552,17 +1042,28 @@ footer a:hover{
         id="imageInput"
         type="file"
         accept="image/jpeg,image/png"
-      >
+        aria-describedby="fileHelp">
+
+      <p
+        id="fileHelp"
+        class="visually-hidden">
+        اختر صورة بصيغة JPG أو JPEG أو PNG.
+      </p>
 
       <div
         class="file-name"
         id="fileName"
-      ></div>
+        role="status"
+        aria-live="polite">
+      </div>
 
     </div>
 
 
-    <div class="settings" id="settings">
+    <div
+      class="settings"
+      id="settings"
+      aria-live="polite">
 
       <label for="quality">
         جودة صورة WebP
@@ -576,13 +1077,24 @@ footer a:hover{
           min="10"
           max="100"
           value="85"
-        >
+          aria-valuemin="10"
+          aria-valuemax="100"
+          aria-valuenow="85"
+          aria-describedby="qualityDescription">
 
-        <span id="qualityValue">
+        <span
+          id="qualityValue"
+          aria-live="polite">
           85%
         </span>
 
       </div>
+
+      <span
+        id="qualityDescription"
+        class="visually-hidden">
+        اختر قيمة بين 10 و100 بالمائة. القيمة الأعلى تعني جودة أعلى.
+      </span>
 
     </div>
 
@@ -591,12 +1103,25 @@ footer a:hover{
       class="convert-button"
       id="convertButton"
       type="button"
-    >
+      aria-describedby="statusMessage">
+
       🔄 تحويل إلى WebP
+
     </button>
 
 
-    <div class="result" id="result">
+    <div
+      id="statusMessage"
+      class="status-message"
+      role="alert"
+      aria-live="assertive">
+    </div>
+
+
+    <div
+      class="result"
+      id="result"
+      aria-live="polite">
 
       <h2>
         ✅ تم تحويل الصورة
@@ -605,8 +1130,7 @@ footer a:hover{
       <img
         id="preview"
         class="preview"
-        alt="معاينة الصورة بعد تحويلها إلى WebP"
-      >
+        alt="معاينة الصورة بعد تحويلها إلى WebP">
 
       <div class="file-info">
 
@@ -622,7 +1146,7 @@ footer a:hover{
         id="downloadButton"
         class="download-button"
         download
-      >
+        aria-label="تحميل صورة WebP">
         ⬇️ تحميل صورة WebP
       </a>
 
@@ -631,8 +1155,7 @@ footer a:hover{
       <button
         class="reset-button"
         id="resetButton"
-        type="button"
-      >
+        type="button">
         تحويل صورة أخرى
       </button>
 
@@ -850,10 +1373,21 @@ footer a:hover{
 
   <br><br>
 
-  <a href="../pages/about.html">من نحن</a> |
-  <a href="../pages/privacy.html">الخصوصية</a> |
-  <a href="../pages/terms.html">الشروط والأحكام</a> |
-  <a href="../pages/contact.html">اتصل بنا</a>
+  <a href="../pages/about.html">
+    من نحن
+  </a> |
+
+  <a href="../pages/privacy.html">
+    الخصوصية
+  </a> |
+
+  <a href="../pages/terms.html">
+    الشروط والأحكام
+  </a> |
+
+  <a href="../pages/contact.html">
+    اتصل بنا
+  </a>
 
 </footer>
 
@@ -861,7 +1395,7 @@ footer a:hover{
 <script>
 
 /* =========================
-   نظام المظهر العالمي
+   Global Theme
 ========================= */
 
 const THEME_KEY = "adaahub-theme";
@@ -926,7 +1460,7 @@ themeToggle.addEventListener(
 
 
 /* =========================
-   أداة تحويل WebP
+   WebP Converter
 ========================= */
 
 const imageInput =
@@ -968,299 +1502,390 @@ const resetButton =
 const fileName =
   document.getElementById("fileName");
 
+const statusMessage =
+  document.getElementById("statusMessage");
+
+
 let selectedFile = null;
 
 let convertedUrl = null;
 
 
-quality.addEventListener("input", function(){
+/* =========================
+   Status Messages
+========================= */
 
-  qualityValue.textContent =
-    this.value + "%";
+function showStatus(message, type){
 
-});
+  statusMessage.textContent =
+    message;
 
+  statusMessage.className =
+    "status-message " + type;
 
-imageInput.addEventListener("change", function(){
-
-  const file = this.files[0];
-
-  if(!file){
-    return;
-  }
-
-
-  const allowedTypes = [
-    "image/jpeg",
-    "image/png"
-  ];
-
-
-  if(!allowedTypes.includes(file.type)){
-
-    alert(
-      "يرجى اختيار صورة JPG أو JPEG أو PNG فقط."
-    );
-
-    imageInput.value = "";
-
-    return;
-
-  }
-
-
-  const maxSize =
-    25 * 1024 * 1024;
-
-
-  if(file.size > maxSize){
-
-    alert(
-      "حجم الصورة كبير جدًا. الحد الأقصى المسموح به هو 25 MB."
-    );
-
-    imageInput.value = "";
-
-    return;
-
-  }
-
-
-  selectedFile = file;
-
-  fileName.textContent =
-    "الصورة المختارة: " + file.name;
-
-  settings.style.display =
+  statusMessage.style.display =
     "block";
 
-  convertButton.style.display =
-    "block";
+}
 
-  result.style.display =
+
+function clearStatus(){
+
+  statusMessage.textContent =
+    "";
+
+  statusMessage.className =
+    "status-message";
+
+  statusMessage.style.display =
     "none";
 
-});
+}
 
 
-convertButton.addEventListener("click", function(){
+/* =========================
+   Quality
+========================= */
 
-  if(!selectedFile){
+quality.addEventListener(
+  "input",
+  function(){
 
-    alert("اختر صورة أولًا.");
+    qualityValue.textContent =
+      this.value + "%";
 
-    return;
-
-  }
-
-
-  convertButton.disabled =
-    true;
-
-  convertButton.textContent =
-    "⏳ جارٍ التحويل...";
-
-
-  const reader =
-    new FileReader();
-
-
-  reader.onload = function(event){
-
-    const img =
-      new Image();
-
-
-    img.onload = function(){
-
-      const canvas =
-        document.createElement("canvas");
-
-
-      canvas.width =
-        img.naturalWidth;
-
-      canvas.height =
-        img.naturalHeight;
-
-
-      const context =
-        canvas.getContext("2d");
-
-
-      if(!context){
-
-        showError(
-          "تعذر تجهيز الصورة للتحويل."
-        );
-
-        return;
-
-      }
-
-
-      context.drawImage(
-        img,
-        0,
-        0,
-        canvas.width,
-        canvas.height
-      );
-
-
-      const selectedQuality =
-        parseInt(
-          quality.value,
-          10
-        ) / 100;
-
-
-      canvas.toBlob(
-
-        function(blob){
-
-          if(!blob){
-
-            showError(
-              "تعذر تحويل الصورة. حاول استخدام صورة أخرى."
-            );
-
-            return;
-
-          }
-
-
-          if(convertedUrl){
-
-            URL.revokeObjectURL(
-              convertedUrl
-            );
-
-          }
-
-
-          convertedUrl =
-            URL.createObjectURL(blob);
-
-
-          preview.src =
-            convertedUrl;
-
-
-          originalInfo.innerHTML =
-            "الحجم الأصلي: <strong>" +
-            formatSize(selectedFile.size) +
-            "</strong>";
-
-
-          webpInfo.innerHTML =
-            "حجم WebP: <strong>" +
-            formatSize(blob.size) +
-            "</strong>";
-
-
-          const difference =
-            ((selectedFile.size - blob.size) /
-            selectedFile.size) * 100;
-
-
-          if(difference > 0){
-
-            savedInfo.innerHTML =
-              "تم تقليل الحجم بنسبة <strong>" +
-              difference.toFixed(1) +
-              "%</strong>";
-
-          }else{
-
-            savedInfo.innerHTML =
-              "ملاحظة: حجم WebP أكبر من الملف الأصلي.";
-
-          }
-
-
-          downloadButton.href =
-            convertedUrl;
-
-
-          downloadButton.download =
-            createFileName(
-              selectedFile.name
-            );
-
-
-          result.style.display =
-            "block";
-
-
-          convertButton.disabled =
-            false;
-
-          convertButton.textContent =
-            "🔄 تحويل إلى WebP";
-
-
-          canvas.width = 1;
-          canvas.height = 1;
-
-
-          result.scrollIntoView({
-            behavior:"smooth",
-            block:"start"
-          });
-
-        },
-
-        "image/webp",
-
-        selectedQuality
-
-      );
-
-    };
-
-
-    img.onerror = function(){
-
-      showError(
-        "تعذر قراءة الصورة. حاول اختيار صورة أخرى."
-      );
-
-    };
-
-
-    img.src =
-      event.target.result;
-
-  };
-
-
-  reader.onerror = function(){
-
-    showError(
-      "حدث خطأ أثناء قراءة الصورة."
+    quality.setAttribute(
+      "aria-valuenow",
+      this.value
     );
 
-  };
+  }
+);
 
 
-  reader.readAsDataURL(
-    selectedFile
-  );
+/* =========================
+   Select File
+========================= */
 
-});
+imageInput.addEventListener(
+  "change",
+  function(){
+
+    clearStatus();
+
+    const file =
+      this.files[0];
+
+    if(!file){
+
+      return;
+
+    }
 
 
-resetButton.addEventListener("click", function(){
+    const allowedTypes = [
+      "image/jpeg",
+      "image/png"
+    ];
 
-  resetTool();
 
-});
+    if(!allowedTypes.includes(file.type)){
 
+      showStatus(
+        "لم يتم اختيار الملف. يرجى اختيار صورة بصيغة JPG أو JPEG أو PNG فقط.",
+        "error"
+      );
+
+      imageInput.value = "";
+
+      return;
+
+    }
+
+
+    const maxSize =
+      25 * 1024 * 1024;
+
+
+    if(file.size > maxSize){
+
+      showStatus(
+        "الصورة كبيرة جدًا. الحد الأقصى المسموح به هو 25 MB.",
+        "error"
+      );
+
+      imageInput.value = "";
+
+      return;
+
+    }
+
+
+    selectedFile =
+      file;
+
+    fileName.textContent =
+      "الصورة المختارة: " + file.name;
+
+    settings.style.display =
+      "block";
+
+    convertButton.style.display =
+      "block";
+
+    result.style.display =
+      "none";
+
+    convertButton.focus();
+
+  }
+);
+
+
+/* =========================
+   Convert
+========================= */
+
+convertButton.addEventListener(
+  "click",
+  function(){
+
+    clearStatus();
+
+    if(!selectedFile){
+
+      showStatus(
+        "اختر صورة أولًا قبل بدء التحويل.",
+        "error"
+      );
+
+      imageInput.focus();
+
+      return;
+
+    }
+
+
+    convertButton.disabled =
+      true;
+
+    convertButton.textContent =
+      "⏳ جارٍ التحويل...";
+
+
+    const reader =
+      new FileReader();
+
+
+    reader.onload =
+      function(event){
+
+        const img =
+          new Image();
+
+
+        img.onload =
+          function(){
+
+            const canvas =
+              document.createElement("canvas");
+
+
+            canvas.width =
+              img.naturalWidth;
+
+            canvas.height =
+              img.naturalHeight;
+
+
+            const context =
+              canvas.getContext("2d");
+
+
+            if(!context){
+
+              showError(
+                "تعذر تجهيز الصورة للتحويل في هذا المتصفح."
+              );
+
+              return;
+
+            }
+
+
+            context.drawImage(
+              img,
+              0,
+              0,
+              canvas.width,
+              canvas.height
+            );
+
+
+            const selectedQuality =
+              parseInt(
+                quality.value,
+                10
+              ) / 100;
+
+
+            canvas.toBlob(
+
+              function(blob){
+
+                if(!blob){
+
+                  showError(
+                    "تعذر إنشاء ملف WebP. جرّب صورة أخرى أو متصفحًا حديثًا."
+                  );
+
+                  return;
+
+                }
+
+
+                if(convertedUrl){
+
+                  URL.revokeObjectURL(
+                    convertedUrl
+                  );
+
+                }
+
+
+                convertedUrl =
+                  URL.createObjectURL(blob);
+
+
+                preview.src =
+                  convertedUrl;
+
+
+                originalInfo.innerHTML =
+                  "الحجم الأصلي: <strong>" +
+                  formatSize(selectedFile.size) +
+                  "</strong>";
+
+
+                webpInfo.innerHTML =
+                  "حجم WebP: <strong>" +
+                  formatSize(blob.size) +
+                  "</strong>";
+
+
+                const difference =
+                  (
+                    (selectedFile.size - blob.size) /
+                    selectedFile.size
+                  ) * 100;
+
+
+                if(difference > 0){
+
+                  savedInfo.innerHTML =
+                    "تم تقليل الحجم بنسبة <strong>" +
+                    difference.toFixed(1) +
+                    "%</strong>";
+
+                }else{
+
+                  savedInfo.innerHTML =
+                    "ملاحظة: حجم WebP أكبر من الملف الأصلي.";
+
+                }
+
+
+                downloadButton.href =
+                  convertedUrl;
+
+
+                downloadButton.download =
+                  createFileName(
+                    selectedFile.name
+                  );
+
+
+                result.style.display =
+                  "block";
+
+
+                convertButton.disabled =
+                  false;
+
+                convertButton.textContent =
+                  "🔄 تحويل إلى WebP";
+
+
+                showStatus(
+                  "تم تحويل الصورة بنجاح. يمكنك الآن تحميل ملف WebP.",
+                  "success"
+                );
+
+
+                canvas.width = 1;
+                canvas.height = 1;
+
+
+                result.scrollIntoView({
+                  behavior:"smooth",
+                  block:"start"
+                });
+
+              },
+
+              "image/webp",
+
+              selectedQuality
+
+            );
+
+          };
+
+
+        img.onerror =
+          function(){
+
+            showError(
+              "تعذر قراءة الصورة. تأكد من أن الملف صالح ثم حاول مرة أخرى."
+            );
+
+          };
+
+
+        img.src =
+          event.target.result;
+
+      };
+
+
+    reader.onerror =
+      function(){
+
+        showError(
+          "حدث خطأ أثناء قراءة الصورة. حاول اختيار الملف مرة أخرى."
+        );
+
+      };
+
+
+    reader.readAsDataURL(
+      selectedFile
+    );
+
+  }
+);
+
+
+/* =========================
+   Error Handler
+========================= */
 
 function showError(message){
 
-  alert(message);
+  showStatus(
+    message,
+    "error"
+  );
 
   convertButton.disabled =
     false;
@@ -1271,7 +1896,26 @@ function showError(message){
 }
 
 
+/* =========================
+   Reset
+========================= */
+
+resetButton.addEventListener(
+  "click",
+  function(){
+
+    resetTool();
+
+    imageInput.focus();
+
+  }
+);
+
+
 function resetTool(){
+
+  clearStatus();
+
 
   if(convertedUrl){
 
@@ -1285,11 +1929,14 @@ function resetTool(){
   }
 
 
-  imageInput.value = "";
+  imageInput.value =
+    "";
 
-  selectedFile = null;
+  selectedFile =
+    null;
 
-  fileName.textContent = "";
+  fileName.textContent =
+    "";
 
   settings.style.display =
     "none";
@@ -1312,6 +1959,11 @@ function resetTool(){
   qualityValue.textContent =
     "85%";
 
+  quality.setAttribute(
+    "aria-valuenow",
+    "85"
+  );
+
   preview.removeAttribute(
     "src"
   );
@@ -1322,6 +1974,10 @@ function resetTool(){
 
 }
 
+
+/* =========================
+   Format Size
+========================= */
 
 function formatSize(bytes){
 
@@ -1351,6 +2007,10 @@ function formatSize(bytes){
 }
 
 
+/* =========================
+   File Name
+========================= */
+
 function createFileName(originalName){
 
   const name =
@@ -1365,6 +2025,10 @@ function createFileName(originalName){
 
 }
 
+
+/* =========================
+   Cleanup
+========================= */
 
 window.addEventListener(
   "beforeunload",
