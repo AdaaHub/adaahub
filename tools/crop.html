@@ -176,7 +176,7 @@ color:var(--primary);
 
 
 /* =========================
-   DARK MODE BUTTON
+   DARK MODE
 ========================= */
 
 .theme-toggle{
@@ -385,7 +385,7 @@ color:var(--primary);
 font-weight:bold;
 }
 
-#status::before{
+#status.loading::before{
 content:"";
 display:inline-block;
 width:15px;
@@ -440,6 +440,11 @@ margin-top:0;
 font-size:24px;
 }
 
+.editor-help{
+color:var(--muted);
+margin:0 auto 18px;
+}
+
 .crop-area{
 width:100%;
 display:flex;
@@ -464,6 +469,8 @@ height:auto;
 touch-action:none;
 cursor:crosshair;
 border-radius:10px;
+user-select:none;
+-webkit-user-select:none;
 }
 
 .selection-info{
@@ -548,6 +555,19 @@ margin-top:15px;
 font-weight:bold;
 color:var(--muted);
 }
+
+#cropMessage.success{
+color:var(--success);
+}
+
+#cropMessage.error{
+color:var(--danger);
+}
+
+
+/* =========================
+   RESULT
+========================= */
 
 #result{
 display:none;
@@ -1026,22 +1046,18 @@ title="تغيير المظهر">
 
 <div class="box">
 
-
 <div class="upload-icon">
 ✂️
 </div>
-
 
 <h2>
 ابدأ قص الصورة
 </h2>
 
-
 <p>
 اختر صورة من جهازك ثم حدد الجزء الذي تريد الاحتفاظ به باستخدام
 الماوس أو اللمس.
 </p>
-
 
 <label
 class="upload"
@@ -1051,7 +1067,6 @@ for="imageInput">
 
 </label>
 
-
 <input
 id="imageInput"
 type="file"
@@ -1059,20 +1074,14 @@ accept="image/jpeg,image/png,image/webp"
 aria-label="اختيار صورة لقصها"
 >
 
-
 <div class="supported">
 JPG · JPEG · PNG · WebP · حتى 25 ميجابايت
 </div>
 
-
 <div
 id="status"
 aria-live="polite">
-
-جارٍ تحميل الصورة...
-
 </div>
-
 
 </div>
 
@@ -1086,11 +1095,9 @@ aria-live="polite">
 ✂️ حدد الجزء المطلوب
 </h2>
 
-
-<p class="subtitle">
-اسحب بالماوس أو اللمس لتحديد المنطقة التي تريد الاحتفاظ بها.
+<p class="editor-help">
+اسحب داخل الصورة لتحديد الجزء الذي تريد الاحتفاظ به.
 </p>
-
 
 <div class="crop-area">
 
@@ -1099,7 +1106,6 @@ id="cropCanvas">
 </canvas>
 
 </div>
-
 
 <div class="selection-info">
 
@@ -1112,17 +1118,15 @@ id="cropCanvas">
 </div>
 
 <div id="selectionSize">
-الحجم: —
+المساحة: —
 </div>
 
 </div>
-
 
 <div
 id="cropMessage"
 aria-live="polite">
 </div>
-
 
 <div class="crop-actions">
 
@@ -1134,7 +1138,6 @@ type="button">
 ✂️ قص الصورة
 
 </button>
-
 
 <button
 class="crop-button secondary"
@@ -1153,17 +1156,14 @@ type="button">
 
 <div id="result">
 
-
 <h2>
 ✅ تمت عملية القص
 </h2>
-
 
 <img
 id="preview"
 alt="معاينة الصورة المقصوصة"
 >
-
 
 <a
 id="download"
@@ -1174,9 +1174,7 @@ download="adaahub-crop.png">
 
 </a>
 
-
 <br>
-
 
 <button
 class="reset"
@@ -1187,18 +1185,15 @@ type="button">
 
 </button>
 
-
 </div>
 
 
 
 <section class="content">
 
-
 <h2>
 قص الصور وتحديد الجزء المطلوب
 </h2>
-
 
 <p>
 تساعدك أداة قص الصور من AdaaHub على تحديد جزء معين من الصورة
@@ -1212,7 +1207,6 @@ type="button">
 متى تحتاج إلى قص الصورة؟
 </h3>
 
-
 <p>
 يمكن استخدام قص الصور لإزالة أجزاء غير مرغوبة من الصورة، أو
 التركيز على عنصر معين، أو تجهيز الصورة للنشر على مواقع التواصل
@@ -1225,7 +1219,6 @@ type="button">
 كيفية قص صورة باستخدام AdaaHub؟
 </h3>
 
-
 <ol>
 
 <li>
@@ -1237,7 +1230,7 @@ type="button">
 </li>
 
 <li>
-حدد المنطقة التي تريد الاحتفاظ بها باستخدام الماوس أو اللمس.
+اسحب داخل الصورة لتحديد المنطقة التي تريد الاحتفاظ بها.
 </li>
 
 <li>
@@ -1245,7 +1238,7 @@ type="button">
 </li>
 
 <li>
-راجع الصورة الناتجة ثم اضغط على «تحميل الصورة المقصوصة».
+اضغط على «تحميل الصورة المقصوصة» لحفظ النتيجة.
 </li>
 
 </ol>
@@ -1254,7 +1247,6 @@ type="button">
 <h3>
 ما صيغ الصور التي تدعمها الأداة؟
 </h3>
-
 
 <p>
 يمكن للأداة استقبال صور JPG وJPEG وPNG وWebP، بحد أقصى
@@ -1266,18 +1258,16 @@ type="button">
 هل يمكن استخدام الأداة من الهاتف؟
 </h3>
 
-
 <p>
 نعم. تم تصميم أداة القص لتعمل على الهواتف والأجهزة اللوحية
 وأجهزة الكمبيوتر الحديثة. يمكنك تحديد الجزء المطلوب باستخدام
-اللمس على شاشة الهاتف أو الماوس على الكمبيوتر.
+اللمس على الهاتف أو الماوس على الكمبيوتر.
 </p>
 
 
 <h3>
 هل يتم رفع الصورة إلى خادم AdaaHub؟
 </h3>
-
 
 <p>
 لا تعتمد عملية القص نفسها على رفع الصورة إلى خادم AdaaHub.
@@ -1286,34 +1276,13 @@ JavaScript، ثم يتم إنشاء الصورة المقصوصة داخل ال�
 </p>
 
 
-<p>
-أما تحميل الصفحة والموارد اللازمة لتشغيلها فهو اتصال طبيعي
-بصفحة الويب، لكن ملف الصورة الذي تختاره لا يتم إرساله إلى
-خادم AdaaHub بواسطة عملية القص نفسها.
-</p>
-
-
 <h3>
 هل تتغير جودة الصورة بعد القص؟
 </h3>
 
-
 <p>
-يتم إنشاء الصورة الناتجة بصيغة PNG، لذلك لا تستخدم عملية القص
-ضغط JPG لإنشاء الملف الناتج. جودة الصورة تعتمد بشكل أساسي على
-جودة الصورة الأصلية والمنطقة التي اخترتها.
-</p>
-
-
-<h3>
-هل يمكن قص جزء صغير جدًا من الصورة؟
-</h3>
-
-
-<p>
-نعم، يمكنك تحديد أي منطقة مناسبة داخل الصورة، بشرط أن يكون
-التحديد له مساحة فعلية. يتم إنشاء الصورة الناتجة من الجزء
-الذي تحدده فقط.
+يتم إنشاء الصورة الناتجة بصيغة PNG، لذلك لا يتم ضغطها بصيغة JPG
+أثناء إنشاء الملف الناتج.
 </p>
 
 
@@ -1321,22 +1290,20 @@ JavaScript، ثم يتم إنشاء الصورة المقصوصة داخل ال�
 هل تتغير أبعاد الصورة بعد القص؟
 </h3>
 
-
 <p>
-نعم. تختلف أبعاد الصورة الناتجة حسب المنطقة التي تحددها أثناء
-عملية القص. كلما كان التحديد أصغر، كانت أبعاد الصورة الناتجة
-أصغر.
+نعم. أبعاد الصورة الناتجة تعتمد على المنطقة التي حددتها أثناء
+عملية القص.
 </p>
 
 
 <h3>
-هل يتم الاحتفاظ بالصورة الأصلية؟
+هل يتم تعديل الصورة الأصلية؟
 </h3>
 
-
 <p>
-لا يتم تعديل الملف الأصلي الموجود على جهازك. تقوم الأداة بإنشاء
-نسخة جديدة من الجزء المحدد ويمكنك تنزيلها بشكل مستقل.
+لا. الملف الأصلي الموجود على جهازك لا يتم تعديله. تقوم الأداة
+بإنشاء نسخة جديدة من المنطقة التي اخترتها ويمكنك تنزيلها بشكل
+مستقل.
 </p>
 
 
@@ -1344,11 +1311,9 @@ JavaScript، ثم يتم إنشاء الصورة المقصوصة داخل ال�
 أدوات AdaaHub الأخرى للصور
 </h3>
 
-
 <p>
-إذا كنت تريد إجراء تعديلات أخرى على الصورة، يمكنك استخدام أدوات
-ضغط الصور أو تغيير الحجم أو التدوير أو تحويل الصيغ أو معرفة
-معلومات الصورة.
+يمكنك استخدام أدوات أخرى إذا كنت تريد ضغط الصورة أو تغيير حجمها
+أو تدويرها أو تحويل صيغتها أو معرفة معلوماتها.
 </p>
 
 
@@ -1402,9 +1367,7 @@ class="all-tools">
 </a>
 
 
-
 <div class="faq">
-
 
 <h2>
 الأسئلة الشائعة
@@ -1433,7 +1396,7 @@ class="all-tools">
 
 <p>
 نعم، يمكن استخدامها على الهواتف والأجهزة اللوحية وأجهزة الكمبيوتر
-الحديثة التي تدعم تقنيات معالجة الصور داخل المتصفح.
+الحديثة.
 </p>
 
 </details>
@@ -1475,8 +1438,7 @@ class="all-tools">
 </summary>
 
 <p>
-نعم. أبعاد الصورة الناتجة تعتمد على المنطقة التي حددتها أثناء
-عملية القص.
+نعم. أبعاد الصورة الناتجة تعتمد على المنطقة التي تحددها.
 </p>
 
 </details>
@@ -1489,8 +1451,7 @@ class="all-tools">
 </summary>
 
 <p>
-لا. الملف الأصلي الموجود على جهازك لا يتم تعديله. يتم إنشاء
-نسخة جديدة من الجزء الذي اخترته.
+لا. الملف الأصلي الموجود على جهازك لا يتم تعديله.
 </p>
 
 </details>
@@ -1503,8 +1464,7 @@ class="all-tools">
 </summary>
 
 <p>
-يتم إنشاء الصورة الناتجة بصيغة PNG حتى يمكن حفظ المنطقة المحددة
-بشكل مباشر دون إعادة ضغطها بصيغة JPG.
+يتم إنشاء الصورة الناتجة بصيغة PNG.
 </p>
 
 </details>
@@ -1517,12 +1477,11 @@ class="all-tools">
 </summary>
 
 <p>
-نعم. يمكنك تحديد المنطقة باستخدام الماوس على الكمبيوتر أو اللمس
-على الهواتف والأجهزة اللوحية.
+نعم. يمكنك استخدام الماوس على الكمبيوتر أو اللمس على الهاتف
+والجهاز اللوحي.
 </p>
 
 </details>
-
 
 </div>
 
@@ -1535,7 +1494,6 @@ class="all-tools">
 <footer>
 
 © 2026 AdaaHub - جميع الحقوق محفوظة
-
 
 <div class="footer-links">
 
@@ -1628,13 +1586,6 @@ const savedTheme =
 localStorage.getItem(THEME_KEY);
 
 
-if(savedTheme === "dark"){
-
-document.documentElement.classList.add("dark");
-
-}
-
-
 applyTheme(
 savedTheme === "dark"
 ? "dark"
@@ -1670,7 +1621,7 @@ applyTheme(newTheme);
 
 
 /* ==========================================
-   CROP TOOL
+   ELEMENTS
 ========================================== */
 
 const input =
@@ -1723,11 +1674,13 @@ let image = null;
 
 let originalFile = null;
 
-let originalUrl = null;
-
 let resultUrl = null;
 
 let displayScale = 1;
+
+let selecting = false;
+
+let hasSelection = false;
 
 let startX = 0;
 
@@ -1737,13 +1690,50 @@ let currentX = 0;
 
 let currentY = 0;
 
-let selecting = false;
 
-let hasSelection = false;
+/* ==========================================
+   STATUS
+========================================== */
+
+function setStatus(message){
+
+status.textContent = message;
+
+status.style.display = "block";
+
+status.classList.add("loading");
+
+}
+
+
+function hideStatus(){
+
+status.textContent = "";
+
+status.style.display = "none";
+
+status.classList.remove("loading");
+
+}
+
+
+function showError(message){
+
+status.textContent = message;
+
+status.style.display = "block";
+
+status.classList.remove("loading");
+
+editor.style.display = "none";
+
+result.style.display = "none";
+
+}
 
 
 /* ==========================================
-   FILE INPUT
+   INPUT
 ========================================== */
 
 input.addEventListener(
@@ -1751,7 +1741,7 @@ input.addEventListener(
 function(){
 
 const file =
-this.files[0];
+input.files[0];
 
 if(!file){
 return;
@@ -1795,14 +1785,9 @@ return;
 }
 
 
-originalFile = file;
+originalFile =
+file;
 
-
-status.textContent =
-"جارٍ تحميل الصورة...";
-
-status.style.display =
-"block";
 
 editor.style.display =
 "none";
@@ -1811,26 +1796,9 @@ result.style.display =
 "none";
 
 
-if(originalUrl){
-
-URL.revokeObjectURL(
-originalUrl
+setStatus(
+"جارٍ تحميل الصورة..."
 );
-
-originalUrl = null;
-
-}
-
-
-if(resultUrl){
-
-URL.revokeObjectURL(
-resultUrl
-);
-
-resultUrl = null;
-
-}
 
 
 const reader =
@@ -1840,20 +1808,24 @@ new FileReader();
 reader.onload =
 function(event){
 
-image =
+const img =
 new Image();
 
 
-image.onload =
+img.onload =
 function(){
+
+image =
+img;
+
 
 const maxDimension =
 10000;
 
 
 if(
-image.naturalWidth > maxDimension ||
-image.naturalHeight > maxDimension
+img.naturalWidth > maxDimension ||
+img.naturalHeight > maxDimension
 ){
 
 showError(
@@ -1865,52 +1837,57 @@ return;
 }
 
 
+/*
+   نعرض الصورة بحد أقصى 800 بكسل للعرض
+   مع الحفاظ على النسبة الأصلية.
+*/
+
 displayScale =
 Math.min(
 1,
-800 / image.naturalWidth
+800 / img.naturalWidth
 );
 
 
-/*
-   الحفاظ على نسبة الأبعاد
-*/
-
-const displayWidth =
+const canvasWidth =
+Math.max(
+1,
 Math.round(
-image.naturalWidth *
+img.naturalWidth *
 displayScale
+)
 );
 
-const displayHeight =
+
+const canvasHeight =
+Math.max(
+1,
 Math.round(
-image.naturalHeight *
+img.naturalHeight *
 displayScale
+)
 );
 
 
 cropCanvas.width =
-displayWidth;
+canvasWidth;
 
 cropCanvas.height =
-displayHeight;
+canvasHeight;
 
 
 cropCanvas.style.width =
-displayWidth + "px";
+canvasWidth + "px";
 
 cropCanvas.style.height =
-displayHeight + "px";
-
-
-drawImage();
+canvasHeight + "px";
 
 
 resetSelection();
 
+drawImage();
 
-status.style.display =
-"none";
+hideStatus();
 
 editor.style.display =
 "block";
@@ -1918,7 +1895,7 @@ editor.style.display =
 
 };
 
-image.onerror =
+img.onerror =
 function(){
 
 showError(
@@ -1928,7 +1905,7 @@ showError(
 };
 
 
-image.src =
+img.src =
 event.target.result;
 
 };
@@ -1950,7 +1927,7 @@ reader.readAsDataURL(file);
 
 
 /* ==========================================
-   DRAW IMAGE
+   DRAW ORIGINAL IMAGE
 ========================================== */
 
 function drawImage(){
@@ -1980,45 +1957,31 @@ cropCanvas.height
 
 
 /* ==========================================
-   POSITION
+   GET POINTER POSITION
 ========================================== */
 
-function getPosition(event){
+function getPointerPosition(event){
 
 const rect =
 cropCanvas.getBoundingClientRect();
 
 
-let clientX;
-let clientY;
+const scaleX =
+cropCanvas.width /
+rect.width;
 
-
-if(event.touches){
-
-clientX =
-event.touches[0].clientX;
-
-clientY =
-event.touches[0].clientY;
-
-}else{
-
-clientX =
-event.clientX;
-
-clientY =
-event.clientY;
-
-}
+const scaleY =
+cropCanvas.height /
+rect.height;
 
 
 let x =
-clientX -
-rect.left;
+(event.clientX - rect.left) *
+scaleX;
 
 let y =
-clientY -
-rect.top;
+(event.clientY - rect.top) *
+scaleY;
 
 
 x =
@@ -2050,10 +2013,12 @@ y:y
 
 
 /* ==========================================
-   START SELECTION
+   POINTER DOWN
 ========================================== */
 
-function startSelection(event){
+cropCanvas.addEventListener(
+"pointerdown",
+function(event){
 
 if(!image){
 return;
@@ -2063,8 +2028,13 @@ return;
 event.preventDefault();
 
 
+cropCanvas.setPointerCapture(
+event.pointerId
+);
+
+
 const pos =
-getPosition(event);
+getPointerPosition(event);
 
 
 startX =
@@ -2083,19 +2053,24 @@ selecting =
 true;
 
 hasSelection =
-false;
+true;
 
 
 drawSelection();
 
+updateSelectionInfo();
+
 }
+);
 
 
 /* ==========================================
-   MOVE SELECTION
+   POINTER MOVE
 ========================================== */
 
-function moveSelection(event){
+cropCanvas.addEventListener(
+"pointermove",
+function(event){
 
 if(!selecting){
 return;
@@ -2106,7 +2081,7 @@ event.preventDefault();
 
 
 const pos =
-getPosition(event);
+getPointerPosition(event);
 
 
 currentX =
@@ -2115,33 +2090,53 @@ pos.x;
 currentY =
 pos.y;
 
-hasSelection =
-true;
-
 
 drawSelection();
 
+updateSelectionInfo();
+
 }
+);
 
 
 /* ==========================================
-   END SELECTION
+   POINTER UP
 ========================================== */
 
-function endSelection(event){
+cropCanvas.addEventListener(
+"pointerup",
+function(event){
 
 if(!selecting){
 return;
 }
 
 
-if(event){
 event.preventDefault();
-}
+
+
+const pos =
+getPointerPosition(event);
+
+
+currentX =
+pos.x;
+
+currentY =
+pos.y;
 
 
 selecting =
 false;
+
+
+try{
+
+cropCanvas.releasePointerCapture(
+event.pointerId
+);
+
+}catch(error){}
 
 
 const rect =
@@ -2160,6 +2155,11 @@ drawImage();
 
 updateSelectionInfo();
 
+showCropMessage(
+"حدد منطقة أكبر من الصورة.",
+"error"
+);
+
 return;
 
 }
@@ -2172,11 +2172,37 @@ drawSelection();
 
 updateSelectionInfo();
 
+hideCropMessage();
+
 }
+);
 
 
 /* ==========================================
-   SELECTION RECTANGLE
+   POINTER CANCEL
+========================================== */
+
+cropCanvas.addEventListener(
+"pointercancel",
+function(event){
+
+selecting =
+false;
+
+try{
+
+cropCanvas.releasePointerCapture(
+event.pointerId
+);
+
+}catch(error){}
+
+}
+);
+
+
+/* ==========================================
+   GET SELECTION
 ========================================== */
 
 function getSelection(){
@@ -2243,13 +2269,15 @@ return;
 
 
 /*
-   تعتيم الجزء خارج التحديد
+   تعتيم المنطقة خارج التحديد
 */
 
 ctx.save();
 
+
 ctx.fillStyle =
-"rgba(0,0,0,.45)";
+"rgba(0,0,0,.48)";
+
 
 ctx.fillRect(
 0,
@@ -2258,6 +2286,10 @@ cropCanvas.width,
 cropCanvas.height
 );
 
+
+/*
+   إعادة رسم المنطقة المحددة
+*/
 
 ctx.clearRect(
 rect.x,
@@ -2280,11 +2312,16 @@ rect.height
 );
 
 
+/*
+   إطار التحديد
+*/
+
 ctx.strokeStyle =
 "#ffffff";
 
 ctx.lineWidth =
 2;
+
 
 ctx.strokeRect(
 rect.x,
@@ -2314,7 +2351,7 @@ selectionHeight.textContent =
 "الارتفاع: —";
 
 selectionSize.textContent =
-"الحجم: —";
+"المساحة: —";
 
 return;
 
@@ -2326,27 +2363,34 @@ getSelection();
 
 
 const realWidth =
+Math.max(
+1,
 Math.round(
 rect.width /
 displayScale
+)
 );
 
+
 const realHeight =
+Math.max(
+1,
 Math.round(
 rect.height /
 displayScale
+)
 );
 
 
 selectionWidth.textContent =
 "العرض: " +
-realWidth +
+formatNumber(realWidth) +
 " بكسل";
 
 
 selectionHeight.textContent =
 "الارتفاع: " +
-realHeight +
+formatNumber(realHeight) +
 " بكسل";
 
 
@@ -2362,56 +2406,7 @@ realHeight
 
 
 /* ==========================================
-   MOUSE EVENTS
-========================================== */
-
-cropCanvas.addEventListener(
-"mousedown",
-startSelection
-);
-
-cropCanvas.addEventListener(
-"mousemove",
-moveSelection
-);
-
-window.addEventListener(
-"mouseup",
-endSelection
-);
-
-
-/* ==========================================
-   TOUCH EVENTS
-========================================== */
-
-cropCanvas.addEventListener(
-"touchstart",
-startSelection,
-{
-passive:false
-}
-);
-
-cropCanvas.addEventListener(
-"touchmove",
-moveSelection,
-{
-passive:false
-}
-);
-
-window.addEventListener(
-"touchend",
-endSelection,
-{
-passive:false
-}
-);
-
-
-/* ==========================================
-   CROP BUTTON
+   CROP
 ========================================== */
 
 cropButton.addEventListener(
@@ -2419,14 +2414,22 @@ cropButton.addEventListener(
 function(){
 
 if(!image){
+
+showCropMessage(
+"اختر صورة أولًا.",
+"error"
+);
+
 return;
+
 }
 
 
 if(!hasSelection){
 
 showCropMessage(
-"حدد الجزء الذي تريد الاحتفاظ به أولًا."
+"حدد الجزء الذي تريد الاحتفاظ به أولًا.",
+"error"
 );
 
 return;
@@ -2444,7 +2447,8 @@ rect.height < 2
 ){
 
 showCropMessage(
-"من فضلك حدد مساحة أكبر من الصورة."
+"حدد منطقة أكبر من الصورة.",
+"error"
 );
 
 return;
@@ -2453,28 +2457,64 @@ return;
 
 
 const sourceX =
-Math.round(
+Math.max(
+0,
+Math.floor(
 rect.x /
 displayScale
+)
 );
+
 
 const sourceY =
-Math.round(
+Math.max(
+0,
+Math.floor(
 rect.y /
 displayScale
+)
 );
 
+
 const sourceWidth =
+Math.min(
+image.naturalWidth - sourceX,
+Math.max(
+1,
 Math.round(
 rect.width /
 displayScale
+)
+)
 );
 
+
 const sourceHeight =
+Math.min(
+image.naturalHeight - sourceY,
+Math.max(
+1,
 Math.round(
 rect.height /
 displayScale
+)
+)
 );
+
+
+if(
+sourceWidth < 1 ||
+sourceHeight < 1
+){
+
+showCropMessage(
+"تعذر تحديد المنطقة المطلوبة. حاول التحديد مرة أخرى.",
+"error"
+);
+
+return;
+
+}
 
 
 const outputCanvas =
@@ -2495,13 +2535,18 @@ outputCanvas.getContext("2d");
 if(!outputCtx){
 
 showCropMessage(
-"المتصفح لا يدعم إنشاء الصورة المطلوبة."
+"المتصفح لا يدعم إنشاء الصورة المطلوبة.",
+"error"
 );
 
 return;
 
 }
 
+
+/*
+   نسخ الجزء المحدد من الصورة الأصلية
+*/
 
 outputCtx.drawImage(
 image,
@@ -2516,13 +2561,20 @@ sourceHeight
 );
 
 
+showCropMessage(
+"جارٍ إنشاء الصورة المقصوصة...",
+"success"
+);
+
+
 outputCanvas.toBlob(
 function(blob){
 
 if(!blob){
 
 showCropMessage(
-"تعذر إنشاء الصورة المقصوصة. حاول مرة أخرى."
+"تعذر إنشاء الصورة المقصوصة. حاول مرة أخرى.",
+"error"
 );
 
 return;
@@ -2547,14 +2599,14 @@ preview.src =
 resultUrl;
 
 
-download.href =
-resultUrl;
-
-
 const originalName =
 getBaseName(
 originalFile.name
 );
+
+
+download.href =
+resultUrl;
 
 
 download.download =
@@ -2566,14 +2618,22 @@ result.style.display =
 "block";
 
 
+showCropMessage(
+"تم إنشاء الصورة المقصوصة بنجاح.",
+"success"
+);
+
+
+setTimeout(
+function(){
+
 result.scrollIntoView({
 behavior:"smooth",
 block:"start"
 });
 
-
-showCropMessage(
-"تم إنشاء الصورة المقصوصة بنجاح."
+},
+100
 );
 
 
@@ -2594,13 +2654,20 @@ function(){
 
 resetTool();
 
+setTimeout(
+function(){
+
 input.click();
+
+},
+50
+);
 
 });
 
 
 /* ==========================================
-   RESET RESULT
+   RESET
 ========================================== */
 
 reset.addEventListener(
@@ -2608,6 +2675,11 @@ reset.addEventListener(
 function(){
 
 resetTool();
+
+window.scrollTo({
+top:0,
+behavior:"smooth"
+});
 
 });
 
@@ -2627,25 +2699,20 @@ editor.style.display =
 result.style.display =
 "none";
 
-status.style.display =
-"none";
+hideStatus();
 
-cropMessage.style.display =
-"none";
+hideCropMessage();
+
 
 preview.removeAttribute(
 "src"
 );
 
+
 download.removeAttribute(
 "href"
 );
 
-hasSelection =
-false;
-
-selecting =
-false;
 
 image =
 null;
@@ -2653,15 +2720,36 @@ null;
 originalFile =
 null;
 
+selecting =
+false;
+
+hasSelection =
+false;
+
+
+startX =
+0;
+
+startY =
+0;
+
+currentX =
+0;
+
+currentY =
+0;
+
 
 selectionWidth.textContent =
 "العرض: —";
 
+
 selectionHeight.textContent =
 "الارتفاع: —";
 
+
 selectionSize.textContent =
-"الحجم: —";
+"المساحة: —";
 
 
 ctx.clearRect(
@@ -2670,18 +2758,6 @@ ctx.clearRect(
 cropCanvas.width,
 cropCanvas.height
 );
-
-
-if(originalUrl){
-
-URL.revokeObjectURL(
-originalUrl
-);
-
-originalUrl =
-null;
-
-}
 
 
 if(resultUrl){
@@ -2699,22 +2775,34 @@ null;
 
 
 /* ==========================================
-   ERROR MESSAGE
+   RESET SELECTION
 ========================================== */
 
-function showError(message){
+function resetSelection(){
 
-status.textContent =
-message;
+selecting =
+false;
 
-status.style.display =
-"block";
+hasSelection =
+false;
 
-editor.style.display =
-"none";
 
-result.style.display =
-"none";
+startX =
+0;
+
+startY =
+0;
+
+currentX =
+0;
+
+currentY =
+0;
+
+
+updateSelectionInfo();
+
+hideCropMessage();
 
 }
 
@@ -2723,13 +2811,46 @@ result.style.display =
    CROP MESSAGE
 ========================================== */
 
-function showCropMessage(message){
+function showCropMessage(
+message,
+type
+){
 
 cropMessage.textContent =
 message;
 
 cropMessage.style.display =
 "block";
+
+cropMessage.classList.remove(
+"success",
+"error"
+);
+
+
+if(type){
+
+cropMessage.classList.add(
+type
+);
+
+}
+
+}
+
+
+function hideCropMessage(){
+
+cropMessage.textContent =
+"";
+
+cropMessage.style.display =
+"none";
+
+cropMessage.classList.remove(
+"success",
+"error"
+);
 
 }
 
@@ -2768,14 +2889,6 @@ return name.replace(
 window.addEventListener(
 "beforeunload",
 function(){
-
-if(originalUrl){
-
-URL.revokeObjectURL(
-originalUrl
-);
-
-}
 
 if(resultUrl){
 
