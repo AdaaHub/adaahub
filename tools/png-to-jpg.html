@@ -1,7 +1,10 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
+
 <head>
+
 <meta charset="UTF-8">
+
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <title>تحويل PNG إلى JPG أونلاين مجانًا | تحويل الصور | AdaaHub</title>
@@ -13,83 +16,313 @@
 <link rel="canonical" href="https://adaahub.github.io/adaahub/tools/png-to-jpg.html">
 
 <style>
+
 *{
     box-sizing:border-box;
 }
 
+:root{
+    --primary:#2563eb;
+    --primary-dark:#1d4ed8;
+    --primary-soft:#eff6ff;
+
+    --bg:#f6f8fc;
+    --surface:#ffffff;
+
+    --text:#111827;
+    --muted:#64748b;
+    --border:#e5e7eb;
+
+    --success:#16a34a;
+    --danger:#dc2626;
+
+    --shadow:0 12px 35px rgba(15,23,42,.07);
+}
+
+html.dark{
+    --primary:#60a5fa;
+    --primary-dark:#93c5fd;
+    --primary-soft:#172554;
+
+    --bg:#0b1120;
+    --surface:#111827;
+
+    --text:#f1f5f9;
+    --muted:#94a3b8;
+    --border:#243044;
+
+    --success:#4ade80;
+    --danger:#f87171;
+
+    --shadow:0 12px 35px rgba(0,0,0,.25);
+}
+
+html{
+    scroll-behavior:smooth;
+}
+
 body{
     margin:0;
-    font-family:Arial,Tahoma,sans-serif;
-    background:#f5f7fb;
-    color:#222;
+
+    font-family:
+        "Cairo",
+        Arial,
+        Tahoma,
+        sans-serif;
+
+    background:
+        radial-gradient(
+            circle at top,
+            var(--primary-soft),
+            var(--bg) 420px
+        );
+
+    color:var(--text);
+
+    transition:
+        background .25s ease,
+        color .25s ease;
+
+    min-height:100vh;
+}
+
+a{
+    color:inherit;
 }
 
 header{
-    background:#fff;
-    border-bottom:1px solid #e5e7eb;
-    padding:16px 20px;
+    position:sticky;
+    top:0;
+    z-index:100;
+
+    background:rgba(255,255,255,.82);
+
+    border-bottom:1px solid var(--border);
+
+    backdrop-filter:blur(14px);
+    -webkit-backdrop-filter:blur(14px);
+}
+
+html.dark header{
+    background:rgba(11,17,32,.82);
 }
 
 .header-inner{
-    max-width:1000px;
+    max-width:1100px;
+
     margin:auto;
+
+    padding:13px 18px;
+
     display:flex;
     align-items:center;
     justify-content:space-between;
+
+    gap:15px;
 }
 
-.logo{
-    font-size:24px;
-    font-weight:bold;
-    color:#1976d2;
+.brand{
+    display:flex;
+    align-items:center;
+
+    gap:9px;
+
     text-decoration:none;
+
+    font-size:21px;
+    font-weight:800;
+
+    color:var(--text);
+}
+
+.brand-mark{
+    width:38px;
+    height:38px;
+
+    border-radius:12px;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    color:#fff;
+
+    font-size:20px;
+    font-weight:900;
+
+    background:
+        linear-gradient(
+            135deg,
+            #2563eb,
+            #60a5fa
+        );
+
+    box-shadow:
+        0 7px 18px rgba(37,99,235,.22);
+}
+
+.nav{
+    display:flex;
+    align-items:center;
+
+    gap:8px;
 }
 
 .home{
-    color:#333;
     text-decoration:none;
+
+    color:var(--muted);
+
+    font-size:14px;
+    font-weight:700;
+
+    padding:9px 12px;
+
+    border-radius:10px;
+
+    transition:.2s;
+}
+
+.home:hover{
+    color:var(--primary);
+
+    background:var(--primary-soft);
+}
+
+.theme-btn{
+    border:1px solid var(--border);
+
+    background:var(--surface);
+
+    color:var(--text);
+
+    width:40px;
+    height:40px;
+
+    border-radius:11px;
+
+    cursor:pointer;
+
+    font-size:18px;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    transition:.2s;
+}
+
+.theme-btn:hover{
+    border-color:var(--primary);
+
+    transform:translateY(-1px);
 }
 
 .container{
-    max-width:900px;
-    margin:30px auto;
-    padding:0 15px;
+    width:min(100% - 30px, 1050px);
+
+    margin:32px auto 45px;
 }
 
-.card{
-    background:#fff;
-    border-radius:14px;
-    padding:25px;
-    box-shadow:0 5px 20px rgba(0,0,0,.06);
+.hero{
+    text-align:center;
+
+    margin-bottom:25px;
+}
+
+.badge{
+    display:inline-flex;
+
+    align-items:center;
+
+    gap:7px;
+
+    background:var(--primary-soft);
+
+    color:var(--primary);
+
+    padding:7px 13px;
+
+    border-radius:999px;
+
+    font-size:13px;
+    font-weight:800;
+
+    margin-bottom:13px;
 }
 
 h1{
-    text-align:center;
-    color:#1976d2;
-    font-size:28px;
+    margin:0;
+
+    color:var(--text);
+
+    font-size:clamp(25px,4vw,36px);
+
+    line-height:1.35;
 }
 
-.intro{
-    text-align:center;
-    color:#666;
-    line-height:1.8;
-    margin-bottom:25px;
+.hero p{
+    max-width:760px;
+
+    margin:12px auto 0;
+
+    color:var(--muted);
+
+    line-height:1.9;
+
+    font-size:15px;
+}
+
+.card{
+    background:var(--surface);
+
+    border:1px solid var(--border);
+
+    border-radius:20px;
+
+    padding:25px;
+
+    box-shadow:var(--shadow);
+
+    transition:
+        background .25s ease,
+        border-color .25s ease;
 }
 
 .upload-box{
     display:block;
-    border:2px dashed #b8c2d1;
-    border-radius:12px;
-    padding:30px 15px;
+
+    border:2px dashed var(--border);
+
+    border-radius:17px;
+
+    padding:38px 18px;
+
     text-align:center;
-    background:#fafcff;
+
+    background:
+        linear-gradient(
+            180deg,
+            var(--surface),
+            var(--bg)
+        );
+
     cursor:pointer;
+
     transition:.2s;
 }
 
 .upload-box:hover{
-    border-color:#1976d2;
-    background:#f4f9ff;
+    border-color:var(--primary);
+
+    background:var(--primary-soft);
+}
+
+.upload-box:focus-within{
+    border-color:var(--primary);
+
+    box-shadow:
+        0 0 0 4px rgba(37,99,235,.10);
 }
 
 .upload-box input{
@@ -97,286 +330,671 @@ h1{
 }
 
 .upload-icon{
-    font-size:42px;
-    margin-bottom:10px;
+    width:66px;
+    height:66px;
+
+    margin:0 auto 13px;
+
+    border-radius:18px;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    background:var(--primary-soft);
+
+    font-size:32px;
 }
 
 .upload-text{
     font-size:17px;
-    font-weight:bold;
+
+    font-weight:800;
+
+    color:var(--text);
 }
 
 .upload-sub{
-    color:#777;
-    font-size:14px;
+    color:var(--muted);
+
+    font-size:13px;
+
     margin-top:8px;
+
+    line-height:1.7;
 }
 
 .file-selected{
     display:none;
+
     margin-top:15px;
-    padding:10px 12px;
-    background:#f8fafc;
-    border-radius:8px;
+
+    padding:11px 13px;
+
+    background:var(--bg);
+
+    border:1px solid var(--border);
+
+    border-radius:11px;
+
     text-align:center;
-    color:#555;
+
+    color:var(--muted);
+
     font-size:14px;
+
     word-break:break-word;
 }
 
 .preview{
     display:none;
-    margin-top:25px;
-    background:#111;
-    border-radius:10px;
+
+    margin-top:20px;
+
+    background:#0f172a;
+
+    border-radius:16px;
+
     padding:15px;
+
     text-align:center;
+
     overflow:auto;
 }
 
 .preview img{
     max-width:100%;
+
     max-height:500px;
+
     height:auto;
+
     display:block;
+
     margin:auto;
+
+    border-radius:8px;
 }
 
 .settings{
     display:none;
+
     margin-top:20px;
-    padding:15px;
-    background:#f8fafc;
-    border-radius:10px;
+
+    padding:17px;
+
+    background:var(--bg);
+
+    border:1px solid var(--border);
+
+    border-radius:13px;
 }
 
 .settings label{
     display:block;
-    font-weight:bold;
-    margin-bottom:10px;
+
+    color:var(--text);
+
+    font-weight:800;
+
+    margin-bottom:12px;
 }
 
 .quality-row{
     display:flex;
+
     align-items:center;
-    gap:10px;
+
+    gap:12px;
 }
 
 #quality{
     flex:1;
+
+    accent-color:var(--primary);
+
+    cursor:pointer;
 }
 
 #qualityValue{
-    min-width:45px;
-    font-weight:bold;
-    color:#1976d2;
+    min-width:48px;
+
+    font-weight:800;
+
+    color:var(--primary);
+
+    text-align:center;
+}
+
+.details{
+    display:none;
+
+    margin-top:15px;
+
+    padding:13px 15px;
+
+    text-align:center;
+
+    color:var(--muted);
+
+    background:var(--bg);
+
+    border:1px solid var(--border);
+
+    border-radius:11px;
+
+    line-height:1.9;
+}
+
+.details strong{
+    color:var(--text);
+}
+
+.status{
+    display:none;
+
+    margin-top:15px;
+
+    padding:11px 14px;
+
+    border-radius:11px;
+
+    text-align:center;
+
+    color:var(--primary);
+
+    background:var(--primary-soft);
+
+    line-height:1.8;
+
+    font-size:14px;
+}
+
+.status.success{
+    color:var(--success);
+
+    background:
+        rgba(22,163,74,.09);
+}
+
+.status.error{
+    color:var(--danger);
+
+    background:
+        rgba(220,38,38,.09);
 }
 
 .buttons{
     display:none;
+
     justify-content:center;
+
     gap:10px;
+
     flex-wrap:wrap;
+
     margin-top:20px;
 }
 
 button,
 .download-btn{
     border:0;
-    border-radius:8px;
-    padding:12px 22px;
+
+    border-radius:11px;
+
+    padding:12px 20px;
+
     font-size:15px;
+
+    font-family:inherit;
+
     cursor:pointer;
+
     text-decoration:none;
+
     transition:.2s;
+
+    font-weight:700;
 }
 
 button:hover,
 .download-btn:hover{
-    opacity:.9;
+    transform:translateY(-1px);
+}
+
+button:disabled{
+    opacity:.65;
+
+    cursor:not-allowed;
+
+    transform:none;
 }
 
 .convert-btn{
-    background:#16a34a;
+    background:var(--success);
+
     color:#fff;
+
+    box-shadow:
+        0 7px 18px rgba(22,163,74,.16);
 }
 
 .reset-btn{
-    background:#e5e7eb;
-    color:#222;
+    background:var(--bg);
+
+    color:var(--text);
+
+    border:1px solid var(--border);
 }
 
 .download-btn{
-    display:none;
-    background:#1976d2;
+    background:var(--primary);
+
     color:#fff;
-}
 
-.status{
     display:none;
-    text-align:center;
-    color:#1976d2;
-    margin-top:15px;
-    line-height:1.7;
-}
 
-.details{
-    display:none;
-    text-align:center;
-    color:#666;
-    line-height:1.9;
-    margin-top:15px;
+    box-shadow:
+        0 7px 18px rgba(37,99,235,.18);
 }
 
 .info{
-    margin-top:25px;
-    background:#f0f7ff;
-    border-right:4px solid #1976d2;
-    padding:15px;
-    border-radius:8px;
-    line-height:1.8;
+    margin-top:22px;
+
+    background:var(--primary-soft);
+
+    border-right:4px solid var(--primary);
+
+    padding:14px 16px;
+
+    border-radius:11px;
+
+    line-height:1.9;
+
     font-size:14px;
+
+    color:var(--text);
 }
 
 .section{
-    background:#fff;
+    background:var(--surface);
+
     margin-top:20px;
+
     padding:25px;
-    border-radius:14px;
+
+    border-radius:18px;
+
+    border:1px solid var(--border);
+
+    box-shadow:var(--shadow);
 }
 
 .section h2{
-    color:#1976d2;
-    margin-top:0;
+    color:var(--text);
+
+    margin:0 0 14px;
+
     font-size:21px;
+
+    line-height:1.5;
+}
+
+.section h2::before{
+    content:"";
+
+    display:inline-block;
+
+    width:5px;
+    height:22px;
+
+    margin-left:9px;
+
+    vertical-align:-3px;
+
+    border-radius:5px;
+
+    background:var(--primary);
 }
 
 .section p{
-    color:#555;
-    line-height:1.9;
+    color:var(--muted);
+
+    line-height:2;
+
+    margin:10px 0;
 }
 
 .section ul,
 .section ol{
-    color:#555;
-    line-height:1.9;
-    padding-right:22px;
+    color:var(--muted);
+
+    line-height:2;
+
+    padding-right:23px;
 }
 
 .section li{
     margin-bottom:7px;
 }
 
-.faq h3{
-    font-size:17px;
-    margin-bottom:6px;
+.faq details{
+    border:1px solid var(--border);
+
+    border-radius:12px;
+
+    padding:0 14px;
+
+    margin-top:10px;
+
+    background:var(--bg);
+}
+
+.faq summary{
+    cursor:pointer;
+
+    padding:14px 3px;
+
+    font-weight:800;
+
+    color:var(--text);
+}
+
+.faq details p{
+    padding:0 3px 12px;
+
+    margin:0;
 }
 
 .tools-links{
     display:flex;
+
     flex-wrap:wrap;
-    gap:10px;
+
+    gap:9px;
 }
 
 .tools-links a{
     text-decoration:none;
-    background:#f1f5f9;
-    color:#1976d2;
+
+    background:var(--bg);
+
+    border:1px solid var(--border);
+
+    color:var(--primary);
+
     padding:9px 12px;
-    border-radius:8px;
+
+    border-radius:10px;
+
     font-size:14px;
+
+    transition:.2s;
 }
 
 .tools-links a:hover{
-    background:#e0efff;
+    background:var(--primary-soft);
+
+    border-color:var(--primary);
 }
 
 .all-tools{
-    display:inline-block;
-    margin-top:18px;
-    background:#1976d2;
-    color:#fff !important;
-    padding:11px 18px !important;
-    border-radius:8px;
+    display:inline-flex;
+
+    margin-top:20px;
+
+    color:var(--primary);
+
+    font-weight:800;
+
+    text-decoration:none;
 }
 
 .all-tools:hover{
-    background:#1565c0 !important;
+    text-decoration:underline;
 }
 
 footer{
     text-align:center;
-    padding:25px 15px;
-    color:#777;
-    font-size:14px;
-    line-height:1.8;
+
+    padding:25px 15px 35px;
+
+    color:var(--muted);
+
+    font-size:13px;
+
+    line-height:2;
 }
 
 footer a{
-    color:#666;
+    color:var(--muted);
+
     text-decoration:none;
+
     margin:0 5px;
 }
 
-@media(max-width:600px){
+footer a:hover{
+    color:var(--primary);
+}
+
+.spinner{
+    display:inline-block;
+
+    width:15px;
+    height:15px;
+
+    border:2px solid currentColor;
+
+    border-left-color:transparent;
+
+    border-radius:50%;
+
+    vertical-align:-2px;
+
+    margin-left:6px;
+
+    animation:spin .7s linear infinite;
+}
+
+@keyframes spin{
+
+    to{
+        transform:rotate(360deg);
+    }
+
+}
+
+@media(max-width:700px){
+
+    .header-inner{
+        padding:11px 14px;
+    }
+
+    .brand{
+        font-size:19px;
+    }
+
+    .brand-mark{
+        width:35px;
+        height:35px;
+    }
+
+    .home{
+        display:none;
+    }
 
     .container{
-        margin:20px auto;
+        width:min(100% - 20px, 1050px);
+
+        margin-top:22px;
     }
 
     .card{
-        padding:18px;
+        padding:17px;
     }
 
-    h1{
-        font-size:23px;
-    }
-
-    .buttons button,
-    .buttons .download-btn{
-        width:100%;
-        text-align:center;
+    .upload-box{
+        padding:30px 14px;
     }
 
     .section{
         padding:20px;
     }
+
+    .buttons button,
+    .buttons .download-btn{
+        width:100%;
+
+        text-align:center;
+    }
+
 }
+
+@media(max-width:430px){
+
+    h1{
+        font-size:23px;
+    }
+
+    .hero p{
+        font-size:14px;
+    }
+
+    .section h2{
+        font-size:19px;
+    }
+
+    .upload-text{
+        font-size:16px;
+    }
+
+}
+
+@media(prefers-reduced-motion:reduce){
+
+    *,
+    *::before,
+    *::after{
+        scroll-behavior:auto !important;
+
+        transition:none !important;
+
+        animation:none !important;
+    }
+
+}
+
 </style>
+
+
+<script>
+
+(function(){
+
+    const savedTheme =
+        localStorage.getItem("adaahub-theme");
+
+    if(savedTheme === "dark"){
+
+        document.documentElement
+            .classList.add("dark");
+
+    }
+
+})();
+
+</script>
+
 </head>
+
 
 <body>
 
+
 <header>
+
     <div class="header-inner">
 
-        <a href="../index.html" class="logo">
-            AdaaHub
+        <a
+            class="brand"
+            href="../index.html"
+            aria-label="AdaaHub الرئيسية">
+
+            <span class="brand-mark">
+                A
+            </span>
+
+            <span>
+                AdaaHub
+            </span>
+
         </a>
 
-        <a href="../index.html" class="home">
-            الرئيسية
-        </a>
+
+        <div class="nav">
+
+            <a
+                class="home"
+                href="../index.html">
+
+                الرئيسية
+
+            </a>
+
+
+            <button
+                type="button"
+                class="theme-btn"
+                id="themeToggle"
+                aria-label="تفعيل الوضع الليلي"
+                title="تفعيل الوضع الليلي">
+
+                🌙
+
+            </button>
+
+        </div>
 
     </div>
+
 </header>
+
+
 
 <main class="container">
 
+
+<section class="hero">
+
+    <div class="badge">
+        ⚡ أداة مجانية وسريعة
+    </div>
+
+    <h1>
+        تحويل PNG إلى JPG أونلاين مجانًا
+    </h1>
+
+    <p>
+        حوّل صور PNG إلى JPG بسهولة،
+        واختر جودة الصورة قبل التحويل،
+        ثم حمّل الملف الجديد مباشرة من متصفحك.
+    </p>
+
+</section>
+
+
+
 <div class="card">
 
-<h1>
-تحويل PNG إلى JPG أونلاين مجانًا
-</h1>
 
-<p class="intro">
-حوّل صور PNG إلى JPG بسهولة، واختر جودة الصورة قبل تحميلها،
-مع معالجة الصورة مباشرة داخل المتصفح.
-</p>
+<label
+    class="upload-box"
+    for="imageInput">
 
-<label class="upload-box" for="imageInput">
-
-    <div class="upload-icon">🖼️</div>
+    <div class="upload-icon">
+        🖼️
+    </div>
 
     <div class="upload-text">
         اختر صورة PNG
@@ -389,23 +1007,35 @@ footer a{
     <input
         type="file"
         id="imageInput"
-        accept="image/png,.png"
-    >
+        accept="image/png,.png">
 
 </label>
 
-<div class="file-selected" id="fileSelected"></div>
 
-<div class="preview" id="previewBox">
+
+<div
+    class="file-selected"
+    id="fileSelected"
+    aria-live="polite">
+</div>
+
+
+
+<div
+    class="preview"
+    id="previewBox">
 
     <img
         id="previewImage"
-        alt="معاينة صورة PNG قبل تحويلها إلى JPG"
-    >
+        alt="معاينة صورة PNG قبل تحويلها إلى JPG">
 
 </div>
 
-<div class="settings" id="settings">
+
+
+<div
+    class="settings"
+    id="settings">
 
     <label for="quality">
         جودة الصورة
@@ -419,7 +1049,7 @@ footer a{
             min="10"
             max="100"
             value="85"
-        >
+            aria-label="جودة صورة JPG">
 
         <span id="qualityValue">
             85%
@@ -429,36 +1059,61 @@ footer a{
 
 </div>
 
-<div class="details" id="details"></div>
 
-<div class="status" id="status">
-    جاري التحويل...
+
+<div
+    class="details"
+    id="details"
+    aria-live="polite">
 </div>
 
-<div class="buttons" id="buttons">
+
+
+<div
+    class="status"
+    id="status"
+    role="status"
+    aria-live="polite">
+</div>
+
+
+
+<div
+    class="buttons"
+    id="buttons">
 
     <button
         type="button"
         class="convert-btn"
         id="convertBtn">
+
         🔄 تحويل إلى JPG
+
     </button>
+
 
     <button
         type="button"
         class="reset-btn"
         id="resetBtn">
+
         إعادة ضبط
+
     </button>
+
 
     <a
         class="download-btn"
         id="downloadBtn"
         download>
+
         ⬇️ تحميل JPG
+
     </a>
 
 </div>
+
+
 
 <div class="info">
 
@@ -469,7 +1124,9 @@ footer a{
 
 </div>
 
+
 </div>
+
 
 
 <section class="section">
@@ -505,6 +1162,7 @@ footer a{
 </section>
 
 
+
 <section class="section">
 
 <h2>
@@ -523,6 +1181,7 @@ footer a{
 </p>
 
 </section>
+
 
 
 <section class="section">
@@ -563,6 +1222,7 @@ footer a{
 </section>
 
 
+
 <section class="section">
 
 <h2>
@@ -581,6 +1241,7 @@ JPG مناسب بشكل خاص للصور الفوتوغرافية والصور 
 </p>
 
 </section>
+
 
 
 <section class="section">
@@ -603,121 +1264,137 @@ JPG مناسب بشكل خاص للصور الفوتوغرافية والصور 
 </section>
 
 
+
 <section class="section">
 
 <h2>
 الأسئلة الشائعة
 </h2>
 
+
 <div class="faq">
 
-<h3>
+
+<details>
+
+<summary>
 هل تحويل PNG إلى JPG مجاني؟
-</h3>
+</summary>
 
 <p>
 نعم، يمكنك استخدام الأداة مجانًا من الهاتف أو الكمبيوتر.
 </p>
 
-</div>
+</details>
 
 
-<div class="faq">
 
-<h3>
+<details>
+
+<summary>
 هل يتم رفع الصورة إلى الموقع؟
-</h3>
+</summary>
 
 <p>
 لا. تتم عملية التحويل داخل متصفحك مباشرة، ولا تحتاج الصورة
 إلى الرفع إلى خوادم AdaaHub لمعالجتها.
 </p>
 
-</div>
+</details>
 
 
-<div class="faq">
 
-<h3>
+<details>
+
+<summary>
 هل يتم الاحتفاظ بأبعاد الصورة؟
-</h3>
+</summary>
 
 <p>
 نعم، يتم إنشاء ملف JPG بنفس أبعاد صورة PNG الأصلية.
 </p>
 
-</div>
+</details>
 
 
-<div class="faq">
 
-<h3>
+<details>
+
+<summary>
 ماذا يحدث للشفافية في صورة PNG؟
-</h3>
+</summary>
 
 <p>
 JPG لا يدعم الشفافية، لذلك تتحول المناطق الشفافة إلى خلفية بيضاء
 في الملف الناتج.
 </p>
 
-</div>
+</details>
 
 
-<div class="faq">
 
-<h3>
+<details>
+
+<summary>
 هل تعمل الأداة على الهاتف؟
-</h3>
+</summary>
 
 <p>
 نعم، الأداة متوافقة مع الهواتف والأجهزة اللوحية وأجهزة الكمبيوتر
 التي تستخدم متصفحًا حديثًا.
 </p>
 
-</div>
+</details>
 
 
-<div class="faq">
 
-<h3>
+<details>
+
+<summary>
 هل يمكن تغيير جودة JPG؟
-</h3>
+</summary>
 
 <p>
 نعم، يمكنك استخدام شريط الجودة واختيار مستوى مناسب قبل بدء التحويل.
 </p>
 
-</div>
+</details>
 
 
-<div class="faq">
 
-<h3>
+<details>
+
+<summary>
 هل سيكون JPG أصغر من PNG؟
-</h3>
+</summary>
 
 <p>
 قد يكون أصغر، لكن ذلك ليس مضمونًا في كل صورة. يعتمد الحجم النهائي
 على محتوى الصورة وأبعادها ومستوى الجودة المحدد.
 </p>
 
-</div>
+</details>
 
 
-<div class="faq">
 
-<h3>
+<details>
+
+<summary>
 هل تحويل PNG إلى JPG يعيد جودة الصورة الأصلية؟
-</h3>
+</summary>
 
 <p>
 لا. التحويل يغيّر صيغة الملف فقط، ولا يمكنه استعادة تفاصيل كانت
 قد فُقدت قبل ذلك من الصورة الأصلية.
 </p>
 
+</details>
+
+
 </div>
 
 </section>
+
 
 
 <section class="section">
@@ -730,6 +1407,7 @@ JPG لا يدعم الشفافية، لذلك تتحول المناطق الشف
 إذا كنت تحتاج إلى وظيفة مختلفة، يمكنك استخدام إحدى أدوات الصور
 الأخرى في AdaaHub.
 </p>
+
 
 <div class="tools-links">
 
@@ -771,15 +1449,20 @@ WebP إلى JPG
 
 </div>
 
+
 <a
-href="../index.html#tools"
-class="all-tools">
-← عرض جميع أدوات AdaaHub
+    class="all-tools"
+    href="../index.html">
+
+    ← عرض جميع أدوات AdaaHub
+
 </a>
 
 </section>
 
+
 </main>
+
 
 
 <footer>
@@ -819,7 +1502,69 @@ class="all-tools">
 </footer>
 
 
+
 <script>
+
+
+/* =========================
+   الوضع الليلي
+========================= */
+
+const themeToggle =
+    document.getElementById("themeToggle");
+
+
+function updateThemeButton(){
+
+    const isDark =
+        document.documentElement
+        .classList.contains("dark");
+
+    themeToggle.textContent =
+        isDark ? "☀️" : "🌙";
+
+    themeToggle.setAttribute(
+        "aria-label",
+        isDark
+            ? "تفعيل الوضع النهاري"
+            : "تفعيل الوضع الليلي"
+    );
+
+    themeToggle.setAttribute(
+        "title",
+        isDark
+            ? "تفعيل الوضع النهاري"
+            : "تفعيل الوضع الليلي"
+    );
+
+}
+
+
+updateThemeButton();
+
+
+themeToggle.addEventListener(
+    "click",
+    function(){
+
+        const isDark =
+            document.documentElement
+            .classList.toggle("dark");
+
+        localStorage.setItem(
+            "adaahub-theme",
+            isDark ? "dark" : "light"
+        );
+
+        updateThemeButton();
+
+    }
+);
+
+
+/* =========================
+   عناصر الأداة
+========================= */
 
 const imageInput =
     document.getElementById("imageInput");
@@ -860,8 +1605,20 @@ const downloadBtn =
 const fileSelected =
     document.getElementById("fileSelected");
 
+
+/* =========================
+   الحدود
+========================= */
+
 const MAX_FILE_SIZE =
     25 * 1024 * 1024;
+
+const MAX_CANVAS_DIMENSION =
+    10000;
+
+const MAX_PIXELS =
+    50000000;
+
 
 let selectedFile = null;
 
@@ -872,230 +1629,408 @@ let previewUrl = null;
 let downloadUrl = null;
 
 
-/* تحديث جودة الصورة */
+/* =========================
+   تحديث الجودة
+========================= */
 
-quality.addEventListener("input", function(){
+quality.addEventListener(
+    "input",
+    function(){
 
-    qualityValue.textContent =
-        this.value + "%";
+        qualityValue.textContent =
+            this.value + "%";
 
-});
-
-
-/* اختيار الصورة */
-
-imageInput.addEventListener("change", function(){
-
-    const file = this.files[0];
-
-    if(!file) return;
-
-    clearDownload();
-
-    clearPreview();
-
-    if(file.type !== "image/png"){
-
-        alert(
-            "من فضلك اختر صورة PNG فقط."
-        );
-
-        this.value = "";
-
-        return;
     }
-
-    if(file.size > MAX_FILE_SIZE){
-
-        alert(
-            "حجم الصورة أكبر من 25 ميجابايت."
-        );
-
-        this.value = "";
-
-        return;
-    }
-
-    selectedFile = file;
-
-    fileSelected.textContent =
-        "الصورة المختارة: " + file.name;
-
-    fileSelected.style.display =
-        "block";
-
-    previewUrl =
-        URL.createObjectURL(file);
-
-    image.onload = function(){
-
-        previewImage.src =
-            previewUrl;
-
-        previewBox.style.display =
-            "block";
-
-        settings.style.display =
-            "block";
-
-        buttons.style.display =
-            "flex";
-
-        details.style.display =
-            "block";
-
-        details.innerHTML =
-            "أبعاد الصورة: <strong>" +
-            image.naturalWidth +
-            " × " +
-            image.naturalHeight +
-            "</strong><br>" +
-            "حجم PNG الأصلي: <strong>" +
-            formatSize(file.size) +
-            "</strong>";
-
-        downloadBtn.style.display =
-            "none";
-
-        status.style.display =
-            "none";
-    };
-
-    image.onerror = function(){
-
-        alert(
-            "تعذر قراءة الصورة. جرّب اختيار صورة PNG أخرى."
-        );
-
-        resetTool();
-    };
-
-    image.src =
-        previewUrl;
-
-});
+);
 
 
-/* التحويل إلى JPG */
+/* =========================
+   اختيار الصورة
+========================= */
 
-convertBtn.addEventListener("click", function(){
+imageInput.addEventListener(
+    "change",
+    function(){
 
-    if(
-        !selectedFile ||
-        !image.naturalWidth ||
-        !image.naturalHeight
-    ){
+        const file =
+            this.files[0];
 
-        return;
-    }
-
-    status.style.display =
-        "block";
-
-    status.textContent =
-        "جاري تحويل الصورة إلى JPG...";
-
-    downloadBtn.style.display =
-        "none";
-
-    const canvas =
-        document.createElement("canvas");
-
-    canvas.width =
-        image.naturalWidth;
-
-    canvas.height =
-        image.naturalHeight;
-
-    const ctx =
-        canvas.getContext("2d");
-
-    /*
-      JPG لا يدعم الشفافية،
-      لذلك نضع خلفية بيضاء أولًا.
-    */
-
-    ctx.fillStyle =
-        "#ffffff";
-
-    ctx.fillRect(
-        0,
-        0,
-        canvas.width,
-        canvas.height
-    );
-
-    ctx.drawImage(
-        image,
-        0,
-        0,
-        canvas.width,
-        canvas.height
-    );
-
-    const imageQuality =
-        Number(quality.value) / 100;
-
-    canvas.toBlob(function(blob){
-
-        if(!blob){
-
-            status.textContent =
-                "حدث خطأ أثناء تحويل الصورة.";
+        if(!file){
 
             return;
+
         }
+
 
         clearDownload();
 
-        downloadUrl =
-            URL.createObjectURL(blob);
+        clearPreview();
 
-        const originalName =
-            selectedFile.name
-            .replace(/\.[^/.]+$/,"");
+        clearStatus();
 
-        downloadBtn.href =
-            downloadUrl;
 
-        downloadBtn.download =
-            originalName +
-            "-adaahub.jpg";
+        if(file.type !== "image/png"){
+
+            showStatus(
+                "من فضلك اختر صورة PNG فقط.",
+                "error"
+            );
+
+            this.value = "";
+
+            return;
+
+        }
+
+
+        if(file.size > MAX_FILE_SIZE){
+
+            showStatus(
+                "حجم الصورة أكبر من 25 ميجابايت.",
+                "error"
+            );
+
+            this.value = "";
+
+            return;
+
+        }
+
+
+        selectedFile = file;
+
+
+        fileSelected.textContent =
+            "الصورة المختارة: " +
+            file.name;
+
+        fileSelected.style.display =
+            "block";
+
+
+        previewUrl =
+            URL.createObjectURL(file);
+
+
+        image.onload =
+            function(){
+
+                if(
+                    image.naturalWidth >
+                    MAX_CANVAS_DIMENSION ||
+                    image.naturalHeight >
+                    MAX_CANVAS_DIMENSION
+                ){
+
+                    showStatus(
+                        "أبعاد الصورة كبيرة جدًا. الحد الأقصى لكل بُعد هو 10000 بكسل.",
+                        "error"
+                    );
+
+                    resetTool();
+
+                    return;
+
+                }
+
+
+                const pixels =
+                    image.naturalWidth *
+                    image.naturalHeight;
+
+
+                if(pixels > MAX_PIXELS){
+
+                    showStatus(
+                        "دقة الصورة كبيرة جدًا لمعالجتها بأمان داخل المتصفح. جرّب صورة بأبعاد أصغر.",
+                        "error"
+                    );
+
+                    resetTool();
+
+                    return;
+
+                }
+
+
+                previewImage.src =
+                    previewUrl;
+
+
+                previewBox.style.display =
+                    "block";
+
+
+                settings.style.display =
+                    "block";
+
+
+                buttons.style.display =
+                    "flex";
+
+
+                details.style.display =
+                    "block";
+
+
+                details.innerHTML =
+                    "أبعاد الصورة: <strong>" +
+                    image.naturalWidth +
+                    " × " +
+                    image.naturalHeight +
+                    "</strong><br>" +
+                    "حجم PNG الأصلي: <strong>" +
+                    formatSize(file.size) +
+                    "</strong>";
+
+
+                downloadBtn.style.display =
+                    "none";
+
+
+                clearStatus();
+
+            };
+
+
+        image.onerror =
+            function(){
+
+                showStatus(
+                    "تعذر قراءة الصورة. جرّب اختيار صورة PNG أخرى.",
+                    "error"
+                );
+
+                resetTool();
+
+            };
+
+
+        image.src =
+            previewUrl;
+
+    }
+);
+
+
+/* =========================
+   التحويل إلى JPG
+========================= */
+
+convertBtn.addEventListener(
+    "click",
+    function(){
+
+        if(
+            !selectedFile ||
+            !image.naturalWidth ||
+            !image.naturalHeight
+        ){
+
+            return;
+
+        }
+
+
+        convertBtn.disabled =
+            true;
+
+
+        status.style.display =
+            "block";
+
+        status.className =
+            "status";
+
+        status.innerHTML =
+            '<span class="spinner"></span>' +
+            "جاري تحويل الصورة إلى JPG...";
+
 
         downloadBtn.style.display =
-            "inline-block";
-
-        status.textContent =
-            "تم تحويل الصورة بنجاح. يمكنك الآن تحميل ملف JPG.";
-
-        details.innerHTML =
-            "أبعاد الصورة: <strong>" +
-            image.naturalWidth +
-            " × " +
-            image.naturalHeight +
-            "</strong><br>" +
-            "حجم PNG: <strong>" +
-            formatSize(selectedFile.size) +
-            "</strong><br>" +
-            "حجم JPG: <strong>" +
-            formatSize(blob.size) +
-            "</strong><br>" +
-            "الجودة: <strong>" +
-            quality.value +
-            "%</strong>";
-
-    }, "image/jpeg", imageQuality);
-
-});
+            "none";
 
 
-/* إعادة الضبط */
+        setTimeout(
+            function(){
 
-resetBtn.addEventListener("click", function(){
+                try{
 
-    resetTool();
+                    const canvas =
+                        document.createElement(
+                            "canvas"
+                        );
 
-});
+
+                    canvas.width =
+                        image.naturalWidth;
+
+                    canvas.height =
+                        image.naturalHeight;
+
+
+                    const ctx =
+                        canvas.getContext(
+                            "2d"
+                        );
+
+
+                    if(!ctx){
+
+                        throw new Error(
+                            "Canvas غير متاح"
+                        );
+
+                    }
+
+
+                    /*
+                       JPG لا يدعم الشفافية،
+                       لذلك نضع خلفية بيضاء
+                       قبل رسم صورة PNG.
+                    */
+
+                    ctx.fillStyle =
+                        "#ffffff";
+
+
+                    ctx.fillRect(
+                        0,
+                        0,
+                        canvas.width,
+                        canvas.height
+                    );
+
+
+                    ctx.drawImage(
+                        image,
+                        0,
+                        0,
+                        canvas.width,
+                        canvas.height
+                    );
+
+
+                    const imageQuality =
+                        Number(quality.value) / 100;
+
+
+                    canvas.toBlob(
+                        function(blob){
+
+                            convertBtn.disabled =
+                                false;
+
+
+                            if(!blob){
+
+                                showStatus(
+                                    "حدث خطأ أثناء تحويل الصورة. جرّب صورة أخرى.",
+                                    "error"
+                                );
+
+                                return;
+
+                            }
+
+
+                            clearDownload();
+
+
+                            downloadUrl =
+                                URL.createObjectURL(
+                                    blob
+                                );
+
+
+                            const originalName =
+                                selectedFile.name
+                                    .replace(
+                                        /\.[^/.]+$/,
+                                        ""
+                                    );
+
+
+                            downloadBtn.href =
+                                downloadUrl;
+
+
+                            downloadBtn.download =
+                                originalName +
+                                "-adaahub.jpg";
+
+
+                            downloadBtn.style.display =
+                                "inline-block";
+
+
+                            status.className =
+                                "status success";
+
+
+                            status.textContent =
+                                "تم تحويل الصورة بنجاح. يمكنك الآن تحميل ملف JPG.";
+
+
+                            details.innerHTML =
+                                "أبعاد الصورة: <strong>" +
+                                image.naturalWidth +
+                                " × " +
+                                image.naturalHeight +
+                                "</strong><br>" +
+                                "حجم PNG: <strong>" +
+                                formatSize(
+                                    selectedFile.size
+                                ) +
+                                "</strong><br>" +
+                                "حجم JPG: <strong>" +
+                                formatSize(
+                                    blob.size
+                                ) +
+                                "</strong><br>" +
+                                "الجودة: <strong>" +
+                                quality.value +
+                                "%</strong>";
+
+                        },
+                        "image/jpeg",
+                        imageQuality
+                    );
+
+                }
+                catch(error){
+
+                    convertBtn.disabled =
+                        false;
+
+
+                    showStatus(
+                        "حدث خطأ أثناء معالجة الصورة. جرّب صورة أخرى.",
+                        "error"
+                    );
+
+                }
+
+            },
+            50
+        );
+
+    }
+);
+
+
+/* =========================
+   إعادة الضبط
+========================= */
+
+resetBtn.addEventListener(
+    "click",
+    function(){
+
+        resetTool();
+
+    }
+);
 
 
 function resetTool(){
@@ -1104,46 +2039,103 @@ function resetTool(){
 
     clearPreview();
 
-    imageInput.value = "";
 
-    selectedFile = null;
+    imageInput.value =
+        "";
 
-    previewImage.removeAttribute("src");
 
-    fileSelected.textContent = "";
+    selectedFile =
+        null;
+
+
+    previewImage.removeAttribute(
+        "src"
+    );
+
+
+    fileSelected.textContent =
+        "";
 
     fileSelected.style.display =
         "none";
 
+
     previewBox.style.display =
         "none";
+
 
     settings.style.display =
         "none";
 
-    details.innerHTML = "";
+
+    details.innerHTML =
+        "";
 
     details.style.display =
         "none";
 
+
     buttons.style.display =
         "none";
 
-    status.textContent =
-        "";
 
-    status.style.display =
-        "none";
+    convertBtn.disabled =
+        false;
+
 
     quality.value =
         85;
 
+
     qualityValue.textContent =
         "85%";
+
+
+    clearStatus();
+
 }
 
 
-/* تنظيف رابط المعاينة */
+/* =========================
+   الرسائل
+========================= */
+
+function showStatus(
+    message,
+    type = ""
+){
+
+    status.style.display =
+        "block";
+
+
+    status.className =
+        "status " + type;
+
+
+    status.textContent =
+        message;
+
+}
+
+
+function clearStatus(){
+
+    status.textContent =
+        "";
+
+    status.className =
+        "status";
+
+    status.style.display =
+        "none";
+
+}
+
+
+/* =========================
+   تنظيف المعاينة
+========================= */
 
 function clearPreview(){
 
@@ -1153,12 +2145,17 @@ function clearPreview(){
             previewUrl
         );
 
-        previewUrl = null;
+        previewUrl =
+            null;
+
     }
+
 }
 
 
-/* تنظيف رابط التحميل */
+/* =========================
+   تنظيف رابط التحميل
+========================= */
 
 function clearDownload(){
 
@@ -1168,48 +2165,69 @@ function clearDownload(){
             downloadUrl
         );
 
-        downloadUrl = null;
+        downloadUrl =
+            null;
+
     }
+
 
     downloadBtn.removeAttribute(
         "href"
     );
 
+
     downloadBtn.style.display =
         "none";
+
 }
 
 
-/* تنسيق حجم الملف */
+/* =========================
+   تنسيق حجم الملف
+========================= */
 
 function formatSize(bytes){
 
     if(bytes < 1024){
 
-        return bytes + " بايت";
+        return bytes +
+            " بايت";
+
     }
 
-    if(bytes < 1024 * 1024){
+
+    if(
+        bytes <
+        1024 * 1024
+    ){
 
         return (
             bytes / 1024
-        ).toFixed(1) + " KB";
+        ).toFixed(1) +
+        " KB";
+
     }
+
 
     return (
         bytes /
         (1024 * 1024)
-    ).toFixed(2) + " MB";
+    ).toFixed(2) +
+        " MB";
+
 }
 
 
-/* تنظيف الذاكرة عند مغادرة الصفحة */
+/* =========================
+   تنظيف عند مغادرة الصفحة
+========================= */
 
 window.addEventListener(
     "beforeunload",
     function(){
 
         clearPreview();
+
         clearDownload();
 
     }
