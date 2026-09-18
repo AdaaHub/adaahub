@@ -27,96 +27,234 @@ href="https://adaahub.github.io/adaahub/tools/pdf.html"
   box-sizing:border-box;
 }
 
+:root{
+  --primary:#2563eb;
+  --primary-dark:#1d4ed8;
+  --primary-soft:#eff6ff;
+  --bg:#f6f8fc;
+  --surface:#ffffff;
+  --text:#111827;
+  --muted:#64748b;
+  --border:#e5e7eb;
+  --success:#16a34a;
+  --danger:#dc2626;
+  --shadow:0 12px 35px rgba(15,23,42,.07);
+}
+
+html.dark{
+  --primary:#60a5fa;
+  --primary-dark:#93c5fd;
+  --primary-soft:#172554;
+  --bg:#0b1120;
+  --surface:#111827;
+  --text:#f1f5f9;
+  --muted:#94a3b8;
+  --border:#243044;
+  --success:#4ade80;
+  --danger:#f87171;
+  --shadow:0 12px 35px rgba(0,0,0,.25);
+}
+
+html{
+  scroll-behavior:smooth;
+}
+
 body{
   margin:0;
   font-family:Arial,Tahoma,sans-serif;
-  background:#f5f7fb;
-  color:#20242a;
-  line-height:1.7;
+  background:
+    radial-gradient(
+      circle at top right,
+      rgba(37,99,235,.08),
+      transparent 30%
+    ),
+    var(--bg);
+  color:var(--text);
+  line-height:1.8;
+  transition:
+    background .25s ease,
+    color .25s ease;
 }
+
+a{
+  color:var(--primary);
+}
+
+button{
+  font-family:inherit;
+}
+
+
+/* =========================
+   HEADER
+========================= */
 
 header{
-  background:#fff;
-  border-bottom:1px solid #e5e7eb;
-  padding:16px 18px;
+  position:sticky;
+  top:0;
+  z-index:1000;
+  background:rgba(255,255,255,.88);
+  border-bottom:1px solid var(--border);
+  backdrop-filter:blur(12px);
 }
 
-.header{
-  max-width:900px;
+html.dark header{
+  background:rgba(17,24,39,.88);
+}
+
+.header-inner{
+  width:94%;
+  max-width:1100px;
+  min-height:70px;
   margin:auto;
   display:flex;
-  justify-content:space-between;
   align-items:center;
-  gap:20px;
+  justify-content:space-between;
+  gap:15px;
 }
 
 .logo{
-  font-size:27px;
-  font-weight:bold;
-}
-
-.logo span{
-  color:#2563eb;
-}
-
-.home{
-  color:#2563eb;
+  display:flex;
+  align-items:center;
+  gap:9px;
+  color:var(--text);
+  font-size:23px;
+  font-weight:800;
   text-decoration:none;
-  font-weight:bold;
 }
 
-.home:hover{
-  text-decoration:underline;
+.logo-mark{
+  width:38px;
+  height:38px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  border-radius:11px;
+  background:linear-gradient(
+    135deg,
+    var(--primary),
+    var(--primary-dark)
+  );
+  color:#fff;
+  font-size:20px;
+  box-shadow:
+    0 7px 18px rgba(37,99,235,.22);
 }
+
+.header-actions{
+  display:flex;
+  align-items:center;
+  gap:9px;
+}
+
+.home-link,
+.theme-toggle{
+  border:1px solid var(--border);
+  background:var(--surface);
+  color:var(--text);
+  text-decoration:none;
+  border-radius:10px;
+  padding:8px 12px;
+  font-size:14px;
+  cursor:pointer;
+  transition:.2s ease;
+}
+
+.home-link:hover,
+.theme-toggle:hover{
+  border-color:var(--primary);
+  color:var(--primary);
+}
+
+
+/* =========================
+   MAIN
+========================= */
 
 .container{
-  max-width:850px;
-  margin:35px auto;
-  padding:20px;
+  width:94%;
+  max-width:1000px;
+  margin:42px auto 55px;
 }
 
-h1{
+
+/* =========================
+   HERO
+========================= */
+
+.hero{
   text-align:center;
+  margin-bottom:25px;
+}
+
+.badge{
+  display:inline-flex;
+  align-items:center;
+  gap:6px;
+  background:var(--primary-soft);
+  color:var(--primary);
+  border:1px solid rgba(37,99,235,.12);
+  padding:6px 12px;
+  border-radius:999px;
+  font-size:13px;
+  font-weight:700;
+  margin-bottom:12px;
+}
+
+.hero h1{
+  margin:0 0 9px;
+  color:var(--text);
   font-size:32px;
-  margin:0 0 10px;
+  line-height:1.35;
 }
 
-.subtitle{
+.hero p{
+  max-width:720px;
+  margin:0 auto;
+  color:var(--muted);
+  font-size:16px;
+}
+
+
+/* =========================
+   TOOL CARD
+========================= */
+
+.tool-card{
+  background:var(--surface);
+  border:1px solid var(--border);
+  border-radius:20px;
+  padding:25px;
+  box-shadow:var(--shadow);
+}
+
+.upload-box{
+  border:2px dashed var(--border);
+  border-radius:16px;
+  padding:38px 20px;
   text-align:center;
-  color:#666;
-  margin:0 auto 28px;
-  max-width:680px;
+  background:var(--bg);
+  transition:.2s ease;
 }
 
-.tool-box{
-  background:#fff;
-  border-radius:18px;
-  padding:30px 20px;
-  border:1px solid #e5e7eb;
-  box-shadow:0 5px 20px rgba(0,0,0,.04);
-}
-
-.upload-area{
-  border:2px dashed #cbd5e1;
-  border-radius:15px;
-  padding:40px 20px;
-  text-align:center;
-  background:#fafcff;
+.upload-box:hover{
+  border-color:var(--primary);
 }
 
 .upload-icon{
-  font-size:50px;
-  margin-bottom:10px;
+  font-size:48px;
+  margin-bottom:8px;
 }
 
-.upload-area h2{
+.upload-box h2{
+  margin:0 0 7px;
   font-size:21px;
-  margin:0 0 8px;
+  color:var(--text);
 }
 
-.upload-area p{
-  color:#777;
-  margin:0 0 20px;
+.upload-box p{
+  margin:0 0 19px;
+  color:var(--muted);
 }
 
 input[type="file"]{
@@ -125,60 +263,72 @@ input[type="file"]{
 
 .choose-button{
   display:inline-block;
-  background:#2563eb;
+  background:var(--primary);
   color:#fff;
-  padding:13px 27px;
-  border-radius:9px;
+  padding:12px 25px;
+  border-radius:10px;
   cursor:pointer;
   font-size:16px;
-  font-weight:bold;
+  font-weight:700;
+  transition:.2s ease;
 }
 
 .choose-button:hover{
-  background:#1d4ed8;
+  background:var(--primary-dark);
 }
+
+
+/* =========================
+   SELECTED INFO
+========================= */
 
 .selected-info{
   display:none;
-  margin-top:20px;
-  padding:14px;
-  background:#eff6ff;
-  border:1px solid #bfdbfe;
+  margin-top:18px;
+  padding:13px;
+  background:var(--primary-soft);
+  border:1px solid rgba(37,99,235,.18);
   border-radius:10px;
-  color:#1e40af;
+  color:var(--primary);
   text-align:center;
-  font-weight:bold;
+  font-weight:700;
 }
+
+
+/* =========================
+   PREVIEW
+========================= */
 
 .images-preview{
   display:none;
-  margin-top:20px;
+  margin-top:22px;
 }
 
 .images-preview h2{
   font-size:21px;
-  margin:0 0 15px;
+  margin:0 0 14px;
+  color:var(--text);
 }
 
 .preview-grid{
   display:grid;
   grid-template-columns:repeat(2,1fr);
-  gap:15px;
+  gap:14px;
 }
 
 .preview-item{
   position:relative;
-  background:#f8fafc;
-  border:1px solid #e5e7eb;
-  border-radius:12px;
+  background:var(--bg);
+  border:1px solid var(--border);
+  border-radius:13px;
   padding:12px;
   text-align:center;
 }
 
 .preview-number{
-  font-weight:bold;
+  font-weight:700;
   margin-bottom:8px;
-  color:#475569;
+  color:var(--muted);
 }
 
 .preview-item img{
@@ -186,64 +336,68 @@ input[type="file"]{
   height:180px;
   object-fit:contain;
   background:#fff;
-  border-radius:8px;
+  border-radius:9px;
   display:block;
 }
 
 .remove-image{
   margin-top:10px;
-  border:0;
-  background:#fee2e2;
-  color:#b91c1c;
+  border:1px solid rgba(220,38,38,.15);
+  background:rgba(220,38,38,.08);
+  color:var(--danger);
   padding:8px 14px;
-  border-radius:7px;
+  border-radius:8px;
   cursor:pointer;
-  font-weight:bold;
+  font-weight:700;
 }
 
 .remove-image:hover{
-  background:#fecaca;
+  opacity:.85;
+}
+
+
+/* =========================
+   BUTTONS
+========================= */
+
+.create-button,
+.reset-button{
+  width:100%;
+  border-radius:11px;
+  cursor:pointer;
+  font-size:16px;
+  font-weight:700;
+  transition:.2s ease;
 }
 
 .create-button{
-  width:100%;
   border:0;
   margin-top:20px;
-  background:#16a34a;
+  background:var(--success);
   color:#fff;
   padding:14px;
-  border-radius:9px;
-  cursor:pointer;
-  font-size:17px;
-  font-weight:bold;
-  display:none;
 }
 
 .create-button:hover{
-  background:#15803d;
+  opacity:.9;
 }
 
 .create-button:disabled{
-  background:#94a3b8;
+  opacity:.65;
   cursor:not-allowed;
 }
 
 .reset-button{
-  width:100%;
-  border:0;
+  border:1px solid var(--border);
   margin-top:10px;
-  background:#e5e7eb;
-  color:#333;
+  background:var(--surface);
+  color:var(--text);
   padding:12px;
-  border-radius:9px;
-  cursor:pointer;
-  font-size:16px;
-  font-weight:bold;
-  display:none;
 }
 
 .reset-button:hover{
-  background:#d1d5db;
+  border-color:var(--primary);
+  color:var(--primary);
 }
 
 .reset-button:disabled{
@@ -251,38 +405,67 @@ input[type="file"]{
   cursor:not-allowed;
 }
 
+
+/* =========================
+   STATUS
+========================= */
+
 .status{
-  margin-top:15px;
-  text-align:center;
-  font-weight:bold;
   min-height:28px;
+  margin-top:14px;
+  text-align:center;
+  color:var(--success);
+  font-weight:700;
+  font-size:14px;
 }
+
+
+/* =========================
+   PRIVACY
+========================= */
 
 .privacy-note{
   margin-top:20px;
-  background:#eff6ff;
-  border:1px solid #bfdbfe;
-  border-radius:12px;
-  padding:16px;
-  color:#1e40af;
-  text-align:center;
+  background:rgba(22,163,74,.08);
+  border-right:4px solid var(--success);
+  border-radius:10px;
+  padding:14px 15px;
+  color:var(--text);
 }
 
+
+/* =========================
+   CONTENT
+========================= */
+
 .content{
-  background:#fff;
-  margin-top:30px;
-  padding:25px;
-  border-radius:15px;
-  border:1px solid #e5e7eb;
+  background:var(--surface);
+  border:1px solid var(--border);
+  border-radius:20px;
+  padding:28px;
+  margin-top:25px;
+  box-shadow:var(--shadow);
 }
 
 .content h2{
+  color:var(--primary);
+  font-size:21px;
+  margin:27px 0 10px;
+}
+
+.content h2:first-child{
   margin-top:0;
-  font-size:23px;
 }
 
 .content h3{
-  font-size:19px;
+  color:var(--text);
+  font-size:18px;
+  margin:22px 0 6px;
+}
+
+.content p,
+.content li{
+  color:var(--muted);
 }
 
 .content ol,
@@ -291,8 +474,7 @@ input[type="file"]{
 }
 
 .content a{
-  color:#2563eb;
-  font-weight:bold;
+  color:var(--primary);
   text-decoration:none;
 }
 
@@ -300,57 +482,112 @@ input[type="file"]{
   text-decoration:underline;
 }
 
+
+/* =========================
+   FAQ
+========================= */
+
 .faq{
-  margin-top:30px;
+  margin-top:15px;
 }
 
 .faq details{
-  background:#f8fafc;
-  border:1px solid #e5e7eb;
-  border-radius:10px;
-  padding:14px 16px;
+  border:1px solid var(--border);
+  border-radius:11px;
   margin-bottom:10px;
+  background:var(--bg);
+  overflow:hidden;
 }
 
 .faq summary{
   cursor:pointer;
-  font-weight:bold;
+  padding:13px 15px;
+  font-weight:700;
+  color:var(--text);
 }
+
+.faq p{
+  margin:0;
+  padding:0 15px 15px;
+}
+
+
+/* =========================
+   FOOTER
+========================= */
 
 footer{
   text-align:center;
-  color:#777;
-  padding:30px 20px;
-  margin-top:30px;
+  color:var(--muted);
+  padding:25px 15px 35px;
+  font-size:14px;
 }
 
 footer a{
-  color:#2563eb;
+  color:var(--primary);
   text-decoration:none;
-  margin:0 5px;
+  margin:0 4px;
 }
 
 footer a:hover{
   text-decoration:underline;
 }
 
-@media(max-width:600px){
 
-  .header{
-    flex-direction:column;
+/* =========================
+   RESPONSIVE
+========================= */
+
+@media(max-width:800px){
+
+  .preview-grid{
+    grid-template-columns:repeat(2,1fr);
   }
 
-  h1{
-    font-size:27px;
+}
+
+@media(max-width:600px){
+
+  .header-inner{
+    min-height:64px;
+  }
+
+  .logo{
+    font-size:20px;
+  }
+
+  .logo-mark{
+    width:35px;
+    height:35px;
+  }
+
+  .home-link,
+  .theme-toggle{
+    padding:7px 9px;
+    font-size:13px;
   }
 
   .container{
-    margin:20px auto;
-    padding:15px;
+    width:94%;
+    margin:28px auto 40px;
   }
 
-  .tool-box{
-    padding:20px 15px;
+  .hero h1{
+    font-size:25px;
+  }
+
+  .hero p{
+    font-size:15px;
+  }
+
+  .tool-card,
+  .content{
+    padding:18px;
+    border-radius:16px;
+  }
+
+  .upload-box{
+    padding:30px 15px;
   }
 
   .preview-grid{
@@ -363,26 +600,104 @@ footer a:hover{
 
 }
 
+@media(max-width:430px){
+
+  .logo{
+    font-size:18px;
+  }
+
+  .header-actions{
+    gap:5px;
+  }
+
+  .hero h1{
+    font-size:22px;
+  }
+
+}
+
+
+/* =========================
+   REDUCED MOTION
+========================= */
+
+@media(prefers-reduced-motion:reduce){
+
+  *,
+  *::before,
+  *::after{
+    scroll-behavior:auto !important;
+    transition:none !important;
+  }
+
+}
+
 </style>
+
+
+<script>
+
+(function(){
+
+  const savedTheme =
+    localStorage.getItem("adaahub-theme");
+
+  if(savedTheme === "dark"){
+    document.documentElement.classList.add("dark");
+  }
+
+})();
+
+</script>
 
 </head>
 
+
 <body>
+
 
 <header>
 
-  <div class="header">
-
-    <div class="logo">
-      Adaa<span>Hub</span>
-    </div>
+  <div class="header-inner">
 
     <a
-      class="home"
+      class="logo"
       href="../index.html"
+      aria-label="AdaaHub الرئيسية"
     >
-      الرئيسية
+
+      <span class="logo-mark">
+        A
+      </span>
+
+      <span>
+        AdaaHub
+      </span>
+
     </a>
+
+
+    <div class="header-actions">
+
+      <a
+        class="home-link"
+        href="../index.html"
+      >
+        الرئيسية
+      </a>
+
+
+      <button
+        type="button"
+        class="theme-toggle"
+        id="themeToggle"
+        aria-label="تفعيل الوضع الليلي"
+        title="تفعيل الوضع الليلي"
+      >
+        🌙
+      </button>
+
+    </div>
 
   </div>
 
@@ -391,19 +706,29 @@ footer a:hover{
 
 <main class="container">
 
-  <h1>
-    تحويل الصور إلى PDF أونلاين
-  </h1>
 
-  <p class="subtitle">
-    اجمع صورة واحدة أو عدة صور في ملف PDF واحد مجانًا
-    من الهاتف أو الكمبيوتر.
-  </p>
+  <section class="hero">
+
+    <div class="badge">
+      ⚡ أداة مجانية وسريعة
+    </div>
+
+    <h1>
+      تحويل الصور إلى PDF أونلاين
+    </h1>
+
+    <p>
+      اجمع صورة واحدة أو عدة صور في ملف PDF واحد مجانًا
+      من الهاتف أو الكمبيوتر.
+    </p>
+
+  </section>
 
 
-  <section class="tool-box">
+  <section class="tool-card">
 
-    <div class="upload-area">
+
+    <div class="upload-box">
 
       <div class="upload-icon">
         📄
@@ -417,12 +742,14 @@ footer a:hover{
         يدعم JPG وJPEG وPNG وWebP
       </p>
 
+
       <label
         class="choose-button"
         for="imageInput"
       >
         اختيار الصور
       </label>
+
 
       <input
         id="imageInput"
@@ -494,6 +821,7 @@ footer a:hover{
 
 
   <section class="content">
+
 
     <h2>
       تحويل الصور إلى ملف PDF
@@ -575,51 +903,57 @@ footer a:hover{
       أدوات أخرى قد تهمك
     </h3>
 
-    <ul>
+    <div class="related-tools">
 
-      <li>
-        <a href="compress.html">
-          ضغط الصور وتقليل حجمها
-        </a>
-      </li>
+      <a href="compress.html">
+        ضغط الصور
+      </a>
 
-      <li>
-        <a href="webp.html">
-          تحويل الصور إلى WebP
-        </a>
-      </li>
+      <a href="webp.html">
+        تحويل إلى WebP
+      </a>
 
-      <li>
-        <a href="resize.html">
-          تغيير حجم وأبعاد الصور
-        </a>
-      </li>
+      <a href="resize.html">
+        تغيير حجم الصور
+      </a>
 
-      <li>
-        <a href="crop.html">
-          قص الصور أونلاين
-        </a>
-      </li>
+      <a href="crop.html">
+        قص الصور
+      </a>
 
-      <li>
-        <a href="rotate.html">
-          تدوير الصور
-        </a>
-      </li>
+      <a href="rotate.html">
+        تدوير الصور
+      </a>
 
-      <li>
-        <a href="image-info.html">
-          معرفة معلومات الصورة
-        </a>
-      </li>
+      <a href="image-info.html">
+        معلومات الصورة
+      </a>
 
-    </ul>
+      <a href="jpg-to-png.html">
+        JPG إلى PNG
+      </a>
+
+      <a href="png-to-jpg.html">
+        PNG إلى JPG
+      </a>
+
+      <a href="webp-to-jpg.html">
+        WebP إلى JPG
+      </a>
+
+      <a href="word-counter.html">
+        عداد الكلمات
+      </a>
+
+    </div>
 
 
-    <p>
+    <p style="margin-top:18px;">
+
       <a href="../index.html">
         ← عرض جميع أدوات AdaaHub
       </a>
+
     </p>
 
 
@@ -723,24 +1057,107 @@ footer a:hover{
 
 <footer>
 
-  © 2026 AdaaHub - جميع الحقوق محفوظة
+  © 2026 AdaaHub - مركز الأدوات اليومية
 
-  <br><br>
+  <div style="margin-top:8px;">
 
-  <a href="../index.html">الرئيسية</a> |
-  <a href="../pages/about.html">من نحن</a> |
-  <a href="../pages/privacy.html">الخصوصية</a> |
-  <a href="../pages/terms.html">الشروط والأحكام</a> |
-  <a href="../pages/contact.html">اتصل بنا</a>
+    <a href="../index.html">
+      الرئيسية
+    </a>
+
+    |
+
+    <a href="../pages/about.html">
+      من نحن
+    </a>
+
+    |
+
+    <a href="../pages/privacy.html">
+      الخصوصية
+    </a>
+
+    |
+
+    <a href="../pages/terms.html">
+      الشروط والأحكام
+    </a>
+
+    |
+
+    <a href="../pages/contact.html">
+      اتصل بنا
+    </a>
+
+  </div>
 
 </footer>
 
 
 <!-- مكتبة إنشاء ملفات PDF -->
+
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 
 
 <script>
+
+/* =========================
+   THEME
+========================= */
+
+const themeToggle =
+  document.getElementById("themeToggle");
+
+
+function updateThemeButton(){
+
+  const dark =
+    document.documentElement.classList.contains("dark");
+
+  themeToggle.textContent =
+    dark ? "☀️" : "🌙";
+
+  themeToggle.setAttribute(
+    "aria-label",
+    dark
+      ? "تفعيل الوضع النهاري"
+      : "تفعيل الوضع الليلي"
+  );
+
+  themeToggle.setAttribute(
+    "title",
+    dark
+      ? "تفعيل الوضع النهاري"
+      : "تفعيل الوضع الليلي"
+  );
+
+}
+
+
+themeToggle.addEventListener(
+  "click",
+  function(){
+
+    const isDark =
+      document.documentElement.classList.toggle("dark");
+
+    localStorage.setItem(
+      "adaahub-theme",
+      isDark ? "dark" : "light"
+    );
+
+    updateThemeButton();
+
+  }
+);
+
+
+updateThemeButton();
+
+
+/* =========================
+   ELEMENTS
+========================= */
 
 const imageInput =
   document.getElementById("imageInput");
@@ -766,8 +1183,10 @@ const status =
 
 let selectedImages = [];
 
+
 const MAX_FILE_SIZE =
   15 * 1024 * 1024;
+
 
 const MAX_IMAGES =
   20;
@@ -779,6 +1198,22 @@ const allowedTypes = [
   "image/webp"
 ];
 
+
+/* =========================
+   STATUS
+========================= */
+
+function showStatus(message){
+
+  status.textContent =
+    message;
+
+}
+
+
+/* =========================
+   FILE SELECTION
+========================= */
 
 imageInput.addEventListener(
   "change",
@@ -795,7 +1230,7 @@ imageInput.addEventListener(
 
     if(files.length > MAX_IMAGES){
 
-      alert(
+      showStatus(
         "يمكنك اختيار 20 صورة كحد أقصى في العملية الواحدة."
       );
 
@@ -816,15 +1251,6 @@ imageInput.addEventListener(
       });
 
 
-    if(validFiles.length !== files.length){
-
-      alert(
-        "تم تجاهل بعض الملفات لأن الأداة تدعم JPG وJPEG وPNG وWebP فقط."
-      );
-
-    }
-
-
     const sizeValidFiles =
       validFiles.filter(function(file){
 
@@ -833,9 +1259,21 @@ imageInput.addEventListener(
       });
 
 
-    if(sizeValidFiles.length !== validFiles.length){
+    if(validFiles.length !== files.length){
 
-      alert(
+      showStatus(
+        "تم تجاهل بعض الملفات. الأداة تدعم JPG وJPEG وPNG وWebP فقط."
+      );
+
+    }
+
+
+    if(
+      sizeValidFiles.length !==
+      validFiles.length
+    ){
+
+      showStatus(
         "تم تجاهل الصور التي يزيد حجمها عن 15 MB."
       );
 
@@ -844,8 +1282,8 @@ imageInput.addEventListener(
 
     if(sizeValidFiles.length === 0){
 
-      alert(
-        "لم يتم اختيار صورة صالحة. اختر صورًا بحجم لا يتجاوز 15 MB."
+      showStatus(
+        "لم يتم اختيار صورة صالحة. اختر صورًا لا يتجاوز حجم الصورة الواحدة منها 15 MB."
       );
 
       imageInput.value = "";
@@ -858,24 +1296,33 @@ imageInput.addEventListener(
     selectedImages =
       sizeValidFiles;
 
+
     renderPreviews();
 
   }
 );
 
 
+/* =========================
+   PREVIEWS
+========================= */
+
 function renderPreviews(){
 
   previewGrid.innerHTML = "";
 
+
   selectedInfo.style.display =
     "block";
+
 
   imagesPreview.style.display =
     "block";
 
+
   createPdf.style.display =
     "block";
+
 
   resetButton.style.display =
     "block";
@@ -977,6 +1424,7 @@ function renderPreviews(){
             removeButton
           );
 
+
           previewGrid.appendChild(
             item
           );
@@ -994,13 +1442,17 @@ function renderPreviews(){
 }
 
 
+/* =========================
+   CREATE PDF
+========================= */
+
 createPdf.addEventListener(
   "click",
   async function(){
 
     if(selectedImages.length === 0){
 
-      alert(
+      showStatus(
         "اختر صورة واحدة على الأقل."
       );
 
@@ -1014,7 +1466,7 @@ createPdf.addEventListener(
       !window.jspdf.jsPDF
     ){
 
-      alert(
+      showStatus(
         "تعذر تحميل مكوّن إنشاء PDF. تحقق من اتصال الإنترنت ثم حاول مرة أخرى."
       );
 
@@ -1031,9 +1483,6 @@ createPdf.addEventListener(
 
     createPdf.textContent =
       "⏳ جاري إنشاء ملف PDF...";
-
-    status.textContent =
-      "جاري تجهيز الصور...";
 
 
     try{
@@ -1067,11 +1516,13 @@ createPdf.addEventListener(
         i++
       ){
 
-        status.textContent =
+        showStatus(
           "جاري معالجة الصورة " +
           (i + 1) +
           " من " +
-          selectedImages.length;
+          selectedImages.length +
+          "..."
+        );
 
 
         const file =
@@ -1094,6 +1545,7 @@ createPdf.addEventListener(
           pageWidth -
           (margin * 2);
 
+
         const maxHeight =
           pageHeight -
           (margin * 2);
@@ -1101,6 +1553,7 @@ createPdf.addEventListener(
 
         let width =
           img.naturalWidth;
+
 
         let height =
           img.naturalHeight;
@@ -1135,6 +1588,7 @@ createPdf.addEventListener(
         const x =
           (pageWidth - width) / 2;
 
+
         const y =
           (pageHeight - height) / 2;
 
@@ -1145,12 +1599,6 @@ createPdf.addEventListener(
 
         }
 
-
-        /*
-          تجهيز الصورة داخل Canvas أولًا.
-          يتم استخدام خلفية بيضاء حتى لا تظهر
-          المناطق الشفافة بشكل غير صحيح داخل JPEG.
-        */
 
         const jpegDataUrl =
           convertImageToJpeg(
@@ -1177,16 +1625,18 @@ createPdf.addEventListener(
       );
 
 
-      status.textContent =
-        "✅ تم إنشاء ملف PDF بنجاح.";
+      showStatus(
+        "✅ تم إنشاء ملف PDF بنجاح."
+      );
 
 
     }catch(error){
 
       console.error(error);
 
-      status.textContent =
-        "❌ حدث خطأ أثناء إنشاء ملف PDF. حاول استخدام صور أصغر.";
+      showStatus(
+        "❌ حدث خطأ أثناء إنشاء ملف PDF. حاول استخدام صور أصغر."
+      );
 
     }
 
@@ -1194,8 +1644,10 @@ createPdf.addEventListener(
     createPdf.disabled =
       false;
 
+
     resetButton.disabled =
       false;
+
 
     createPdf.textContent =
       "📄 إنشاء ملف PDF";
@@ -1203,6 +1655,10 @@ createPdf.addEventListener(
   }
 );
 
+
+/* =========================
+   RESET
+========================= */
 
 resetButton.addEventListener(
   "click",
@@ -1222,32 +1678,44 @@ function resetTool(){
 
   previewGrid.innerHTML = "";
 
+
   selectedInfo.style.display =
     "none";
+
 
   imagesPreview.style.display =
     "none";
 
+
   createPdf.style.display =
     "none";
+
 
   createPdf.disabled =
     false;
 
+
   createPdf.textContent =
     "📄 إنشاء ملف PDF";
+
 
   resetButton.style.display =
     "none";
 
+
   resetButton.disabled =
     false;
+
 
   status.textContent =
     "";
 
 }
 
+
+/* =========================
+   READ FILE
+========================= */
 
 function readFile(file){
 
@@ -1290,6 +1758,10 @@ function readFile(file){
 }
 
 
+/* =========================
+   LOAD IMAGE
+========================= */
+
 function loadImage(src){
 
   return new Promise(
@@ -1330,16 +1802,15 @@ function loadImage(src){
 }
 
 
-/*
-  تحويل الصورة إلى JPEG داخل المتصفح.
-  هذا يجعل JPG وPNG وWebP تعمل بالطريقة نفسها
-  مع jsPDF، مع خلفية بيضاء للصور الشفافة.
-*/
+/* =========================
+   IMAGE TO JPEG
+========================= */
 
 function convertImageToJpeg(img){
 
   const canvas =
     document.createElement("canvas");
+
 
   const ctx =
     canvas.getContext("2d");
@@ -1348,12 +1819,14 @@ function convertImageToJpeg(img){
   canvas.width =
     img.naturalWidth;
 
+
   canvas.height =
     img.naturalHeight;
 
 
   ctx.fillStyle =
     "#ffffff";
+
 
   ctx.fillRect(
     0,
