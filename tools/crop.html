@@ -4,617 +4,942 @@
 <head>
 
 <meta charset="UTF-8">
-
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <title>قص الصور أونلاين مجانًا | قص وتحديد جزء من الصورة | AdaaHub</title>
 
 <meta
-  name="description"
-  content="قص الصور أونلاين مجانًا بسهولة. حدد الجزء الذي تريد الاحتفاظ به باستخدام الماوس أو اللمس، ثم حمّل الصورة المقصوصة مباشرة من المتصفح."
+name="description"
+content="قص الصور أونلاين مجانًا بسهولة. حدد الجزء الذي تريد الاحتفاظ به باستخدام الماوس أو اللمس، ثم حمّل الصورة المقصوصة مباشرة من المتصفح."
 >
 
 <meta name="robots" content="index, follow">
 
 <link
-  rel="canonical"
-  href="https://adaahub.github.io/adaahub/tools/crop.html"
+rel="canonical"
+href="https://adaahub.github.io/adaahub/tools/crop.html"
 >
-
-<script>
-(function(){
-  const savedTheme = localStorage.getItem("adaahub-theme");
-
-  if(savedTheme === "dark"){
-    document.documentElement.classList.add("dark");
-  }
-})();
-</script>
 
 <style>
 
-*{
-  box-sizing:border-box;
-}
-
 :root{
-  --primary:#2563eb;
-  --primary-dark:#1d4ed8;
-  --primary-soft:#eff6ff;
-  --bg:#f6f8fc;
-  --surface:#ffffff;
-  --text:#111827;
-  --muted:#64748b;
-  --border:#e5e7eb;
-  --success:#16a34a;
-  --danger:#dc2626;
-  --shadow:0 12px 35px rgba(15,23,42,.07);
+--primary:#2563eb;
+--primary-dark:#1d4ed8;
+--primary-soft:#eff6ff;
+--bg:#f6f8fc;
+--surface:#ffffff;
+--text:#111827;
+--muted:#64748b;
+--border:#e5e7eb;
+--success:#16a34a;
+--danger:#dc2626;
+--shadow:0 12px 35px rgba(15,23,42,.07);
 }
 
 html.dark{
-  --primary:#60a5fa;
-  --primary-dark:#93c5fd;
-  --primary-soft:#172554;
-  --bg:#0b1120;
-  --surface:#111827;
-  --text:#f1f5f9;
-  --muted:#94a3b8;
-  --border:#243044;
-  --success:#4ade80;
-  --danger:#f87171;
-  --shadow:0 12px 35px rgba(0,0,0,.25);
+--primary:#60a5fa;
+--primary-dark:#93c5fd;
+--primary-soft:#172554;
+--bg:#0b1120;
+--surface:#111827;
+--text:#f1f5f9;
+--muted:#94a3b8;
+--border:#243044;
+--success:#4ade80;
+--danger:#f87171;
+--shadow:0 12px 35px rgba(0,0,0,.25);
+}
+
+*{
+box-sizing:border-box;
 }
 
 html{
-  scroll-behavior:smooth;
+scroll-behavior:smooth;
+background:var(--bg);
 }
 
 body{
-  margin:0;
-  font-family:Arial,Tahoma,sans-serif;
-  background:
-    radial-gradient(
-      circle at top,
-      rgba(37,99,235,.08),
-      transparent 420px
-    ),
-    var(--bg);
-  color:var(--text);
-  line-height:1.7;
-  transition:
-    background .25s ease,
-    color .25s ease;
+margin:0;
+font-family:Arial,Tahoma,sans-serif;
+background:
+radial-gradient(circle at 50% -10%,rgba(37,99,235,.10),transparent 35%),
+var(--bg);
+color:var(--text);
+line-height:1.8;
+transition:
+background-color .25s ease,
+color .25s ease;
 }
 
-button,
-input,
-select{
-  font-family:inherit;
+html.dark body{
+background:
+radial-gradient(circle at 50% -10%,rgba(37,99,235,.13),transparent 35%),
+var(--bg);
 }
+
+a{
+color:inherit;
+}
+
+
+/* =========================
+   HEADER
+========================= */
 
 header{
-  position:sticky;
-  top:0;
-  z-index:100;
-  background:rgba(255,255,255,.88);
-  border-bottom:1px solid var(--border);
-  backdrop-filter:blur(12px);
+position:sticky;
+top:0;
+z-index:100;
+background:rgba(255,255,255,.88);
+backdrop-filter:blur(14px);
+-webkit-backdrop-filter:blur(14px);
+border-bottom:1px solid rgba(226,232,240,.85);
+transition:.25s;
 }
 
 html.dark header{
-  background:rgba(17,24,39,.88);
+background:rgba(11,17,32,.88);
+border-bottom-color:var(--border);
 }
 
 .header{
-  max-width:1050px;
-  margin:auto;
-  padding:14px 20px;
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  gap:18px;
+max-width:1150px;
+margin:auto;
+padding:14px 20px;
+display:flex;
+justify-content:space-between;
+align-items:center;
+gap:20px;
 }
 
+
+/* =========================
+   LOGO
+========================= */
+
 .logo{
-  display:flex;
-  align-items:center;
-  gap:9px;
-  color:var(--text);
-  text-decoration:none;
-  font-size:25px;
-  font-weight:800;
-  white-space:nowrap;
+display:flex;
+align-items:center;
+gap:9px;
+text-decoration:none;
+font-size:25px;
+font-weight:900;
+letter-spacing:-.5px;
+color:var(--text);
 }
 
 .logo-mark{
-  width:38px;
-  height:38px;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  border-radius:11px;
-  color:#fff;
-  font-size:21px;
-  font-weight:900;
-  background:linear-gradient(
-    135deg,
-    #2563eb,
-    #60a5fa
-  );
-  box-shadow:0 7px 18px rgba(37,99,235,.25);
+width:39px;
+height:39px;
+display:grid;
+place-items:center;
+border-radius:12px;
+background:linear-gradient(135deg,#2563eb,#60a5fa);
+color:#fff;
+box-shadow:0 7px 18px rgba(37,99,235,.25);
 }
 
-.logo span{
-  color:var(--primary);
+.logo-text span{
+color:var(--primary);
 }
+
+
+/* =========================
+   NAVIGATION
+========================= */
 
 .nav{
-  display:flex;
-  align-items:center;
-  gap:9px;
+display:flex;
+align-items:center;
+gap:8px;
 }
 
-.home{
-  color:var(--primary);
-  text-decoration:none;
-  font-weight:700;
-  padding:8px 11px;
-  border-radius:9px;
+.nav a{
+padding:9px 13px;
+border-radius:10px;
+color:#475569;
+text-decoration:none;
+font-weight:bold;
+font-size:14px;
+transition:.2s;
 }
 
-.home:hover{
-  background:var(--primary-soft);
+html.dark .nav a{
+color:#cbd5e1;
 }
+
+.nav a:hover{
+background:var(--primary-soft);
+color:var(--primary);
+}
+
+
+/* =========================
+   DARK MODE BUTTON
+========================= */
 
 .theme-toggle{
-  border:1px solid var(--border);
-  background:var(--surface);
-  color:var(--text);
-  width:42px;
-  height:42px;
-  border-radius:10px;
-  cursor:pointer;
-  font-size:18px;
-  transition:.2s;
+width:42px;
+height:42px;
+border:1px solid var(--border);
+border-radius:12px;
+background:var(--surface);
+color:var(--text);
+display:grid;
+place-items:center;
+cursor:pointer;
+font-size:19px;
+transition:.2s;
+box-shadow:0 4px 12px rgba(15,23,42,.05);
 }
 
 .theme-toggle:hover{
-  border-color:var(--primary);
-  transform:translateY(-1px);
+transform:translateY(-1px);
+border-color:#bfdbfe;
+background:var(--primary-soft);
 }
+
+.theme-toggle:focus{
+outline:3px solid rgba(37,99,235,.20);
+outline-offset:2px;
+}
+
+
+/* =========================
+   MAIN
+========================= */
 
 .container{
-  max-width:950px;
-  margin:0 auto;
-  padding:42px 20px 20px;
+max-width:1050px;
+margin:0 auto;
+padding:58px 20px 30px;
 }
 
-.hero{
-  text-align:center;
-  margin-bottom:28px;
+
+/* =========================
+   HERO
+========================= */
+
+.tool-hero{
+text-align:center;
+max-width:820px;
+margin:0 auto 32px;
 }
 
 .badge{
-  display:inline-flex;
-  align-items:center;
-  gap:6px;
-  padding:7px 12px;
-  border-radius:999px;
-  background:var(--primary-soft);
-  color:var(--primary);
-  font-size:13px;
-  font-weight:700;
-  margin-bottom:12px;
+display:inline-flex;
+align-items:center;
+gap:7px;
+padding:7px 13px;
+border:1px solid #dbeafe;
+background:rgba(239,246,255,.8);
+color:var(--primary);
+border-radius:999px;
+font-size:13px;
+font-weight:bold;
+margin-bottom:16px;
+}
+
+html.dark .badge{
+background:#172554;
+border-color:#1e3a8a;
 }
 
 h1{
-  margin:0 0 10px;
-  font-size:34px;
-  line-height:1.35;
-  letter-spacing:-.5px;
+font-size:clamp(30px,5vw,46px);
+line-height:1.25;
+letter-spacing:-1px;
+margin:0 0 14px;
 }
 
 .subtitle{
-  max-width:720px;
-  margin:0 auto;
-  color:var(--muted);
-  font-size:16px;
+max-width:730px;
+margin:0 auto;
+font-size:17px;
+color:var(--muted);
 }
+
+
+/* =========================
+   TOOL BOX
+========================= */
 
 .tool-card{
-  background:var(--surface);
-  border:1px solid var(--border);
-  border-radius:20px;
-  padding:25px;
-  box-shadow:var(--shadow);
+position:relative;
+background:var(--surface);
+border:1px solid var(--border);
+border-radius:26px;
+padding:12px;
+box-shadow:var(--shadow);
+overflow:hidden;
 }
 
-.upload-box{
-  border:2px dashed var(--border);
-  border-radius:16px;
-  padding:38px 20px;
-  text-align:center;
-  background:
-    linear-gradient(
-      180deg,
-      var(--surface),
-      var(--bg)
-    );
-  transition:.2s;
-  cursor:pointer;
+.tool-card::before{
+content:"";
+position:absolute;
+top:-100px;
+right:-80px;
+width:220px;
+height:220px;
+background:rgba(37,99,235,.08);
+border-radius:50%;
+pointer-events:none;
 }
 
-.upload-box:hover{
-  border-color:var(--primary);
-  background:var(--primary-soft);
+.box{
+position:relative;
+border:2px dashed #bfdbfe;
+border-radius:20px;
+padding:60px 20px;
+text-align:center;
+background:
+linear-gradient(
+180deg,
+rgba(239,246,255,.72),
+rgba(255,255,255,.9)
+);
+}
+
+html.dark .box{
+background:
+linear-gradient(
+180deg,
+rgba(23,37,84,.55),
+rgba(17,24,39,.9)
+);
+border-color:#315a9b;
 }
 
 .upload-icon{
-  width:64px;
-  height:64px;
-  margin:0 auto 13px;
-  border-radius:17px;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  font-size:32px;
-  background:var(--primary-soft);
+width:70px;
+height:70px;
+margin:0 auto 18px;
+display:grid;
+place-items:center;
+border-radius:20px;
+background:#dbeafe;
+font-size:31px;
 }
 
-.upload-box h2{
-  margin:0 0 7px;
-  font-size:21px;
+html.dark .upload-icon{
+background:#1e3a8a;
 }
 
-.upload-box p{
-  color:var(--muted);
-  margin:0 0 18px;
-  font-size:14px;
+.box h2{
+margin:0 0 7px;
+font-size:23px;
 }
 
-input[type="file"]{
-  display:none;
+.box p{
+margin:0 auto 22px;
+max-width:520px;
+color:var(--muted);
 }
 
-.choose-button{
-  display:inline-flex;
-  align-items:center;
-  justify-content:center;
-  background:var(--primary);
-  color:#fff;
-  padding:12px 24px;
-  border-radius:10px;
-  font-size:15px;
-  font-weight:700;
-  cursor:pointer;
-  transition:.2s;
+input{
+display:none;
 }
 
-.choose-button:hover{
-  background:var(--primary-dark);
-  transform:translateY(-1px);
+.upload{
+display:inline-flex;
+align-items:center;
+justify-content:center;
+gap:8px;
+background:linear-gradient(135deg,#2563eb,#3b82f6);
+color:#fff;
+padding:14px 27px;
+border-radius:13px;
+cursor:pointer;
+font-size:16px;
+font-weight:bold;
+box-shadow:0 10px 22px rgba(37,99,235,.22);
+transition:.2s;
 }
 
-.file-selected{
-  display:none;
-  max-width:100%;
-  margin:16px auto 0;
-  padding:10px 13px;
-  border:1px solid #bfdbfe;
-  background:var(--primary-soft);
-  color:var(--primary);
-  border-radius:10px;
-  font-size:14px;
-  overflow-wrap:anywhere;
+.upload:hover{
+transform:translateY(-2px);
+background:linear-gradient(135deg,#1d4ed8,#2563eb);
 }
 
-.status{
-  display:none;
-  margin-top:15px;
-  padding:11px 14px;
-  border-radius:10px;
-  text-align:center;
-  font-size:14px;
-  border:1px solid var(--border);
+.upload:focus{
+outline:3px solid rgba(37,99,235,.25);
+outline-offset:3px;
 }
 
-.status.show{
-  display:block;
+.supported{
+margin-top:17px;
+font-size:13px;
+color:#94a3b8;
 }
 
-.status.success{
-  color:var(--success);
-  background:rgba(22,163,74,.08);
-  border-color:rgba(22,163,74,.25);
+
+/* =========================
+   STATUS
+========================= */
+
+#status{
+display:none;
+margin-top:20px;
+color:var(--primary);
+font-weight:bold;
 }
 
-.status.error{
-  color:var(--danger);
-  background:rgba(220,38,38,.08);
-  border-color:rgba(220,38,38,.25);
-}
-
-.editor{
-  display:none;
-  margin-top:22px;
-}
-
-.canvas-wrapper{
-  width:100%;
-  overflow:auto;
-  background:#111827;
-  border-radius:14px;
-  padding:10px;
-  text-align:center;
-  -webkit-overflow-scrolling:touch;
-}
-
-#canvas{
-  max-width:100%;
-  height:auto;
-  display:block;
-  margin:auto;
-  cursor:crosshair;
-  touch-action:none;
-  user-select:none;
-  -webkit-user-select:none;
-}
-
-.selection-info{
-  text-align:center;
-  color:var(--muted);
-  font-size:14px;
-  margin:15px 0;
-}
-
-.buttons{
-  display:flex;
-  gap:10px;
-  justify-content:center;
-  flex-wrap:wrap;
-}
-
-button,
-.download-btn{
-  border:0;
-  border-radius:10px;
-  padding:12px 22px;
-  font-size:15px;
-  cursor:pointer;
-  text-decoration:none;
-  font-family:inherit;
-  transition:.2s;
-}
-
-.crop-btn{
-  background:var(--success);
-  color:#fff;
-}
-
-.crop-btn:hover:not(:disabled){
-  filter:brightness(.93);
-  transform:translateY(-1px);
-}
-
-.reset-btn{
-  background:var(--border);
-  color:var(--text);
-}
-
-.reset-btn:hover{
-  filter:brightness(.95);
-}
-
-.download-btn{
-  display:none;
-  background:var(--primary);
-  color:#fff;
-}
-
-.download-btn:hover{
-  background:var(--primary-dark);
-}
-
-button:disabled{
-  opacity:.5;
-  cursor:not-allowed;
-}
-
-.privacy-note{
-  margin-top:18px;
-  padding:14px 16px;
-  border-radius:12px;
-  background:var(--primary-soft);
-  border:1px solid rgba(37,99,235,.18);
-  color:var(--primary);
-  text-align:center;
-  font-size:14px;
-}
-
-.content{
-  margin-top:30px;
-  background:var(--surface);
-  border:1px solid var(--border);
-  border-radius:18px;
-  padding:28px;
-  box-shadow:var(--shadow);
-}
-
-.content h2{
-  margin-top:0;
-  font-size:24px;
-}
-
-.content h3{
-  font-size:19px;
-  margin-top:25px;
-}
-
-.content p{
-  color:var(--muted);
-}
-
-.content ol,
-.content ul{
-  padding-right:22px;
-}
-
-.content li{
-  margin-bottom:7px;
-}
-
-.content a{
-  color:var(--primary);
-  text-decoration:none;
-  font-weight:700;
-}
-
-.content a:hover{
-  text-decoration:underline;
-}
-
-.faq{
-  margin-top:32px;
-}
-
-.faq h2{
-  margin-bottom:15px;
-}
-
-.faq details{
-  background:var(--bg);
-  border:1px solid var(--border);
-  border-radius:11px;
-  padding:14px 16px;
-  margin-bottom:10px;
-}
-
-.faq summary{
-  cursor:pointer;
-  font-weight:700;
-}
-
-.faq p{
-  margin-bottom:0;
-}
-
-.tools-links{
-  margin-top:30px;
-  padding-top:22px;
-  border-top:1px solid var(--border);
-}
-
-.tools-links h3{
-  margin-top:0;
-}
-
-footer{
-  text-align:center;
-  color:var(--muted);
-  padding:32px 20px;
-  margin-top:10px;
-  font-size:14px;
-}
-
-footer a{
-  color:var(--primary);
-  text-decoration:none;
-  margin:0 5px;
-}
-
-footer a:hover{
-  text-decoration:underline;
-}
-
-.spinner{
-  display:inline-block;
-  width:15px;
-  height:15px;
-  border:2px solid rgba(255,255,255,.45);
-  border-top-color:#fff;
-  border-radius:50%;
-  animation:spin .7s linear infinite;
-  vertical-align:-2px;
-  margin-left:5px;
+#status::before{
+content:"";
+display:inline-block;
+width:15px;
+height:15px;
+margin-left:8px;
+vertical-align:-2px;
+border:2px solid #bfdbfe;
+border-top-color:var(--primary);
+border-radius:50%;
+animation:spin .8s linear infinite;
 }
 
 @keyframes spin{
-  to{
-    transform:rotate(360deg);
-  }
+to{
+transform:rotate(360deg);
 }
+}
+
+
+/* =========================
+   CROP EDITOR
+========================= */
+
+#editor{
+display:none;
+margin-top:22px;
+background:var(--surface);
+padding:30px;
+border-radius:22px;
+border:1px solid var(--border);
+box-shadow:var(--shadow);
+text-align:center;
+animation:fadeUp .3s ease;
+}
+
+@keyframes fadeUp{
+
+from{
+opacity:0;
+transform:translateY(8px);
+}
+
+to{
+opacity:1;
+transform:translateY(0);
+}
+
+}
+
+#editor h2{
+margin-top:0;
+font-size:24px;
+}
+
+.crop-area{
+width:100%;
+display:flex;
+justify-content:center;
+align-items:center;
+overflow:hidden;
+margin:20px auto;
+padding:10px;
+border-radius:16px;
+background:#f8fafc;
+border:1px solid var(--border);
+}
+
+html.dark .crop-area{
+background:#0f172a;
+}
+
+#cropCanvas{
+display:block;
+max-width:100%;
+height:auto;
+touch-action:none;
+cursor:crosshair;
+border-radius:10px;
+}
+
+.selection-info{
+display:flex;
+justify-content:center;
+flex-wrap:wrap;
+gap:10px;
+margin-top:15px;
+}
+
+.selection-info > div{
+background:#f8fafc;
+border:1px solid var(--border);
+padding:9px 15px;
+border-radius:11px;
+font-size:14px;
+color:#475569;
+}
+
+html.dark .selection-info > div{
+background:#0f172a;
+color:#cbd5e1;
+}
+
+.crop-actions{
+display:flex;
+justify-content:center;
+align-items:center;
+flex-wrap:wrap;
+gap:10px;
+margin-top:20px;
+}
+
+.crop-button{
+display:inline-flex;
+align-items:center;
+justify-content:center;
+gap:8px;
+border:0;
+padding:13px 24px;
+border-radius:12px;
+font-weight:bold;
+font-family:inherit;
+font-size:15px;
+cursor:pointer;
+transition:.2s;
+}
+
+.crop-button:hover{
+transform:translateY(-2px);
+}
+
+.crop-button.primary{
+background:linear-gradient(135deg,#2563eb,#3b82f6);
+color:#fff;
+box-shadow:0 9px 20px rgba(37,99,235,.18);
+}
+
+.crop-button.secondary{
+background:#f1f5f9;
+color:#334155;
+border:1px solid #e2e8f0;
+}
+
+.crop-button.secondary:hover{
+background:#e2e8f0;
+}
+
+html.dark .crop-button.secondary{
+background:#1e293b;
+color:#e2e8f0;
+border-color:#334155;
+}
+
+html.dark .crop-button.secondary:hover{
+background:#334155;
+}
+
+#cropMessage{
+display:none;
+margin-top:15px;
+font-weight:bold;
+color:var(--muted);
+}
+
+#result{
+display:none;
+margin-top:22px;
+background:var(--surface);
+padding:30px;
+border-radius:22px;
+border:1px solid var(--border);
+box-shadow:var(--shadow);
+text-align:center;
+animation:fadeUp .3s ease;
+}
+
+#result h2{
+margin-top:0;
+font-size:24px;
+}
+
+#preview{
+max-width:100%;
+max-height:360px;
+margin:20px auto;
+display:block;
+border-radius:15px;
+object-fit:contain;
+background:#f8fafc;
+border:1px solid var(--border);
+padding:5px;
+}
+
+html.dark #preview{
+background:#0f172a;
+}
+
+.download{
+display:inline-flex;
+align-items:center;
+justify-content:center;
+gap:8px;
+background:linear-gradient(135deg,#16a34a,#22c55e);
+color:#fff;
+text-decoration:none;
+padding:13px 24px;
+border-radius:12px;
+margin-top:20px;
+font-weight:bold;
+box-shadow:0 9px 20px rgba(22,163,74,.18);
+transition:.2s;
+}
+
+.download:hover{
+transform:translateY(-2px);
+}
+
+.reset{
+display:inline-flex;
+align-items:center;
+justify-content:center;
+background:#f1f5f9;
+color:#334155;
+border:1px solid #e2e8f0;
+padding:11px 20px;
+border-radius:11px;
+margin-top:12px;
+cursor:pointer;
+font-weight:bold;
+font-family:inherit;
+transition:.2s;
+}
+
+.reset:hover{
+background:#e2e8f0;
+}
+
+html.dark .reset{
+background:#1e293b;
+color:#e2e8f0;
+border-color:#334155;
+}
+
+html.dark .reset:hover{
+background:#334155;
+}
+
+
+/* =========================
+   CONTENT
+========================= */
+
+.content{
+margin-top:35px;
+background:var(--surface);
+padding:35px;
+border-radius:22px;
+border:1px solid var(--border);
+box-shadow:0 8px 28px rgba(15,23,42,.04);
+}
+
+.content h2{
+font-size:27px;
+line-height:1.4;
+margin:0 0 15px;
+color:var(--text);
+}
+
+.content h3{
+font-size:20px;
+margin-top:30px;
+margin-bottom:8px;
+color:var(--text);
+}
+
+.content p{
+color:var(--muted);
+}
+
+.content ul,
+.content ol{
+padding-right:24px;
+color:var(--muted);
+}
+
+.content li{
+margin-bottom:8px;
+}
+
+.content a{
+color:var(--primary);
+font-weight:bold;
+}
+
+
+/* =========================
+   INTERNAL LINKS
+========================= */
+
+.internal-links{
+display:flex;
+flex-wrap:wrap;
+gap:9px;
+margin-top:17px;
+}
+
+.internal-links a{
+display:inline-flex;
+align-items:center;
+background:var(--primary-soft);
+color:var(--primary);
+padding:9px 13px;
+border:1px solid #dbeafe;
+border-radius:10px;
+text-decoration:none;
+font-size:14px;
+font-weight:bold;
+transition:.2s;
+}
+
+html.dark .internal-links a{
+border-color:#1e3a8a;
+}
+
+.internal-links a:hover{
+background:#dbeafe;
+transform:translateY(-1px);
+}
+
+html.dark .internal-links a:hover{
+background:#1e3a8a;
+}
+
+.all-tools{
+display:inline-flex;
+margin-top:23px;
+padding:10px 14px;
+border-radius:10px;
+background:#f8fafc;
+color:var(--primary)!important;
+text-decoration:none;
+}
+
+html.dark .all-tools{
+background:#0f172a;
+}
+
+
+/* =========================
+   FAQ
+========================= */
+
+.faq{
+margin-top:38px;
+padding-top:30px;
+border-top:1px solid var(--border);
+}
+
+.faq h2{
+margin-bottom:17px;
+}
+
+.faq details{
+background:#f8fafc;
+border:1px solid var(--border);
+border-radius:13px;
+padding:15px 17px;
+margin-bottom:10px;
+transition:.2s;
+}
+
+html.dark .faq details{
+background:#0f172a;
+}
+
+.faq details[open]{
+background:var(--surface);
+border-color:#3b82f6;
+box-shadow:0 5px 18px rgba(15,23,42,.04);
+}
+
+.faq summary{
+cursor:pointer;
+font-weight:bold;
+color:var(--text);
+}
+
+.faq p{
+margin-bottom:0;
+}
+
+
+/* =========================
+   FOOTER
+========================= */
+
+footer{
+margin-top:30px;
+text-align:center;
+color:var(--muted);
+padding:35px 20px 45px;
+}
+
+.footer-links{
+display:flex;
+justify-content:center;
+flex-wrap:wrap;
+gap:8px;
+margin-top:13px;
+}
+
+.footer-links a{
+color:var(--muted);
+text-decoration:none;
+font-size:14px;
+padding:6px 9px;
+border-radius:8px;
+}
+
+.footer-links a:hover{
+color:var(--primary);
+background:var(--primary-soft);
+}
+
+
+/* =========================
+   MOBILE
+========================= */
 
 @media(max-width:700px){
 
-  .header{
-    padding:12px 15px;
-  }
+.header{
+padding:12px 15px;
+}
 
-  .container{
-    padding:30px 15px 15px;
-  }
+.nav{
+gap:2px;
+}
 
-  h1{
-    font-size:28px;
-  }
+.nav a{
+padding:8px 9px;
+font-size:13px;
+}
 
-  .tool-card{
-    padding:18px;
-  }
+.container{
+padding:38px 14px 20px;
+}
 
-  .content{
-    padding:22px 18px;
-  }
+h1{
+font-size:30px;
+}
+
+.subtitle{
+font-size:15px;
+}
+
+.tool-card{
+padding:8px;
+border-radius:21px;
+}
+
+.box{
+padding:45px 15px;
+}
+
+.content{
+padding:25px 18px;
+border-radius:18px;
+}
+
+.content h2{
+font-size:23px;
+}
+
+.content h3{
+font-size:19px;
+}
+
+.selection-info{
+flex-direction:column;
+}
+
+.selection-info > div{
+width:100%;
+}
+
+#editor,
+#result{
+padding:22px 15px;
+}
+
+.crop-area{
+padding:6px;
+}
+
+.crop-actions{
+flex-direction:column;
+}
+
+.crop-button{
+width:100%;
+max-width:300px;
+}
 
 }
 
 @media(max-width:430px){
 
-  .header{
-    flex-wrap:wrap;
-  }
+.header{
+flex-wrap:wrap;
+}
 
-  .logo{
-    font-size:22px;
-  }
+.nav{
+width:100%;
+justify-content:flex-end;
+}
 
-  .logo-mark{
-    width:35px;
-    height:35px;
-  }
+.logo{
+font-size:22px;
+}
 
-  .nav{
-    width:100%;
-    justify-content:flex-end;
-  }
+.logo-mark{
+width:35px;
+height:35px;
+border-radius:10px;
+}
 
-  .upload-box{
-    padding:30px 14px;
-  }
+.theme-toggle{
+width:38px;
+height:38px;
+}
 
-  .buttons{
-    flex-direction:column;
-  }
+.box h2{
+font-size:21px;
+}
 
-  button,
-  .download-btn{
-    width:100%;
-  }
+.upload{
+width:100%;
+max-width:300px;
+}
 
 }
 
+
+/* =========================
+   REDUCED MOTION
+========================= */
+
 @media(prefers-reduced-motion:reduce){
 
-  html{
-    scroll-behavior:auto;
-  }
-
-  *,
-  *::before,
-  *::after{
-    animation-duration:.01ms !important;
-    transition-duration:.01ms !important;
-  }
+*{
+scroll-behavior:auto!important;
+animation:none!important;
+transition:none!important;
+}
 
 }
 
@@ -622,1613 +947,1845 @@ footer a:hover{
 
 </head>
 
+
 <body>
+
 
 <header>
 
-  <div class="header">
+<div class="header">
 
-    <a
-      class="logo"
-      href="../index.html"
-      aria-label="AdaaHub الرئيسية"
-    >
 
-      <span class="logo-mark">A</span>
+<a
+class="logo"
+href="../index.html"
+aria-label="AdaaHub">
 
-      <span>
-        Adaa<span>Hub</span>
-      </span>
+<span class="logo-mark">
+A
+</span>
 
-    </a>
+<span class="logo-text">
+Adaa<span>Hub</span>
+</span>
 
-    <nav class="nav">
+</a>
 
-      <a
-        class="home"
-        href="../index.html"
-      >
-        الرئيسية
-      </a>
 
-      <button
-        class="theme-toggle"
-        id="themeToggle"
-        type="button"
-        aria-label="تفعيل الوضع الليلي"
-        title="الوضع الليلي"
-      >
-        🌙
-      </button>
+<nav class="nav">
 
-    </nav>
+<a href="../index.html">
+الرئيسية
+</a>
 
-  </div>
+<a href="../index.html#tools">
+كل الأدوات
+</a>
+
+<button
+class="theme-toggle"
+id="themeToggle"
+type="button"
+aria-label="تفعيل الوضع الداكن"
+title="تغيير المظهر">
+🌙
+</button>
+
+</nav>
+
+
+</div>
 
 </header>
 
 
+
 <main class="container">
 
-  <section class="hero">
 
-    <div class="badge">
-      ⚡ أداة مجانية وسريعة
-    </div>
+<section class="tool-hero">
 
-    <h1>
-      قص الصور أونلاين مجانًا
-    </h1>
+<div class="badge">
+⚡ أداة مجانية وسريعة
+</div>
 
-    <p class="subtitle">
-      حدد الجزء الذي تريد الاحتفاظ به من الصورة باستخدام الماوس
-      أو إصبعك، ثم حمّل الصورة المقصوصة مباشرة من المتصفح.
-    </p>
+<h1>
+قص الصور أونلاين مجانًا
+</h1>
 
-  </section>
+<p class="subtitle">
+حدد الجزء الذي تريد الاحتفاظ به من صورة JPG أو PNG أو WebP،
+ثم حمّل الصورة المقصوصة مباشرة من المتصفح.
+</p>
 
+</section>
 
-  <section class="tool-card">
 
-    <label
-      class="upload-box"
-      for="imageInput"
-    >
 
-      <div class="upload-icon">
-        ✂️
-      </div>
+<section class="tool-card">
 
-      <h2>
-        اختر صورة للبدء
-      </h2>
+<div class="box">
 
-      <p>
-        يدعم JPG وJPEG وPNG وWebP — الحد الأقصى 25MB
-      </p>
 
-      <span class="choose-button">
-        اختيار صورة
-      </span>
+<div class="upload-icon">
+✂️
+</div>
 
-      <input
-        type="file"
-        id="imageInput"
-        accept="image/jpeg,image/png,image/webp"
-      >
 
-      <div
-        class="file-selected"
-        id="fileSelected"
-      ></div>
+<h2>
+ابدأ قص الصورة
+</h2>
 
-    </label>
 
+<p>
+اختر صورة من جهازك ثم حدد الجزء الذي تريد الاحتفاظ به باستخدام
+الماوس أو اللمس.
+</p>
 
-    <div
-      class="status"
-      id="status"
-      role="status"
-      aria-live="polite"
-    ></div>
 
+<label
+class="upload"
+for="imageInput">
 
-    <div
-      class="editor"
-      id="editor"
-    >
+📁 اختر صورة
 
-      <div class="canvas-wrapper">
+</label>
 
-        <canvas
-          id="canvas"
-          aria-label="منطقة تحديد الجزء المطلوب من الصورة"
-        ></canvas>
 
-      </div>
+<input
+id="imageInput"
+type="file"
+accept="image/jpeg,image/png,image/webp"
+aria-label="اختيار صورة لقصها"
+>
 
 
-      <div
-        class="selection-info"
-        id="selectionInfo"
-        aria-live="polite"
-      >
-        اسحب على الصورة لتحديد الجزء الذي تريد قصه
-      </div>
+<div class="supported">
+JPG · JPEG · PNG · WebP · حتى 25 ميجابايت
+</div>
 
 
-      <div class="buttons">
+<div
+id="status"
+aria-live="polite">
 
-        <button
-          class="crop-btn"
-          id="cropBtn"
-          type="button"
-          disabled
-        >
-          ✂️ قص الصورة
-        </button>
+جارٍ تحميل الصورة...
 
+</div>
 
-        <button
-          class="reset-btn"
-          id="resetBtn"
-          type="button"
-        >
-          إعادة ضبط
-        </button>
 
+</div>
 
-        <a
-          class="download-btn"
-          id="downloadBtn"
-          download
-        >
-          ⬇️ تحميل الصورة
-        </a>
+</section>
 
-      </div>
 
-    </div>
 
+<section id="editor">
 
-    <div class="privacy-note">
+<h2>
+✂️ حدد الجزء المطلوب
+</h2>
 
-      🔒 <strong>الخصوصية:</strong>
-      تتم معالجة الصورة داخل متصفحك مباشرة،
-      ولا يتم رفعها إلى خادم AdaaHub.
 
-    </div>
+<p class="subtitle">
+اسحب بالماوس أو اللمس لتحديد المنطقة التي تريد الاحتفاظ بها.
+</p>
 
-  </section>
 
+<div class="crop-area">
 
-  <section class="content">
+<canvas
+id="cropCanvas">
+</canvas>
 
-    <h2>
-      قص الصور أونلاين
-    </h2>
+</div>
 
-    <p>
-      تساعدك أداة AdaaHub على قص الصور بسهولة من الهاتف أو الكمبيوتر.
-      حدد المنطقة المطلوبة من الصورة باستخدام الماوس أو إصبعك،
-      ثم أنشئ نسخة جديدة تحتوي على الجزء المحدد فقط.
-    </p>
 
+<div class="selection-info">
 
-    <h3>
-      كيفية قص الصورة؟
-    </h3>
+<div id="selectionWidth">
+العرض: —
+</div>
 
-    <ol>
+<div id="selectionHeight">
+الارتفاع: —
+</div>
 
-      <li>
-        اضغط على «اختيار صورة».
-      </li>
+<div id="selectionSize">
+الحجم: —
+</div>
 
-      <li>
-        اختر صورة JPG أو PNG أو WebP من جهازك.
-      </li>
+</div>
 
-      <li>
-        اسحب فوق الصورة لتحديد المنطقة التي تريد الاحتفاظ بها.
-      </li>
 
-      <li>
-        اضغط على «قص الصورة».
-      </li>
+<div
+id="cropMessage"
+aria-live="polite">
+</div>
 
-      <li>
-        اضغط على «تحميل الصورة» لحفظ النتيجة.
-      </li>
 
-    </ol>
+<div class="crop-actions">
 
+<button
+class="crop-button primary"
+id="cropButton"
+type="button">
 
-    <h3>
-      هل يتم رفع الصور إلى الإنترنت؟
-    </h3>
+✂️ قص الصورة
 
-    <p>
-      لا. تتم معالجة الصورة داخل متصفح جهازك باستخدام JavaScript،
-      ولا يتم إرسال ملف الصورة إلى خادم AdaaHub أثناء عملية القص.
-    </p>
+</button>
 
 
-    <h3>
-      هل تعمل الأداة على الهاتف؟
-    </h3>
+<button
+class="crop-button secondary"
+id="resetEditor"
+type="button">
 
-    <p>
-      نعم، يمكنك تحديد الجزء المطلوب باستخدام إصبعك على شاشة الهاتف
-      أو باستخدام الماوس على الكمبيوتر.
-    </p>
+↻ اختيار صورة أخرى
 
+</button>
 
-    <h3>
-      ما صيغ الصور المدعومة؟
-    </h3>
+</div>
 
-    <p>
-      يمكن استخدام الصور بصيغة JPG أو JPEG أو PNG أو WebP.
-      يتم حفظ الصورة المقصوصة بصيغة PNG للحفاظ على جودة الجزء المحدد.
-    </p>
+</section>
 
 
-    <div class="faq">
 
-      <h2>
-        الأسئلة الشائعة
-      </h2>
+<div id="result">
 
 
-      <details>
+<h2>
+✅ تمت عملية القص
+</h2>
 
-        <summary>
-          هل أداة قص الصور مجانية؟
-        </summary>
 
-        <p>
-          نعم، يمكنك استخدام الأداة مجانًا من متصفح الإنترنت.
-        </p>
+<img
+id="preview"
+alt="معاينة الصورة المقصوصة"
+>
 
-      </details>
 
+<a
+id="download"
+class="download"
+download="adaahub-crop.png">
 
-      <details>
+⬇️ تحميل الصورة المقصوصة
 
-        <summary>
-          هل أحتاج إلى تثبيت برنامج؟
-        </summary>
+</a>
 
-        <p>
-          لا، الأداة تعمل مباشرة من متصفح الإنترنت
-          ولا تحتاج إلى تثبيت برنامج إضافي.
-        </p>
 
-      </details>
+<br>
 
 
-      <details>
+<button
+class="reset"
+id="reset"
+type="button">
 
-        <summary>
-          هل يمكن قص الصورة من الهاتف؟
-        </summary>
+↻ قص صورة أخرى
 
-        <p>
-          نعم، يمكنك تحديد المنطقة المطلوبة بالسحب بإصبعك
-          على شاشة الهاتف.
-        </p>
+</button>
 
-      </details>
 
+</div>
 
-      <details>
 
-        <summary>
-          هل يتم الاحتفاظ بالصور على الموقع؟
-        </summary>
 
-        <p>
-          لا. تتم معالجة الصورة محليًا داخل المتصفح
-          ولا يتم إرسالها إلى خادم AdaaHub.
-        </p>
+<section class="content">
 
-      </details>
 
+<h2>
+قص الصور وتحديد الجزء المطلوب
+</h2>
 
-      <details>
 
-        <summary>
-          ما الحد الأقصى لحجم الصورة؟
-        </summary>
+<p>
+تساعدك أداة قص الصور من AdaaHub على تحديد جزء معين من الصورة
+والاحتفاظ به، سواء كنت تستخدم الهاتف أو الكمبيوتر. يمكنك تحديد
+المنطقة المطلوبة باستخدام الماوس أو اللمس ثم إنشاء صورة جديدة
+تحتوي على الجزء المحدد فقط.
+</p>
 
-        <p>
-          يمكن للأداة استقبال ملفات يصل حجمها إلى 25MB.
-          وقد يختلف الأداء الفعلي حسب إمكانيات الجهاز والمتصفح.
-        </p>
 
-      </details>
+<h3>
+متى تحتاج إلى قص الصورة؟
+</h3>
 
-    </div>
 
+<p>
+يمكن استخدام قص الصور لإزالة أجزاء غير مرغوبة من الصورة، أو
+التركيز على عنصر معين، أو تجهيز الصورة للنشر على مواقع التواصل
+الاجتماعي والمواقع الإلكترونية، أو الحصول على أبعاد مناسبة
+للاستخدام المطلوب.
+</p>
 
-    <div class="tools-links">
 
-      <h3>
-        أدوات قد تهمك
-      </h3>
+<h3>
+كيفية قص صورة باستخدام AdaaHub؟
+</h3>
 
-      <ul>
 
-        <li>
-          <a href="compress.html">
-            ضغط الصور وتقليل حجمها
-          </a>
-        </li>
+<ol>
 
-        <li>
-          <a href="resize.html">
-            تغيير حجم الصور
-          </a>
-        </li>
+<li>
+اضغط على «اختر صورة».
+</li>
 
-        <li>
-          <a href="webp.html">
-            تحويل الصور إلى WebP
-          </a>
-        </li>
+<li>
+حدد صورة JPG أو JPEG أو PNG أو WebP من جهازك.
+</li>
 
-        <li>
-          <a href="rotate.html">
-            تدوير الصور
-          </a>
-        </li>
+<li>
+حدد المنطقة التي تريد الاحتفاظ بها باستخدام الماوس أو اللمس.
+</li>
 
-        <li>
-          <a href="jpg-to-png.html">
-            تحويل JPG إلى PNG
-          </a>
-        </li>
+<li>
+اضغط على «قص الصورة».
+</li>
 
-        <li>
-          <a href="png-to-jpg.html">
-            تحويل PNG إلى JPG
-          </a>
-        </li>
+<li>
+راجع الصورة الناتجة ثم اضغط على «تحميل الصورة المقصوصة».
+</li>
 
-        <li>
-          <a href="webp-to-jpg.html">
-            تحويل WebP إلى JPG
-          </a>
-        </li>
+</ol>
 
-        <li>
-          <a href="image-info.html">
-            معرفة معلومات الصورة
-          </a>
-        </li>
 
-      </ul>
+<h3>
+ما صيغ الصور التي تدعمها الأداة؟
+</h3>
 
-    </div>
 
-  </section>
+<p>
+يمكن للأداة استقبال صور JPG وJPEG وPNG وWebP، بحد أقصى
+25 ميجابايت للملف الواحد.
+</p>
+
+
+<h3>
+هل يمكن استخدام الأداة من الهاتف؟
+</h3>
+
+
+<p>
+نعم. تم تصميم أداة القص لتعمل على الهواتف والأجهزة اللوحية
+وأجهزة الكمبيوتر الحديثة. يمكنك تحديد الجزء المطلوب باستخدام
+اللمس على شاشة الهاتف أو الماوس على الكمبيوتر.
+</p>
+
+
+<h3>
+هل يتم رفع الصورة إلى خادم AdaaHub؟
+</h3>
+
+
+<p>
+لا تعتمد عملية القص نفسها على رفع الصورة إلى خادم AdaaHub.
+يتم تحميل الصورة إلى ذاكرة المتصفح ومعالجتها محليًا باستخدام
+JavaScript، ثم يتم إنشاء الصورة المقصوصة داخل المتصفح.
+</p>
+
+
+<p>
+أما تحميل الصفحة والموارد اللازمة لتشغيلها فهو اتصال طبيعي
+بصفحة الويب، لكن ملف الصورة الذي تختاره لا يتم إرساله إلى
+خادم AdaaHub بواسطة عملية القص نفسها.
+</p>
+
+
+<h3>
+هل تتغير جودة الصورة بعد القص؟
+</h3>
+
+
+<p>
+يتم إنشاء الصورة الناتجة بصيغة PNG، لذلك لا تستخدم عملية القص
+ضغط JPG لإنشاء الملف الناتج. جودة الصورة تعتمد بشكل أساسي على
+جودة الصورة الأصلية والمنطقة التي اخترتها.
+</p>
+
+
+<h3>
+هل يمكن قص جزء صغير جدًا من الصورة؟
+</h3>
+
+
+<p>
+نعم، يمكنك تحديد أي منطقة مناسبة داخل الصورة، بشرط أن يكون
+التحديد له مساحة فعلية. يتم إنشاء الصورة الناتجة من الجزء
+الذي تحدده فقط.
+</p>
+
+
+<h3>
+هل تتغير أبعاد الصورة بعد القص؟
+</h3>
+
+
+<p>
+نعم. تختلف أبعاد الصورة الناتجة حسب المنطقة التي تحددها أثناء
+عملية القص. كلما كان التحديد أصغر، كانت أبعاد الصورة الناتجة
+أصغر.
+</p>
+
+
+<h3>
+هل يتم الاحتفاظ بالصورة الأصلية؟
+</h3>
+
+
+<p>
+لا يتم تعديل الملف الأصلي الموجود على جهازك. تقوم الأداة بإنشاء
+نسخة جديدة من الجزء المحدد ويمكنك تنزيلها بشكل مستقل.
+</p>
+
+
+<h3>
+أدوات AdaaHub الأخرى للصور
+</h3>
+
+
+<p>
+إذا كنت تريد إجراء تعديلات أخرى على الصورة، يمكنك استخدام أدوات
+ضغط الصور أو تغيير الحجم أو التدوير أو تحويل الصيغ أو معرفة
+معلومات الصورة.
+</p>
+
+
+<div class="internal-links">
+
+<a href="compress.html">
+ضغط الصور
+</a>
+
+<a href="webp.html">
+تحويل الصور إلى WebP
+</a>
+
+<a href="resize.html">
+تغيير حجم الصور
+</a>
+
+<a href="rotate.html">
+تدوير الصور
+</a>
+
+<a href="jpg-to-png.html">
+JPG إلى PNG
+</a>
+
+<a href="png-to-jpg.html">
+PNG إلى JPG
+</a>
+
+<a href="webp-to-jpg.html">
+WebP إلى JPG
+</a>
+
+<a href="image-info.html">
+معلومات الصورة
+</a>
+
+<a href="pdf.html">
+تحويل الصور إلى PDF
+</a>
+
+</div>
+
+
+<a
+href="../index.html#tools"
+class="all-tools">
+
+← عرض جميع أدوات AdaaHub
+
+</a>
+
+
+
+<div class="faq">
+
+
+<h2>
+الأسئلة الشائعة
+</h2>
+
+
+<details>
+
+<summary>
+هل أداة قص الصور مجانية؟
+</summary>
+
+<p>
+نعم، يمكنك استخدام أداة قص الصور مجانًا من خلال متصفح الويب
+دون الحاجة إلى تثبيت برنامج مخصص.
+</p>
+
+</details>
+
+
+<details>
+
+<summary>
+هل تعمل أداة القص على الهاتف؟
+</summary>
+
+<p>
+نعم، يمكن استخدامها على الهواتف والأجهزة اللوحية وأجهزة الكمبيوتر
+الحديثة التي تدعم تقنيات معالجة الصور داخل المتصفح.
+</p>
+
+</details>
+
+
+<details>
+
+<summary>
+ما أنواع الصور التي يمكن قصها؟
+</summary>
+
+<p>
+تدعم الأداة صور JPG وJPEG وPNG وWebP، مع حد أقصى لحجم الملف
+يبلغ 25 ميجابايت.
+</p>
+
+</details>
+
+
+<details>
+
+<summary>
+هل يتم رفع الصورة إلى خادم AdaaHub؟
+</summary>
+
+<p>
+لا تتم عملية القص من خلال رفع الصورة إلى خادم AdaaHub.
+تتم المعالجة داخل متصفح المستخدم ثم يتم إنشاء الصورة الناتجة
+محليًا.
+</p>
+
+</details>
+
+
+<details>
+
+<summary>
+هل تتغير أبعاد الصورة بعد القص؟
+</summary>
+
+<p>
+نعم. أبعاد الصورة الناتجة تعتمد على المنطقة التي حددتها أثناء
+عملية القص.
+</p>
+
+</details>
+
+
+<details>
+
+<summary>
+هل تتأثر الصورة الأصلية؟
+</summary>
+
+<p>
+لا. الملف الأصلي الموجود على جهازك لا يتم تعديله. يتم إنشاء
+نسخة جديدة من الجزء الذي اخترته.
+</p>
+
+</details>
+
+
+<details>
+
+<summary>
+ما صيغة الصورة الناتجة؟
+</summary>
+
+<p>
+يتم إنشاء الصورة الناتجة بصيغة PNG حتى يمكن حفظ المنطقة المحددة
+بشكل مباشر دون إعادة ضغطها بصيغة JPG.
+</p>
+
+</details>
+
+
+<details>
+
+<summary>
+هل أستطيع استخدام الماوس واللمس؟
+</summary>
+
+<p>
+نعم. يمكنك تحديد المنطقة باستخدام الماوس على الكمبيوتر أو اللمس
+على الهواتف والأجهزة اللوحية.
+</p>
+
+</details>
+
+
+</div>
+
+</section>
 
 </main>
 
 
+
 <footer>
 
-  <div>
-    © 2026 AdaaHub - جميع الحقوق محفوظة
-  </div>
+© 2026 AdaaHub - جميع الحقوق محفوظة
 
-  <div style="margin-top:8px;">
 
-    <a href="../index.html">
-      الرئيسية
-    </a>
+<div class="footer-links">
 
-    |
+<a href="../index.html">
+الرئيسية
+</a>
 
-    <a href="../pages/about.html">
-      من نحن
-    </a>
+<a href="../pages/about.html">
+من نحن
+</a>
 
-    |
+<a href="../pages/privacy.html">
+سياسة الخصوصية
+</a>
 
-    <a href="../pages/privacy.html">
-      الخصوصية
-    </a>
+<a href="../pages/terms.html">
+شروط الاستخدام
+</a>
 
-    |
+<a href="../pages/contact.html">
+اتصل بنا
+</a>
 
-    <a href="../pages/terms.html">
-      الشروط والأحكام
-    </a>
-
-    |
-
-    <a href="../pages/contact.html">
-      اتصل بنا
-    </a>
-
-  </div>
+</div>
 
 </footer>
 
 
+
 <script>
 
-/* =========================
-   الوضع الليلي
-========================= */
+/* ==========================================
+   ADAAHUB GLOBAL THEME SYSTEM
+========================================== */
+
+const THEME_KEY = "adaahub-theme";
 
 const themeToggle =
-  document.getElementById("themeToggle");
+document.getElementById("themeToggle");
 
 
-function updateThemeButton(){
+function applyTheme(theme){
 
-  const dark =
-    document.documentElement.classList.contains("dark");
+if(theme === "dark"){
 
-  themeToggle.textContent =
-    dark ? "☀️" : "🌙";
+document.documentElement.classList.add("dark");
 
-  themeToggle.setAttribute(
-    "aria-label",
-    dark
-      ? "تفعيل الوضع الفاتح"
-      : "تفعيل الوضع الليلي"
-  );
+if(themeToggle){
 
-  themeToggle.setAttribute(
-    "title",
-    dark
-      ? "الوضع الفاتح"
-      : "الوضع الليلي"
-  );
+themeToggle.textContent = "☀️";
+
+themeToggle.setAttribute(
+"aria-label",
+"تفعيل الوضع الفاتح"
+);
+
+themeToggle.setAttribute(
+"title",
+"الوضع الداكن مفعل - اضغط للتبديل"
+);
+
+}
+
+}else{
+
+document.documentElement.classList.remove("dark");
+
+if(themeToggle){
+
+themeToggle.textContent = "🌙";
+
+themeToggle.setAttribute(
+"aria-label",
+"تفعيل الوضع الداكن"
+);
+
+themeToggle.setAttribute(
+"title",
+"الوضع الفاتح مفعل - اضغط للتبديل"
+);
+
+}
+
+}
 
 }
 
 
-updateThemeButton();
+const savedTheme =
+localStorage.getItem(THEME_KEY);
 
 
-themeToggle.addEventListener(
-  "click",
-  function(){
+if(savedTheme === "dark"){
 
-    const dark =
-      document.documentElement.classList.toggle("dark");
+document.documentElement.classList.add("dark");
 
-    localStorage.setItem(
-      "adaahub-theme",
-      dark ? "dark" : "light"
-    );
+}
 
-    updateThemeButton();
 
-  }
+applyTheme(
+savedTheme === "dark"
+? "dark"
+: "light"
 );
 
 
-/* =========================
-   عناصر الأداة
-========================= */
+if(themeToggle){
 
-const imageInput =
-  document.getElementById("imageInput");
+themeToggle.addEventListener(
+"click",
+function(){
 
-const canvas =
-  document.getElementById("canvas");
+const isDark =
+document.documentElement.classList.contains("dark");
 
-const ctx =
-  canvas.getContext("2d");
+const newTheme =
+isDark
+? "light"
+: "dark";
 
-const editor =
-  document.getElementById("editor");
+localStorage.setItem(
+THEME_KEY,
+newTheme
+);
 
-const cropBtn =
-  document.getElementById("cropBtn");
+applyTheme(newTheme);
 
-const resetBtn =
-  document.getElementById("resetBtn");
+}
+);
 
-const downloadBtn =
-  document.getElementById("downloadBtn");
+}
 
-const selectionInfo =
-  document.getElementById("selectionInfo");
 
-const fileSelected =
-  document.getElementById("fileSelected");
+/* ==========================================
+   CROP TOOL
+========================================== */
+
+const input =
+document.getElementById("imageInput");
 
 const status =
-  document.getElementById("status");
+document.getElementById("status");
+
+const editor =
+document.getElementById("editor");
+
+const cropCanvas =
+document.getElementById("cropCanvas");
+
+const cropButton =
+document.getElementById("cropButton");
+
+const resetEditor =
+document.getElementById("resetEditor");
+
+const cropMessage =
+document.getElementById("cropMessage");
+
+const result =
+document.getElementById("result");
+
+const preview =
+document.getElementById("preview");
+
+const download =
+document.getElementById("download");
+
+const reset =
+document.getElementById("reset");
+
+const selectionWidth =
+document.getElementById("selectionWidth");
+
+const selectionHeight =
+document.getElementById("selectionHeight");
+
+const selectionSize =
+document.getElementById("selectionSize");
+
+const ctx =
+cropCanvas.getContext("2d");
 
 
-let image =
-  new Image();
+let image = null;
 
-let startX = 0;
-let startY = 0;
+let originalFile = null;
 
-let currentX = 0;
-let currentY = 0;
+let originalUrl = null;
 
-let selecting = false;
-let hasSelection = false;
+let resultUrl = null;
 
 let displayScale = 1;
 
-let downloadUrl = null;
+let startX = 0;
 
-let selectedFile = null;
+let startY = 0;
+
+let currentX = 0;
+
+let currentY = 0;
+
+let selecting = false;
+
+let hasSelection = false;
 
 
-const MAX_FILE_SIZE =
-  25 * 1024 * 1024;
+/* ==========================================
+   FILE INPUT
+========================================== */
 
-const MAX_CANVAS_DIMENSION =
-  10000;
+input.addEventListener(
+"change",
+function(){
+
+const file =
+this.files[0];
+
+if(!file){
+return;
+}
 
 
-/* =========================
-   رسائل الحالة
-========================= */
+const allowedTypes = [
+"image/jpeg",
+"image/png",
+"image/webp"
+];
 
-function showStatus(message,type){
 
-  status.textContent =
-    message;
+if(!allowedTypes.includes(file.type)){
 
-  status.className =
-    "status show " +
-    type;
+showError(
+"يرجى اختيار صورة JPG أو PNG أو WebP."
+);
+
+input.value = "";
+
+return;
 
 }
 
 
-function clearStatus(){
+const maxSize =
+25 * 1024 * 1024;
 
-  status.textContent =
-    "";
 
-  status.className =
-    "status";
+if(file.size > maxSize){
+
+showError(
+"حجم الصورة كبير جدًا. الحد الأقصى المسموح به هو 25 ميجابايت."
+);
+
+input.value = "";
+
+return;
 
 }
 
 
-/* =========================
-   اختيار الصورة
-========================= */
+originalFile = file;
 
-imageInput.addEventListener(
-  "change",
-  function(){
 
-    const file =
-      this.files[0];
+status.textContent =
+"جارٍ تحميل الصورة...";
 
-    if(!file){
-      return;
-    }
+status.style.display =
+"block";
 
+editor.style.display =
+"none";
 
-    clearStatus();
+result.style.display =
+"none";
 
 
-    const allowedTypes = [
-      "image/jpeg",
-      "image/png",
-      "image/webp"
-    ];
+if(originalUrl){
 
+URL.revokeObjectURL(
+originalUrl
+);
 
-    if(!allowedTypes.includes(file.type)){
+originalUrl = null;
 
-      showStatus(
-        "يرجى اختيار صورة بصيغة JPG أو PNG أو WebP.",
-        "error"
-      );
+}
 
-      imageInput.value =
-        "";
 
-      return;
+if(resultUrl){
 
-    }
+URL.revokeObjectURL(
+resultUrl
+);
 
+resultUrl = null;
 
-    if(file.size > MAX_FILE_SIZE){
+}
 
-      showStatus(
-        "حجم الصورة أكبر من 25MB. يرجى اختيار صورة أصغر.",
-        "error"
-      );
 
-      imageInput.value =
-        "";
+const reader =
+new FileReader();
 
-      return;
 
-    }
+reader.onload =
+function(event){
 
+image =
+new Image();
 
-    selectedFile =
-      file;
 
+image.onload =
+function(){
 
-    fileSelected.style.display =
-      "block";
+const maxDimension =
+10000;
 
 
-    fileSelected.innerHTML =
-      "📄 <strong>" +
-      escapeHtml(file.name) +
-      "</strong> — " +
-      formatSize(file.size);
+if(
+image.naturalWidth > maxDimension ||
+image.naturalHeight > maxDimension
+){
 
+showError(
+"أبعاد الصورة كبيرة جدًا. الحد الأقصى المسموح به هو 10000 بكسل لكل بُعد."
+);
 
-    const reader =
-      new FileReader();
+return;
 
+}
 
-    reader.onload =
-      function(event){
 
-        image.onload =
-          function(){
-
-            if(
-              image.naturalWidth >
-              MAX_CANVAS_DIMENSION ||
-              image.naturalHeight >
-              MAX_CANVAS_DIMENSION
-            ){
-
-              showStatus(
-                "أبعاد الصورة كبيرة جدًا. يرجى استخدام صورة بأبعاد أصغر من 10000 بكسل.",
-                "error"
-              );
-
-              resetTool(false);
-
-              return;
-
-            }
-
-
-            displayScale =
-              Math.min(
-                1,
-                800 / image.naturalWidth
-              );
-
-
-            canvas.width =
-              Math.max(
-                1,
-                Math.round(
-                  image.naturalWidth *
-                  displayScale
-                )
-              );
-
-
-            canvas.height =
-              Math.max(
-                1,
-                Math.round(
-                  image.naturalHeight *
-                  displayScale
-                )
-              );
-
-
-            drawImage();
-
-
-            editor.style.display =
-              "block";
-
-
-            cropBtn.disabled =
-              true;
-
-
-            hasSelection =
-              false;
-
-
-            selecting =
-              false;
-
-
-            clearDownload();
-
-
-            selectionInfo.textContent =
-              "اسحب على الصورة لتحديد الجزء الذي تريد قصه";
-
-
-            editor.scrollIntoView({
-              behavior:"smooth",
-              block:"start"
-            });
-
-          };
-
-
-        image.onerror =
-          function(){
-
-            showStatus(
-              "تعذر قراءة الصورة. يرجى تجربة صورة أخرى.",
-              "error"
-            );
-
-            resetTool(false);
-
-          };
-
-
-        image.src =
-          event.target.result;
-
-      };
-
-
-    reader.onerror =
-      function(){
-
-        showStatus(
-          "حدث خطأ أثناء قراءة الصورة.",
-          "error"
-        );
-
-      };
-
-
-    reader.readAsDataURL(file);
-
-  }
+displayScale =
+Math.min(
+1,
+800 / image.naturalWidth
 );
 
 
-/* =========================
-   رسم الصورة
-========================= */
+/*
+   الحفاظ على نسبة الأبعاد
+*/
+
+const displayWidth =
+Math.round(
+image.naturalWidth *
+displayScale
+);
+
+const displayHeight =
+Math.round(
+image.naturalHeight *
+displayScale
+);
+
+
+cropCanvas.width =
+displayWidth;
+
+cropCanvas.height =
+displayHeight;
+
+
+cropCanvas.style.width =
+displayWidth + "px";
+
+cropCanvas.style.height =
+displayHeight + "px";
+
+
+drawImage();
+
+
+resetSelection();
+
+
+status.style.display =
+"none";
+
+editor.style.display =
+"block";
+
+
+};
+
+image.onerror =
+function(){
+
+showError(
+"تعذر قراءة الصورة. حاول اختيار صورة أخرى."
+);
+
+};
+
+
+image.src =
+event.target.result;
+
+};
+
+
+reader.onerror =
+function(){
+
+showError(
+"حدث خطأ أثناء قراءة الملف."
+);
+
+};
+
+
+reader.readAsDataURL(file);
+
+});
+
+
+/* ==========================================
+   DRAW IMAGE
+========================================== */
 
 function drawImage(){
 
-  ctx.clearRect(
-    0,
-    0,
-    canvas.width,
-    canvas.height
-  );
+if(!image){
+return;
+}
 
 
-  ctx.drawImage(
-    image,
-    0,
-    0,
-    canvas.width,
-    canvas.height
-  );
+ctx.clearRect(
+0,
+0,
+cropCanvas.width,
+cropCanvas.height
+);
+
+
+ctx.drawImage(
+image,
+0,
+0,
+cropCanvas.width,
+cropCanvas.height
+);
 
 }
 
 
-/* =========================
-   الحصول على موضع المؤشر
-========================= */
+/* ==========================================
+   POSITION
+========================================== */
 
 function getPosition(event){
 
-  const rect =
-    canvas.getBoundingClientRect();
+const rect =
+cropCanvas.getBoundingClientRect();
 
 
-  let clientX;
-  let clientY;
+let clientX;
+let clientY;
 
 
-  if(event.touches){
+if(event.touches){
 
-    clientX =
-      event.touches[0].clientX;
+clientX =
+event.touches[0].clientX;
 
-    clientY =
-      event.touches[0].clientY;
+clientY =
+event.touches[0].clientY;
 
-  }else{
+}else{
 
-    clientX =
-      event.clientX;
+clientX =
+event.clientX;
 
-    clientY =
-      event.clientY;
-
-  }
-
-
-  const scaleX =
-    canvas.width /
-    rect.width;
-
-
-  const scaleY =
-    canvas.height /
-    rect.height;
-
-
-  return {
-
-    x:Math.max(
-      0,
-      Math.min(
-        canvas.width,
-        (clientX - rect.left) *
-        scaleX
-      )
-    ),
-
-    y:Math.max(
-      0,
-      Math.min(
-        canvas.height,
-        (clientY - rect.top) *
-        scaleY
-      )
-    )
-
-  };
+clientY =
+event.clientY;
 
 }
 
 
-/* =========================
-   بداية التحديد
-========================= */
+let x =
+clientX -
+rect.left;
+
+let y =
+clientY -
+rect.top;
+
+
+x =
+Math.max(
+0,
+Math.min(
+x,
+cropCanvas.width
+)
+);
+
+
+y =
+Math.max(
+0,
+Math.min(
+y,
+cropCanvas.height
+)
+);
+
+
+return {
+x:x,
+y:y
+};
+
+}
+
+
+/* ==========================================
+   START SELECTION
+========================================== */
 
 function startSelection(event){
 
-  event.preventDefault();
+if(!image){
+return;
+}
 
 
-  const pos =
-    getPosition(event);
+event.preventDefault();
 
 
-  startX =
-    pos.x;
-
-  startY =
-    pos.y;
-
-  currentX =
-    startX;
-
-  currentY =
-    startY;
+const pos =
+getPosition(event);
 
 
-  selecting =
-    true;
+startX =
+pos.x;
 
-  hasSelection =
-    false;
+startY =
+pos.y;
+
+currentX =
+pos.x;
+
+currentY =
+pos.y;
+
+selecting =
+true;
+
+hasSelection =
+false;
 
 
-  cropBtn.disabled =
-    true;
-
-
-  clearDownload();
-
-  clearStatus();
+drawSelection();
 
 }
 
 
-/* =========================
-   تحريك التحديد
-========================= */
+/* ==========================================
+   MOVE SELECTION
+========================================== */
 
 function moveSelection(event){
 
-  if(!selecting){
-    return;
-  }
+if(!selecting){
+return;
+}
 
 
-  event.preventDefault();
+event.preventDefault();
 
 
-  const pos =
-    getPosition(event);
+const pos =
+getPosition(event);
 
 
-  currentX =
-    pos.x;
+currentX =
+pos.x;
 
-  currentY =
-    pos.y;
+currentY =
+pos.y;
+
+hasSelection =
+true;
 
 
-  drawSelection();
+drawSelection();
 
 }
 
 
-/* =========================
-   إنهاء التحديد
-========================= */
+/* ==========================================
+   END SELECTION
+========================================== */
 
-function endSelection(){
+function endSelection(event){
 
-  if(!selecting){
-    return;
-  }
-
-
-  selecting =
-    false;
+if(!selecting){
+return;
+}
 
 
-  const width =
-    Math.abs(
-      currentX -
-      startX
-    );
+if(event){
+event.preventDefault();
+}
 
 
-  const height =
-    Math.abs(
-      currentY -
-      startY
-    );
+selecting =
+false;
 
 
-  if(
-    width > 5 &&
-    height > 5
-  ){
-
-    hasSelection =
-      true;
+const rect =
+getSelection();
 
 
-    cropBtn.disabled =
-      false;
+if(
+rect.width < 2 ||
+rect.height < 2
+){
 
+hasSelection =
+false;
 
-    selectionInfo.textContent =
-      "تم تحديد المنطقة. اضغط «قص الصورة»";
+drawImage();
 
-  }else{
+updateSelectionInfo();
 
-    hasSelection =
-      false;
-
-
-    cropBtn.disabled =
-      true;
-
-
-    drawImage();
-
-
-    selectionInfo.textContent =
-      "حدد منطقة أكبر داخل الصورة.";
-
-  }
+return;
 
 }
 
 
-/* =========================
-   رسم التحديد
-========================= */
+hasSelection =
+true;
+
+drawSelection();
+
+updateSelectionInfo();
+
+}
+
+
+/* ==========================================
+   SELECTION RECTANGLE
+========================================== */
+
+function getSelection(){
+
+const x =
+Math.min(
+startX,
+currentX
+);
+
+const y =
+Math.min(
+startY,
+currentY
+);
+
+const width =
+Math.abs(
+currentX -
+startX
+);
+
+const height =
+Math.abs(
+currentY -
+startY
+);
+
+
+return {
+x:x,
+y:y,
+width:width,
+height:height
+};
+
+}
+
+
+/* ==========================================
+   DRAW SELECTION
+========================================== */
 
 function drawSelection(){
 
-  drawImage();
+drawImage();
 
 
-  const x =
-    Math.min(
-      startX,
-      currentX
-    );
+if(!hasSelection){
+return;
+}
 
 
-  const y =
-    Math.min(
-      startY,
-      currentY
-    );
+const rect =
+getSelection();
 
 
-  const width =
-    Math.abs(
-      currentX -
-      startX
-    );
+if(
+rect.width <= 0 ||
+rect.height <= 0
+){
+return;
+}
 
 
-  const height =
-    Math.abs(
-      currentY -
-      startY
-    );
+/*
+   تعتيم الجزء خارج التحديد
+*/
+
+ctx.save();
+
+ctx.fillStyle =
+"rgba(0,0,0,.45)";
+
+ctx.fillRect(
+0,
+0,
+cropCanvas.width,
+cropCanvas.height
+);
 
 
-  ctx.save();
+ctx.clearRect(
+rect.x,
+rect.y,
+rect.width,
+rect.height
+);
 
 
-  ctx.fillStyle =
-    "rgba(0,0,0,.45)";
+ctx.drawImage(
+image,
+rect.x / displayScale,
+rect.y / displayScale,
+rect.width / displayScale,
+rect.height / displayScale,
+rect.x,
+rect.y,
+rect.width,
+rect.height
+);
 
 
-  ctx.fillRect(
-    0,
-    0,
-    canvas.width,
-    canvas.height
-  );
+ctx.strokeStyle =
+"#ffffff";
+
+ctx.lineWidth =
+2;
+
+ctx.strokeRect(
+rect.x,
+rect.y,
+rect.width,
+rect.height
+);
 
 
-  ctx.clearRect(
-    x,
-    y,
-    width,
-    height
-  );
-
-
-  ctx.drawImage(
-    image,
-    x / displayScale,
-    y / displayScale,
-    width / displayScale,
-    height / displayScale,
-    x,
-    y,
-    width,
-    height
-  );
-
-
-  ctx.strokeStyle =
-    "#ffffff";
-
-
-  ctx.lineWidth =
-    2;
-
-
-  ctx.strokeRect(
-    x,
-    y,
-    width,
-    height
-  );
-
-
-  ctx.restore();
+ctx.restore();
 
 }
 
 
-/* =========================
-   أحداث الماوس
-========================= */
+/* ==========================================
+   SELECTION INFO
+========================================== */
 
-canvas.addEventListener(
-  "mousedown",
-  startSelection
+function updateSelectionInfo(){
+
+if(!hasSelection){
+
+selectionWidth.textContent =
+"العرض: —";
+
+selectionHeight.textContent =
+"الارتفاع: —";
+
+selectionSize.textContent =
+"الحجم: —";
+
+return;
+
+}
+
+
+const rect =
+getSelection();
+
+
+const realWidth =
+Math.round(
+rect.width /
+displayScale
+);
+
+const realHeight =
+Math.round(
+rect.height /
+displayScale
 );
 
 
-canvas.addEventListener(
-  "mousemove",
-  moveSelection
+selectionWidth.textContent =
+"العرض: " +
+realWidth +
+" بكسل";
+
+
+selectionHeight.textContent =
+"الارتفاع: " +
+realHeight +
+" بكسل";
+
+
+selectionSize.textContent =
+"المساحة: " +
+formatNumber(
+realWidth *
+realHeight
+) +
+" بكسل";
+
+}
+
+
+/* ==========================================
+   MOUSE EVENTS
+========================================== */
+
+cropCanvas.addEventListener(
+"mousedown",
+startSelection
 );
 
+cropCanvas.addEventListener(
+"mousemove",
+moveSelection
+);
 
 window.addEventListener(
-  "mouseup",
-  endSelection
+"mouseup",
+endSelection
 );
 
 
-/* =========================
-   أحداث اللمس
-========================= */
-
-canvas.addEventListener(
-  "touchstart",
-  startSelection,
-  {
-    passive:false
-  }
-);
-
-
-canvas.addEventListener(
-  "touchmove",
-  moveSelection,
-  {
-    passive:false
-  }
-);
-
-
-canvas.addEventListener(
-  "touchend",
-  function(event){
-
-    event.preventDefault();
-
-    endSelection();
-
-  },
-  {
-    passive:false
-  }
-);
-
-
-/* =========================
-   قص الصورة
-========================= */
-
-cropBtn.addEventListener(
-  "click",
-  function(){
-
-    if(
-      !hasSelection ||
-      !selectedFile
-    ){
-      return;
-    }
-
-
-    const x =
-      Math.min(
-        startX,
-        currentX
-      );
-
-
-    const y =
-      Math.min(
-        startY,
-        currentY
-      );
-
-
-    const width =
-      Math.abs(
-        currentX -
-        startX
-      );
-
-
-    const height =
-      Math.abs(
-        currentY -
-        startY
-      );
-
-
-    const outputWidth =
-      Math.round(
-        width /
-        displayScale
-      );
-
-
-    const outputHeight =
-      Math.round(
-        height /
-        displayScale
-      );
-
-
-    if(
-      outputWidth < 1 ||
-      outputHeight < 1
-    ){
-
-      showStatus(
-        "المنطقة المحددة صغيرة جدًا.",
-        "error"
-      );
-
-      return;
-
-    }
-
-
-    if(
-      outputWidth >
-      MAX_CANVAS_DIMENSION ||
-      outputHeight >
-      MAX_CANVAS_DIMENSION
-    ){
-
-      showStatus(
-        "الأبعاد الناتجة كبيرة جدًا.",
-        "error"
-      );
-
-      return;
-
-    }
-
-
-    cropBtn.disabled =
-      true;
-
-
-    cropBtn.innerHTML =
-      '<span class="spinner"></span> جارٍ قص الصورة...';
-
-
-    const output =
-      document.createElement(
-        "canvas"
-      );
-
-
-    output.width =
-      outputWidth;
-
-
-    output.height =
-      outputHeight;
-
-
-    const outputCtx =
-      output.getContext(
-        "2d"
-      );
-
-
-    if(!outputCtx){
-
-      showStatus(
-        "تعذر تجهيز الصورة.",
-        "error"
-      );
-
-
-      cropBtn.disabled =
-        false;
-
-
-      cropBtn.textContent =
-        "✂️ قص الصورة";
-
-
-      return;
-
-    }
-
-
-    outputCtx.drawImage(
-      image,
-      x / displayScale,
-      y / displayScale,
-      width / displayScale,
-      height / displayScale,
-      0,
-      0,
-      outputWidth,
-      outputHeight
-    );
-
-
-    output.toBlob(
-      function(blob){
-
-        if(!blob){
-
-          showStatus(
-            "تعذر إنشاء الصورة المقصوصة.",
-            "error"
-          );
-
-
-          cropBtn.disabled =
-            false;
-
-
-          cropBtn.textContent =
-            "✂️ قص الصورة";
-
-
-          return;
-
-        }
-
-
-        clearDownload();
-
-
-        downloadUrl =
-          URL.createObjectURL(
-            blob
-          );
-
-
-        downloadBtn.href =
-          downloadUrl;
-
-
-        const originalName =
-          selectedFile.name.replace(
-            /\.[^/.]+$/,
-            ""
-          );
-
-
-        downloadBtn.download =
-          originalName +
-          "-adaahub-crop.png";
-
-
-        downloadBtn.style.display =
-          "inline-flex";
-
-
-        selectionInfo.textContent =
-          "✅ تم قص الصورة بنجاح — " +
-          outputWidth +
-          " × " +
-          outputHeight +
-          " بكسل";
-
-
-        cropBtn.disabled =
-          false;
-
-
-        cropBtn.textContent =
-          "✂️ قص الصورة";
-
-
-        showStatus(
-          "تم إنشاء الصورة المقصوصة بنجاح. يمكنك تحميلها الآن.",
-          "success"
-        );
-
-
-        downloadBtn.scrollIntoView({
-          behavior:"smooth",
-          block:"nearest"
-        });
-
-      },
-      "image/png"
-    );
-
-  }
-);
-
-
-/* =========================
-   إعادة ضبط
-========================= */
-
-resetBtn.addEventListener(
-  "click",
-  function(){
-
-    resetTool(true);
-
-  }
-);
-
-
-function resetTool(clearMessage){
-
-  clearDownload();
-
-
-  imageInput.value =
-    "";
-
-
-  selectedFile =
-    null;
-
-
-  editor.style.display =
-    "none";
-
-
-  cropBtn.disabled =
-    true;
-
-
-  cropBtn.textContent =
-    "✂️ قص الصورة";
-
-
-  hasSelection =
-    false;
-
-
-  selecting =
-    false;
-
-
-  startX =
-    0;
-
-  startY =
-    0;
-
-  currentX =
-    0;
-
-  currentY =
-    0;
-
-
-  fileSelected.style.display =
-    "none";
-
-
-  fileSelected.textContent =
-    "";
-
-
-  selectionInfo.textContent =
-    "اسحب على الصورة لتحديد الجزء الذي تريد قصه";
-
-
-  ctx.clearRect(
-    0,
-    0,
-    canvas.width,
-    canvas.height
-  );
-
-
-  if(clearMessage){
-
-    clearStatus();
-
-  }
-
+/* ==========================================
+   TOUCH EVENTS
+========================================== */
+
+cropCanvas.addEventListener(
+"touchstart",
+startSelection,
+{
+passive:false
 }
+);
 
-
-/* =========================
-   تنظيف رابط التحميل
-========================= */
-
-function clearDownload(){
-
-  if(downloadUrl){
-
-    URL.revokeObjectURL(
-      downloadUrl
-    );
-
-    downloadUrl =
-      null;
-
-  }
-
-
-  downloadBtn.removeAttribute(
-    "href"
-  );
-
-
-  downloadBtn.removeAttribute(
-    "download"
-  );
-
-
-  downloadBtn.style.display =
-    "none";
-
+cropCanvas.addEventListener(
+"touchmove",
+moveSelection,
+{
+passive:false
 }
-
-
-/* =========================
-   حجم الملف
-========================= */
-
-function formatSize(bytes){
-
-  if(bytes < 1024){
-
-    return (
-      bytes +
-      " بايت"
-    );
-
-  }
-
-
-  if(
-    bytes <
-    1024 * 1024
-  ){
-
-    return (
-      bytes / 1024
-    ).toFixed(1) +
-    " KB";
-
-  }
-
-
-  return (
-    bytes /
-    (1024 * 1024)
-  ).toFixed(2) +
-  " MB";
-
-}
-
-
-/* =========================
-   حماية اسم الملف
-========================= */
-
-function escapeHtml(text){
-
-  return text
-    .replace(
-      /&/g,
-      "&amp;"
-    )
-    .replace(
-      /</g,
-      "&lt;"
-    )
-    .replace(
-      />/g,
-      "&gt;"
-    )
-    .replace(
-      /"/g,
-      "&quot;"
-    )
-    .replace(
-      /'/g,
-      "&#039;"
-    );
-
-}
-
-
-/* =========================
-   تنظيف الرابط عند مغادرة الصفحة
-========================= */
+);
 
 window.addEventListener(
-  "beforeunload",
-  function(){
-
-    clearDownload();
-
-  }
+"touchend",
+endSelection,
+{
+passive:false
+}
 );
+
+
+/* ==========================================
+   CROP BUTTON
+========================================== */
+
+cropButton.addEventListener(
+"click",
+function(){
+
+if(!image){
+return;
+}
+
+
+if(!hasSelection){
+
+showCropMessage(
+"حدد الجزء الذي تريد الاحتفاظ به أولًا."
+);
+
+return;
+
+}
+
+
+const rect =
+getSelection();
+
+
+if(
+rect.width < 2 ||
+rect.height < 2
+){
+
+showCropMessage(
+"من فضلك حدد مساحة أكبر من الصورة."
+);
+
+return;
+
+}
+
+
+const sourceX =
+Math.round(
+rect.x /
+displayScale
+);
+
+const sourceY =
+Math.round(
+rect.y /
+displayScale
+);
+
+const sourceWidth =
+Math.round(
+rect.width /
+displayScale
+);
+
+const sourceHeight =
+Math.round(
+rect.height /
+displayScale
+);
+
+
+const outputCanvas =
+document.createElement("canvas");
+
+
+outputCanvas.width =
+sourceWidth;
+
+outputCanvas.height =
+sourceHeight;
+
+
+const outputCtx =
+outputCanvas.getContext("2d");
+
+
+if(!outputCtx){
+
+showCropMessage(
+"المتصفح لا يدعم إنشاء الصورة المطلوبة."
+);
+
+return;
+
+}
+
+
+outputCtx.drawImage(
+image,
+sourceX,
+sourceY,
+sourceWidth,
+sourceHeight,
+0,
+0,
+sourceWidth,
+sourceHeight
+);
+
+
+outputCanvas.toBlob(
+function(blob){
+
+if(!blob){
+
+showCropMessage(
+"تعذر إنشاء الصورة المقصوصة. حاول مرة أخرى."
+);
+
+return;
+
+}
+
+
+if(resultUrl){
+
+URL.revokeObjectURL(
+resultUrl
+);
+
+}
+
+
+resultUrl =
+URL.createObjectURL(blob);
+
+
+preview.src =
+resultUrl;
+
+
+download.href =
+resultUrl;
+
+
+const originalName =
+getBaseName(
+originalFile.name
+);
+
+
+download.download =
+originalName +
+"-adaahub-crop.png";
+
+
+result.style.display =
+"block";
+
+
+result.scrollIntoView({
+behavior:"smooth",
+block:"start"
+});
+
+
+showCropMessage(
+"تم إنشاء الصورة المقصوصة بنجاح."
+);
+
+
+},
+"image/png"
+);
+
+});
+
+
+/* ==========================================
+   RESET EDITOR
+========================================== */
+
+resetEditor.addEventListener(
+"click",
+function(){
+
+resetTool();
+
+input.click();
+
+});
+
+
+/* ==========================================
+   RESET RESULT
+========================================== */
+
+reset.addEventListener(
+"click",
+function(){
+
+resetTool();
+
+});
+
+
+/* ==========================================
+   RESET TOOL
+========================================== */
+
+function resetTool(){
+
+input.value =
+"";
+
+editor.style.display =
+"none";
+
+result.style.display =
+"none";
+
+status.style.display =
+"none";
+
+cropMessage.style.display =
+"none";
+
+preview.removeAttribute(
+"src"
+);
+
+download.removeAttribute(
+"href"
+);
+
+hasSelection =
+false;
+
+selecting =
+false;
+
+image =
+null;
+
+originalFile =
+null;
+
+
+selectionWidth.textContent =
+"العرض: —";
+
+selectionHeight.textContent =
+"الارتفاع: —";
+
+selectionSize.textContent =
+"الحجم: —";
+
+
+ctx.clearRect(
+0,
+0,
+cropCanvas.width,
+cropCanvas.height
+);
+
+
+if(originalUrl){
+
+URL.revokeObjectURL(
+originalUrl
+);
+
+originalUrl =
+null;
+
+}
+
+
+if(resultUrl){
+
+URL.revokeObjectURL(
+resultUrl
+);
+
+resultUrl =
+null;
+
+}
+
+}
+
+
+/* ==========================================
+   ERROR MESSAGE
+========================================== */
+
+function showError(message){
+
+status.textContent =
+message;
+
+status.style.display =
+"block";
+
+editor.style.display =
+"none";
+
+result.style.display =
+"none";
+
+}
+
+
+/* ==========================================
+   CROP MESSAGE
+========================================== */
+
+function showCropMessage(message){
+
+cropMessage.textContent =
+message;
+
+cropMessage.style.display =
+"block";
+
+}
+
+
+/* ==========================================
+   FORMAT NUMBER
+========================================== */
+
+function formatNumber(number){
+
+return number.toLocaleString(
+"ar-EG"
+);
+
+}
+
+
+/* ==========================================
+   FILE NAME
+========================================== */
+
+function getBaseName(name){
+
+return name.replace(
+(/\.[^/.]+$/),
+""
+);
+
+}
+
+
+/* ==========================================
+   CLEANUP
+========================================== */
+
+window.addEventListener(
+"beforeunload",
+function(){
+
+if(originalUrl){
+
+URL.revokeObjectURL(
+originalUrl
+);
+
+}
+
+if(resultUrl){
+
+URL.revokeObjectURL(
+resultUrl
+);
+
+}
+
+});
 
 </script>
 
