@@ -13,24 +13,74 @@
 
 <link rel="canonical" href="https://adaahub.github.io/adaahub/tools/webp.html">
 
+<script>
+(function(){
+  const theme = localStorage.getItem("adaahub-theme");
+  if(theme === "dark"){
+    document.documentElement.classList.add("dark");
+  }
+})();
+</script>
+
 <style>
 
 *{
   box-sizing:border-box;
 }
 
+:root{
+  --primary:#2563eb;
+  --primary-dark:#1d4ed8;
+  --primary-soft:#eff6ff;
+  --bg:#f6f8fc;
+  --surface:#ffffff;
+  --text:#111827;
+  --muted:#64748b;
+  --border:#e5e7eb;
+  --success:#16a34a;
+  --danger:#dc2626;
+  --shadow:0 12px 35px rgba(15,23,42,.07);
+}
+
+html.dark{
+  --primary:#60a5fa;
+  --primary-dark:#93c5fd;
+  --primary-soft:#172554;
+  --bg:#0b1120;
+  --surface:#111827;
+  --text:#f1f5f9;
+  --muted:#94a3b8;
+  --border:#243044;
+  --success:#4ade80;
+  --danger:#f87171;
+  --shadow:0 12px 35px rgba(0,0,0,.25);
+}
+
+html{
+  scroll-behavior:smooth;
+}
+
 body{
   margin:0;
   font-family:Arial,Tahoma,sans-serif;
-  background:#f5f7fb;
-  color:#20242a;
+  background:var(--bg);
+  color:var(--text);
   line-height:1.7;
+  transition:
+    background .25s ease,
+    color .25s ease;
 }
 
 header{
-  background:#fff;
-  border-bottom:1px solid #e5e7eb;
-  padding:16px 18px;
+  background:var(--surface);
+  border-bottom:1px solid var(--border);
+  padding:15px 18px;
+  position:sticky;
+  top:0;
+  z-index:100;
+  transition:
+    background .25s ease,
+    border-color .25s ease;
 }
 
 .header{
@@ -45,20 +95,50 @@ header{
 .logo{
   font-size:27px;
   font-weight:bold;
+  letter-spacing:-.5px;
 }
 
 .logo span{
-  color:#2563eb;
+  color:var(--primary);
+}
+
+.header-actions{
+  display:flex;
+  align-items:center;
+  gap:10px;
 }
 
 .home{
-  color:#2563eb;
+  color:var(--primary);
   text-decoration:none;
   font-weight:bold;
 }
 
 .home:hover{
   text-decoration:underline;
+}
+
+.theme-toggle{
+  width:42px;
+  height:42px;
+  border:1px solid var(--border);
+  border-radius:12px;
+  background:var(--surface);
+  color:var(--text);
+  cursor:pointer;
+  font-size:19px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  transition:
+    background .2s ease,
+    border-color .2s ease,
+    transform .2s ease;
+}
+
+.theme-toggle:hover{
+  transform:translateY(-2px);
+  border-color:var(--primary);
 }
 
 .container{
@@ -75,25 +155,32 @@ h1{
 
 .subtitle{
   text-align:center;
-  color:#666;
+  color:var(--muted);
   margin:0 auto 28px;
   max-width:680px;
 }
 
 .tool-box{
-  background:#fff;
+  background:var(--surface);
   border-radius:18px;
   padding:30px 20px;
-  border:1px solid #e5e7eb;
-  box-shadow:0 5px 20px rgba(0,0,0,.04);
+  border:1px solid var(--border);
+  box-shadow:var(--shadow);
 }
 
 .upload-area{
-  border:2px dashed #cbd5e1;
+  border:2px dashed var(--border);
   border-radius:15px;
   padding:40px 20px;
   text-align:center;
-  background:#fafcff;
+  background:var(--bg);
+  transition:
+    background .25s ease,
+    border-color .25s ease;
+}
+
+.upload-area:hover{
+  border-color:var(--primary);
 }
 
 .upload-icon{
@@ -107,7 +194,7 @@ h1{
 }
 
 .upload-area p{
-  color:#777;
+  color:var(--muted);
   margin:0 0 20px;
 }
 
@@ -117,23 +204,27 @@ input[type="file"]{
 
 .choose-button{
   display:inline-block;
-  background:#2563eb;
+  background:var(--primary);
   color:#fff;
   padding:13px 27px;
   border-radius:9px;
   cursor:pointer;
   font-size:16px;
   font-weight:bold;
+  transition:
+    background .2s ease,
+    transform .2s ease;
 }
 
 .choose-button:hover{
-  background:#1d4ed8;
+  background:var(--primary-dark);
+  transform:translateY(-1px);
 }
 
 .file-name{
   margin-top:15px;
   font-size:14px;
-  color:#475569;
+  color:var(--muted);
   word-break:break-word;
 }
 
@@ -141,8 +232,9 @@ input[type="file"]{
   display:none;
   margin-top:20px;
   padding:20px;
-  background:#f8fafc;
+  background:var(--bg);
   border-radius:12px;
+  border:1px solid var(--border);
 }
 
 .settings label{
@@ -160,18 +252,20 @@ input[type="file"]{
 input[type="range"]{
   flex:1;
   cursor:pointer;
+  accent-color:var(--primary);
 }
 
 #qualityValue{
   min-width:45px;
   font-weight:bold;
+  color:var(--primary);
 }
 
 .convert-button{
   width:100%;
   border:0;
   margin-top:20px;
-  background:#16a34a;
+  background:var(--success);
   color:#fff;
   padding:14px;
   border-radius:9px;
@@ -179,22 +273,27 @@ input[type="range"]{
   font-size:17px;
   font-weight:bold;
   display:none;
+  transition:
+    background .2s ease,
+    transform .2s ease;
 }
 
 .convert-button:hover{
   background:#15803d;
+  transform:translateY(-1px);
 }
 
 .convert-button:disabled{
   background:#94a3b8;
   cursor:not-allowed;
+  transform:none;
 }
 
 .result{
   display:none;
   margin-top:25px;
-  background:#fff;
-  border:1px solid #e5e7eb;
+  background:var(--surface);
+  border:1px solid var(--border);
   border-radius:15px;
   padding:25px;
   text-align:center;
@@ -202,7 +301,7 @@ input[type="range"]{
 
 .result h2{
   margin-top:0;
-  color:#16a34a;
+  color:var(--success);
 }
 
 .preview{
@@ -211,10 +310,11 @@ input[type="range"]{
   display:block;
   margin:15px auto;
   border-radius:10px;
+  border:1px solid var(--border);
 }
 
 .file-info{
-  background:#f8fafc;
+  background:var(--bg);
   padding:15px;
   border-radius:10px;
   margin-top:15px;
@@ -225,45 +325,62 @@ input[type="range"]{
   display:inline-block;
   margin-top:18px;
   padding:12px 25px;
-  background:#2563eb;
+  background:var(--primary);
   color:#fff;
   text-decoration:none;
   border-radius:9px;
   font-weight:bold;
+  transition:
+    background .2s ease,
+    transform .2s ease;
 }
 
 .download-button:hover{
-  background:#1d4ed8;
+  background:var(--primary-dark);
+  transform:translateY(-1px);
 }
 
 .reset-button{
   display:inline-block;
   margin-top:12px;
   padding:10px 20px;
-  background:#e5e7eb;
-  color:#333;
+  background:var(--border);
+  color:var(--text);
   border:0;
   border-radius:8px;
   cursor:pointer;
   font-weight:bold;
+  transition:
+    background .2s ease,
+    transform .2s ease;
+}
+
+.reset-button:hover{
+  background:#cbd5e1;
+  transform:translateY(-1px);
 }
 
 .privacy-note{
   margin-top:20px;
-  background:#eff6ff;
-  border:1px solid #bfdbfe;
+  background:var(--primary-soft);
+  border:1px solid rgba(37,99,235,.25);
   border-radius:12px;
   padding:16px;
-  color:#1e40af;
+  color:var(--primary-dark);
   text-align:center;
 }
 
+html.dark .privacy-note{
+  color:#bfdbfe;
+}
+
 .content{
-  background:#fff;
+  background:var(--surface);
   margin-top:30px;
   padding:25px;
   border-radius:15px;
-  border:1px solid #e5e7eb;
+  border:1px solid var(--border);
+  box-shadow:var(--shadow);
 }
 
 .content h2{
@@ -281,7 +398,7 @@ input[type="range"]{
 }
 
 .content a{
-  color:#2563eb;
+  color:var(--primary);
   font-weight:bold;
   text-decoration:none;
 }
@@ -295,11 +412,14 @@ input[type="range"]{
 }
 
 .faq details{
-  background:#f8fafc;
-  border:1px solid #e5e7eb;
+  background:var(--bg);
+  border:1px solid var(--border);
   border-radius:10px;
   padding:14px 16px;
   margin-bottom:10px;
+  transition:
+    background .25s ease,
+    border-color .25s ease;
 }
 
 .faq summary{
@@ -309,13 +429,13 @@ input[type="range"]{
 
 footer{
   text-align:center;
-  color:#777;
+  color:var(--muted);
   padding:30px 20px;
   margin-top:30px;
 }
 
 footer a{
-  color:#2563eb;
+  color:var(--primary);
   text-decoration:none;
   margin:0 5px;
 }
@@ -327,7 +447,15 @@ footer a:hover{
 @media(max-width:600px){
 
   .header{
-    flex-direction:column;
+    flex-direction:row;
+  }
+
+  .header-actions{
+    gap:6px;
+  }
+
+  .home{
+    font-size:14px;
   }
 
   h1{
@@ -368,9 +496,22 @@ footer a:hover{
       Adaa<span>Hub</span>
     </div>
 
-    <a class="home" href="../index.html">
-      الرئيسية
-    </a>
+    <div class="header-actions">
+
+      <a class="home" href="../index.html">
+        الرئيسية
+      </a>
+
+      <button
+        class="theme-toggle"
+        id="themeToggle"
+        type="button"
+        aria-label="تفعيل الوضع الداكن"
+        title="تغيير المظهر">
+        🌙
+      </button>
+
+    </div>
 
   </div>
 
@@ -718,6 +859,75 @@ footer a:hover{
 
 
 <script>
+
+/* =========================
+   نظام المظهر العالمي
+========================= */
+
+const THEME_KEY = "adaahub-theme";
+
+const themeToggle =
+  document.getElementById("themeToggle");
+
+
+function applyTheme(theme){
+
+  const isDark =
+    theme === "dark";
+
+  document.documentElement.classList.toggle(
+    "dark",
+    isDark
+  );
+
+  themeToggle.textContent =
+    isDark ? "☀️" : "🌙";
+
+  themeToggle.setAttribute(
+    "aria-label",
+    isDark
+      ? "تفعيل الوضع الفاتح"
+      : "تفعيل الوضع الداكن"
+  );
+
+}
+
+
+const savedTheme =
+  localStorage.getItem(THEME_KEY);
+
+
+applyTheme(
+  savedTheme === "dark"
+    ? "dark"
+    : "light"
+);
+
+
+themeToggle.addEventListener(
+  "click",
+  function(){
+
+    const isDark =
+      document.documentElement.classList.contains("dark");
+
+    const newTheme =
+      isDark ? "light" : "dark";
+
+    localStorage.setItem(
+      THEME_KEY,
+      newTheme
+    );
+
+    applyTheme(newTheme);
+
+  }
+);
+
+
+/* =========================
+   أداة تحويل WebP
+========================= */
 
 const imageInput =
   document.getElementById("imageInput");
